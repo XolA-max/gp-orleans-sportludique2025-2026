@@ -19,3 +19,7 @@ Répartition des adresses IP par groupe géographique :
 - Orléans correspond à **notre site**.
 - Ces adresses peuvent être subdivisées selon les besoins internes (réseaux VLAN, DMZ, etc).
 
+| Sites | Plages d’adresses | CIDR |
+| --- | --- | --- |
+| Orléans | 172.28.96.0 → 172.28.127.0 | 172.28.96.0 /19 |
+|  |  |  |
