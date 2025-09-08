@@ -23,3 +23,5 @@ Répartition des adresses IP par groupe géographique :
 | --- | --- | --- |
 | ORL-SW-CORE (Switch) | 192.168.140.1 | x |
 |  |  |  |
+
+![](<Switch Coeur.png>)
