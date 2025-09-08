@@ -25,3 +25,5 @@ Répartition des adresses IP par groupe géographique :
 VM-Windows	|192.168.140.5|	x
 VM-ORL-L (VM linux )	|192.168.140.10|	x
 |  |  |  |
+
+![](<Switch Coeur.png>)
