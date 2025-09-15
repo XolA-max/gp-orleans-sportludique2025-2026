@@ -1,43 +1,39 @@
-# Problème rencontrés
+# Problèmes rencontrés
 ---
 
 ## 🗓️ Semaine 1
 
 ### 🔴 Problèmes
-- Enorme latence lors de l’écriture sur les terminaux.  
-- Les lettres ne correspondaient pas → beaucoup d’erreurs de saisie.  
+- Énorme latence lors de l’écriture sur les terminaux.  
+- Les lettres ne correspondaient pas → beaucoup d’erreurs de saisie.
 
 ### 🟢 Solutions
-- Utilisation d’un PC séparé avec un câble bien tendu (pas de solution précise trouvée).  
-- Connexions **SSH à distance** depuis mon ordinateur.  
+- Utilisation d’un PC séparé avec un câble bien tendu.  
+- Utilisation d’un ordinateur portable sous Windows XP, plus compatible avec le switch via le port console.  
+- Connexions SSH à distance depuis mon ordinateur.  
 
 ---
 
 ## 🗓️ Semaine 2
 
 ### 🔴 Problèmes
-- Problème de **liaison Trunk** entre le switch et le PC.  
+- Problème de liaison Trunk entre le switch cœur et le switch de la baie.  
+- Interconnexion entre le switch et le routeur (VLAN interco).  
+- ACL : mauvaise configuration.  
+
 - **Mauvaise configuration DNS** :  
   - Création d’un nouveau DNS.  
   - Suppression du DNS initial (lié au compte Administrateur).  
-  - Suppression de la VM par erreur.  
 
 ### 🟢 Solutions
 - Arrêter d’essayer d’établir une liaison entre les deux appareils.  
 - Ne pas supprimer le DNS principal et bien le configurer dès le départ.  
-- ⚠️ **Cloner la VM** pour éviter de devoir refaire toute l’installation.  
+- ⚠️ Cloner la VM pour éviter de devoir refaire toute l’installation.  
+- Créer le VLAN d’interconnexion et **le mettre en mode Access** sur une interface pour l’activer. Sinon, il reste inactif et ne peut pas être relié à une liaison Trunk.  
+- Refaire les ACL correctement en autorisant les bons réseaux.  
 
 ---
 
 ## 🗓️ Semaine 3
 
-### 🔴 Problèmes 
-    -  **Interconnexion entre le switch et le routeur (VLAN 249)
-    - **ACL : mauvaise configuration** 
-### 🟢 Solutions
-    - Créer le VLAN `249` et **le mettre en mode Access** sur une interface pour l’activer. Sinon, il reste inactif et ne peut pas être relié à une liaison Trunk.
-
----
-
 ✅ **Test effectué** : VLAN actif après configuration.
-
