@@ -1,5 +1,4 @@
-# Compte-rendu des Séances
-
+# Problème rencontrés
 ---
 
 ## 🗓️ Semaine 1
@@ -32,12 +31,11 @@
 
 ## 🗓️ Semaine 3
 
-### 🔴 Problèmes & 🟢 Solutions
-
-| Problème | Solution |
-|----------|----------|
-| **Interconnexion entre le switch et le routeur (VLAN 249)** | Créer le VLAN `249` et **le mettre en mode Access** sur une interface pour l’activer. Sinon, il reste inactif et ne peut pas être relié à une liaison Trunk. <br> **Commande** :<br>```bash<br>conf t<br>vlan 249<br>description Interco<br>``` |
-| **ACL : mauvaise configuration** | (À compléter — problème rencontré mais pas encore corrigé) |
+### 🔴 Problèmes 
+    -  **Interconnexion entre le switch et le routeur (VLAN 249)
+    - **ACL : mauvaise configuration** 
+### 🟢 Solutions
+    - Créer le VLAN `249` et **le mettre en mode Access** sur une interface pour l’activer. Sinon, il reste inactif et ne peut pas être relié à une liaison Trunk.
 
 ---
 
