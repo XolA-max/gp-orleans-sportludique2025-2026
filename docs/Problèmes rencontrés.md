@@ -1,5 +1,4 @@
-# Compte-rendu des Séances
-
+# Problème rencontrés
 ---
 
 ## 🗓️ Semaine 1
