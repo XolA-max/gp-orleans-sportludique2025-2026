@@ -27,7 +27,7 @@ Liaisons →
 
 
 
-## Routeur 200
+## Routeur fibre
 
 →Routes
 
@@ -35,7 +35,7 @@ Liaisons →
 
 →ACL
 
-## Routeur 100
+## Routeur ADSL
 
 →Routes
 
