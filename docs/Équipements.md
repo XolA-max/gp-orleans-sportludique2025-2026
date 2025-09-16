@@ -8,19 +8,34 @@ Stack → Empilement de switches permettant d’assurer une tolérance aux panne
 
 SSH → Installation de SSH sur l’équipement afin de pouvoir le manager depuis le VLAN de management.
 
-LACP → La mise en place de LACP permet de faire de l’agrégation de liens, c’est-à-dire d’utiliser deux câbles physiques qui correspondent à un seul lien logique.
+LACP → La mise en place de LACP permet de faire de l’agrégation de liens, c’est-à-dire d’utiliser deux câbles physiques qui correspondent à un seul lien logique.Sur les interfaces Fa1/0/23 et Fa2/0/23
 
-Mode Trunk → Fa 1/0/23 et a 2/0/23 
+Mode Trunk → Les interfaces Fa1/0/23-24 et Fa2/0/23-24 sont configurées en mode trunk et permettent de faire passer tous les VLANs autorisés.
 
-Mode Access → Fa 1/0/1-4
+Mode Access → Les interfaces Fa 1/0/1-4 sont configurées en mode access et permettent de faire que un VLANs .
 
-Vlan →  Mana -  Clients - Serveurs - Interco
+Vlan →  Managment -  Clients - Serveurs - Interco
 
 Routage → Activation du routage afin que le switch puisse router les paquets.
 
 Liaisons → 
+- Interfaces Fa1/0/1 à Fa1/0/4 : reliées aux ordinateurs clients
 
-## Routeur
+- Interfaces Fa1/0/23 et Fa2/0/23 : reliées au switch B4
+
+- Interfaces Fa1/0/24 et Fa2/0/24 : reliées au routeur Fibre et ADSL
+
+
+
+## Routeur 200
+
+→Routes
+
+→Interfaces virtuelles pour les Vlans Mana - interco 
+
+→ACL
+
+## Routeur 100
 
 →Routes
 
