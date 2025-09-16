@@ -4,8 +4,8 @@
 
 | Tâches                                  | Descriptions                                                                 | Personnes concernées       |
 |-----------------------------------------|----------------------------------------------------------------------------|----------------------------|
-| Mise en place de la configuration du Switch ORL-SW-CORE | Brancher le switch avec le câble console sur un ordinateur<br>- Hostname<br>- SSH<br>- Adresse IP `192.168.140.1` | Antoine, Cyriak, Louis     |
-| Ajout d’un utilisateur local `sio2orl`  | Ajout de cet utilisateur pour pouvoir changer la configuration de la carte réseau et la mettre sur le réseau `192.168.140.0` | Antoine, Louis, Cyriak     |
+| Mise en place de la configuration du Switch ORL-SW-CORE | Brancher le switch avec le câble console sur un ordinateur<br>- Hostname<br>- SSH<br>- Adresse IP | Antoine, Cyriak, Louis     |
+| Ajout d’un utilisateur local `sio2orl`  | Ajout de cet utilisateur pour pouvoir changer la configuration de la carte réseau et la mettre sur le réseau  | Antoine, Louis, Cyriak     |
 | Stack des deux Switch                   | - Brancher le câble<br>- Vérification de la connexion en branchant le câble sur les deux switches | Antoine, Cyriak, Louis     |
 
 ---
