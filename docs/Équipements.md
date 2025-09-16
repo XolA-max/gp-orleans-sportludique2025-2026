@@ -25,7 +25,7 @@ Liaisons →
 
 - Interfaces Fa1/0/24 et Fa2/0/24 : reliées au routeur Fibre et ADSL
 
-
+## Switch Salle serveur
 
 ## Routeur fibre
 
