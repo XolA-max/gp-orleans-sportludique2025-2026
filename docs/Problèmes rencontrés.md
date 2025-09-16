@@ -36,4 +36,10 @@
 
 ## 🗓️ Semaine 3
 
+### 🔴 Problèmes
+- Aucun gros problème, à part une perte de temps en salle serveur due à une mauvaise configuration du switch de la baie des serveurs
+
+### 🟢 Solutions
+
+- Appelle du profeseur pour modifier la configuration du switch
 ✅ **Test effectué** : VLAN actif après configuration.
