@@ -1,10 +1,8 @@
-site_name: Orleans
+site_name: "Orleans"
+
 theme:
-  name: material
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.instant
+  name: "material"
+
   palette:
     - scheme: default
       primary: blue
@@ -12,17 +10,42 @@ theme:
     - scheme: slate
       primary: blue
       accent: deep orange
+
   font:
     text: Roboto
     code: Roboto Mono
+
+  logo: "images/logo.png"
+  favicon: "images/favicon.ico"
+  
+  features:
+    - navigation.tabs        # Onglets de navigation
+    - navigation.sections    # Sections dans la navigation
+    - navigation.instant     # Navigation instantanée (sans rechargement)
+    - content.code.annotate  # Annotation des codes
+
 markdown_extensions:
-  - admonition      
-  - codehilite      
-  - toc             
+  - admonition          # Blocs d'informations (note, warning, tip)
+  - codehilite          # Coloration syntaxique
+  - toc                 # Table des matières automatique
   - pymdownx.superfences
   - pymdownx.highlight
-  - pymdownx.emoji
-features:
-    - navigation.tabs
-    - navigation.top
-    - navigation.instant
+  - pymdownx.emoji      # Emojis
+
+
+nav:
+  - Accueil: index.md
+  - Guide:
+      - Introduction: guide/intro.md
+      - Installation: guide/install.md
+      - Configuration: guide/config.md
+  - Référence:
+      - Commandes: reference/commands.md
+      - API: reference/api.md
+  - FAQ: faq.md
+  - À propos: about.md
+
+# Plugins optionnels
+plugins:
+  - search
+  # - git-revision-date-localized  # Afficher la date de dernière modification
