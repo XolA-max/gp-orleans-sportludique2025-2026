@@ -8,7 +8,8 @@
 - **Mode Access** : Fa1/0/1-4 → un seul VLAN.
 - **VLANs** : Management, Clients, Serveurs, Interco.
 - **Routage** : Activation du routage.
-- **Routage** : Route par default sur IP de la passerelle virtuel
+- **Passerelle par default** : Route par default sur IP de la passerelle virtuel
+- **Relai DHCP** : Contacter le serveur AD pour obtenir une adresse ip en DHCP
 - **Liaisons** :
   - Fa1/0/1 à Fa1/0/4 → ordinateurs clients  
   - Fa1/0/23 & Fa2/0/23 → switch B4  
@@ -58,11 +59,16 @@
 
 ---
 
-## 📡 Serveur AD
+## 🔷  Serveur AD
 - **Création de la machine viruel** : Création de la machine virtuelle via l’interface web
   - Configuration des ressources nécessaires à la machine virtuelle.
   - Installation de Windows Server 2025.
   - Configurations reseaux : Une interface dans le VLAN Management et une autre dans le VLAN Serveur.
 - **AD** :
-
+  - Crétion de l'active directori
 - **DHCP** : 
+ - Une plage DHCP pour le VLAN Client a été configurée de X.X.X.10 à X.X.X.50.
+- **DNS** :
+  - Résolution de noms en adresses IP
+- **Serveur de fichier** :
+  - Fichier partagé entre les comptes clients
