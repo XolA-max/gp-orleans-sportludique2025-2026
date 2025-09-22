@@ -1,1 +1,28 @@
-site_name: "Orleans"
+site_name: Orleans
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.instant
+  palette:
+    - scheme: slate           
+      primary: blue           
+      accent: teal            
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: "Basculer le thème"
+  font:
+    text: Roboto
+    code: Roboto Mono
+markdown_extensions:
+  - admonition      
+  - codehilite      
+  - toc             
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.emoji
+features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.instant
