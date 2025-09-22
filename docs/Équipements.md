@@ -59,6 +59,15 @@
 
 ---
 
+## 📡 PareFeu physique stormshield
+ - 
+ 
+---
+
+## 📡 PareFeu virtuel
+ - 
+
+---
 ## 🔷  Machine virtuel AD
 - **Création de la machine viruel** : Création de la machine virtuelle via l’interface web
   - Configuration des ressources nécessaires à la machine virtuelle.
