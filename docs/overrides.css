@@ -1,0 +1,26 @@
+
+.md-content, .md-main {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+
+.md-header {
+    background-color: #FF5722 !important;  /* Orange foncé */
+}
+
+
+.md-header nav a {
+    color: #FFFFFF !important;
+}
+
+
+.md-button.md-button--primary {
+    background-color: #FF5722 !important;
+    color: #FFFFFF !important;
+}
+
+
+.md-content a {
+    color: #00BCD4 !important; /* Accent cyan/bleu pour lisibilité */
+}
