@@ -13,7 +13,7 @@ Ce projet a pour objectif la **création et la gestion de quatre réseaux distin
 
 Chaque réseau est conçu pour permettre une **organisation efficace et sécurisée des communications** entre les différentes entités, tout en répondant aux besoins spécifiques des utilisateurs locaux.  
 
-### 🔹 Objectifs du projet
+## 📌 Objectifs du projet
 - Concevoir et configurer des **réseaux locaux (LAN)** pour chaque ville.  
 - Mettre en place une **segmentation logique** des différents services.  
 - Assurer la **connectivité et la communication** entre les réseaux.  
@@ -23,7 +23,7 @@ Ce projet reflète les compétences acquises en **administration réseau, gestio
 
 ---
 
-### 👥 Projet réalisé par :
+## 👥 Projet réalisé par :
 
 - **Cyriak**
 - **Louis**
