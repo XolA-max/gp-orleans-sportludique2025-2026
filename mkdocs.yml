@@ -7,7 +7,7 @@ theme:
     - navigation.instant
   palette:
     - scheme: slate           
-      primary: "#FF5722"   
+      primary: "#E65100"   
       accent: "#009688"            
       toggle:
   font:
