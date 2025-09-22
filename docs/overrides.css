@@ -7,7 +7,7 @@
 /* ===== Bandeau du haut (header + onglets) ===== */
 .md-header, 
 .md-tabs {
-    background-color: #E65100 !important;  /* Orange foncé uniforme */
+    background-color: #21EB82!important;  /* Orange foncé uniforme */
 }
 
 /* ===== Liens dans la navbar et les onglets ===== */
@@ -18,7 +18,7 @@
 
 /* Hover sur onglets */
 .md-tabs__item:hover {
-    background-color: #BF360C !important; /* Orange encore plus foncé au survol */
+    background-color: #10C266 !important; /* Orange encore plus foncé au survol */
 }
 
 /* ===== Navigation latérale ===== */
@@ -27,16 +27,16 @@
 }
 .md-nav__link:hover,
 .md-nav__link--active {
-    color: #E65100 !important; /* Orange foncé au survol et actif */
+    color: #21EB82 !important; /* Orange foncé au survol et actif */
 }
 
 /* ===== Boutons primaires ===== */
 .md-button.md-button--primary {
-    background-color: #E65100 !important;
+    background-color: #21EB82 !important;
     color: #FFFFFF !important;
 }
 
 /* ===== Liens dans le contenu ===== */
 .md-content a {
-    color: #E65100 !important; /* Orange foncé pour liens */
+    color: #21EB82 !important; /* Orange foncé pour liens */
 }
