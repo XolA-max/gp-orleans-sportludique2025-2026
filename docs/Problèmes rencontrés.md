@@ -50,5 +50,11 @@
 
 ### 🔴 Problèmes
 - Problème d’installation du RAID 5 sur le serveur, car nous n’avons aucun accès à HPSSA et à l’ILO.
+  - L’ILO est corrompue, affichant la version 255.255, alors qu’elle devrait être en version 4 ou 5, ce qui pose un problème.
+
+### Test effectué :
+
+- Coupure de l'alimentation du serveur afin de tenter de restaurer les paramètres de l'ILO. 
+- Flash : mise à jour du firmware sur la puce qui gère l’ILO.
 
 ### 🟢 Solutions

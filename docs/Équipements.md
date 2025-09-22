@@ -24,7 +24,7 @@
 - **Mode Access** : Fa1/0/23 et Fa1/0/24 → un seul VLAN.
 - **VLANs** : Management, Serveurs.
 - **Liaisons** :
-  - Fa1/0/1 et Fa1/0/2 → vers les switches salle serveur  
+  - Fa1/0/1 & Fa1/0/2 → vers les switchs salle serveur  
   - Fa1/0/23 & Fa1/0/24 → vers switch serveur  
 
 ---
@@ -59,7 +59,7 @@
 
 ---
 
-## 🔷  Serveur AD
+## 🔷  Machine virtuel AD
 - **Création de la machine viruel** : Création de la machine virtuelle via l’interface web
   - Configuration des ressources nécessaires à la machine virtuelle.
   - Installation de Windows Server 2025.
@@ -72,3 +72,8 @@
   - Résolution de noms en adresses IP
 - **Serveur de fichier** :
   - Fichier partagé entre les comptes clients
+
+---
+
+## 🔷  Serveur Proxmox
+

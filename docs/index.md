@@ -13,6 +13,8 @@ Ce projet a pour objectif la **création et la gestion de quatre réseaux distin
 
 Chaque réseau est conçu pour permettre une **organisation efficace et sécurisée des communications** entre les différentes entités, tout en répondant aux besoins spécifiques des utilisateurs locaux.  
 
+---
+
 ## 📌 Objectifs du projet
 - Concevoir et configurer des **réseaux locaux (LAN)** pour chaque ville.  
 - Mettre en place une **segmentation logique** des différents services.  
