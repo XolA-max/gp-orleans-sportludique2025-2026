@@ -3,21 +3,18 @@ site_name: "Orleans"
 theme:
   name: "material"
 
-  palette:
-    - scheme: default
-      primary: blue
-      accent: deep orange
-    - scheme: slate
-      primary: blue
-      accent: deep orange
+palette:
+    - scheme: slate           # Thème sombre
+      primary: blue           # Couleur principale (titres, boutons)
+      accent: teal            # Couleur secondaire (liens, accents)
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: "Basculer le thème"
 
   font:
     text: Roboto
     code: Roboto Mono
-
-  logo: "images/logo.png"
-  favicon: "images/favicon.ico"
-  
+    
   features:
     - navigation.tabs        # Onglets de navigation
     - navigation.sections    # Sections dans la navigation
@@ -31,20 +28,6 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight
   - pymdownx.emoji      # Emojis
-
-
-nav:
-  - Accueil: index.md
-  - Guide:
-      - Introduction: guide/intro.md
-      - Installation: guide/install.md
-      - Configuration: guide/config.md
-  - Référence:
-      - Commandes: reference/commands.md
-      - API: reference/api.md
-  - FAQ: faq.md
-  - À propos: about.md
-
 # Plugins optionnels
 plugins:
   - search
