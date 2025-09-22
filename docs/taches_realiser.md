@@ -29,7 +29,7 @@
 |Routeur ADLS|Ajout d’un deuxième routeur ADSL qui prendra le relais si le routeur fibre rencontre une défaillance ou si les connexions sont débranchées.              |Cyriak,Louis|
 |Switch salle serveur|Configuration du switch situé dans la salle des serveurs              |Louis,Cyriak,Antoine                      |
 |Documentation |Mise à jour de la documentation              |Antoine|
-|HA|Mise en place de HA pour crée une passerelle virtuel              |Cyriak,Louis
+|HA|Mise en place de HA pour crée une passerelle virtuel              |Cyriak,Louis,Antoine
 
 ---
 
@@ -38,6 +38,7 @@
 | Tâches | Descriptions | Personnes concernées |
 |--------|--------------|----------------------|
 |Documentation |Mise à jour de la documentation              |Antoine
+|Raid 5|Instalation Raid 5 sur le serveur              | Louis,Cyriak                     |
 |Proxmox|Instalation de proxmox sur notre serveur              |Louis,Cyriak                      |
 |        |              |                      |
 |        |              |                      |
