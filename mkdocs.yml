@@ -10,8 +10,6 @@ theme:
       primary: "#FF5722"   
       accent: "#009688"            
       toggle:
-        icon: material/toggle-switch-off-outline
-        name: "Basculer le thème"
   font:
     text: Roboto
     code: Roboto Mono
@@ -32,3 +30,5 @@ nav:
   - Taches realiser: taches_realiser.md
   - Équipements: Équipements.md
     
+extra_css:
+  - css/overrides.css
