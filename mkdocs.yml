@@ -28,7 +28,7 @@ features:
     - navigation.instant
 nav:
   - Accueil: index.md
-  - Problèmes rencontrés: gp-orleans-sportludique2025-2026/docs/Problèmes rencontrés.md
-  - Taches realiser: gp-orleans-sportludique2025-2026/docs/taches_realiser.md
-  - Équipements: gp-orleans-sportludique2025-2026/docs/Équipements.md
+  - Problèmes rencontrés: Problèmes rencontrés.md
+  - Taches realiser: taches_realiser.md
+  - Équipements: Équipements.md
     
