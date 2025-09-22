@@ -49,6 +49,6 @@
 ## 🗓️ Semaine 4
 
 ### 🔴 Problèmes
-
+- Problème d’installation du RAID 5 sur le serveur, car nous n’avons aucun accès à HPSSA et à l’ILO.
 
 ### 🟢 Solutions
