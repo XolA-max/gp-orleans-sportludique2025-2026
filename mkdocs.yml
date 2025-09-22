@@ -7,7 +7,7 @@ theme:
     - navigation.instant
   palette:
     - scheme: slate           
-      primary: blue           
+      primary: Deep Orange          
       accent: teal            
       toggle:
         icon: material/toggle-switch-off-outline
