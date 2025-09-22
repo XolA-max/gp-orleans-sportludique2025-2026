@@ -33,7 +33,7 @@
 
 ---
 
-## Semaine 4
+## 📅 Semaine 4
 
 | Tâches | Descriptions | Personnes concernées |
 |--------|--------------|----------------------|
