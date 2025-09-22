@@ -8,6 +8,7 @@
 - **Mode Access** : Fa1/0/1-4 → un seul VLAN.
 - **VLANs** : Management, Clients, Serveurs, Interco.
 - **Routage** : Activation du routage.
+- **Routage** : Route par default sur IP de la passerelle virtuel
 - **Liaisons** :
   - Fa1/0/1 à Fa1/0/4 → ordinateurs clients  
   - Fa1/0/23 & Fa2/0/23 → switch B4  
@@ -15,7 +16,7 @@
 
 ---
 
-## 🖥️ Switch Salle Serveur
+## 🌐 Switch Salle Serveur
 - **SSH** : Accès distant (3 comptes utilisateurs avec droits complets).
 - **LACP** : Agrégation de liens (Fa1/0/1 et Fa1/0/2).
 - **Mode Trunk** : Fa1/0/1 et Fa1/0/2 → tous les VLANs.
@@ -27,21 +28,41 @@
 
 ---
 
-## 🚀 Routeur Fibre
+## 📡 Routeur Fibre
 - **SSH** : Accès distant (3 comptes utilisateurs avec droits complets).
 - **VLANs** : Management, Interco.
+- **Routage statique** :
+  - Utiliser l’interface Gi0/0.interco pour accéder aux VLAN Serveurs et Clients.
+- **ACL/NAT** :
+  - Autoriser le VLAN Interco à sortir du routeur pour accéder à Internet
+- **HA** :
+  - Création d’une passerelle virtuelle permettant d’avoir plusieurs passerelles : une active et une inactive. Lorsque la passerelle active tombe en panne, le basculement se fait automatiquement vers l’autre routeur.
 - **Interfaces** :
-  - Gi0/0 (virtuel) : VLAN Interco + VLAN Management (mode access).
-  - Gi0/1 : VLAN 200 (mode access).
-- **Fonctions** :
-  - Routage statique  
-  - Interfaces virtuelles (VLAN Mana + Interco)  
-  - ACL (contrôle d’accès)  
+  - Gi0/0 (virtuel) : VLAN Interco(nat inside) + VLAN Management (mode access).
+  - Gi0/1 : VLAN 200 (mode access,nat outside).
 
 ---
 
 ## 📡 Routeur ADSL
-- **Fonctions** :
-  - Routage statique  
-  - Interfaces virtuelles (VLAN Mana + Interco)  
-  - ACL (contrôle d’accès)  
+- **SSH** : Accès distant (3 comptes utilisateurs avec droits complets).
+- **VLANs** : Management, Interco.
+- **Routage statique** :
+  - Utiliser l’interface Gi0/0.interco pour accéder aux VLAN Serveurs et Clients.
+- **ACL/NAT** :
+  - Autoriser le VLAN Interco à sortir du routeur pour accéder à Internet
+- **HA** :
+  - Création d’une passerelle virtuelle permettant d’avoir plusieurs passerelles : une active et une inactive. Lorsque la passerelle active tombe en panne, le basculement se fait automatiquement vers l’autre routeur.
+- **Interfaces** :
+  - Gi0/0 (virtuel) : VLAN Interco(nat inside) + VLAN Management (mode access).
+  - Gi0/1 : VLAN 100 (mode access,nat outside).
+
+---
+
+## 📡 Serveur AD
+- **Création de la machine viruel** : Création de la machine virtuelle via l’interface web
+  - Configuration des ressources nécessaires à la machine virtuelle.
+  - Installation de Windows Server 2025.
+  - Configurations reseaux : Une interface dans le VLAN Management et une autre dans le VLAN Serveur.
+- **AD** :
+
+- **DHCP** : 
