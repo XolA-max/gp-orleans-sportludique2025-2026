@@ -21,6 +21,15 @@
     background-color: #BF360C !important; /* Orange encore plus foncé au survol */
 }
 
+/* ===== Navigation latérale ===== */
+.md-nav__link {
+    color: #FFFFFF !important; /* Texte blanc par défaut */
+}
+.md-nav__link:hover,
+.md-nav__link--active {
+    color: #E65100 !important; /* Orange foncé au survol et actif */
+}
+
 /* ===== Boutons primaires ===== */
 .md-button.md-button--primary {
     background-color: #E65100 !important;
@@ -29,5 +38,5 @@
 
 /* ===== Liens dans le contenu ===== */
 .md-content a {
-    color: #E65100 !important; /* Accent cyan/bleu pour lisibilité */
+    color: #E65100 !important; /* Orange foncé pour liens */
 }
