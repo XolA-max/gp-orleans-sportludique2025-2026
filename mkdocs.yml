@@ -6,29 +6,29 @@ theme:
     - navigation.sections
     - navigation.instant
   palette:
-    - scheme: slate           
-      primary: "#E65100"   
-      accent: "#009688"            
+    - scheme: slate
+      primary: indigo   # placeholder (sera écrasé par CSS)
+      accent: teal
       toggle:
+        icon: material/lightbulb-outline
+        name: "Basculer le thème"
   font:
     text: Roboto
     code: Roboto Mono
+
 markdown_extensions:
-  - admonition      
-  - codehilite      
-  - toc             
+  - admonition
+  - codehilite
+  - toc
   - pymdownx.superfences
   - pymdownx.highlight
   - pymdownx.emoji
-features:
-    - navigation.tabs
-    - navigation.top
-    - navigation.instant
+
 nav:
   - Accueil: index.md
   - Problèmes rencontrés: Problèmes rencontrés.md
   - Taches realiser: taches_realiser.md
   - Équipements: Équipements.md
-    
+
 extra_css:
   - overrides.css
