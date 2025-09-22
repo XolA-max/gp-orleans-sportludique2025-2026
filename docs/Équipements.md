@@ -59,12 +59,12 @@
 
 ---
 
-## 📡 PareFeu physique stormshield
+## 🚫 PareFeu physique stormshield
  - 
  
 ---
 
-## 📡 PareFeu virtuel
+## 🚫 PareFeu virtuel
  - 
 
 ---
