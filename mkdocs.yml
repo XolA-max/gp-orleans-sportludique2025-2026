@@ -7,8 +7,8 @@ theme:
     - navigation.instant
   palette:
     - scheme: slate           
-      primary: Deep Orange          
-      accent: Deep Orange            
+      primary: "#FF5722"   
+      accent: "#009688"            
       toggle:
         icon: material/toggle-switch-off-outline
         name: "Basculer le thème"
