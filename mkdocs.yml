@@ -6,7 +6,7 @@ theme:
     - navigation.sections
     - navigation.instant
   palette:
-    - scheme: slate           
+    - scheme: default           
       primary: "#FF5722"   
       accent: "#009688"            
       toggle:
