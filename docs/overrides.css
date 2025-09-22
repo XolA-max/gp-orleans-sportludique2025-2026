@@ -1,26 +1,27 @@
-/* Bandeau du haut (header / navbar) en vrai orange foncé */
-.md-header {
-    background-color: #E65100 !important;  /* Orange foncé profond */
+/* ===== Fond général ===== */
+.md-main, .md-content {
+    background-color: #000000 !important; /* Fond noir */
+    color: #FFFFFF !important;
 }
 
-/* Boutons primaires assortis */
+/* ===== Bandeau du haut (header / navbar) ===== */
+.md-header, .md-tabs {
+    background-color: #E65100 !important;  /* Orange foncé uniforme */
+}
+
+/* ===== Liens et textes dans la navbar ===== */
+.md-header nav a,
+.md-tabs a {
+    color: #FFFFFF !important;
+}
+
+/* ===== Boutons primaires ===== */
 .md-button.md-button--primary {
     background-color: #E65100 !important;
     color: #FFFFFF !important;
 }
 
-/* Liens dans la navbar */
-.md-header nav a {
-    color: #FFFFFF !important;
-}
-
-
-.md-button.md-button--primary {
-    background-color: #FF5722 !important;
-    color: #FFFFFF !important;
-}
-
-
+/* ===== Liens dans le contenu ===== */
 .md-content a {
     color: #00BCD4 !important; /* Accent cyan/bleu pour lisibilité */
 }
