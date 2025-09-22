@@ -1,15 +1,15 @@
+/* Bandeau du haut (header / navbar) en vrai orange foncé */
+.md-header {
+    background-color: #E65100 !important;  /* Orange foncé profond */
+}
 
-.md-content, .md-main {
-    background-color: #000000 !important;
+/* Boutons primaires assortis */
+.md-button.md-button--primary {
+    background-color: #E65100 !important;
     color: #FFFFFF !important;
 }
 
-
-.md-header {
-    background-color: #FF5722 !important;  /* Orange foncé */
-}
-
-
+/* Liens dans la navbar */
 .md-header nav a {
     color: #FFFFFF !important;
 }
