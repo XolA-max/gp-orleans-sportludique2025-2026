@@ -31,4 +31,4 @@ nav:
   - Équipements: Équipements.md
     
 extra_css:
-  - css/overrides.css
+  - overrides.css
