@@ -40,7 +40,7 @@
 |Documentation |Mise à jour de la documentation              |Antoine
 |Raid 5|Instalation Raid 5 sur le serveur              | Louis,Cyriak                     |
 |Proxmox|Instalation de proxmox sur notre serveur              |Louis,Cyriak                      |
-|        |              |                      |
+|Parefeu|Reflexion parfeu              |                      |Antoine,Louis,Cyriak
 |        |              |                      |
 |        |              |                      |
 |        |              |                      |
