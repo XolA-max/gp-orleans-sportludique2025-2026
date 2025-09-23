@@ -29,6 +29,7 @@ nav:
   - Problèmes rencontrés: Problèmes rencontrés.md
   - Taches realiser: taches_realiser.md
   - Équipements: Équipements.md
+  - Commandes : Commandes.md
 
 extra_css:
   - overrides.css
