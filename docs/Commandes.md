@@ -1,8 +1,10 @@
 # Équipements utilisés
 
-- **Switch cœur :** Cisco 3750  
-- **Routeurs :** [À compléter]  
+- **Switch cœur :** Cisco 3750 L3
+- **Routeurs :** Cisco 1921 
 - **Serveurs :** [À compléter]  
+
+# Switch 
 
 # 🔐 Configuration SSH et utilisateurs sur le switch cœur
 
@@ -64,3 +66,26 @@ Switch# show interfaces status
 Switch# show running-config
 
 ```
+
+# 🌐 Routage
+```
+# Routage
+Activation du routage sur le switch / routeur :  
+Switch(config)# ip routing
+
+# Passerelle par défaut
+
+Définir la gateway par défaut :  
+Switch(config)# ip route 0.0.0.0 0.0.0.0 <IP_Gateway>
+
+# Routes statiques
+Ajouter des routes vers des réseaux spécifiques :  
+Switch(config)# ip route <Réseau1> <Masque1> <Next_Hop1>
+Switch(config)# ip route <Réseau2> <Masque2> <Next_Hop2>
+Switch(config)# ip route <Réseau3> <Masque3> <Next_Hop3>
+
+# Vérification
+Vérifier les routes configurées :  
+Switch# show ip route
+```
+# Routeurs
