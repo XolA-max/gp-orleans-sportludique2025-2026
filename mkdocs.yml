@@ -23,13 +23,5 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight
   - pymdownx.emoji
-
-nav:
-  - Accueil: index.md
-  - Problèmes rencontrés: Problèmes rencontrés.md
-  - Taches realiser: taches_realiser.md
-  - Équipements: Équipements.md
-  - Commandes : Commandes.md
-
 extra_css:
   - overrides.css
