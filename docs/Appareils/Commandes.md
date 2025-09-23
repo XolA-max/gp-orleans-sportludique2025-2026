@@ -180,3 +180,4 @@ Router(config-subif)# ip address 192.168.10.1 255.255.255.0
 Router(config)# interface GigabitEthernet0/0.20
 Router(config-subif)# encapsulation dot1Q 20
 Router(config-subif)# ip address 192.168.20.1 255.255.255.0
+```
