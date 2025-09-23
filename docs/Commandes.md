@@ -14,3 +14,27 @@ Coeur(config)# exit
 Coeur# exit
 Coeur# write memory
 ```
+
+```
+
+Switch# show version              
+Switch# show switch               
+Switch(config)# switch <num> priority 15   
+Switch# show switch stack-ports   
+Switch# write memory                        
+
+```
+
+```
+Switch# show etherchannel summary             
+Switch(config)# interface range GigabitEthernet1/0/1 - 2  
+Switch(config-if-range)# channel-group 1 mode active       
+Switch(config)# interface Port-channel 1       
+Switch(config-if)# switchport mode trunk       
+Switch(config-if)# switchport trunk allowed vlan 10,20  
+Switch# show running-config                   
+Switch# show interfaces status                
+Switch# show etherchannel detail              
+
+
+```
