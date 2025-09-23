@@ -1,12 +1,13 @@
-# Équipements utilisés
+# Rappel des commandes 
+## Équipements utilisés
 
 - **Switch cœur :** Cisco 3750 L3
 - **Routeurs :** Cisco 1921 
 - **Serveurs :** [À compléter]  
 
-# Switch 
+## Switch 
 
-# 🔐 Configuration SSH et utilisateurs sur le switch cœur
+### 🔐 Configuration SSH et utilisateurs sur le switch cœur
 
 ```
 Coeur> enable
@@ -25,7 +26,7 @@ Coeur# exit
 Coeur# write memory
 ```
 
-# 🗂️ Configuration des VLAN
+### 🗂️ Configuration des VLAN
 ```
 ## Création d’un VLAN
 Switch(config)# vlan 10
@@ -44,7 +45,7 @@ Switch# show vlan brief
 ## Suppression d’un VLAN (si nécessaire)
 Switch(config)# no vlan 20
 ```
-# 🖧 Configuration Stack Cisco 3750
+### 🖧 Configuration Stack Cisco 3750
 
 ```
 
@@ -55,7 +56,7 @@ Switch# show switch stack-ports
 Switch# write memory                        
 
 ```
-# 🔗 LACP / EtherChannel
+### 🔗 LACP / EtherChannel
 ```
 Switch# show etherchannel summary             
 Switch(config)# interface range GigabitEthernet1/0/1 - 2  
@@ -69,7 +70,7 @@ Switch# show etherchannel detail
 
 
 ```
-# 🚦 Configuration des ports : Trunk et Access
+### 🚦 Configuration des ports : Trunk et Access
 ```
 # Mode Trunk
 Switch(config)# interface GigabitEthernet1/0/1
@@ -87,7 +88,7 @@ Switch# show running-config
 
 ```
 
-# 🌐 Routage
+### 🌐 Routage
 ```
 # Routage
 Activation du routage sur le switch / routeur :  
@@ -108,4 +109,4 @@ Switch(config)# ip route <Réseau3> <Masque3> <Next_Hop3>
 Vérifier les routes configurées :  
 Switch# show ip route
 ```
-# Routeurs
+## Routeurs
