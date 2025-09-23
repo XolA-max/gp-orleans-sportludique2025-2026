@@ -38,3 +38,6 @@ Switch# show etherchannel detail
 
 
 ```
+```
+
+```
