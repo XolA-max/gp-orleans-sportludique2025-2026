@@ -1,8 +1,10 @@
 # Équipements utilisés
 
-- **Switch cœur :** Cisco 3750  
-- **Routeurs :** [À compléter]  
+- **Switch cœur :** Cisco 3750 L3
+- **Routeurs :** Cisco 1921 
 - **Serveurs :** [À compléter]  
+
+# Switch 
 
 # 🔐 Configuration SSH et utilisateurs sur le switch cœur
 
@@ -21,6 +23,26 @@ Coeur(config)# transport input ssh
 Coeur(config)# exit
 Coeur# exit
 Coeur# write memory
+```
+
+# 🗂️ Configuration des VLAN
+```
+## Création d’un VLAN
+Switch(config)# vlan 10
+Switch(config-vlan)# name Utilisateurs
+Switch(config)# vlan 20
+Switch(config-vlan)# name Serveurs
+
+## Attribution d’un VLAN à un port en mode Access
+Switch(config)# interface GigabitEthernet1/0/3
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport access vlan 10
+
+## Vérification des VLAN existants
+Switch# show vlan brief
+
+## Suppression d’un VLAN (si nécessaire)
+Switch(config)# no vlan 20
 ```
 # 🖧 Configuration Stack Cisco 3750
 
@@ -64,3 +86,26 @@ Switch# show interfaces status
 Switch# show running-config
 
 ```
+
+# 🌐 Routage
+```
+# Routage
+Activation du routage sur le switch / routeur :  
+Switch(config)# ip routing
+
+# Passerelle par défaut
+
+Définir la gateway par défaut :  
+Switch(config)# ip route 0.0.0.0 0.0.0.0 <IP_Gateway>
+
+# Routes statiques
+Ajouter des routes vers des réseaux spécifiques :  
+Switch(config)# ip route <Réseau1> <Masque1> <Next_Hop1>
+Switch(config)# ip route <Réseau2> <Masque2> <Next_Hop2>
+Switch(config)# ip route <Réseau3> <Masque3> <Next_Hop3>
+
+# Vérification
+Vérifier les routes configurées :  
+Switch# show ip route
+```
+# Routeurs
