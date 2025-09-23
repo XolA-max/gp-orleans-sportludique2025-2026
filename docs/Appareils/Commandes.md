@@ -7,12 +7,7 @@
 ## Informations utile
 - **Les addresses Ip id de VLAN et numéro d'interfaces sont fictif  :** 
 
-## Comment reinitialiser chacun des équipements :
-#### **Switch cœur :** Cisco 3750 L3
-#### **Routeurs :** Cisco 1921 
-#### 
-
-# Commandes
+## Commandes
 ## Switch :
 ### 🔐 Configuration SSH et utilisateurs sur le switch cœur
 
@@ -171,3 +166,17 @@ RouterB(config-if)# standby 1 ip 192.168.1.1
 RouterB(config-if)# standby 1 priority 100
 RouterB(config-if)# standby 1 preempt
 ```
+
+# 🧩 Encapsulation Dot1Q
+
+## Configuration d’un sous-interface pour le routage inter-VLAN
+Configurer une interface routeur pour transporter plusieurs VLANs via **802.1Q** :  
+
+```h
+Router(config)# interface GigabitEthernet0/0.10
+Router(config-subif)# encapsulation dot1Q 10
+Router(config-subif)# ip address 192.168.10.1 255.255.255.0
+
+Router(config)# interface GigabitEthernet0/0.20
+Router(config-subif)# encapsulation dot1Q 20
+Router(config-subif)# ip address 192.168.20.1 255.255.255.0
