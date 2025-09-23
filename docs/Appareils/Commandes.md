@@ -16,7 +16,7 @@
 ## Switch :
 ### 🔐 Configuration SSH et utilisateurs sur le switch cœur
 
-```
+```h
 Coeur> enable
 Coeur# conf t
 Coeur(config)# enable secret "MotDePasse" [Pour mettre un MDP sur la commande enable]
@@ -36,31 +36,31 @@ Coeur# write memory
 ## 🗂️ Configuration des VLAN :
 
 ## Création d’un VLAN
-```
+```h
 Switch(config)# vlan 10
 Switch(config-vlan)# name Utilisateurs
 Switch(config)# vlan 20
 Switch(config-vlan)# name Serveurs
 ```
 ### Attribution d’un VLAN à un port en mode Access
-```
+```h
 Switch(config)# interface GigabitEthernet1/0/3
 Switch(config-if)# switchport mode access
 Switch(config-if)# switchport access vlan 10
 ```
 ### Suppression d’un VLAN 
-```
+```h
 Switch(config)# no vlan 20
 ```
 ### Vérification des VLAN existants
-```
+```h
 Switch# show vlan brief
 ```
 
 ## 🚦 Configuration des ports : Trunk et Access :
 
 ### Mode Trunk
-```
+```h
 Switch(config)# interface GigabitEthernet1/0/1
 Switch(config-if)# switchport mode trunk
 Switch(config-if)# switchport trunk allowed vlan 10,20
@@ -68,7 +68,7 @@ Switch# show interfaces trunk
 Switch# show running-config
 ```
 ### Mode Access
-```
+```h
 Switch(config)# interface GigabitEthernet1/0/2
 Switch(config-if)# switchport mode access
 Switch(config-if)# switchport access vlan 10
@@ -77,7 +77,7 @@ Switch# show running-config
 
 ```
 ## 🖧 Stack :
-```
+```h
 Switch# show version              
 Switch# show switch               
 Switch(config)# switch <num> priority 15   
@@ -85,7 +85,7 @@ Switch# show switch stack-ports
 Switch# write memory                        
 ```
 ## 🔗 LACP / EtherChannel :
-```
+```h
 Switch# show etherchannel summary             
 Switch(config)# interface range GigabitEthernet1/0/1 - 2  
 Switch(config-if-range)# channel-group 1 mode active       
@@ -100,36 +100,36 @@ Switch# show etherchannel detail
 # Routeurs
 ## 🌐 Routage :
 ### Activation Routage 
-```
+```h
 Switch(config)# ip routing
 ```
 ### Passerelle par défaut 
 
 
-```
+```h
 Switch(config)# ip route 0.0.0.0 0.0.0.0 <IP_Gateway>
 ```
 ### Routes statiques
 Ajouter des routes vers des réseaux spécifiques :  
-```
+```h
 Switch(config)# ip route <Réseau1> <Masque1> <Next_Hop1>
 Switch(config)# ip route <Réseau2> <Masque2> <Next_Hop2>
 Switch(config)# ip route <Réseau3> <Masque3> <Next_Hop3>
 ```
 ### Vérification
 Vérifier les routes configurées :  
-```
+```h
 Switch# show ip route
 ```
 ## 🛡️ ACL :
 
 ### ACL pour autoriser le VLAN Interco
 Créer une ACL pour autoriser le trafic du VLAN Interco vers Internet :  
-```
+```h
 Router(config)# access-list 100 permit ip 192.168.10.0 0.0.0.255 any
 ```
 ### Appliquer l’ACL sur l’interface sortante
-```
+```h
 Router(config)# interface GigabitEthernet0/0
 Router(config-if)# ip access-group 100 out
 ```
@@ -144,14 +144,35 @@ Router(config)# access-list 1 permit 192.168.10.0 0.0.0.255
 Router(config)# ip nat inside source list 1 interface GigabitEthernet0/0 overload
 ```
 ### Définir les interfaces NAT Inside / Outside
-```
+```h
 Router(config)# interface GigabitEthernet0/1
 Router(config-if)# ip nat inside
 Router(config)# interface GigabitEthernet0/0
 Router(config-if)# ip nat outside
 ```
 ### Vérification
-```
+```h
 Router# show ip nat translations
 Router# show ip nat statistics
+```
+
+## 🛠️ HSRP (Hot Standby Router Protocol)
+
+### Configuration sur le premier routeur (Routeur FIBRE)
+
+```h
+RouterA(config)# interface GigabitEthernet0/1
+RouterA(config-if)# ip address 192.168.1.2 255.255.255.0
+RouterA(config-if)# standby 1 ip 192.168.1.1
+RouterA(config-if)# standby 1 priority 110
+RouterA(config-if)# standby 1 preempt
+```
+
+### configuration sur le second routeur (Routeur ADSL)
+```h
+RouterB(config)# interface GigabitEthernet0/1
+RouterB(config-if)# ip address 192.168.1.3 255.255.255.0
+RouterB(config-if)# standby 1 ip 192.168.1.1
+RouterB(config-if)# standby 1 priority 100
+RouterB(config-if)# standby 1 preempt
 ```
