@@ -7,7 +7,7 @@
 ## Informations utile
 - **Les addresses Ip id de VLAN et numéro d'interfaces sont fictif  :** 
 
-# Comment reinitialiser chacun des équipements :
+## Comment reinitialiser chacun des équipements :
 #### **Switch cœur :** Cisco 3750 L3
 #### **Routeurs :** Cisco 1921 
 #### 
@@ -42,12 +42,7 @@ Switch(config-vlan)# name Utilisateurs
 Switch(config)# vlan 20
 Switch(config-vlan)# name Serveurs
 ```
-### Attribution d’un VLAN à un port en mode Access
-```h
-Switch(config)# interface GigabitEthernet1/0/3
-Switch(config-if)# switchport mode access
-Switch(config-if)# switchport access vlan 10
-```
+
 ### Suppression d’un VLAN 
 ```h
 Switch(config)# no vlan 20
