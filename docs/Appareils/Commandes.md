@@ -4,9 +4,16 @@
 - **Switch cœur :** Cisco 3750 L3
 - **Routeurs :** Cisco 1921 
 - **Serveurs :** [À compléter]  
+## Informations utile
+- **Les addresses Ip id de VLAN et numéro d'interfaces sont fictif  :** 
 
-## Switch 
+# Comment reinitialiser chacun des équipements :
+#### **Switch cœur :** Cisco 3750 L3
+#### **Routeurs :** Cisco 1921 
+#### 
 
+# Commandes
+## Switch :
 ### 🔐 Configuration SSH et utilisateurs sur le switch cœur
 
 ```
@@ -26,7 +33,7 @@ Coeur# exit
 Coeur# write memory
 ```
 
-## 🗂️ Configuration des VLAN
+## 🗂️ Configuration des VLAN :
 
 ## Création d’un VLAN
 ```
@@ -50,7 +57,7 @@ Switch(config)# no vlan 20
 Switch# show vlan brief
 ```
 
-## 🚦 Configuration des ports : Trunk et Access
+## 🚦 Configuration des ports : Trunk et Access :
 
 ### Mode Trunk
 ```
@@ -69,7 +76,7 @@ Switch# show interfaces status
 Switch# show running-config
 
 ```
-## 🖧 Stack 
+## 🖧 Stack :
 ```
 Switch# show version              
 Switch# show switch               
@@ -77,7 +84,7 @@ Switch(config)# switch <num> priority 15
 Switch# show switch stack-ports   
 Switch# write memory                        
 ```
-## 🔗 LACP / EtherChannel
+## 🔗 LACP / EtherChannel :
 ```
 Switch# show etherchannel summary             
 Switch(config)# interface range GigabitEthernet1/0/1 - 2  
@@ -91,15 +98,12 @@ Switch# show etherchannel detail
 ```
 
 # Routeurs
-
-## 🌐 Routage
-
-### Activation Routage
-
+## 🌐 Routage :
+### Activation Routage 
 ```
 Switch(config)# ip routing
 ```
-### Passerelle par défaut
+### Passerelle par défaut 
 
 
 ```
@@ -117,7 +121,7 @@ Vérifier les routes configurées :
 ```
 Switch# show ip route
 ```
-## 🛡️ ACL 
+## 🛡️ ACL :
 
 ### ACL pour autoriser le VLAN Interco
 Créer une ACL pour autoriser le trafic du VLAN Interco vers Internet :  
@@ -133,7 +137,7 @@ Router(config-if)# ip access-group 100 out
 ```
 Router# show access-lists
 ```
-## 🔀 NAT/PAT
+## 🔀 NAT/PAT :
 ### NAT pour traduire les adresses internes en IP publique
 ```
 Router(config)# access-list 1 permit 192.168.10.0 0.0.0.255
