@@ -7,12 +7,7 @@
 ## Informations utile
 - **Les addresses Ip id de VLAN et numéro d'interfaces sont fictif  :** 
 
-## Comment reinitialiser chacun des équipements :
-#### **Switch cœur :** Cisco 3750 L3
-#### **Routeurs :** Cisco 1921 
-#### 
-
-# Commandes
+## Commandes
 ## Switch :
 ### 🔐 Configuration SSH et utilisateurs sur le switch cœur
 
