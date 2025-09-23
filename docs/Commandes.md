@@ -1,3 +1,11 @@
+# Équipements utilisés
+
+- **Switch cœur :** Cisco 3750  
+- **Routeurs :** [À compléter]  
+- **Serveurs :** [À compléter]  
+
+# 🔐 Configuration SSH et utilisateurs sur le switch cœur
+
 ```
 Coeur> enable
 Coeur# conf t
@@ -14,6 +22,7 @@ Coeur(config)# exit
 Coeur# exit
 Coeur# write memory
 ```
+# 🖧 Configuration Stack Cisco 3750
 
 ```
 
@@ -24,7 +33,7 @@ Switch# show switch stack-ports
 Switch# write memory                        
 
 ```
-
+# 🔗 LACP / EtherChannel
 ```
 Switch# show etherchannel summary             
 Switch(config)# interface range GigabitEthernet1/0/1 - 2  
@@ -36,5 +45,22 @@ Switch# show running-config
 Switch# show interfaces status                
 Switch# show etherchannel detail              
 
+
+```
+# 🚦 Configuration des ports : Trunk et Access
+```
+# Mode Trunk
+Switch(config)# interface GigabitEthernet1/0/1
+Switch(config-if)# switchport mode trunk
+Switch(config-if)# switchport trunk allowed vlan 10,20
+Switch# show interfaces trunk
+Switch# show running-config
+
+# Mode Access
+Switch(config)# interface GigabitEthernet1/0/2
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport access vlan 10
+Switch# show interfaces status
+Switch# show running-config
 
 ```
