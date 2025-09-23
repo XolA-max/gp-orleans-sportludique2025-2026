@@ -36,7 +36,7 @@
   - Utiliser l’interface Gi0/0.interco pour accéder aux VLAN Serveurs et Clients.
 - **ACL/NAT** :
   - Autoriser le VLAN Interco à sortir du routeur pour accéder à Internet
-- **HA** :
+- **HA (VRRP)** :
   - Création d’une passerelle virtuelle permettant d’avoir plusieurs passerelles : une active et une inactive. Lorsque la passerelle active tombe en panne, le basculement se fait automatiquement vers l’autre routeur.
 - **Interfaces** :
   - Gi0/0 (virtuel) : VLAN Interco(nat inside) + VLAN Management (mode access).
