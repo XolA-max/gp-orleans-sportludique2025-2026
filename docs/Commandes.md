@@ -24,6 +24,26 @@ Coeur(config)# exit
 Coeur# exit
 Coeur# write memory
 ```
+
+# 🗂️ Configuration des VLAN
+```
+## Création d’un VLAN
+Switch(config)# vlan 10
+Switch(config-vlan)# name Utilisateurs
+Switch(config)# vlan 20
+Switch(config-vlan)# name Serveurs
+
+## Attribution d’un VLAN à un port en mode Access
+Switch(config)# interface GigabitEthernet1/0/3
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport access vlan 10
+
+## Vérification des VLAN existants
+Switch# show vlan brief
+
+## Suppression d’un VLAN (si nécessaire)
+Switch(config)# no vlan 20
+```
 # 🖧 Configuration Stack Cisco 3750
 
 ```
