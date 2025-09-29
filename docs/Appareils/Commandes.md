@@ -111,6 +111,21 @@ Vérifier les routes configurées :
 ```h
 Switch# show ip route
 ```
+
+## 🧩 Encapsulation Dot1Q
+
+## Configuration d’une sous-interface pour le routage inter-VLAN
+Configurer une interface routeur pour transporter plusieurs VLANs via **802.1Q** :  
+
+```h
+Router(config)# interface GigabitEthernet0/0.10
+Router(config-subif)# encapsulation dot1Q 10
+Router(config-subif)# ip address 192.168.10.1 255.255.255.0
+
+Router(config)# interface GigabitEthernet0/0.20
+Router(config-subif)# encapsulation dot1Q 20
+Router(config-subif)# ip address 192.168.20.1 255.255.255.0
+```
 ## 🛡️ ACL :
 
 ### ACL pour autoriser le VLAN Interco
@@ -167,16 +182,3 @@ RouterB(config-if)# standby 1 priority 100
 RouterB(config-if)# standby 1 preempt
 ```
 
-# 🧩 Encapsulation Dot1Q
-
-## Configuration d’un sous-interface pour le routage inter-VLAN
-Configurer une interface routeur pour transporter plusieurs VLANs via **802.1Q** :  
-
-```h
-Router(config)# interface GigabitEthernet0/0.10
-Router(config-subif)# encapsulation dot1Q 10
-Router(config-subif)# ip address 192.168.10.1 255.255.255.0
-
-Router(config)# interface GigabitEthernet0/0.20
-Router(config-subif)# encapsulation dot1Q 20
-Router(config-subif)# ip address 192.168.20.1 255.255.255.0
