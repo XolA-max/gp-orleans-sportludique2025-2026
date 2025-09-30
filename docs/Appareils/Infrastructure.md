@@ -1,3 +1,3 @@
-# Infrastructure
+# Infrastructure :
 
 ![](Cartereseau.drawio)
