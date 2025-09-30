@@ -25,3 +25,5 @@ markdown_extensions:
   - pymdownx.emoji
 extra_css:
   - overrides.css
+plugins: 
+  - drawio 
