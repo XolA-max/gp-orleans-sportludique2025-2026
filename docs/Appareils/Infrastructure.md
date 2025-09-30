@@ -1,7 +1,9 @@
 # Infrastructure :
 
+## Plan du reseau :
+
 ![](carte.drawio)
 
-# Details :
+## Details :
 
 ![](Infra.drawio)
