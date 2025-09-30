@@ -39,8 +39,16 @@
 |--------|--------------|----------------------|
 |Documentation |Mise à jour de la documentation              |Antoine
 |Raid 5|Instalation Raid 5 sur le serveur              | Louis,Cyriak                     |
-|Proxmox|Instalation de proxmox sur notre serveur              |Louis,Cyriak                      |
-|Parefeu|Reflexion parfeu              |                      |Antoine,Louis,Cyriak
-|        |              |                      |
-|        |              |                      |
-|        |              |                      |
+|Proxmox|Instalation de proxmox sur notre serveur(Pas effectué)              |Louis,Cyriak                      |
+|Parefeu|Reflexion parfeu              |                      |Antoine,Louis,Cyriak |
+
+---
+
+## 📅 Semaine 5
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|
+| Proxmox            | Installation de Proxmox sur notre serveur                          | Louis                 |
+| Infrastructure     | Modification des routeurs et switchs pour accueillir le pare-feu   | Antoine               |
+| Pare-feu physique  | Configuration du pare-feu et mise en place dans la baie            | Antoine, Louis, Cyriak|
+| OPNsense           | Réflexion sur la mise en place de la DMZ et d’un pare-feu virtuel  | Cyriak, Louis         |

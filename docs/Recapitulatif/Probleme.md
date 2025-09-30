@@ -5,7 +5,7 @@
 
 ### 🔴 Problèmes
 - Énorme latence lors de l’écriture sur les terminaux.  
-- Les lettres ne correspondaient pas → beaucoup d’erreurs de saisie.
+  - Les lettres ne correspondaient pas → beaucoup d’erreurs de saisie.
 
 ### 🟢 Solutions
 - Utilisation d’un PC séparé avec un câble bien tendu.  
@@ -42,15 +42,18 @@
 ### 🟢 Solutions
 
 - Appelle du profeseur pour modifier la configuration du switch
-✅ **Test effectué** : VLAN actif après configuration.
+✅ **Test effectué** : 
+
+VLAN actif après configuration.
 
 ---
 
 ## 🗓️ Semaine 4
 
 ### 🔴 Problèmes
-- Problème d’installation du RAID 5 sur le serveur, car nous n’avons aucun accès à HPSSA et à l’ILO.
+- 1️⃣Problème d’installation du RAID 5 sur le serveur, car nous n’avons aucun accès à HPSSA et à l’ILO.
   - L’ILO est corrompue, affichant la version 255.255, alors qu’elle devrait être en version 4 ou 5, ce qui pose un problème.
+- 2️⃣Reconfiguration de l'infrastructure avec l'ajout du Parefeu
 
 ### Test effectué :
 
@@ -58,3 +61,15 @@
 - Flash : mise à jour du firmware sur la puce qui gère l’ILO.
 
 ### 🟢 Solutions
+
+- 1️⃣,2️⃣ Aucune dans la semaine
+
+---
+
+## 🗓️ Semaine 5
+
+### 🔴 Problèmes
+- 1️⃣ Notre VLAN client n’avait plus accès à Internet depuis l’ajout du pare-feu.
+
+### 🟢 Solutions
+- 1️⃣ Modifications des configurations faites la semaine 4

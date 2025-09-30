@@ -60,7 +60,23 @@
 ---
 
 ## 🚫 PareFeu physique stormshield
- - 
+
+---
+
+### Accès à l’interface
+
+- L’administration se fait via l’interface web.  
+- Adresse IP par défaut ou configurée pour le management : `192.168.140.45`  
+- Utiliser un navigateur moderne et se connecter avec le compte administrateur.  
+
+---
+
+### Configuration initiale
+
+#### Paramètres réseau
+- Assigner une IP statique sur l’interface de management.
+  - IP : `192.168.140.45`
+  - Masque : `255.255.255.0`
  
 ---
 
@@ -84,5 +100,20 @@
 
 ---
 
-## 🔷  Serveur Proxmox
+## 🔷 Serveur Proxmox
+
+- **Installation RAID 5 avec LVM**
+  - Création des partitions avec `fdisk` ou `parted`.
+  - Configuration du RAID 5 via `mdadm` 
+  - Création du volume LVM 
+
+- **Installation de Proxmox**
+  - Création d’une clé USB bootable avec `Rufus` ou `dd` 
+  - Démarrage du serveur sur la clé USB et installation de l’OS Proxmox.
+
+- **Configuration de Proxmox**
+  - Configuration du VLAN de management dans l’interface réseau :
+  - Redémarrage du service réseau :
+
+
 
