@@ -24,9 +24,6 @@ Chaque réseau est conçu pour permettre une **organisation efficace et sécuris
 Ce projet reflète les compétences acquises en **administration réseau, gestion de VLANs et interconnexion de sites distants** au cours de la formation SISR.
 
 ---
-## Infrastructure Actuel :
-
-![](Infra.drawio)
 
 ## 👥 Projet réalisé par :
 

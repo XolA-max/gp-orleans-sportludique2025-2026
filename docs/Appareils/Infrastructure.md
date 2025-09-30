@@ -1,3 +1,7 @@
 # Infrastructure :
 
-![](Carte.drawio)
+![](carte.drawio)
+
+# Details :
+
+![](Infra.drawio)
