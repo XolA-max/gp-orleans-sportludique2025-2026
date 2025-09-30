@@ -1,11 +1,11 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0" version="28.2.5">
   <diagram name="Page-1" id="fflIQQpTYrM3X1x5JRc0">
-    <mxGraphModel dx="2792" dy="1772" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="413" pageHeight="583" math="0" shadow="0">
+    <mxGraphModel dx="2202" dy="1415" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="413" pageHeight="583" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="ml21YmN0sPayiZwg91VS-5" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-550" y="-380" width="1400" height="850" as="geometry" />
+        <mxCell id="ml21YmN0sPayiZwg91VS-5" value="" style="rounded=1;whiteSpace=wrap;html=1;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" vertex="1" parent="1">
+          <mxGeometry x="-533" y="-400" width="1400" height="850" as="geometry" />
         </mxCell>
         <mxCell id="pyu1rjhyokUZVvccA6zp-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#76608a;strokeColor=#432D57;endArrow=none;endFill=0;" parent="1" source="pyu1rjhyokUZVvccA6zp-1" target="pyu1rjhyokUZVvccA6zp-15" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -51,7 +51,7 @@
         <mxCell id="YpFHt7UzIiXQDVgsjooq-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" parent="1" source="pyu1rjhyokUZVvccA6zp-19" target="pyu1rjhyokUZVvccA6zp-17" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="pyu1rjhyokUZVvccA6zp-19" value="&lt;div data-contents=&quot;true&quot; align=&quot;center&quot;&gt;&lt;div class=&quot;&quot; data-block=&quot;true&quot; data-editor=&quot;eshlh&quot; data-offset-key=&quot;1rqa5-0-0&quot;&gt;&lt;blockquote data-offset-key=&quot;1rqa5-0-0&quot; class=&quot;public-DraftStyleDefault-block public-DraftStyleDefault-ltr&quot;&gt;&lt;span data-offset-key=&quot;1rqa5-0-0&quot;&gt;&lt;/span&gt;DMZ&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;span data-offset-key=&quot;1pts3-0-0&quot;&gt;&lt;span data-text=&quot;true&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/font&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;" style="html=1;outlineConnect=0;fillColor=#e3c800;strokeColor=#B09500;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.bus;gradientDirection=north;fontColor=#000000;perimeter=backbonePerimeter;backboneSize=20;" parent="1" vertex="1">
+        <mxCell id="pyu1rjhyokUZVvccA6zp-19" value="192.168.45.0/24" style="html=1;outlineConnect=0;fillColor=#e3c800;strokeColor=#B09500;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.bus;gradientDirection=north;fontColor=#000000;perimeter=backbonePerimeter;backboneSize=20;" parent="1" vertex="1">
           <mxGeometry x="62" y="40" width="290" height="20" as="geometry" />
         </mxCell>
         <mxCell id="pyu1rjhyokUZVvccA6zp-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" parent="1" source="pyu1rjhyokUZVvccA6zp-20" target="pyu1rjhyokUZVvccA6zp-24" edge="1">
@@ -176,7 +176,7 @@
         <mxCell id="pyu1rjhyokUZVvccA6zp-71" value="&lt;div data-contents=&quot;true&quot; align=&quot;center&quot;&gt;&lt;div class=&quot;&quot; data-block=&quot;true&quot; data-editor=&quot;eshlh&quot; data-offset-key=&quot;1rqa5-0-0&quot;&gt;&lt;blockquote data-offset-key=&quot;1rqa5-0-0&quot; class=&quot;public-DraftStyleDefault-block public-DraftStyleDefault-ltr&quot;&gt;&lt;span data-offset-key=&quot;1rqa5-0-0&quot;&gt;&lt;/span&gt;Vlan 249 LANtoDMZ&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;" style="html=1;outlineConnect=0;fillColor=#76608a;strokeColor=#432D57;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.bus;gradientDirection=north;fontColor=#ffffff;perimeter=backbonePerimeter;backboneSize=20;" parent="1" vertex="1">
           <mxGeometry x="-520" y="-180" width="290" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="pyu1rjhyokUZVvccA6zp-72" value="&lt;div data-contents=&quot;true&quot; align=&quot;center&quot;&gt;&lt;div class=&quot;&quot; data-block=&quot;true&quot; data-editor=&quot;eshlh&quot; data-offset-key=&quot;1rqa5-0-0&quot;&gt;&lt;blockquote data-offset-key=&quot;1rqa5-0-0&quot; class=&quot;public-DraftStyleDefault-block public-DraftStyleDefault-ltr&quot;&gt;&lt;span data-offset-key=&quot;1rqa5-0-0&quot;&gt;&lt;/span&gt;DMZ&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;span data-offset-key=&quot;1pts3-0-0&quot;&gt;&lt;span data-text=&quot;true&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;/font&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;/div&gt;" style="html=1;outlineConnect=0;fillColor=#e3c800;strokeColor=#B09500;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.bus;gradientDirection=north;fontColor=#000000;perimeter=backbonePerimeter;backboneSize=20;" parent="1" vertex="1">
+        <mxCell id="pyu1rjhyokUZVvccA6zp-72" value="&lt;span style=&quot;color: light-dark(rgb(255, 255, 255), rgb(237, 237, 237));&quot;&gt;V&lt;span style=&quot;color: rgb(255, 255, 255);&quot;&gt;lan DMZ&lt;/span&gt;&lt;/span&gt;" style="html=1;outlineConnect=0;fillColor=#e3c800;strokeColor=#B09500;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.bus;gradientDirection=north;fontColor=#000000;perimeter=backbonePerimeter;backboneSize=20;" parent="1" vertex="1">
           <mxGeometry x="-520" y="-140" width="290" height="20" as="geometry" />
         </mxCell>
         <mxCell id="YpFHt7UzIiXQDVgsjooq-1" value="&lt;div&gt;.65&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" parent="1" vertex="1">
@@ -197,8 +197,13 @@
         <mxCell id="YpFHt7UzIiXQDVgsjooq-10" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Azure_Firewall.svg;" parent="1" vertex="1">
           <mxGeometry x="187" y="100" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="ml21YmN0sPayiZwg91VS-4" value="" style="shape=mxgraph.networks2.icon;aspect=fixed;fillColor=#1ba1e2;strokeColor=#006EAF;network2IconShadow=1;network2bgFillColor=none;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;network2Icon=mxgraph.networks2.pc;network2IconYOffset=-0.0593;network2IconW=0.9999;network2IconH=0.7096;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fontColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="-340" y="317.42" width="60" height="42.58" as="geometry" />
+        <mxCell id="ml21YmN0sPayiZwg91VS-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#e51400;strokeColor=#B20000;endArrow=none;endFill=0;" edge="1" source="ml21YmN0sPayiZwg91VS-8" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-180" y="338.71000000000004" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ml21YmN0sPayiZwg91VS-8" value="" style="shape=mxgraph.networks2.icon;aspect=fixed;fillColor=#e51400;strokeColor=#B20000;network2IconShadow=1;network2bgFillColor=none;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;network2Icon=mxgraph.networks2.pc;network2IconYOffset=-0.0593;network2IconW=0.9999;network2IconH=0.7096;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="-340" y="317.41999999999996" width="60" height="42.58" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
