@@ -1,11 +1,5 @@
 # Rappel des commandes
 
-## Équipements utilisés
-
-- **Switch cœur :** Cisco 3750 L3
-- **Routeurs :** Cisco 1921
-- **Serveurs :** [À compléter]  
-
 ## Informations utile
 
 - **Les addresses Ip id de VLAN et numéro d'interfaces sont fictif  :**
@@ -31,9 +25,9 @@ Coeur(config)# transport input ssh
 Coeur(config)# exit
 Coeur# exit
 Coeur# write memory
-```
+``` 
 
-### 🗂️ Configuration des VLAN
+### 🗂️ Configuration des VLAN :
 
 ### Création d’un VLAN
 
