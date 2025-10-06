@@ -1,6 +1,6 @@
-# 🏠 Page d'Accueil
+# Page d'Accueil
 
-## 📌 Informations sur le projet **SportLudique – Project 2025-2026**
+##  Informations sur le projet **SportLudique – Project 2025-2026**
 
 Bienvenue sur la page d’accueil du projet **SportLudique**, développé dans le cadre du BTS SIO spécialité SISR pour l’année scolaire 2025-2026.  
 
@@ -15,7 +15,7 @@ Chaque réseau est conçu pour permettre une **organisation efficace et sécuris
 
 ---
 
-## 📌 Objectifs du projet
+##  Objectifs du projet
 - Concevoir et configurer des **réseaux locaux (LAN)** pour chaque ville.  
 - Mettre en place une **segmentation logique** des différents services.  
 - Assurer la **connectivité et la communication** entre les réseaux.  
@@ -25,7 +25,7 @@ Ce projet reflète les compétences acquises en **administration réseau, gestio
 
 ---
 
-## 👥 Projet réalisé par :
+##  Projet réalisé par :
 
 - **Cyriak**
 - **Louis**

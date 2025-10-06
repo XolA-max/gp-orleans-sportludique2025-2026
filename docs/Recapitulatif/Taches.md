@@ -37,10 +37,10 @@
 
 | Tâches | Descriptions | Personnes concernées |
 |--------|--------------|----------------------|
-|Documentation |Mise à jour de la documentation              |Antoine
-|Raid 5|Instalation Raid 5 sur le serveur              | Louis,Cyriak                     |
-|Proxmox|Instalation de proxmox sur notre serveur(Pas effectué)              |Louis,Cyriak                      |
-|Parefeu|Reflexion parfeu              |                      |Antoine,Louis,Cyriak |
+|Documentation |Mise à jour de la documentation|Antoine
+|Raid 5|Instalation Raid 5 sur le serveur | Louis,Cyriak |
+|Proxmox|Instalation de proxmox sur notre serveur(Pas effectué) | Louis,Cyriak |
+|Parefeu|Reflexion parfeu | Antoine,Louis,Cyriak |
 
 ---
 
@@ -52,3 +52,13 @@
 | Infrastructure     | Modification des routeurs et switchs pour accueillir le pare-feu   | Antoine               |
 | Pare-feu physique  | Configuration du pare-feu et mise en place dans la baie            | Antoine, Louis, Cyriak|
 | OPNsense           | Réflexion sur la mise en place de la DMZ et d’un pare-feu virtuel  | Cyriak, Louis         |
+
+---
+
+## 📅 Semaine 6
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|
+|OPNsense|Mise en place de OPNsense sur le serveur nutanix|Cyriak|
+|Infrastructure |Modification des routeurs et switchs pour accueillir le  deuxime pare-feu |Louis|
+
