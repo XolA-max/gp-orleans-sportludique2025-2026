@@ -85,4 +85,5 @@
 ---
 
 ## 🔷  Serveur Proxmox
-
+- **Installation du serveur**
+- **Ajout de l'adresse ip dans le Vlan mana et administration via interface web**
