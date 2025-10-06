@@ -25,6 +25,22 @@ Ce projet reflète les compétences acquises en **administration réseau, gestio
 
 ---
 
+
+## Équipements utilisés
+
+- **Switch :** 
+    - Cisco 9200L 24p
+    - Cisco 3750 L3 [Coeur]
+- **Routeurs :** 
+    - Cisco 1921
+- **Serveurs :** 
+    - Hp DL380 Gen9
+- **FireWall :**  
+    - StormShield NA-SN210 [Physique] 
+    - OpenSense [Virtuel]
+
+---
+
 ##  Projet réalisé par :
 
 - **Cyriak**
