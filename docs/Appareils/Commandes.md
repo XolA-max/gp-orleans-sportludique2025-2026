@@ -10,11 +10,11 @@
 
 - **Les addresses Ip id de VLAN et numéro d'interfaces sont fictif  :**
 
-## Commandes
+# Commandes
 
 ## Switch
 
-### 🔐 Configuration SSH et utilisateurs sur le switch cœur
+#### 🔐 Configuration SSH et utilisateurs sur le switch cœur
 
 ```h
 Coeur> enable
@@ -33,9 +33,9 @@ Coeur# exit
 Coeur# write memory
 ```
 
-## 🗂️ Configuration des VLAN
+### 🗂️ Configuration des VLAN
 
-## Création d’un VLAN
+### Création d’un VLAN
 
 ```h
 Switch(config)# vlan 10
@@ -44,21 +44,21 @@ Switch(config)# vlan 20
 Switch(config-vlan)# name Serveurs
 ```
 
-### Suppression d’un VLAN
+#### Suppression d’un VLAN
 
 ```h
 Switch(config)# no vlan 20
 ```
 
-### Vérification des VLAN existants
+#### Vérification des VLAN existants
 
 ```h
 Switch# show vlan brief
 ```
 
-## 🚦 Configuration des ports : Trunk et Access
+### 🚦 Configuration des ports : Trunk et Access
 
-### Mode Trunk
+#### Mode Trunk
 
 ```h
 Switch(config)# interface GigabitEthernet1/0/1
@@ -68,7 +68,7 @@ Switch# show interfaces trunk
 Switch# show running-config
 ```
 
-### Mode Access
+#### Mode Access
 
 ```h
 Switch(config)# interface GigabitEthernet1/0/2
@@ -79,7 +79,7 @@ Switch# show running-config
 
 ```
 
-## 🖧 Stack
+### 🖧 Stack
 
 ```h
 Switch# show version              
@@ -89,7 +89,7 @@ Switch# show switch stack-ports
 Switch# write memory                        
 ```
 
-## 🔗 LACP / EtherChannel
+### 🔗 LACP / EtherChannel
 
 ```h
 Switch# show etherchannel summary             
@@ -102,24 +102,25 @@ Switch# show running-config
 Switch# show interfaces status                
 Switch# show etherchannel detail              
 ```
+---
 
-# Routeurs
+## Routeurs
 
-## 🌐 Routage
+### 🌐 Routage
 
-### Activation Routage
+#### Activation Routage
 
 ```h
 Switch(config)# ip routing
 ```
 
-### Passerelle par défaut
+#### Passerelle par défaut
 
 ```h
 Switch(config)# ip route 0.0.0.0 0.0.0.0 <IP_Gateway>
 ```
 
-### Routes statiques
+#### Routes statiques
 
 Ajouter des routes vers des réseaux spécifiques :  
 
@@ -129,7 +130,7 @@ Switch(config)# ip route <Réseau2> <Masque2> <Next_Hop2>
 Switch(config)# ip route <Réseau3> <Masque3> <Next_Hop3>
 ```
 
-### Vérification
+#### Vérification
 
 Vérifier les routes configurées :  
 
@@ -137,9 +138,9 @@ Vérifier les routes configurées :
 Switch# show ip route
 ```
 
-## 🧩 Encapsulation Dot1Q
+### 🧩 Encapsulation Dot1Q
 
-## Configuration d’une sous-interface pour le routage inter-VLAN
+### Configuration d’une sous-interface pour le routage inter-VLAN
 
 Configurer une interface routeur pour transporter plusieurs VLANs via **802.1Q** :  
 
@@ -153,9 +154,9 @@ Router(config-subif)# encapsulation dot1Q 20
 Router(config-subif)# ip address 192.168.20.1 255.255.255.0
 ```
 
-## 🛡️ ACL
+### 🛡️ ACL
 
-### ACL pour autoriser le VLAN Interco
+#### ACL pour autoriser le VLAN Interco
 
 Créer une ACL pour autoriser le trafic du VLAN Interco vers Internet :  
 
@@ -163,29 +164,29 @@ Créer une ACL pour autoriser le trafic du VLAN Interco vers Internet :
 Router(config)# access-list 100 permit ip 192.168.10.0 0.0.0.255 any
 ```
 
-### Appliquer l’ACL sur l’interface sortante
+#### Appliquer l’ACL sur l’interface sortante
 
 ```h
 Router(config)# interface GigabitEthernet0/0
 Router(config-if)# ip access-group 100 out
 ```
 
-### Vérification
+#### Vérification
 
 ```
 Router# show access-lists
 ```
 
-## 🔀 NAT/PAT
+### 🔀 NAT/PAT
 
-### NAT pour traduire les adresses internes en IP publique
+#### NAT pour traduire les adresses internes en IP publique
 
 ```
 Router(config)# access-list 1 permit 192.168.10.0 0.0.0.255
 Router(config)# ip nat inside source list 1 interface GigabitEthernet0/0 overload
 ```
 
-### Définir les interfaces NAT Inside / Outside
+#### Définir les interfaces NAT Inside / Outside
 
 ```h
 Router(config)# interface GigabitEthernet0/1
@@ -194,16 +195,16 @@ Router(config)# interface GigabitEthernet0/0
 Router(config-if)# ip nat outside
 ```
 
-### Vérification
+#### Vérification
 
 ```h
 Router# show ip nat translations
 Router# show ip nat statistics
 ```
 
-## 🛠️ HSRP (Hot Standby Router Protocol)
+### 🛠️ HSRP (Hot Standby Router Protocol)
 
-### Configuration sur le premier routeur (Routeur FIBRE)
+#### Configuration sur le premier routeur (Routeur FIBRE)
 
 ```h
 RouterA(config)# interface GigabitEthernet0/1
@@ -213,7 +214,7 @@ RouterA(config-if)# standby 1 priority 110
 RouterA(config-if)# standby 1 preempt
 ```
 
-### configuration sur le second routeur (Routeur ADSL)
+#### configuration sur le second routeur (Routeur ADSL)
 
 ```h
 RouterB(config)# interface GigabitEthernet0/1
@@ -223,9 +224,9 @@ RouterB(config-if)# standby 1 priority 100
 RouterB(config-if)# standby 1 preempt
 ```
 
-## Installation RAID 5 avec LVM sur le serveur
+### Installation RAID 5 avec LVM sur le serveur
 
-### Commandes
+#### Commandes
 
 ```h
 # Création d'un RAID 5 avec 4 disques
@@ -245,9 +246,9 @@ vgcreate vg_raid5 /dev/md0
 lvcreate -L 5200G -n lv_proxmox vg_raid5
 ```
 
-## Configuration de Proxmox
-
 ### Configuration de Proxmox
+
+#### Configuration de Proxmox
 
 ```h
 # Éditer la configuration réseau
@@ -262,6 +263,33 @@ iface vmbr0 inet static
 systemctl restart networking
 ```
 
-### Gestion
+#### Gestion
 
 L’administration s’effectue depuis l’interface web, disponible à l’adresse IP : 192.168.140.75
+
+---
+
+## FireWall physique
+
+### Accès à l’interface Web d’administration
+
+```h
+https://192.168.0.254
+
+admin / admin
+```
+
+
+### Définir les interfaces réseau :
+
+```h
+CONFIG NETWORK set interface eth0 ip X.X.X.X/X
+CONFIG NETWORK set interface eth1 ip X.X.X.X/X
+CONFIG NETWORK set interface eth2 dhcpclient enable
+```
+
+### Navigation
+
+Après avoir configuré les ports LAN et WAN, la configuration se fait depuis l’interface web de l’équipement.
+
+### Gateway 
