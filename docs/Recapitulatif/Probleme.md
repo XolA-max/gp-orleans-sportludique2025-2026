@@ -17,10 +17,9 @@
 ## 🗓️ Semaine 2
 
 ### 🔴 Problèmes
-- Problème de liaison Trunk entre le switch cœur et le switch de la baie.  
+- Problème de liaison **Trunk** entre le switch cœur et le switch de la baie.  
 - Interconnexion entre le switch et le routeur (VLAN interco).  
-- ACL : mauvaise configuration.  
-
+- **ACL** : mauvaise configuration.  
 - **Mauvaise configuration DNS** :  
   - Création d’un nouveau DNS.  
   - Suppression du DNS initial (lié au compte Administrateur).  
@@ -40,10 +39,8 @@
 - Aucun gros problème, à part une perte de temps en salle serveur due à une mauvaise configuration du switch de la baie des serveurs.
 
 ### 🟢 Solutions
-
-- Appelle du profeseur pour modifier la configuration du switch
-✅ **Test effectué** : 
-
+- Appel du professeur pour modifier la configuration du switch.  
+✅ **Test effectué** :  
 VLAN actif après configuration.
 
 ---
@@ -51,25 +48,34 @@ VLAN actif après configuration.
 ## 🗓️ Semaine 4
 
 ### 🔴 Problèmes
-- 1️⃣Problème d’installation du RAID 5 sur le serveur, car nous n’avons aucun accès à HPSSA et à l’ILO.
-  - L’ILO est corrompue, affichant la version 255.255, alors qu’elle devrait être en version 4 ou 5, ce qui pose un problème.
-- 2️⃣Reconfiguration de l'infrastructure avec l'ajout du Parefeu
+- 1️⃣ Problème d’installation du RAID 5 sur le serveur, car nous n’avions aucun accès à HPSSA ni à l’ILO.  
+  - L’ILO était corrompue, affichant la version *255.255*, alors qu’elle aurait dû être en version 4 ou 5, ce qui posait problème.  
+- 2️⃣ Reconfiguration de l’infrastructure avec l’ajout du pare-feu.
 
-### Test effectué :
-
-- Coupure de l'alimentation du serveur afin de tenter de restaurer les paramètres de l'ILO. 
+### 🧪 Tests effectués
+- Coupure de l’alimentation du serveur afin de tenter de restaurer les paramètres de l’ILO.  
 - Flash : mise à jour du firmware sur la puce qui gère l’ILO.
 
 ### 🟢 Solutions
-
-- 1️⃣,2️⃣ Aucune dans la semaine
+- 1️⃣, 2️⃣ Aucune cette semaine.
 
 ---
 
 ## 🗓️ Semaine 5
 
 ### 🔴 Problèmes
-- 1️⃣ Notre VLAN client n’avait plus accès à Internet depuis l’ajout du pare-feu.
+- 1️⃣ Le VLAN client n’avait plus accès à Internet depuis l’ajout du pare-feu.
 
 ### 🟢 Solutions
-- 1️⃣ Modifications des configurations faites la semaine 4
+- 1️⃣ Modifications des configurations effectuées la semaine 4.
+
+---
+
+## 🗓️ Semaine 6
+
+### 🔴 Problèmes
+- 1️⃣ Problème de démarrage d’OPNsense sur le serveur Nutanix (redémarrage à zéro à chaque démarrage de la machine virtuelle).  
+- 2️⃣ Impossible de contacter la salle des serveurs depuis notre poste de travail.
+
+### 🟢 Solutions
+- 2️⃣ La modification apportée sur le switch la semaine passée manquait une commande pour que le LACP fonctionne correctement (le port-channel et les interfaces des deux ports doivent être identiques, ce qui n’était pas le cas).  
