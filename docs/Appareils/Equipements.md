@@ -122,3 +122,20 @@
 - **Configuration de Proxmox**
   - Configuration du VLAN de management dans l’interface réseau :
   - Redémarrage du service réseau :
+
+
+## 🔷 Pare-feu Opnsense
+
+- **Installation de la VM sur Nutanix**
+  - Ajout d'un CD-ROM avec une image OPNsense
+  - Ajout d'un Disque de 300GB
+  - Mettre les interfaces Réseau (Mana, DMZ et le WAN)
+
+- **Installation Interne**
+  - Installation via Installer
+  - Configurer les interfaces WAN, DMZ et LAN
+  - Se connecter via le site web 
+
+- **Configuration site web**
+  - Configuration Passerelle/Route
+  - Règles de Pare-Feu/NAT
