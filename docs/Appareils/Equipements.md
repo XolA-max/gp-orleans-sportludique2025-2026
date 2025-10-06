@@ -1,6 +1,7 @@
 # Présentation des équipements réseau
 
 ## 🌐 Switch CORE
+
 - **Stack** : Empilement de switches (tolérance aux pannes + plus de ports).
 - **SSH** : Accès distant via VLAN de management.
 - **LACP** : Agrégation de liens (Fa1/0/23 et Fa2/0/23).
@@ -18,6 +19,7 @@
 ---
 
 ## 🌐 Switch Salle Serveur
+
 - **SSH** : Accès distant (3 comptes utilisateurs avec droits complets).
 - **LACP** : Agrégation de liens (Fa1/0/1 et Fa1/0/2).
 - **Mode Trunk** : Fa1/0/1 et Fa1/0/2 → tous les VLANs.
@@ -30,6 +32,7 @@
 ---
 
 ## 📡 Routeur Fibre
+
 - **SSH** : Accès distant (3 comptes utilisateurs avec droits complets).
 - **VLANs** : Management, Interco.
 - **Routage statique** :
@@ -45,6 +48,7 @@
 ---
 
 ## 📡 Routeur ADSL
+
 - **SSH** : Accès distant (3 comptes utilisateurs avec droits complets).
 - **VLANs** : Management, Interco.
 - **Routage statique** :
@@ -60,23 +64,43 @@
 ---
 
 ## 🚫 PareFeu physique stormshield
- - 
- 
+
+---
+
+### Accès à l’interface
+
+- L’administration se fait via l’interface web.  
+- Adresse IP par défaut ou configurée pour le management : `192.168.140.45`  
+- Utiliser un navigateur moderne et se connecter avec le compte administrateur.  
+
+---
+
+### Configuration initiale
+
+#### Paramètres réseau
+
+- Assigner une IP statique sur l’interface de management.
+  - IP : `192.168.140.45`
+  - Masque : `255.255.255.0`
+
 ---
 
 ## 🚫 PareFeu virtuel
- - 
+
+-
 
 ---
+
 ## 🔷  Machine virtuel AD
+
 - **Création de la machine viruel** : Création de la machine virtuelle via l’interface web
   - Configuration des ressources nécessaires à la machine virtuelle.
   - Installation de Windows Server 2025.
   - Configurations reseaux : Une interface dans le VLAN Management et une autre dans le VLAN Serveur.
 - **AD** :
   - Crétion de l'active directori
-- **DHCP** : 
- - Une plage DHCP pour le VLAN Client a été configurée de X.X.X.10 à X.X.X.50.
+- **DHCP** :
+- Une plage DHCP pour le VLAN Client a été configurée de X.X.X.10 à X.X.X.50.
 - **DNS** :
   - Résolution de noms en adresses IP
 - **Serveur de fichier** :
@@ -84,6 +108,17 @@
 
 ---
 
-## 🔷  Serveur Proxmox
-- **Installation du serveur**
-- **Ajout de l'adresse ip dans le Vlan mana et administration via interface web**
+## 🔷 Serveur Proxmox
+
+- **Installation RAID 5 avec LVM**
+  - Création des partitions avec `fdisk` ou `parted`.
+  - Configuration du RAID 5 via `mdadm`
+  - Création du volume LVM
+
+- **Installation de Proxmox**
+  - Création d’une clé USB bootable avec `Rufus` ou `dd`
+  - Démarrage du serveur sur la clé USB et installation de l’OS Proxmox.
+
+- **Configuration de Proxmox**
+  - Configuration du VLAN de management dans l’interface réseau :
+  - Redémarrage du service réseau :
