@@ -59,6 +59,8 @@
 
 | Tâches | Descriptions | Personnes concernées |
 |--------|--------------|----------------------|
-|OPNsense|Mise en place de OPNsense sur le serveur nutanix|Cyriak|
-|Infrastructure |Modification des routeurs et switchs pour accueillir le  deuxime pare-feu |Louis|
+|OPNsense|Mise en place de OPNsense sur le serveur nutanix|Cyriak,Antoine|
+|Infrastructure |Modification des routeurs et switchs pour accueillir le  deuxime pare-feu |Louis,Antoine|
+|DNS|Resolver|Cyriak|
+|DNS|Autorité|Louis|
 

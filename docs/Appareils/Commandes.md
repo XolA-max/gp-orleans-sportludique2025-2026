@@ -4,8 +4,6 @@
 
 - **Les addresses Ip id de VLAN et numéro d'interfaces sont fictif  :**
 
-# Commandes
-
 ## Switch
 
 #### 🔐 Configuration SSH et utilisateurs sur le switch cœur
