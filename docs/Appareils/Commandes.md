@@ -261,28 +261,108 @@ L’administration s’effectue depuis l’interface web, disponible à l’adre
 
 ## FireWall physique
 
-### Accès à l’interface Web d’administration
+### Accès à l’interface Web d’administration a l'installation
 
 ```h
-https://192.168.0.254
+https://10.0.0.254
 
 admin / admin
 ```
 
 
-### Définir les interfaces réseau :
+### Définir les interfaces réseau
 
-```h
-CONFIG NETWORK set interface eth0 ip X.X.X.X/X
-CONFIG NETWORK set interface eth1 ip X.X.X.X/X
-CONFIG NETWORK set interface eth2 dhcpclient enable
-```
+Identifier les VLANs utilisés dans le réseau interne (IN) avec leur **nom**, **interface associée (IN)**, **numéro de VLAN**, ainsi que **l’adresse de management** accompagnée de son **masque de sous-réseau**.  
+Répéter la même opération pour les autres VLANs présents sur l’infrastructure.  
+
+Désactiver l’interface **IN** principale et **laisser uniquement les VLANs actifs**.  
+
+Enfin, identifier l’adresse de sortie (vers l’extérieur) en précisant son **nom**, son **adresse IP** et son **masque de sous-réseau**.
+
 
 ### Navigation
 
-Après avoir configuré les ports LAN et WAN, la configuration se fait depuis l’interface web de l’équipement.
+Après avoir configuré les ports LAN et WAN, la configuration se fait depuis l’interface web de l’équipement avec l'addresse LAN de Mana.
+
+### Définir les réseaux de destination
+
+Passer en **mode écriture**.
+
+Aller dans :  
+`Objets → Réseaux → Type : Réseau → Ajouter`
+
+Renseigner le **nom des réseaux distants** ainsi que **leurs adresses IP** et **leurs masques**.
+
+---
+
+### Définir les passerelles
+
+Aller dans :  
+`Objets → Réseaux → Type : Machine → Ajouter`
+
+Attribuer un **nom** et renseigner **l’adresse IP de la passerelle** correspondante.
+
+---
+
+### Ajouter les routes de retour
+
+Aller dans :  
+`Réseau → Routage → Ajouter`
+
+Renseigner le **réseau de destination**, **l’interface de sortie** et la **passerelle** associée.
+
+
+
+### Régle de filtarge
+
+|Protocol |	Source |	Port |	Destination |	Port |	Gateway |
+|---------|--------|---------|--------------|--------|----------|
+|*        |*       |*        |*             |*       |*         |
+
+Cela permet de n’avoir aucun problème au niveau des règles de filtrage.
+
+### Desactiver le mode furtif
+
+Aller dans :  
+`Protection de sécurité → Protocoles → Protocoles IP → IP → Mode furtif`
+
 
 ---
 
 ## FireWall virtuel
 
+OPNsense fonctionne sur une machine virtuelle Linux.
+
+### Accès à l’interface Web d’administration
+
+L’accès à l’interface web d’administration se fait grâce à l’adresse IP configurée lors de l’installation d’OPNsense.
+
+### Définir les interfaces réseau
+
+La configuration des interfaces réseau se fait en ligne de commande après l’installation.  
+Il est important d’identifier correctement les adresses MAC et de les associer aux bonnes adresses IP, aussi bien pour les interfaces LAN (Management) que WAN.
+
+---
+
+### Navigation
+
+Après avoir configuré les ports LAN, WAN et DMZ, la configuration s’effectue depuis l’interface web de l’équipement, en utilisant l’adresse IP LAN du réseau Management.  
+Il faut également attribuer une adresse IP à l’interface DMZ, correspondant au sous-réseau de la DMZ.
+
+---
+
+### Définir les passerelles
+
+Sur les interfaces DMZ et WAN, il est nécessaire de renseigner les passerelles (gateway) en leur attribuant un **nom** et une **adresse IP** correspondante.
+
+---
+
+### Règles de filtrage
+
+Appliquer les règles suivantes sur les interfaces WAN et DMZ :
+
+| Protocole | Source | Port source | Destination | Port destination | Passerelle |
+|------------|---------|--------------|--------------|------------------|-------------|
+| *          | *       | *            | *            | *                | *           |
+
+Cette configuration permet de ne rencontrer aucun blocage au niveau du filtrage, le temps de valider le bon fonctionnement du réseau.

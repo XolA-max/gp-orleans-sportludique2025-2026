@@ -45,8 +45,6 @@ Les adresses IP y sont également en **statique**.
 
 (Serveur DNS d'autorité)
 
-## 🗺️ Tableau des réseaux
-
 | Nom du réseau| IP Réseau|Maque| Plage d’adresses| Passerelle (Gateway)|Adresse Broadcast|
 |------------|----|------|--------------|----------|-----------|
 |DMZ|192.168.45.0|/24|192.168.45.1-192.168.45.253|192.168.45.254|192.168.45.255|
