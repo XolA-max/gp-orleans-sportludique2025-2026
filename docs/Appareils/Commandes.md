@@ -2,13 +2,11 @@
 
 ## Informations utile
 
-- **Les addresses Ip id de VLAN et numéro d'interfaces sont fictif  :**
-
 ### Accées nutanix
 
 ```h
 https://172.16.90.200
-```
+```#### Paramètres réseau
 ### Accées IPAM
 
 ```h
@@ -97,7 +95,8 @@ Switch# show switch stack-ports
 Switch# write memory                        
 ```
 
-#### 🔗 LACP / EtherChannel
+#### 🔗 LACP et EtherChannel
+
 
 ```h
 Switch# show etherchannel summary             
@@ -265,7 +264,7 @@ nano /etc/network/interfaces
 # Exemple de configuration VLAN-aware
 auto vmbr0
 iface vmbr0 inet static
-    address 192.168.140.75/24
+    address X.X.X.X/24
 
 # Redémarrer le réseau
 systemctl restart networking
@@ -300,4 +299,7 @@ CONFIG NETWORK set interface eth2 dhcpclient enable
 
 Après avoir configuré les ports LAN et WAN, la configuration se fait depuis l’interface web de l’équipement.
 
-### Gateway 
+---
+
+## FireWall virtuel
+
