@@ -69,6 +69,7 @@ VLAN actif après configuration.
 ### 🟢 Solutions
 - Installation de LVM sur le serveur Proxmox afin de rendre disponible le RAID 5 sur celui-ci.
 - 1️⃣ Modifications des configurations effectuées la semaine 4.
+  - Vlan,Route,Brassage physique
 
 ---
 
@@ -78,8 +79,10 @@ VLAN actif après configuration.
 - 1️⃣ Problème de démarrage d’OPNsense sur le serveur Nutanix (redémarrage à zéro à chaque démarrage de la machine virtuelle).  
 - 2️⃣ Impossible de contacter la salle des serveurs depuis notre poste de travail.
 - 3️⃣ Depuis l'ajout du Firewall virtuel(OPNsense) le vlan client n'a plus accées un internet. 
+- 4️⃣ Le DNS n’est plus fonctionnel.
 
 ### 🟢 Solutions
 - 1️⃣ Lors de l’installation d’OPNsense, nous avons choisi root à la place de installer, ce qui utilise uniquement la RAM et non le disque.L’option installer permet d’installer complètement OPNsense sur le disque du serveur.
 - 2️⃣ La modification apportée sur le switch la semaine passée manquait une commande pour que le LACP fonctionne correctement (le port-channel et les interfaces des deux ports doivent être identiques, ce qui n’était pas le cas).
 - 3️⃣ Vérification des routes, vérification des règles d’entrée et de sortie du pare-feu, rebrassage entre le switch cœur - le switch de la baie 4 - pare-feu physique.
+- 4️⃣ Le pare-feu virtuel acceptait uniquement les paquets ICMP et pas l’UDP. Il a donc suffi d’autoriser tous les protocoles à traverser le pare-feu virtuel pour que cela fonctionne.
