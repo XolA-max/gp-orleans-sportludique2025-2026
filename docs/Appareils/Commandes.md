@@ -1,23 +1,5 @@
 # Rappel des commandes
 
-## Informations utile
-
-### Accées nutanix
-
-```h
-https://172.16.90.200
-```#### Paramètres réseau
-### Accées IPAM
-
-```h
-https://ipam.sio.lyceefulbert.fr
-```
-
-### Accées Proxmox
-
-```h
-https://192.168.140.65
-```
 ## Switch
 
 #### 🔐 Configuration SSH et utilisateurs sur le switch cœur
@@ -41,7 +23,7 @@ Coeur# write memory
 
 ### 🗂️ Configuration des VLAN :
 
-### Création d’un VLAN
+#### Création d’un VLAN
 
 ```h
 Switch(config)# vlan 10
@@ -109,6 +91,7 @@ Switch# show running-config
 Switch# show interfaces status                
 Switch# show etherchannel detail              
 ```
+
 ---
 
 ## Routeurs
