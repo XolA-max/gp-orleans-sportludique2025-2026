@@ -2,7 +2,7 @@
 
 ## Switch
 
-#### 🔐 Configuration SSH et utilisateurs sur le switch cœur
+####  Configuration SSH et utilisateurs sur le switch cœur
 
 ```h
 Coeur> enable
@@ -21,7 +21,7 @@ Coeur# exit
 Coeur# write memory
 ``` 
 
-### 🗂️ Configuration des VLAN :
+###  Configuration des VLAN :
 
 #### Création d’un VLAN
 
@@ -44,7 +44,7 @@ Switch(config)# no vlan 20
 Switch# show vlan brief
 ```
 
-### 🚦 Configuration des ports : Trunk et Access
+###  Configuration des ports : Trunk et Access
 
 #### Mode Trunk
 
@@ -67,7 +67,7 @@ Switch# show running-config
 
 ```
 
-#### 🖧 Stack
+####  Stack
 
 ```h
 Switch# show version              
@@ -77,7 +77,7 @@ Switch# show switch stack-ports
 Switch# write memory                        
 ```
 
-#### 🔗 LACP et EtherChannel
+####  LACP et EtherChannel
 
 
 ```h
@@ -96,7 +96,7 @@ Switch# show etherchannel detail
 
 ## Routeurs
 
-### 🌐 Routage
+###  Routage
 
 #### Activation Routage
 
@@ -128,7 +128,7 @@ Vérifier les routes configurées :
 Switch# show ip route
 ```
 
-### 🧩 Encapsulation Dot1Q
+###  Encapsulation Dot1Q
 
 ### Configuration d’une sous-interface pour le routage inter-VLAN
 
@@ -144,7 +144,7 @@ Router(config-subif)# encapsulation dot1Q 20
 Router(config-subif)# ip address 192.168.20.1 255.255.255.0
 ```
 
-### 🛡️ ACL
+###  ACL
 
 #### ACL pour autoriser le VLAN Interco
 
@@ -167,7 +167,7 @@ Router(config-if)# ip access-group 100 out
 Router# show access-lists
 ```
 
-### 🔀 NAT/PAT
+###  NAT/PAT
 
 #### NAT pour traduire les adresses internes en IP publique
 
@@ -192,7 +192,7 @@ Router# show ip nat translations
 Router# show ip nat statistics
 ```
 
-### 🛠️ HSRP (Hot Standby Router Protocol)
+###  HSRP (Hot Standby Router Protocol)
 
 #### Configuration sur le premier routeur (Routeur FIBRE)
 
@@ -268,7 +268,7 @@ https://10.0.0.254
 
 admin / admin
 ```
-
+---
 
 ### Définir les interfaces réseau
 
@@ -279,10 +279,13 @@ Désactiver l’interface **IN** principale et **laisser uniquement les VLANs ac
 
 Enfin, identifier l’adresse de sortie (vers l’extérieur) en précisant son **nom**, son **adresse IP** et son **masque de sous-réseau**.
 
+---
 
 ### Navigation
 
 Après avoir configuré les ports LAN et WAN, la configuration se fait depuis l’interface web de l’équipement avec l'addresse LAN de Mana.
+
+---
 
 ### Définir les réseaux de destination
 
@@ -311,7 +314,7 @@ Aller dans :
 
 Renseigner le **réseau de destination**, **l’interface de sortie** et la **passerelle** associée.
 
-
+---
 
 ### Régle de filtarge
 
@@ -320,6 +323,8 @@ Renseigner le **réseau de destination**, **l’interface de sortie** et la **pa
 |*        |*       |*        |*             |*       |*         |
 
 Cela permet de n’avoir aucun problème au niveau des règles de filtrage.
+
+---
 
 ### Desactiver le mode furtif
 
@@ -333,9 +338,13 @@ Aller dans :
 
 OPNsense fonctionne sur une machine virtuelle Linux.
 
+---
+
 ### Accès à l’interface Web d’administration
 
 L’accès à l’interface web d’administration se fait grâce à l’adresse IP configurée lors de l’installation d’OPNsense.
+
+---
 
 ### Définir les interfaces réseau
 
