@@ -22,8 +22,8 @@
 
 - **SSH** : Accès distant (3 comptes utilisateurs avec droits complets).
 - **LACP** : Agrégation de liens (Fa1/0/1 et Fa1/0/2).
-- **Mode Trunk** : Fa1/0/1 et Fa1/0/2 → tous les VLANs.
-- **Mode Access** : Fa1/0/23 et Fa1/0/24 → un seul VLAN.
+- **Mode Trunk** : Fa1/0/1-2 → tous les VLANs | Fa1/0/21-23 → Vlan 241
+- **Mode Access** : Fa1/0/24 → Vlan Mana.
 - **VLANs** : Management, Serveurs.
 - **Liaisons** :
   - Fa1/0/1 & Fa1/0/2 → vers les switchs salle serveur  
@@ -75,19 +75,52 @@
 
 ---
 
-### Configuration initiale
+#### Règles de filtrage
 
-#### Paramètres réseau
+Actuellement, aucune règle de filtrage n’a été mise en place afin de vérifier le bon fonctionnement de notre réseau.
 
-- Assigner une IP statique sur l’interface de management.
-  - IP : `192.168.140.45`
-  - Masque : `255.255.255.0`
+---
+
+#### Interfaces
+
+Gi0/0 Lan → Vlan 245
+GI0/1 WAn → Vlan 248
+
+---
+#### Routes
+
+- Les routes configurées sur le pare-feu permettent notamment de redescendre vers le réseau **172.28.96.0/19**.  
+- Une **route par défaut** est définie vers un **HSRP** (Hot Standby Router Protocol) qui réunit les deux routeurs.  
 
 ---
 
 ## 🚫 PareFeu virtuel
 
--
+### Accès à l’interface
+
+- L’administration se fait via l’interface web.  
+- Adresse IP par défaut ou configurée pour le management : `192.168.140.75`  
+- Utiliser un navigateur moderne et se connecter avec le compte administrateur.  
+
+---
+
+#### Règles de filtrage
+
+Actuellement, aucune règle de filtrage n’a été mise en place afin de vérifier le bon fonctionnement de notre réseau.
+
+---
+
+#### Routes
+
+- Les routes configurées sur le pare-feu permettent notamment de redescendre vers le réseau **172.28.96.0/19**.  
+- Une **route par défaut** est définie vers le switch coeur.  
+
+---
+
+#### Interfaces
+
+Gi0/0 Lan → Vlan 245
+GI0/1 WAn → Vlan 249
 
 ---
 
