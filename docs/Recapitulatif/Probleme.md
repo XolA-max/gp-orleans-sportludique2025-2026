@@ -4,13 +4,13 @@
 ## 🗓️ Semaine 1
 
 ### 🔴 Problèmes
-- Énorme latence lors de l’écriture sur les terminaux.  
+- 1️⃣ Énorme latence lors de l’écriture sur les terminaux.  
   - Les lettres ne correspondaient pas → beaucoup d’erreurs de saisie.
 
 ### 🟢 Solutions
-- Utilisation d’un PC séparé avec un câble bien tendu.  
-- Utilisation d’un ordinateur portable sous Windows XP, plus compatible avec le switch via le port console.  
-- Connexions SSH à distance depuis mon ordinateur.  
+- 1️⃣Utilisation d’un PC séparé avec un câble bien tendu.  
+    - Utilisation d’un ordinateur portable sous Windows XP, plus compatible avec le switch via le port console.  
+    - Connexions SSH à distance depuis mon ordinateur.  
 
 ---
 
@@ -67,6 +67,7 @@ VLAN actif après configuration.
 - 1️⃣ Le VLAN client n’avait plus accès à Internet depuis l’ajout du pare-feu.
 
 ### 🟢 Solutions
+- Instalation de 
 - 1️⃣ Modifications des configurations effectuées la semaine 4.
 
 ---
@@ -76,6 +77,11 @@ VLAN actif après configuration.
 ### 🔴 Problèmes
 - 1️⃣ Problème de démarrage d’OPNsense sur le serveur Nutanix (redémarrage à zéro à chaque démarrage de la machine virtuelle).  
 - 2️⃣ Impossible de contacter la salle des serveurs depuis notre poste de travail.
+- 3️⃣ Le DNS ne fonctionne plus depuis l’ajout de toutes les modifications réseau effectuées.
+- 4️⃣ Depuis l'ajout du Firewall virtuel(OPNsense) le vlan client n'a plus accées un internet.
 
 ### 🟢 Solutions
-- 2️⃣ La modification apportée sur le switch la semaine passée manquait une commande pour que le LACP fonctionne correctement (le port-channel et les interfaces des deux ports doivent être identiques, ce qui n’était pas le cas).  
+- 1️⃣ Lors de l’installation d’OPNsense, nous avons choisi root à la place de installer, ce qui utilise uniquement la RAM et non le disque.L’option installer permet d’installer complètement OPNsense sur le disque du serveur.
+- 2️⃣ La modification apportée sur le switch la semaine passée manquait une commande pour que le LACP fonctionne correctement (le port-channel et les interfaces des deux ports doivent être identiques, ce qui n’était pas le cas).
+- 3️⃣
+- 4️⃣ Vérification des routes, vérification des règles d’entrée et de sortie du pare-feu, rebrassage entre le switch cœur - le switch de la baie 4 - pare-feu physique.
