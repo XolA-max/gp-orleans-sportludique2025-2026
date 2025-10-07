@@ -4,6 +4,22 @@
 
 - **Les addresses Ip id de VLAN et numéro d'interfaces sont fictif  :**
 
+### Accées nutanix
+
+```h
+https://172.16.90.200
+```
+### Accées IPAM
+
+```h
+https://ipam.sio.lyceefulbert.fr
+```
+
+### Accées Proxmox
+
+```h
+https://192.168.140.65
+```
 ## Switch
 
 #### 🔐 Configuration SSH et utilisateurs sur le switch cœur
@@ -71,7 +87,7 @@ Switch# show running-config
 
 ```
 
-### 🖧 Stack
+#### 🖧 Stack
 
 ```h
 Switch# show version              
@@ -81,7 +97,7 @@ Switch# show switch stack-ports
 Switch# write memory                        
 ```
 
-### 🔗 LACP / EtherChannel
+#### 🔗 LACP / EtherChannel
 
 ```h
 Switch# show etherchannel summary             
