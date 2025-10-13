@@ -86,3 +86,13 @@ VLAN actif après configuration.
 - 2️⃣ La modification apportée sur le switch la semaine passée manquait une commande pour que le LACP fonctionne correctement (le port-channel et les interfaces des deux ports doivent être identiques, ce qui n’était pas le cas).
 - 3️⃣ Vérification des routes, vérification des règles d’entrée et de sortie du pare-feu, rebrassage entre le switch cœur - le switch de la baie 4 - pare-feu physique.
 - 4️⃣ Le pare-feu virtuel acceptait uniquement les paquets ICMP et pas l’UDP. Il a donc suffi d’autoriser tous les protocoles à traverser le pare-feu virtuel pour que cela fonctionne.
+
+---
+
+## 🗓️ Semaine 6
+
+### 🔴 Problèmes
+- 
+
+### 🟢 Solutions
+- 

@@ -64,3 +64,12 @@
 |DNS|Resolver|Cyriak|
 |DNS|Autorité|Louis|
 
+---
+
+## 📅 Semaine 7
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|
+|DNS|Autorité|Louis|
+|AD|Ajout utilisateur de l'ad|Antoine, Cyriak|
+
