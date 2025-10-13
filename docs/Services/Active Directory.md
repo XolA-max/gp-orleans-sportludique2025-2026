@@ -1,5 +1,9 @@
 # Active Directory
+
+---
+
 ## Organisation des unités (OU)
+---
 
 ### Création d’une OU pour chaque service disponible :
 
@@ -11,9 +15,10 @@
 
 - Conception
 - Informatique
+---
 
 ## Gestion des utilisateurs
-
+---
 ### Ajout des utilisateurs :
 
 - Dans chaque service
@@ -21,9 +26,9 @@
 - Dans chaque OU
 
 - Dans chaque groupe associé
-
+---
 ## Liste des Utilisateur:
-
+---
 | NOM | PRENOM | SERVICE | EQUIPE |
 |-----|--------|---------|--------|
 | CHEUVAN | Marie Alice | CONCEPTION | |
@@ -87,8 +92,9 @@
 | THARENT | Alvaro | INFORMATIQUE | |
 | BENTELEB | John | INFORMATIQUE | |
 
-
+---
 ## Script powershell utilisé:
+---
 ```h
 # Script d'importation d'utilisateurs Active Directory depuis CSV
 

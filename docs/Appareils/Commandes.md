@@ -214,6 +214,12 @@ RouterB(config-if)# standby 1 priority 100
 RouterB(config-if)# standby 1 preempt
 ```
 
+#### PAT
+
+```h
+ip nat inside source static udp 192.168.45.2 53 interface g0/1 53
+```
+
 ### Installation RAID 5 avec LVM sur le serveur
 
 #### Commandes
