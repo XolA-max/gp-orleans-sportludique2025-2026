@@ -86,7 +86,7 @@
 #### **Interfaces** :
   - Gi0/0 (virtuel) : VLAN Interco(nat inside) + VLAN Management (mode access).
   - Gi0/1 : VLAN 100 (mode access,nat outside).
-#### **PAT*** :
+#### **PAT** :
   - Autoriser les requêtes DNS entrantes provenant de l'IP publique à être acheminées vers notre serveur DNS faisant autorité.
 
 
