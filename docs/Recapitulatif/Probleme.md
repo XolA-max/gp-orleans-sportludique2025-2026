@@ -89,10 +89,10 @@ VLAN actif après configuration.
 
 ---
 
-## 🗓️ Semaine 6
+## 🗓️ Semaine 7
 
 ### 🔴 Problèmes
-- 
+- Le service DHCP n'est plus fonctionnel.
 
 ### 🟢 Solutions
-- 
+- Le DNS a été désactivé sur l'Active Directory, ce qui a rendu le service DHCP inopérant.
