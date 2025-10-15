@@ -14,8 +14,8 @@ sudo apt install -y bind9 bind9utils bind9-dnsutils
 
 1. Dans le fichier de zone pour `orleans.sportludique.fr` ou `exemple.com`, ajoutez les enregistrements NS pour le sous-domaine délégué comme ceci :
 
-Information lié à notre cas
-Information à changer en fonction de la situation
+Informations lié à notre cas
+Informations à changer en fonction de la situation
 
 ```markdown
 ; Fichier de zone pour exemple.com (zone publique)
@@ -68,7 +68,7 @@ Les requetes à destination de la zone locale doivent être redirigées
 vers le serveur DNS de la DMZ en interogeant la vue interne.
 
 ```markdown
-zone "ville.sportludique.fr" {
+zone "orleans.sportludique.fr" {
     type forward;
     forwarders { 192.168.x.y };  // Remplace par l'IP du serveur DNS ayant autorité sur la zone (dans la DMZ par exemple)
 };
@@ -95,7 +95,7 @@ Cela permet d'éviter une potentielle censure en utilisant le serveur DNS d'un O
 > 
 > 
 
-### serveur DNS ayant autorité sur la zone ville.sportludique.fr
+### serveur DNS ayant autorité sur la zone orleans.sportludique.fr
 
 ### Fichier /etc/bind/named.conf.default-zones
 
@@ -103,7 +103,7 @@ Cela permet d'éviter une potentielle censure en utilisant le serveur DNS d'un O
 > 
 
 ```markdown
-  GNU nano 7.2                                                                                          /etc/bind/named.conf.default-zones                                                                                                    
+                                                                                                   
 // prime the server with knowledge of the root servers
 //zone "." {
 //      type hint;
@@ -145,9 +145,9 @@ Cela permet d'éviter une potentielle censure en utilisant le serveur DNS d'un O
             !192.168.x.0/24;    //requète de provenant pas de la DMZ
             any;                //Toutes les autres adresses
         };
-        zone "ville.sportludique.fr." {
+        zone "orleans.sportludique.fr." {
             type master;
-            file "/etc/bind/db.ville.sp.fr.externe";
+            file "/etc/bind/db.orleans.sp.fr.externe";
         };
     };
     view "inside" {
@@ -155,9 +155,9 @@ Cela permet d'éviter une potentielle censure en utilisant le serveur DNS d'un O
             172.x.0.0/24;    //requète provenant du LAN
             192.168.x.0/24;    //requète provenant de la DMZ
         };
-        zone "ville.sportludique.fr." {
+        zone "orleans.sportludique.fr." {
             type master;
-            file "/etc/bind/db.ville.sp.fr.interne";
+            file "/etc/bind/db.orleans.sp.fr.interne";
         };
     };
 
@@ -171,41 +171,43 @@ Dans Bind9 est une vue un mécanisme de filtrage et de séparation logique du se
 
 </aside>
 
-### Fichier /etc/bind/db.ville.sp.fr.interne
+### Fichier /etc/bind/db.orleans.sp.fr.interne
 
-```markdown
+```markdown                                     
 ;
 ; BIND data file for local loopback interface
 ;
 $TTL    604800
-@       IN      SOA     dns.orleans.sportludique.fr. root.orleans.sportludique.fr. (
-                         2025101301     ; Serial
+@       IN      SOA     ns1.orleans.sportludique.fr. root.orleans.sportludique.fr. (
+                         2025101301   ; Serial
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
 ;
-@       IN      NS      dns.orleans.sportludique.fr.
-dns     IN      A       192.168.45.2
-www     In      A       192.168.45.3
-monsite IN      CNAME   www
+@       IN      NS      ns1.orleans.sportludique.fr.
+ns1     IN      A       192.168.45.2
+www     IN      A       192.168.45.3
+
+
+
 
 ```
 
-> @       IN      SOA     [dns.orleans.sportludique.fr](http://dns.orleans.sportludique.fr/).
+> @       IN      SOA     [ns1.orleans.sportludique.fr](http://dns.orleans.sportludique.fr/).
 > 
 > - **OA (Start Of Authority)** définit **le serveur DNS maître (primaire)** et **les paramètres d’autorité** de la zone.
 > - Il est **obligatoirement unique** dans chaque fichier de zone.
 > - En plus du DNS primaire, il indique aussi **l’adresse e-mail de l’administrateur** et les **valeurs de synchronisation** (Serial, Refresh, etc.).
 
-> @       IN      NS      [dns.orleans.sportludique.fr](http://dns.orleans.sportludique.fr/).
+> @       IN      NS      [ns1.orleans.sportludique.fr](http://www.orleans.sportludique.fr/).
 > 
 > - Les enregistrements **NS (Name Server)** désignent les **serveurs DNS autoritaires** pour cette zone.
 > - Il peut y en avoir **plusieurs** (un primaire, un ou plusieurs secondaires).
 
 > dns     IN      A       192.168.45.2
 > 
-> - ’enregistrement **A (Address)** associe un **nom d’hôte** (ex. `dns`) à une **adresse IPv4**.
+> - ’enregistrement **A (Address)** associe un **nom d’hôte** (ex. `ns1`) à une **adresse IPv4**.
 > - C’est le lien entre **nom → IP**.
 
 > monsite IN      CNAME   www
@@ -213,26 +215,30 @@ monsite IN      CNAME   www
 > - Le **CNAME (Canonical Name)** crée un **alias** : il fait pointer un nom vers **un autre nom DNS**, **pas directement vers une IP**.
 > - Le résolveur suit ensuite ce second nom pour trouver son enregistrement A.
 
-### Fichier /etc/bind/db.ville.sp.fr.externe
+### Fichier /etc/bind/db.orleans.sp.fr.externe
 
 > 
 > 
 
 ```markdown
 
+;
 ; BIND data file for local loopback interface
 ;
 $TTL    604800
-@       IN      SOA    dns.orleans.sportludique.fr. root.orleans.sportludique.fr. (
-                     2025131030         ; Serial
+@       IN      SOA   ns1.orleans.sportludique.fr. root.orleans.sportludique.fr>
+                     2025150938         ; Serial
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
 ;
-@       IN      NS     dns.sportludique.fr.
+@       IN      NS      ns1.orleans.sportludique.fr.
 
-dns     IN      A       183.44.45.2
+@       IN      A       183.44.45.1
+ns1     IN      A       183.44.45.1
+www     IN      A       183.44.45.1
+
 
 ```
 
