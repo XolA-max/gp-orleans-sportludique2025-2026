@@ -14,7 +14,7 @@ https://ipam.sio.lyceefulbert.fr
 ### Accés Proxmox
 
 ```h
-https://192.168.140.65
+https://192.168.140.65:8006
 ```
 
 ### Gestion des mots de passe
