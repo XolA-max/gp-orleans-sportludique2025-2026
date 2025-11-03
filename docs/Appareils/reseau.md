@@ -38,20 +38,33 @@ Les adresses IP sont également configurées en **statique** pour assurer un con
 |Management|192.168.140.0|/24|192.168.140.1-192.168.140.253|192.168.140.254|192.168.140.255|
 
 ---
-## Réseau DMZ
+## Réseau DMZ public
 
-Le réseau **DMZ (Demilitarized Zone)** héberge les services accessibles depuis l’extérieur (serveur web, mail, etc.) tout en isolant ces derniers du réseau interne.  
+Le réseau **DMZ (Demilitarized Zone) public** héberge les services accessibles depuis l’extérieur (serveur web, mail, etc.) tout en isolant ces derniers du réseau interne.  
 Les adresses IP y sont également en **statique**.
 
 (Serveur DNS d'autorité)
+(Serveur web)
 
 | Nom du réseau| IP Réseau|Maque| Plage d’adresses| Passerelle (Gateway)|Adresse Broadcast|
 |------------|----|------|--------------|----------|-----------|
-|DMZ|192.168.45.0|/24|192.168.45.1-192.168.45.253|192.168.45.254|192.168.45.255|
+|DMZ public|192.168.45.0|/24|192.168.45.1-192.168.45.253|192.168.45.254|192.168.45.255|
 
 
 ---
+## Réseau DMZ privée
 
+Le réseau **DMZ (Demilitarized Zone) privé** héberge les services accessibles depuis la DMZ public (base de données etc.) tout en isolant ces derniers du réseau interne.  
+Les adresses IP y sont également en **statique**.
+
+(Base de données)
+
+| Nom du réseau| IP Réseau|Maque| Plage d’adresses| Passerelle (Gateway)|Adresse Broadcast|
+|------------|----|------|--------------|----------|-----------|
+|DMZ privée|192.168.55.0|/24|192.168.55.1-192.168.55.253|192.168.55.254|192.168.55.255|
+
+
+---
 ## Réseau LAN to DMZ
 
 Ce réseau assure l’**interconnexion entre le switch cœur de réseau et le pare-feu virtuel**.  
