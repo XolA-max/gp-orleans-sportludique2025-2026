@@ -241,6 +241,12 @@ www     IN      A       183.44.45.1
 
 
 ```
+## Route interne
+
+```
+sudo nano /etc/network/interfaces
+up ip route add 172.28.96.0/24 via 192.168.45.1 dev ens5
+```
 
 ## Pour ajouter des LOG
 ### Fichier /etc/bind/named.conf.options 

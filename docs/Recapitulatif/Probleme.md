@@ -96,3 +96,14 @@ VLAN actif après configuration.
 
 ### 🟢 Solutions
 - Le DNS a été désactivé sur l'Active Directory, ce qui a rendu le service DHCP inopérant.
+
+---
+
+## 🗓️ Semaine 8
+
+### 🔴 Problèmes
+- Le DNS d’autorité n’est pas accessible depuis le DNS resolver.
+- Le serveur web n’est pas accessible depuis les ordinateurs clients.
+
+### 🟢 Solutions
+- Ajouter des routes sur les serveurs afin d’autoriser l’accès aux ordinateurs souhaités.

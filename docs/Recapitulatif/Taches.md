@@ -76,4 +76,12 @@
 |Routeur|Ajout du PAT sur les deux routeurs|Antoine|
 |Serveur web|Apache|Louis|
 
+---
 
+## 📅 Semaine 8
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|
+|DMZ privée|Création de la DMZ privée|Cyriak,Antoine|
+|Serveur web|Apache|Louis|
+|Serveur Web|Assesibilité au serveur web depuis l'interieur et exterieur|Antoine|
