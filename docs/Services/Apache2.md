@@ -47,3 +47,10 @@ sudo a2ensite siteorl.orleans.sportludique.fr.conf
 ou
 sudo a2ensite [monsite.conf]
 ```
+
+## Route interne
+
+```
+sudo nano /etc/network/interfaces
+up ip route add 172.28.120.0/24 via 192.168.45.1 dev ens3
+```

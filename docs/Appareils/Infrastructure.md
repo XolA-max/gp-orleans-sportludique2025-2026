@@ -2,10 +2,10 @@
 
 ## Plan du reseau
 
-![](carte.drawio)
+![](Plan.drawio)
 
 ---
 
 ## Details
 
-![](infra.drawio)
+![](carte.drawio)
