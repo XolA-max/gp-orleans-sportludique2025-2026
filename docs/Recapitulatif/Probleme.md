@@ -4,13 +4,13 @@
 ## 🗓️ Semaine 1
 
 ### 🔴 Problèmes
-- Énorme latence lors de l’écriture sur les terminaux.  
+- 1️⃣ Énorme latence lors de l’écriture sur les terminaux.  
   - Les lettres ne correspondaient pas → beaucoup d’erreurs de saisie.
 
 ### 🟢 Solutions
-- Utilisation d’un PC séparé avec un câble bien tendu.  
-- Utilisation d’un ordinateur portable sous Windows XP, plus compatible avec le switch via le port console.  
-- Connexions SSH à distance depuis mon ordinateur.  
+- 1️⃣Utilisation d’un PC séparé avec un câble bien tendu.  
+    - Utilisation d’un ordinateur portable sous Windows XP, plus compatible avec le switch via le port console.  
+    - Connexions SSH à distance depuis mon ordinateur.  
 
 ---
 
@@ -48,7 +48,7 @@ VLAN actif après configuration.
 ## 🗓️ Semaine 4
 
 ### 🔴 Problèmes
-- 1️⃣ Problème d’installation du RAID 5 sur le serveur, car nous n’avions aucun accès à HPSSA ni à l’ILO.  
+- 1️⃣ Problème d’installation du RAID 5 sur le serveur proxmox, car nous n’avions aucun accès à HPSSA ni à l’ILO.  
   - L’ILO était corrompue, affichant la version *255.255*, alors qu’elle aurait dû être en version 4 ou 5, ce qui posait problème.  
 - 2️⃣ Reconfiguration de l’infrastructure avec l’ajout du pare-feu.
 
@@ -67,7 +67,9 @@ VLAN actif après configuration.
 - 1️⃣ Le VLAN client n’avait plus accès à Internet depuis l’ajout du pare-feu.
 
 ### 🟢 Solutions
+- Installation de LVM sur le serveur Proxmox afin de rendre disponible le RAID 5 sur celui-ci.
 - 1️⃣ Modifications des configurations effectuées la semaine 4.
+  - Vlan,Route,Brassage physique
 
 ---
 
@@ -76,6 +78,32 @@ VLAN actif après configuration.
 ### 🔴 Problèmes
 - 1️⃣ Problème de démarrage d’OPNsense sur le serveur Nutanix (redémarrage à zéro à chaque démarrage de la machine virtuelle).  
 - 2️⃣ Impossible de contacter la salle des serveurs depuis notre poste de travail.
+- 3️⃣ Depuis l'ajout du Firewall virtuel(OPNsense) le vlan client n'a plus accées un internet. 
+- 4️⃣ Le DNS n’est plus fonctionnel.
 
 ### 🟢 Solutions
-- 2️⃣ La modification apportée sur le switch la semaine passée manquait une commande pour que le LACP fonctionne correctement (le port-channel et les interfaces des deux ports doivent être identiques, ce qui n’était pas le cas).  
+- 1️⃣ Lors de l’installation d’OPNsense, nous avons choisi root à la place de installer, ce qui utilise uniquement la RAM et non le disque.L’option installer permet d’installer complètement OPNsense sur le disque du serveur.
+- 2️⃣ La modification apportée sur le switch la semaine passée manquait une commande pour que le LACP fonctionne correctement (le port-channel et les interfaces des deux ports doivent être identiques, ce qui n’était pas le cas).
+- 3️⃣ Vérification des routes, vérification des règles d’entrée et de sortie du pare-feu, rebrassage entre le switch cœur - le switch de la baie 4 - pare-feu physique.
+- 4️⃣ Le pare-feu virtuel acceptait uniquement les paquets ICMP et pas l’UDP. Il a donc suffi d’autoriser tous les protocoles à traverser le pare-feu virtuel pour que cela fonctionne.
+
+---
+
+## 🗓️ Semaine 7
+
+### 🔴 Problèmes
+- Le service DHCP n'est plus fonctionnel.
+
+### 🟢 Solutions
+- Le DNS a été désactivé sur l'Active Directory, ce qui a rendu le service DHCP inopérant.
+
+---
+
+## 🗓️ Semaine 8
+
+### 🔴 Problèmes
+- Le DNS d’autorité n’est pas accessible depuis le DNS resolver.
+- Le serveur web n’est pas accessible depuis les ordinateurs clients.
+
+### 🟢 Solutions
+- Ajouter des routes sur les serveurs afin d’autoriser l’accès aux ordinateurs souhaités.

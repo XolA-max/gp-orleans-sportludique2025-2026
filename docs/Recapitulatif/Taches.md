@@ -59,6 +59,41 @@
 
 | Tâches | Descriptions | Personnes concernées |
 |--------|--------------|----------------------|
-|OPNsense|Mise en place de OPNsense sur le serveur nutanix|Cyriak|
-|Infrastructure |Modification des routeurs et switchs pour accueillir le  deuxime pare-feu |Louis|
+|OPNsense|Mise en place de OPNsense sur le serveur nutanix|Cyriak,Antoine|
+|Infrastructure |Modification des routeurs et switchs pour accueillir le  deuxime pare-feu |Louis,Antoine|
+|DNS|Resolver|Cyriak|
+|DNS|Autorité|Louis|
 
+---
+
+## 📅 Semaine 7
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|
+|DNS|Autorité|Louis, Antoine|
+|AD|Ajout utilisateur de l'ad|Antoine, Cyriak|
+|DHCP|Modification du DHCP sur l'active directory|Antoine, Cyriak|
+|Routeur|Ajout du PAT sur les deux routeurs|Antoine|
+|Serveur web|Apache|Louis|
+
+---
+
+## 📅 Semaine 8
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|
+|DMZ privée|Création de la DMZ privée|Cyriak,Antoine|
+|Serveur web|Apache|Louis|
+|Serveur Web|Assesibilité au serveur web depuis l'interieur et exterieur|Antoine|
+|Certificat SSL|Serveur web securisé avec le protocole SSL|Cyriak,Louis,Antoine|
+|ReverseProxy|Proxy poura voir plusieur sites web disponible depuis l'exterieur|Antoine|
+
+---
+
+## 📅 Semaine 9
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|
+|Serveur Base de donnée|Base de donnée pour wordpress|Antoine|
+|Serveur wordpress|Wordpress|Antoine|
+|Certificat SSL|Serveur web securisé avec le protocole SSL|Cyriak,Louis|
