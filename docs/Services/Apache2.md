@@ -465,43 +465,39 @@ openssl req -new -x509 -days 365 -key /autorite/keys/private_ca.key > autorite/c
 
 ## Traitement de la demande de certificat de notre serveur par l'autorité de certification fictive
 
-1. Taper openssl x509 -help pour obtenir l'aide :
-
-La demande de certificat à signer est le fich
-
 1. La commande qui signe la demande de certificat est la suivante :
 
 <aside>
 
-classique 
+<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
+  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
+    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique </button>
+    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Dans notre cas</button>
+  </div>
 
-```markdown
-openssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certificat autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl
-```
+  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certificat autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl</code></pre>
 
-Dans notre cas
+  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt -CA [ca].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl</code></pre>
+</div>
 
-```markdown
-openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt -CA [ca].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl
-```
 
 </aside>
 
 <aside>
+### Forcer l'usage des champs Subject Alternatives Names (SAN)
 
-Forcer l'usage des champs Subject Alternatives Names (SAN)
+<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
+  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
+    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique </button>
+    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Dans notre cas</button>
+  </div>
 
-```
-openssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certif_autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req
-```
+  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>oopenssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certif_autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req</code></pre>
 
-Dans notre cas
-
-```markdown
-openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt 
+  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt 
 -CA [ca].crt -CAkey [privatekey_ca].key -CAcreateserial 
--CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req
-```
+-CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req</code></pre>
+</div>
 
 </aside>
 
@@ -513,20 +509,21 @@ openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt
 
 <aside>
 
-```markdown
-scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/du/fichier/destination
-```
+<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
+  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
+    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique </button>
+    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Dans notre cas</button>
+  </div>
 
-```markdown
-	scp orlssl/autorite/certs/ca-orleans.sp.crt etudiant@192.168.140.105:/etc/ssl/cert
-```
+  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/du/fichier/destination</code></pre>
+
+  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>	scp orlssl/autorite/certs/ca-orleans.sp.crt etudiant@192.168.140.105:/etc/ssl/cert</code></pre>
+</div>
+
 
 </aside>
 
 ---
-
----
-
 ---
 
 ### Serveur Apache2 :
@@ -568,7 +565,6 @@ Redirect permanent / <https://www.orleans.sportludique.fr>
 ```
 
 </aside>
-
 ---
 
 ## Activer le site web
@@ -581,7 +577,7 @@ sudo a2ensite www.orleans.sportludique.fr-secure.conf
 
 </aside>
 
----
+
 
 ## Activer SSL
 
@@ -593,7 +589,6 @@ a2enmod ssl
 
 </aside>
 
----
 
 ## Restart apache2
 
@@ -610,7 +605,7 @@ sudo systemctl restart apache2
 > /!\ Sur les routeurs penser à rediriger le port 443 sur le serveur web comme fait precedement avec le port 80
 > 
 
-dans /var/www/html ou …/siteorl mettre le ca.crt
+
 
 <aside>
 
@@ -629,7 +624,7 @@ sudo cp /etc/ssl/certs/ca.crt /var/www/siteorl
 <aside>
 
 ```markdown
-www.orleans.sportludique.fr/ca.cert
+on importe le fichier ca.crt s
 ```
 
 Cela va télecharger le fichier et nous pouvons alors l’importer dans le navigateur 
