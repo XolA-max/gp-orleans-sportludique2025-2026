@@ -1,0 +1,1605 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Active%20Directory/">
+      
+      
+        <link rel="next" href="../Base%20de%20donne/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Apache2 - Orleans</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../overrides.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#apache2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Orleans" class="md-header__button md-logo" aria-label="Orleans" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Orleans
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Apache2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="Basculer le thème"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Basculer le thème" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Page d'Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Appareils/Commandes/" class="md-tabs__link">
+          
+  
+  
+  Appareils
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Recapitulatif/Probleme/" class="md-tabs__link">
+          
+  
+  
+  Recapitulatif
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Active%20Directory/" class="md-tabs__link">
+          
+  
+  
+  Services
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Orleans" class="md-nav__button md-logo" aria-label="Orleans" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Orleans
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Page d'Accueil
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appareils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Appareils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Appareils/Commandes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rappel des commandes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Appareils/Equipements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Présentation des équipements réseau
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Appareils/Information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Information
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Appareils/Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Infrastructure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Appareils/reseau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Réseaux présents sur l’infrastructure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Recapitulatif
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Recapitulatif
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Recapitulatif/Probleme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problèmes rencontrés
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Recapitulatif/Taches/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compte rendu des séances
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Active%20Directory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Active Directory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Apache2
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Apache2
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#met-a-jour-la-liste-des-paquets-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Met à jour la liste des paquets disponibles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#met-a-jour-les-paquets-installes-optionnel-mais-recommande" class="md-nav__link">
+    <span class="md-ellipsis">
+      Met à jour les paquets installés (optionnel, mais recommandé)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-vhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les Vhost :
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Les Vhost :">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fichier-etcapache2sites-availabledwwworleansspfrconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fichier etc/apache2/sites-availabled/www.orleans.sp.fr.conf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activer-un-vhost-une-fois-le-fichier-cree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activer un vhost une fois le fichier créé :
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cree-des-pages-pour-wwworleanssportludiquecom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crée des pages pour www.orleans.sportludique.com
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creer-une-route-statique-interne-pour-acceder-au-reseaux-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Créer une route statique (interne) pour accéder au réseaux lan
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sur-les-routeurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sur les routeurs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sur-le-serveur-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sur le serveur DNS
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Base%20de%20donne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base de Données
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DNS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OpenSSL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSSL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ReverseProxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ReverseProxy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wordpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation et Configuration de WordPress
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#met-a-jour-la-liste-des-paquets-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Met à jour la liste des paquets disponibles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#met-a-jour-les-paquets-installes-optionnel-mais-recommande" class="md-nav__link">
+    <span class="md-ellipsis">
+      Met à jour les paquets installés (optionnel, mais recommandé)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-vhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les Vhost :
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Les Vhost :">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fichier-etcapache2sites-availabledwwworleansspfrconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fichier etc/apache2/sites-availabled/www.orleans.sp.fr.conf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activer-un-vhost-une-fois-le-fichier-cree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activer un vhost une fois le fichier créé :
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cree-des-pages-pour-wwworleanssportludiquecom" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crée des pages pour www.orleans.sportludique.com
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creer-une-route-statique-interne-pour-acceder-au-reseaux-lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Créer une route statique (interne) pour accéder au réseaux lan
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sur-les-routeurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sur les routeurs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sur-le-serveur-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sur le serveur DNS
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="apache2">Apache2</h1>
+<h2 id="met-a-jour-la-liste-des-paquets-disponibles">Met à jour la liste des paquets disponibles</h2>
+<div class="highlight"><pre><span></span><code>sudo apt update
+</code></pre></div>
+<h2 id="met-a-jour-les-paquets-installes-optionnel-mais-recommande">Met à jour les paquets installés (optionnel, mais recommandé)</h2>
+<div class="highlight"><pre><span></span><code>sudo apt upgrade -y
+<span class="sb"> ```</span>
+
+<span class="sb"> ## Installation d&#39;Apache2</span>
+<span class="sb"> ```</span>
+sudo apt install apache2 -y
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="les-vhost">Les Vhost :</h2>
+<p>Sous Linux la configuration des Vhosts se fait :</p>
+<div class="highlight"><pre><span></span><code>/etc/apache2/sites-available/   → contient tous les fichiers de configuration des sites
+
+Fichier : /etc/apache2/sites-available/mon_site.conf  dans notre cas → /etc/apache2/sites-available/www.orleans.sp.fr.conf 
+
+---------------------------------------------------------------------------------
+
+/etc/apache2/sites-enabled/     → contient les sites actuellement activés (liens symboliques pointant vers sites-available )
+
+Fichier : /etc/apache2/sites-enabled/mon_site.conf  dans notre cas → /etc/apache2/sites-enabled/www.orleans.sp.fr.conf
+</code></pre></div>
+<h3 id="fichier-etcapache2sites-availabledwwworleansspfrconf">Fichier etc/apache2/sites-availabled/www.orleans.sp.fr.conf</h3>
+<div class="highlight"><pre><span></span><code>&lt;VirtualHost *:80&gt;
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request&#39;s Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        ServerName www.orleans.sportludique.fr
+        ServerAlias www.orleans.sportludique.fr
+        DocumentRoot /var/www/siteorl
+
+        &lt;Directory /var/www/siteorl&gt;
+            Options Indexes FollowSymLinks
+            AllowOverride All
+           # Require all granted
+    &lt;/Directory&gt;
+
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+        # It is also possible to configure the loglevel for particular
+        # modules, e.g.
+        <span class="ni">#LogLevel</span> info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with &quot;a2disconf&quot;.
+        <span class="ni">#Include</span> conf-available/serve-cgi-bin.conf      
+&lt;/VirtualHost&gt;
+</code></pre></div>
+<h3 id="activer-un-vhost-une-fois-le-fichier-cree">Activer un vhost une fois le fichier créé :</h3>
+<div class="highlight"><pre><span></span><code>sudo a2ensite mon_site.conf [ici www.orleans.sp.fr.conf]
+sudo systemctl reload apache2
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="cree-des-pages-pour-wwworleanssportludiquecom">Crée des pages pour www.orleans.sportludique.com</h2>
+<div class="highlight"><pre><span></span><code>sudo mkdir /var/www/siteorl
+sudo mkdir /var/www/siteorl/html
+sudo touch /var/www/siteorl/html/index.html
+          ou dans notre cas
+sudo touch /var/www/siteorl/index.html
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Accueil - SportLudique&lt;/title&gt;
+  &lt;style&gt;
+    /* Style de base */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: <span class="ni">#000</span>; /* fond sombre */
+      color: white;
+      text-align: center;
+    }
+
+    /* Bandeau supérieur */
+    header {
+      background: linear-gradient(90deg, <span class="ni">#0B7A2B</span>, <span class="ni">#10A339</span>, <span class="ni">#00C27A</span>);
+      padding: 15px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    /* Contenu principal */
+    main {
+      padding: 60px 20px;
+    }
+
+    a {
+      display: inline-block;
+      background-color: <span class="ni">#10A339</span>;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+
+    a:hover {
+      background-color: <span class="ni">#0B7A2B</span>;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header&gt;🏋️‍♂️ SportLudique Project 2025-2026&lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;h1&gt;Bienvenue sur le projet SportLudique&lt;/h1&gt;
+    &lt;p&gt;Projet collaboratif des étudiants du BTS SIO – spécialité SISR&lt;/p&gt;
+    &lt;a href=&quot;https://lmeryfulbert.github.io/SportLudique2025-2026/&quot; target=&quot;_blank&quot;&gt;
+      Voir la Documentation
+    &lt;/a&gt;
+  &lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="creer-une-route-statique-interne-pour-acceder-au-reseaux-lan">Créer une route statique (interne) pour accéder au réseaux lan</h2>
+<aside>
+
+sudo nano /etc/network/interfaces :
+
+<div class="highlight"><pre><span></span><code>auto lo
+iface lo inet loopback
+
+allow-hotplug ens3
+iface ens3 inet static
+        address 192.168.45.3/24
+        gateway 192.168.45.254
+        dns-nameservers 172.28.120.2
+        dns-search orl.orleans.sportludique.fr
+        up ip route add 172.28.96.0/19 via 192.168.45.1 dev ens3
+
+allow-hotplug ens4
+iface ens4 inet static
+        address 192.168.140.105/24
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code> up ip route add 172.28.96.0/19 via 192.168.45.1 dev ens3
+
+ Cela indique : Pour atteindre le réseau 172.28.96.0/19 , passer par la passerelle 192.168.45.1 , en utilisant l’interface ens3 .
+ Cela permet d&#39;acceder au site depuis le réseau lan 
+</code></pre></div>
+
+</aside>
+
+<hr />
+<h2 id="sur-les-routeurs">Sur les routeurs</h2>
+<blockquote>
+<p>/!\ Sur les routeurs penser à rediriger le port 80 sur le serveur web NAT/PAT
+</p>
+</blockquote>
+<h2 id="sur-le-serveur-dns">Sur le serveur DNS</h2>
+<blockquote>
+<p>/!\ Mettre enregistrement dns : www IN A 192.168.45.3</p>
+</blockquote>
+<hr />
+<h1 id="https">HTTPS</h1>
+<p>Pour notre certificats nous allons creer une autorité de certification qui va signer nos certificats</p>
+<p>Il faut donc une deuxième VM nous pouvons aussi le faire sur la meme VM mais pour dissocier les deux nous avons le serveur apache et une autre VM Autorité de certification </p>
+<h2 id="obtenir-openssl">Obtenir Openssl</h2>
+<aside>
+
+<div class="highlight"><pre><span></span><code>apt-get install openssl
+</code></pre></div>
+
+</aside>
+
+<hr />
+<h3 id="configuration-openssl-gestion-rfc-2818">Configuration openSSL (gestion RFC 2818)</h3>
+<p>Ce fichier décrit le comportemant que gère openSSL. C'est dans ce fichier que nous 
+imposerons les champs SAN (Subject Alternative Names).</p>
+<aside>
+
+ sudo nano /etc/ssl/openssl.cnf 
+
+<div class="highlight"><pre><span></span><code>  [ req ]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req    <span class="ni">#Decommenter</span> cette ligne et trouver la section
+...
+[ v3_req ]
+<span class="gh"># Extensions to add to a certificate request</span>
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+#########    Ajouter la ligne suivante:
+subjectAltName = <span class="ni">@alt_names</span>    # le <span class="ni">@alt_names</span> est un pointeur vers la section ci dessous
+[ alt_names ]
+DNS.1 = example.com             <span class="ni">#Saisir</span> le nom du domaine concerné (vous remarquez qu&#39;il n&#39;y a pas l&#39;hôte associé)
+DNS.2 = www.example.com         <span class="ni">#saisir</span> le nom FQDN de votre site
+</code></pre></div>
+
+</aside>
+
+<p>Malheuresement, ces champs ne peuvent être renseignées par l'utilisateur de manière interactive.
+Il faudra donc penser à faire cette manipulation pour chaque site que pour lesquel vous souhaitez générer un certificat.</p>
+<hr />
+<hr />
+<p>il faut </p>
+<ol>
+<li>Créer un dossier de travail (orlssl) dans les VM avec l'arborescence suivante afin de s'organiser un minimum. Vérifiez avec la commande tree à installer si vous ne l'avez pas déjà fait :</li>
+</ol>
+<aside>
+
+VM Certificats d’autorité :
+
+<div class="highlight"><pre><span></span><code>├── autorite
+    ├── certificats
+    └── keys
+</code></pre></div>
+
+</aside>
+
+<aside>
+
+VM Serveur Apache :
+
+<div class="highlight"><pre><span></span><code> ├─ siteweb
+       ├── certificats
+       ├── keys
+       └── requests_certificats
+</code></pre></div>
+
+</aside>
+
+<hr />
+<h1 id="serveurweb">ServeurWeb</h1>
+<h3 id="generation-de-la-cle-privee-du-serveur-web">Génération de la clé privée du serveur web</h3>
+<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
+  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
+    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">RSA</button>
+    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Courbe eliptique</button>
+  </div>
+
+  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl genrsa 2048 > siteweb/keys/privatekey.key</code></pre>
+
+  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl ecparam -genkey -name prime256v1 -out privatekey.key</code></pre>
+</div>
+
+<ol>
+<li>Vérifier le contenu du fichier généré avec la commande <code>cat</code> pour les clés RSA ou pour les <strong>courbes eliptique</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code>openssl ec -in privatekey.key -text -noout
+</code></pre></div>
+<p>Génération d'une demande de certificat pour le serveur web.</p>
+<p>La demande de certificat est généré avec openssl via la commande
+suivante :</p>
+<p>Information très importante</p>
+<p>Normallement les modifications dans le fichier de conf d'open SSL sont prise en compte mais on peut forcer leur utilisation</p>
+<aside>
+
+<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
+  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
+    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique</button>
+    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Forcer l’usage du fichier de conf</button>
+  </div>
+
+  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl req -new -key siteweb/keys/privatekey.key > siteweb/requests_certificats/demande.csr</code></pre>
+
+  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl req -new -key siteweb/keys/privatekey.key > siteweb/requests_certificats/demande.csr -config /etc/ssl/openssl.cnf</code></pre>
+</div>
+
+
+
+</aside>
+
+<p>Le système va vous demander de saisir des champs remplissez-les en adaptant sauf le champ </p>
+<aside>
+
+**Common Name** qui doit correspondre
+exactement au nom de domaine utilisé correspondant à la directive
+**Server Name** défini dans le VHost d'apache. (ex :
+www.orleans.sportludique.fr )
+
+<div class="highlight"><pre><span></span><code>Country Name (2 letter code) [AU]:FR
+State or Province Name (full name) [Some-State]:Centre-Val-De-Loire
+Locality Name (eg, city) []:Orleans
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:orleans-sportludique                                                    
+Organizational Unit Name (eg, section) []:orleans-sportludique
+Common Name (e.g. server FQDN or YOUR name) []:www.orleans.sportludique.fr
+Email Address []:
+</code></pre></div>
+
+</aside>
+
+<aside>
+
+Ce n'est pas la peine de saisir d'autres "extra attributes"...
+
+<div class="highlight"><pre><span></span><code>A challenge password [] :
+AN optional company name [] :
+</code></pre></div>
+
+</aside>
+
+<blockquote>
+<p>Ce qui permet de générer votre <strong>CSR certificat</strong>. Celle-ci est créée
+dans le format PEM encodé en base64, PEM (<em>Privacy Enhanced Mail</em>) étant
+le format par défaut pour OpenSSL (il s'agit d'un fichier DER encodé en
+ASCII et entouré de balises de marquage).
+</p>
+</blockquote>
+<script>
+function showTab(tab) {
+  document.getElementById('tab1').style.display = tab === 'tab1' ? 'block' : 'none';
+  document.getElementById('tab2').style.display = tab === 'tab2' ? 'block' : 'none';
+  document.getElementById('btn1').style.background = tab === 'tab1' ? '#444' : '#222';
+  document.getElementById('btn2').style.background = tab === 'tab2' ? '#444' : '#222';
+}
+</script>
+
+<hr />
+<hr />
+<h2 id="format-pem">Format PEM</h2>
+<aside>
+
+<div class="highlight"><pre><span></span><code>cat file1.crt file2.key &gt; file3.pem
+</code></pre></div>
+
+par exemple :
+
+<div class="highlight"><pre><span></span><code>cat ca-orleans.sp.crt &gt; ca-orleans.sp.pem
+</code></pre></div>
+
+</aside>
+
+<hr />
+<p>Deux choix s'offrent désormais à nous :</p>
+<ul>
+<li>envoyer le fichier demande.csr à un organisme (le tiers de confiance ou <strong>l\'autorité de certification (CA)</strong>) et ainsi obtenir le certificat dûment signé par la clé privée de l'organisme (après avoir payé),</li>
+<li><strong>ou bien signer nous-même notre certificat avec une autorité que nous allons créer pour l'occasion.</strong> Elle ne sera évidement pas reconnu comme étant de confiance. Cela ne peut donc pas être mis en production dans le monde réel.</li>
+</ul>
+<p>Ici nous allons utiliser notre deuxième VM comme autorité de certification</p>
+<ol>
+<li>Verifier la présence des champs Subject Alternatives Names</li>
+</ol>
+<div class="highlight"><pre><span></span><code>openssl req -in siteweb/requests_certificats/demande.csr -noout -text
+</code></pre></div>
+<p><img alt="" src="https://lmeryfulbert.github.io/SportLudique2025-2026/medias/cours/openssl/SAN.png" /></p>
+<hr />
+<hr />
+<h2 id="vm-autorite-de-certification">VM Autorité de certification</h2>
+<h2 id="creation-du-certificat-de-lautorite-de-certification">Création du certificat de l'autorité de certification</h2>
+<p>Pour signer un certificat, vous devez devenir votre propre autorité de
+certification, cela implique donc de posséder une clé privée et un
+certificat auto-signé.</p>
+<ol>
+<li>
+<p>La création de la clé privée de l\'autorité de certification se fait
+comme précédemment :</p>
+<aside>
+<div class="highlight"><pre><span></span><code>openssl genrsa -des3 2048 &gt; autorite/keys/private_ca.key
+</code></pre></div>
+</aside>
+</li>
+</ol>
+<p>Attention ne pas mélanger le fichier correspondant à notre serveur et
+ceux correspondant à l'autorité de certification.</p>
+<ol>
+<li>Ensuite, à partir de la clé privée, on crée un certificat d’autorité (ca.crt) x509 pour une
+durée de validité d'un an auto-signé :</li>
+</ol>
+<div class="highlight"><pre><span></span><code>openssl req -new -x509 -days 365 -key /autorite/keys/private_ca.key &gt; autorite/certificats/ca.crt
+</code></pre></div>
+<h2 id="traitement-de-la-demande-de-certificat-de-notre-serveur-par-lautorite-de-certification-fictive">Traitement de la demande de certificat de notre serveur par l'autorité de certification fictive</h2>
+<ol>
+<li>La commande qui signe la demande de certificat est la suivante :</li>
+</ol>
+<aside>
+
+<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
+  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
+    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique </button>
+    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Dans notre cas</button>
+  </div>
+
+  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certificat autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl</code></pre>
+
+  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt -CA [ca].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl</code></pre>
+</div>
+
+
+</aside>
+
+<aside>
+### Forcer l'usage des champs Subject Alternatives Names (SAN)
+
+<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
+  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
+    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique </button>
+    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Dans notre cas</button>
+  </div>
+
+  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>oopenssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certif_autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req</code></pre>
+
+  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt 
+-CA [ca].crt -CAkey [privatekey_ca].key -CAcreateserial 
+-CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req</code></pre>
+</div>
+
+</aside>
+
+<hr />
+<hr />
+<h2 id="envois-de-fichier-dun-post-a-un-autre">Envois de Fichier d’un post à un autre</h2>
+<aside>
+
+<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
+  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
+    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique </button>
+    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Dans notre cas</button>
+  </div>
+
+  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/du/fichier/destination</code></pre>
+
+  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>   scp orlssl/autorite/certs/ca-orleans.sp.crt etudiant@192.168.140.105:/etc/ssl/cert</code></pre>
+</div>
+
+
+</aside>
+
+<h2 id="-">---</h2>
+<h3 id="serveur-apache2">Serveur Apache2 :</h3>
+<h2 id="fichier-de-conf">Fichier de conf</h2>
+<aside>
+
+sudo nano /etc/apache2/sites-available/www.orleans.sportludique.fr-secure.conf
+
+<div class="highlight"><pre><span></span><code>&lt;VirtualHost *:80&gt;
+ServerName [<span class="nt">www.orleans.sportludique.fr</span>](<span class="na">http://www.orleans.sportludique.fr/</span>)
+ServerAlias [<span class="nt">orleans.sportludique.fr</span>](<span class="na">http://orleans.sportludique.fr/</span>)
+<span class="gh"># Redirection permanente vers HTTPS</span>
+Redirect permanent / &lt;https://www.orleans.sportludique.fr&gt;
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:443&gt;
+    ServerName www.orleans.sportludique.fr
+    ServerAlias www.orleans.sportludique.fr
+    DocumentRoot /var/www/siteorl
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    SSLEngine on
+
+      #  SSLCertificateFile directive is needed.
+        SSLCertificateFile      /etc/ssl/certs/ca-orleans.sp.crt
+        SSLCertificateKeyFile   /etc/ssl/private/privatekey-orleans.key
+        SSLCACertificateFile /etc/ssl/certs/ca.crt
+
+        &lt;Directory /var/www/siteorl&gt;
+             Options -Indexes +FollowSymLinks
+             AllowOverride All  
+        &lt;/Directory&gt;
+
+&lt;/VirtualHost&gt;
+</code></pre></div>
+
+</aside>
+<hr />
+<h2 id="activer-le-site-web">Activer le site web</h2>
+<aside>
+
+<div class="highlight"><pre><span></span><code>sudo a2ensite www.orleans.sportludique.fr-secure.conf
+</code></pre></div>
+
+</aside>
+
+<h2 id="activer-ssl">Activer SSL</h2>
+<aside>
+
+<div class="highlight"><pre><span></span><code>a2enmod ssl
+</code></pre></div>
+
+</aside>
+
+<h2 id="restart-apache2">Restart apache2</h2>
+<aside>
+
+<div class="highlight"><pre><span></span><code>sudo systemctl restart apache2
+</code></pre></div>
+
+</aside>
+
+<hr />
+<blockquote>
+<p>/!\ Sur les routeurs penser à rediriger le port 443 sur le serveur web comme fait precedement avec le port 80
+</p>
+</blockquote>
+<aside>
+
+<div class="highlight"><pre><span></span><code>sudo cp /etc/ssl/certs/ca.crt /var/www/siteorl
+</code></pre></div>
+
+</aside>
+
+<hr />
+<h2 id="navigateur">Navigateur</h2>
+<aside>
+
+<div class="highlight"><pre><span></span><code>on importe le fichier ca.crt s
+</code></pre></div>
+
+Cela va télecharger le fichier et nous pouvons alors l’importer dans le navigateur 
+Exemple sur firefox `Paramètre` → rechercher `certificats` afficher les certificats `importer` `ca.crt`
+
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
