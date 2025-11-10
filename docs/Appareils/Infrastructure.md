@@ -8,4 +8,4 @@
 
 ## Details
 
-![](carte.drawio)
+![](equip.drawio)
