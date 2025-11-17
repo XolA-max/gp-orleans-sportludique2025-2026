@@ -1,9 +1,6 @@
 OpenSSL
 
 # HTTPS
-Pour notre certificats nous allons creer une autorité de certification qui va signer nos certificats
-
-Il faut donc une deuxième VM nous pouvons aussi le faire sur la meme VM mais pour dissocier les deux nous avons le serveur apache et une autre VM Autorité de certification 
 
 ## Obtenir Openssl
 
@@ -53,7 +50,10 @@ Il faudra donc penser à faire cette manipulation pour chaque site que pour lesq
 
 
 
-il faut 
+Pour notre certificat nous allons creer une autorité de certification qui va signer nos certificats
+
+Il faut donc une deuxième VM nous pouvons aussi le faire sur la meme VM mais pour dissocier les deux nous avons le serveur apache et une autre VM Autorité de certification 
+
 
 1. Créer un dossier de travail (orlssl) dans les VM avec l'arborescence suivante afin de s'organiser un minimum. Vérifiez avec la commande tree à installer si vous ne l'avez pas déjà fait :
 
@@ -245,7 +245,7 @@ comme précédemment :
 Attention ne pas mélanger le fichier correspondant à notre serveur et
 ceux correspondant à l'autorité de certification.
 
-1. Ensuite, à partir de la clé privée, on crée un certificat d’autorité (ca.crt) x509 pour une
+2. Ensuite, à partir de la clé privée, on crée un certificat d’autorité (ca.crt) x509 pour une
 durée de validité d'un an auto-signé :
 
 ```
@@ -273,7 +273,8 @@ openssl req -new -x509 -days 365 -key /autorite/keys/private_ca.key > autorite/c
 </aside>
 
 <aside>
-### Forcer l'usage des champs Subject Alternatives Names (SAN)
+
+###  Forcer l'usage des champs Subject Alternatives Names (SAN)
 
 <div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
   <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
@@ -313,6 +314,7 @@ openssl req -new -x509 -days 365 -key /autorite/keys/private_ca.key > autorite/c
 </aside>
 
 ---
+
 ---
 
 ### Serveur Apache2 :
@@ -391,11 +393,6 @@ sudo systemctl restart apache2
 
 ---
 
-> /!\ Sur les routeurs penser à rediriger le port 443 sur le serveur web comme fait precedement avec le port 80
-> 
-
-
-
 <aside>
 
 ```markdown
@@ -405,6 +402,9 @@ sudo cp /etc/ssl/certs/ca.crt /var/www/siteorl
 </aside>
 
   
+
+> /!\ Sur les routeurs penser à rediriger le port 443 sur le serveur web comme fait precedement avec le port 80
+> 
 
 ---
 

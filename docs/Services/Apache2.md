@@ -207,71 +207,88 @@ iface ens4 inet static
 
 >
 
+import React, { useState } from 'react';
 
-<aside>
-        <div class="tab-container">
-            <div class="tab-buttons" id="tabButtons">
-                <!-- Les boutons seront générés ici -->
-            </div>
-            <div id="tabContents">
-                <!-- Les contenus seront générés ici -->
-            </div>
+export default function CryptoKeyGenerator() {
+  const [activeAlgo, setActiveAlgo] = useState('RSA');
+  const [command, setCommand] = useState('openssl genrsa 2048 > siteweb/keys/privateKey.key');
+
+  // Configuration des algorithmes et leurs commandes
+  const algorithms = [
+    {
+      name: 'RSA',
+      command: 'openssl genrsa 2048 > siteweb/keys/privateKey.key'
+    },
+    {
+      name: 'Courbe elliptique',
+      command: 'openssl ecparam -genkey -name secp256k1 -out siteweb/keys/privateKey.key'
+    },
+    {
+      name: 'DSA',
+      command: 'openssl dsaparam -genkey 2048 | openssl dsa -out siteweb/keys/privateKey.key'
+    },
+    {
+      name: 'Ed25519',
+      command: 'openssl genpkey -algorithm ED25519 -out siteweb/keys/privateKey.key'
+    }
+  ];
+
+  const handleAlgoClick = (algo) => {
+    setActiveAlgo(algo.name);
+    setCommand(algo.command);
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(command);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-8">
+      <div className="w-full max-w-3xl bg-gray-800 rounded-lg shadow-2xl p-8">
+        <h1 className="text-2xl font-bold text-white mb-6">Générateur de clés cryptographiques</h1>
+        
+        {/* Boutons des algorithmes */}
+        <div className="flex flex-wrap gap-3 mb-6">
+          {algorithms.map((algo) => (
+            <button
+              key={algo.name}
+              onClick={() => handleAlgoClick(algo)}
+              className={`px-6 py-2 rounded-lg font-medium transition-all duration-200 ${
+                activeAlgo === algo.name
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              {algo.name}
+            </button>
+          ))}
         </div>
-    </aside>
-<aside>
-    <script>
-        // Configuration des onglets
-        const tabs = [
-            {
-                title: "Sur le serveur DNS",
-                content: "/!\ Mettre enregistrement dns : www IN A 192.168.45.3"
-            },
-            {
-                title: "Sur le serveur DNS à changer ",
-                content: "/!\ Mettre enregistrement dns : www IN A (ADRESSEIP)"
-            }
-            // Ajoutez autant d'onglets que vous voulez ici
-        ];
 
-        // Fonction pour afficher un onglet
-        function showTab(index) {
-            // Retirer la classe active de tous les boutons et contenus
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Ajouter la classe active au bouton et contenu sélectionnés
-            document.getElementById(`btn-${index}`).classList.add('active');
-            document.getElementById(`tab-${index}`).classList.add('active');
-        }
+        {/* Zone de commande */}
+        <div className="bg-gray-900 rounded-lg p-6 border border-gray-700">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-gray-400 text-sm font-mono">Terminal</span>
+            <button
+              onClick={copyToClipboard}
+              className="px-3 py-1 bg-gray-700 hover:bg-gray-600 text-gray-300 rounded text-sm transition-colors"
+            >
+              Copier
+            </button>
+          </div>
+          <div className="bg-black rounded p-4">
+            <code className="text-green-400 font-mono text-sm break-all">
+              {command}
+            </code>
+          </div>
+        </div>
 
-        // Générer les boutons et contenus dynamiquement
-        const buttonsContainer = document.getElementById('tabButtons');
-        const contentsContainer = document.getElementById('tabContents');
-
-        tabs.forEach((tab, index) => {
-            // Créer le bouton
-            const button = document.createElement('button');
-            button.className = 'tab-button';
-            button.id = `btn-${index}`;
-            button.textContent = tab.title;
-            // ✅ Solution : capturer correctement l'index
-            button.onclick = () => showTab(index);
-            buttonsContainer.appendChild(button);
-            
-            // Créer le contenu
-            const content = document.createElement('pre');
-            content.className = 'tab-content';
-            content.id = `tab-${index}`;
-            content.innerHTML = `<code>${tab.content}</code>`;
-            contentsContainer.appendChild(content);
-        });
-
-        // Afficher le premier onglet par défaut
-        showTab(0);
-    </script>
-</aside>
----
+        {/* Instructions */}
+        <div className="mt-6 text-gray-400 text-sm">
+          <p>• Cliquez sur un algorithme pour générer la commande correspondante</p>
+          <p>• Utilisez le bouton "Copier" pour copier la commande dans le presse-papiers</p>
+          <p>• La commande génère une clé privée dans le dossier spécifié</p>
+        </div>
+      </div>
+    </div>
+  );
+}
