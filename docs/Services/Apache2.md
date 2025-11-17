@@ -197,6 +197,7 @@ iface ens4 inet static
 
 </aside>
 
+
 ---
 ## Sur les routeurs
 > /!\ Sur les routeurs penser à rediriger le port 80 sur le serveur web NAT/PAT
@@ -207,6 +208,70 @@ iface ens4 inet static
 >
 
 
+<aside>
+        <div class="tab-container">
+            <div class="tab-buttons" id="tabButtons">
+                <!-- Les boutons seront générés ici -->
+            </div>
+            <div id="tabContents">
+                <!-- Les contenus seront générés ici -->
+            </div>
+        </div>
+    </aside>
 
+    <script>
+        // Configuration des onglets
+        const tabs = [
+            {
+                title: "Sur le serveur DNS",
+                content: "/!\ Mettre enregistrement dns : www IN A 192.168.45.3"
+            },
+            {
+                title: "Sur le serveur DNS à changer ",
+                content: "/!\ Mettre enregistrement dns : www IN A (ADRESSEIP)"
+            }
+            // Ajoutez autant d'onglets que vous voulez ici
+        ];
+
+        // Fonction pour afficher un onglet
+        function showTab(index) {
+            // Retirer la classe active de tous les boutons et contenus
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Ajouter la classe active au bouton et contenu sélectionnés
+            document.getElementById(`btn-${index}`).classList.add('active');
+            document.getElementById(`tab-${index}`).classList.add('active');
+        }
+
+        // Générer les boutons et contenus dynamiquement
+        const buttonsContainer = document.getElementById('tabButtons');
+        const contentsContainer = document.getElementById('tabContents');
+
+        tabs.forEach((tab, index) => {
+            // Créer le bouton
+            const button = document.createElement('button');
+            button.className = 'tab-button';
+            button.id = `btn-${index}`;
+            button.textContent = tab.title;
+            // ✅ Solution : capturer correctement l'index
+            button.onclick = () => showTab(index);
+            buttonsContainer.appendChild(button);
+            
+            // Créer le contenu
+            const content = document.createElement('pre');
+            content.className = 'tab-content';
+            content.id = `tab-${index}`;
+            content.innerHTML = `<code>${tab.content}</code>`;
+            contentsContainer.appendChild(content);
+        });
+
+        // Afficher le premier onglet par défaut
+        showTab(0);
+    </script>
 
 ---
