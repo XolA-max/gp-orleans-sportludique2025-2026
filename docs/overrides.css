@@ -1,68 +1,93 @@
 
-
-/* ===== Bandeau du haut (header + onglets) ===== */
-.md-header, 
-.md-tabs {
-    background-color: #099E37!important;  /* Orange foncé uniforme */
-}
-
-/* ===== Liens dans la navbar et les onglets ===== */
-.md-header nav a,
-.md-tabs a {
-    color: #FFFFFF !important;
-}
-
-/* Hover sur onglets */
-.md-tabs__item:hover {
-    background-color: #07782A !important; /* Orange encore plus foncé au survol */
-}
-
-/* ===== Navigation latérale ===== */
-.md-nav__link {
-    color: #FFFFFF !important; /* Texte blanc par défaut */
-}
-.md-nav__link:hover,
-.md-nav__link--active {
-    color: #099E37 !important; /* Orange foncé au survol et actif */
-}
-
-/* ===== Boutons primaires ===== */
-.md-button.md-button--primary {
-    background-color: #099E37 !important;
-    color: #FFFFFF !important;
-}
-
-/* ===== Liens dans le contenu ===== */
-.md-content a {
-    color: #099E37 !important; /* Orange foncé pour liens */
-}
-
 /* ====== test ======*/
+/* =============================
+   ---- THÈME CLAIR : fond blanc + textes noirs ----
+   ============================= */
+:root {
+    --md-default-bg-color: #ffffff !important;
+    --md-default-fg-color: #000000 !important;
+}
 
-
-/* Arrière-plan blanc */
+/* Contenu principal */
 .md-container,
 .md-main,
 .md-content,
 .md-content__inner {
     background-color: #ffffff !important;
-}
-
-/* Texte en noir */
-body,
-.md-typeset,
-.md-nav,
-.md-nav__title,
-.md-nav__item a {
     color: #000000 !important;
 }
 
-/* Correction des liens */
-a {
+/* Titres */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+    color: #000000 !important;
+}
+
+/* Paragraphes */
+.md-typeset p {
+    color: #000000 !important;
+}
+
+/* Liens dans le contenu */
+.md-content a {
     color: #099E37 !important;
 }
 
-/* Correction du code */
+
+
+/* =============================
+   ---- BANDEAU HAUT + ONGLETs ----
+   ============================= */
+
+.md-header,
+.md-tabs {
+    background-color: #099E37 !important;
+}
+
+/* Liens dans header */
+.md-header nav a,
+.md-tabs a {
+    color: #ffffff !important;
+}
+
+/* Hover onglets */
+.md-tabs__item:hover {
+    background-color: #07782A !important;
+}
+
+
+
+/* =============================
+   ---- NAVIGATION LATÉRALE ----
+   ============================= */
+
+.md-nav__link {
+    color: #000000 !important;  /* Texte noir (contraste) */
+}
+
+.md-nav__link:hover,
+.md-nav__link--active {
+    color: #099E37 !important;
+}
+
+
+
+/* =============================
+   ---- BOUTONS ----
+   ============================= */
+
+.md-button.md-button--primary {
+    background-color: #099E37 !important;
+    color: #ffffff !important;
+}
+
+
+
+/* =============================
+   ---- BLOCS DE CODE ----
+   ============================= */
 code, pre {
     background: #f5f5f5 !important;
     color: #000000 !important;
