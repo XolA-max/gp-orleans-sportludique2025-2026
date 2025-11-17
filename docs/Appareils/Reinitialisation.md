@@ -128,12 +128,60 @@ ou ESC selon le clavier.
 
     Mot de passe perdu et no service password-recovery activé : ROMMON peut être inaccessible.
 
-### 4. Vérification
+### 4. Commandes Rommon
 
-L’invite doit apparaître :
+>L’invite doit apparaître :
 ```
 rommon 1 >
 ```
+#### 4.1 Ignorer la configuration existante
+
+>À l’invite rommon 1 > :
+```
+rommon 1 > confreg 0x2142
+```
+> Cette commande indique au routeur de ne pas charger la configuration en NVRAM au prochain boot.
+
+#### 4.2 Redémarrer le routeur depuis ROMMON
+```
+rommon 2 > reset
+```
+>Le routeur démarre maintenant sans charger la configuration existante.
+
+#### 4.3 Entrer dans IOS
+
+    Lorsque le System Configuration Dialog apparaît :
+
+Would you like to enter the initial configuration dialog? [yes/no]:
+
+    Répondre : no
+
+    Tu arrives sur le prompt IOS (Router>).
+
+#### 4.4 Rétablir le registre normal
+
+En mode privilégié :
+```
+Router> enable
+Router# configure terminal
+Router(config)# config-register 0x2102
+Router(config)# end
+```
+> /!\ Cela permet au routeur de booter normalement au prochain redémarrage.
+
+#### 4.5 Supprimer définitivement l’ancienne configuration
+```
+Router# write memory
+```
+> Cette commande écrase la configuration stockée en NVRAM avec la configuration actuelle (qui est vide).
+
+#### 4.6 Redémarrer le routeur
+```
+Router# reload
+```
+> /!\ À l’invite du System Configuration Dialog, répondre no.
+
+
 
 
 
