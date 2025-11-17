@@ -1,8 +1,4 @@
-/* ===== Fond général ===== */
-.md-main, .md-content {
-    background-color: #000000 !important; /* Fond noir */
-    color: #FFFFFF !important;
-}
+
 
 /* ===== Bandeau du haut (header + onglets) ===== */
 .md-header, 
