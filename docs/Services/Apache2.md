@@ -625,9 +625,8 @@ sudo cp /etc/ssl/certs/ca.crt /var/www/siteorl
 
 ```markdown
 on importe le fichier ca.crt s
-```
 
-Cela va télecharger le fichier et nous pouvons alors l’importer dans le navigateur 
+l’importer dans le navigateur 
 Exemple sur firefox `Paramètre` → rechercher `certificats` afficher les certificats `importer` `ca.crt`
-
+```
 </aside>
