@@ -218,7 +218,7 @@ iface ens4 inet static
             </div>
         </div>
     </aside>
-
+<aside>
     <script>
         // Configuration des onglets
         const tabs = [
@@ -273,5 +273,5 @@ iface ens4 inet static
         // Afficher le premier onglet par défaut
         showTab(0);
     </script>
-
+</aside>
 ---
