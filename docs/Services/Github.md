@@ -1,6 +1,8 @@
-
+# Github
 ## 1. Prérequis
+
 ---
+
 ### Instalation de Git
 ```
     sudo apt-get install git
@@ -51,6 +53,7 @@ Résultat attendu :
 ---
 
 ---
+
 ## 3. Créer un nouveau dépôt GitHub 
 
 Connecte-toi sur https://github.com. Créer un nouveau dépôt GitHub
