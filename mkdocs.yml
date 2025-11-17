@@ -28,24 +28,19 @@ extra_css:
 plugins: 
   - drawio 
 
-theme :
-  icon:
-  annotation: material/arrow-right-circle-outlin
-  ιogo : logo.png
+theme:
   name: material
   language: fr
   palette:
-  - scheme: default
-  primary:  #099E37
-  toggle:
-  accent: white
-
-  icon: material/weather-night
-  name: Switch to dark mode
-  nav:
-  - scheme: slate
-  primary: 099E37
-  accent: white
-  toggle:
-  icon: material/weather-sunny
-  name: Switch to light mode
+    - scheme: default
+      primary: "#099E37"
+      accent: white
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: "#099E37"
+      accent: white
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
