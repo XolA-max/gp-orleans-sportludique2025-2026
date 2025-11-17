@@ -107,3 +107,23 @@ VLAN actif après configuration.
 
 ### 🟢 Solutions
 - Ajouter des routes sur les serveurs afin d’autoriser l’accès aux ordinateurs souhaités.
+
+---
+
+## 🗓️ Semaine 9
+
+### 🔴 Problèmes
+
+
+### 🟢 Solutions
+
+---
+
+## 🗓️ Semaine 10
+
+### 🔴 Problèmes
+- 
+- 
+
+### 🟢 Solutions
+- 
