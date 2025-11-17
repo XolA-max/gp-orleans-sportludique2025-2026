@@ -35,7 +35,7 @@ theme :
   name: material
   language: fr
   palette:
-  scheme: default
+  - scheme: default
   primary:  #099E37
   toggle:
   accent: white
@@ -43,7 +43,7 @@ theme :
   icon: material/weather-night
   name: Switch to dark mode
   nav:
-  scheme: slate
+  - scheme: slate
   primary: 099E37
   accent: white
   toggle:
