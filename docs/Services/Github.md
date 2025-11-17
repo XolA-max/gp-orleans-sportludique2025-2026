@@ -1,24 +1,27 @@
 
 ## 1. Prérequis
-
-Avant de commencer, assurez-vous d’avoir installé :
-
+---
 ### Instalation de Git
 ```
     sudo apt-get install git
 ```
 ---
+
 ###  Instalation de Python + pip
 ```
     sudo apt-get install python3-pip
 ```
+
 ---
+
 ###  Instalation de MkDocs
 ```
     pip install mkdocs
 ```
+
 ---
 ---
+
 ## 2. Configuration de Python et de MkDocs
 ### 2.1 Création et activation d’un environnement virtuel
 ```
@@ -66,6 +69,7 @@ Connecte-toi sur https://github.com. Créer un nouveau dépôt GitHub
 
 ---
 ---
+
  ## 4. Configurer les clés SSH sur GitHub 
 
     Aller dans Settings > SSH and GPG keys
@@ -80,6 +84,7 @@ Connecte-toi sur https://github.com. Créer un nouveau dépôt GitHub
 
 ---
 ---
+
 ## 5. Cloner le dépôt sur ta machine
 
 Sur ton PC :
@@ -92,6 +97,7 @@ git clone git@github.com:ton-utilisateur/mon-projet-mkdocs.git
 
 ---
 ---
+
 ## 6. Ajouter les fichiers du projet
 
 Une fois le projet créé localement :
@@ -112,6 +118,7 @@ git push origin main
 ``` 
 ---
 ---
+
  ## 7. Créer une branche (bonnes pratiques GitHub)
 
 Dans le terminal :
@@ -128,6 +135,7 @@ git push
 ``` 
 ---
 ---
+
 ## 8. Créer une Pull Request (PR)
 
 Dans GitHub :
@@ -150,6 +158,7 @@ Dans GitHub :
 
 ---
 ---
+
 ## 9. Ajouter un workflow CI/CD dans GitHub Actions
 
     Aller dans Actions
@@ -169,6 +178,7 @@ Dans GitHub :
 
 ---
 ---
+
 ## 10. Synchroniser ton dépôt local après modification du workflow
 
 Toujours dans ton projet local :
@@ -179,6 +189,7 @@ git pull origin main
 ```
 ---
 ---
+
 ## 11. Activer GitHub Pages
 
     Aller dans -> [Settings] -> [Pages] -> [Build and Deployment]
