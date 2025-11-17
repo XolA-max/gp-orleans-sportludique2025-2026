@@ -128,7 +128,7 @@ ou ESC selon le clavier.
 
     Mot de passe perdu et no service password-recovery activé : ROMMON peut être inaccessible.
 
-### 4. Commandes Rommon
+### 4. Étapes sur Rommon
 
 >L’invite doit apparaître :
 ```
@@ -199,7 +199,7 @@ Router# show version
 ```
 >Doit afficher : ```Configuration register is 0x2102```
 
-## Commandes ROMMON utiles
+### Commandes ROMMON utiles
 ```
 Voir le registre:	confreg
 Modifier le registre:	confreg 0x2142
