@@ -33,14 +33,12 @@ theme:
   language: fr
   palette:
     - scheme: default
-      primary: "#099E37"
+      primary: "#099E37"     # Couleur principale (vert)
       accent: white
       toggle:
         icon: material/weather-night
-        name: Switch to dark mode
-    - scheme: slate
-      primary: "#099E37"
-      accent: white
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+        name: Passer au mode sombre
+
+extra:
+  css:
+    - overrides.css

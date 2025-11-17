@@ -40,3 +40,34 @@
 .md-content a {
     color: #099E37 !important; /* Orange foncé pour liens */
 }
+
+/* ====== test ======*/
+
+
+/* Arrière-plan blanc */
+.md-container,
+.md-main,
+.md-content,
+.md-content__inner {
+    background-color: #ffffff !important;
+}
+
+/* Texte en noir */
+body,
+.md-typeset,
+.md-nav,
+.md-nav__title,
+.md-nav__item a {
+    color: #000000 !important;
+}
+
+/* Correction des liens */
+a {
+    color: #099E37 !important;
+}
+
+/* Correction du code */
+code, pre {
+    background: #f5f5f5 !important;
+    color: #000000 !important;
+}
