@@ -20,6 +20,7 @@
 ```
 
 ---
+
 ---
 
 ## 2. Configuration de Python et de MkDocs
@@ -48,6 +49,7 @@ Résultat attendu :
 ```/usr/local/bin/mkdocs```
 
 ---
+
 ---
 ## 3. Créer un nouveau dépôt GitHub 
 
@@ -68,6 +70,7 @@ Connecte-toi sur https://github.com. Créer un nouveau dépôt GitHub
     Clique Create repository
 
 ---
+
 ---
 
  ## 4. Configurer les clés SSH sur GitHub 
@@ -83,6 +86,7 @@ Connecte-toi sur https://github.com. Créer un nouveau dépôt GitHub
     Sauvegarder
 
 ---
+
 ---
 
 ## 5. Cloner le dépôt sur ta machine
@@ -96,6 +100,7 @@ git clone git@github.com:ton-utilisateur/mon-projet-mkdocs.git
 ```
 
 ---
+
 ---
 
 ## 6. Ajouter les fichiers du projet
@@ -117,6 +122,7 @@ git commit -m "Initialisation du projet"
 git push origin main
 ``` 
 ---
+
 ---
 
  ## 7. Créer une branche (bonnes pratiques GitHub)
@@ -134,6 +140,7 @@ git commit -m "Ajout fonctionnalité X"
 git push 
 ``` 
 ---
+
 ---
 
 ## 8. Créer une Pull Request (PR)
@@ -157,6 +164,7 @@ Dans GitHub :
     Le propriétaire valide ou demande des modifications
 
 ---
+
 ---
 
 ## 9. Ajouter un workflow CI/CD dans GitHub Actions
@@ -177,6 +185,7 @@ Dans GitHub :
     Faire Commit changes
 
 ---
+
 ---
 
 ## 10. Synchroniser ton dépôt local après modification du workflow
@@ -188,6 +197,7 @@ cd /chemin/de/mon/projet
 git pull origin main
 ```
 ---
+
 ---
 
 ## 11. Activer GitHub Pages
