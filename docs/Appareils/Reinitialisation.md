@@ -13,7 +13,7 @@
 Deux méthodes principales sont disponibles.
 ## Méthode 1 — Réinitialisation standard (registre 0x2102)
 
-#### Vérifier le registre de configuration
+#### 1.1 Vérifier le registre de configuration
 ```
 Router# show version
 ```
@@ -29,14 +29,14 @@ Router(config)# config-register 0x2102
 Router(config)# end
 ```
 
-#### Effacer la configuration
+#### 1.2 Effacer la configuration
 ```
 
 
 Router# write erase
 ```
 
-#### Redémarrer
+#### 1.3 Redémarrer
 ```
 
 Router# reload
@@ -52,7 +52,7 @@ Would you like to enter the initial configuration dialog? [yes/no]:n
 
 ## Méthode 2 — Réinitialisation via registre 0x2142 (ignorer la configuration existante)
 
-#### Changer le registre
+#### 2.1 Changer le registre
 ```
 
 Router# configure terminal
@@ -60,7 +60,7 @@ Router(config)# config-register 0x2142
 Router(config)# end
 ```
 
-#### Redémarrer
+#### 2.2 Redémarrer
 ```
 
 Router# reload
@@ -69,7 +69,7 @@ System configuration has been modified. Save? [yes/no]: n
 
 >Au redémarrage, répondre no au System Configuration Dialog.
 
-#### Rétablir le registre standard
+#### 2.3 Rétablir le registre standard
 ```
 
 Router# configure terminal
@@ -77,7 +77,7 @@ Router(config)# config-register 0x2102
 Router(config)# end
 ```
 
-#### Écraser la configuration existante
+#### 2.4 Écraser la configuration existante
 ```
 
 Router# write memory
@@ -92,13 +92,13 @@ Router# reload
 
 ---
 
-##  Accéder au mode ROMMON
+##  Méthode 3 - Accéder au mode ROMMON
 
 Le ROMMON est un mode bas niveau pour dépannage, récupération de mot de passe et restauration IOS.
 
 ---
 
-### 1. Préparer la connexion console
+### 3.1 Préparer la connexion console
 
 > Câble console : RJ45 → USB / DB9
 
@@ -106,14 +106,14 @@ Le ROMMON est un mode bas niveau pour dépannage, récupération de mot de passe
 Paramètres : 9600 baud, 8 bits, pas de parité, 1 bit d’arrêt, pas de contrôle de flux 
 
 
-### 2. Redémarrer le routeur
+### 3.2 Redémarrer le routeur
 ```
 
 Router# reload
 ```
 
 >ou couper et remettre l’alimentation.
-### 3. Interrompre le boot
+### 3.3 Interrompre le boot
 
 > / ! \ Dès l’apparition du message :
 Use BREAK or ESC to interrupt boot process
@@ -122,7 +122,7 @@ Appuyer sur BREAK (Ctrl + Pause/Break)
 ou (Ctrl + Fn + B) 
 ou ESC selon le clavier.
 ```
-#### Cas particuliers
+#### 3.4 Cas particuliers
 
     Touche BREAK ne fonctionne pas : utiliser le menu “Send Break” de votre terminal.
 
