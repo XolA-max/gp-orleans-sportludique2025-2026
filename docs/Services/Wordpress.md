@@ -1,4 +1,4 @@
-# Installation et Configuration de WordPress
+# WordPress
 
 ## Installation de MariaDB et des extensions PHP
 

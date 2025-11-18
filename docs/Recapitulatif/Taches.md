@@ -97,3 +97,10 @@
 |Serveur Base de donnée|Base de donnée pour wordpress|Antoine|
 |Serveur wordpress|Wordpress|Antoine|
 |Certificat SSL|Serveur web securisé avec le protocole SSL|Cyriak,Louis|
+
+---
+
+## 📅 Semaine 10
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|

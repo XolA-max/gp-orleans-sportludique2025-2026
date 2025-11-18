@@ -712,3 +712,5 @@ Appliquer les règles suivantes sur les interfaces WAN et DMZ :
 | *          | *       | *            | *            | *                | *           |
 
 Cette configuration permet de ne rencontrer aucun blocage au niveau du filtrage, le temps de valider le bon fonctionnement du réseau.
+
+
