@@ -110,20 +110,12 @@ VLAN actif après configuration.
 
 ---
 
-## 🗓️ Semaine 9
-
-### 🔴 Problèmes
-
-
-### 🟢 Solutions
-
----
 
 ## 🗓️ Semaine 10
 
 ### 🔴 Problèmes
 - 
-- 
+
 
 ### 🟢 Solutions
 - 

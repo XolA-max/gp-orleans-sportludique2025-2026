@@ -104,3 +104,18 @@
 
 | Tâches | Descriptions | Personnes concernées |
 |--------|--------------|----------------------|
+|Proxmox|Instalation des vm et configuration reseaux|Antoine,Cyriak
+|DNS-resolver-sec|resilience du service DNS|Cyriak|
+|Serveur mail|Creation du serveur mail dans la dmz|Louis|
+|DNS-autorité-sec|resilience du service dns|cyriak|
+|Active directory secondaire|resilience du service Active directory|Antoine|
+
+---
+
+## 📅 Semaine 11
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|
+|Active directory secondaire|resilience du service Active directory|Antoine|
+|Serveur mail|Creation du serveur mail dans la dmz|Louis|
+|Regle Parefeu|Regle de filtrage du stromshield|cyriak|
