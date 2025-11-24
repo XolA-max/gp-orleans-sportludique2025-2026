@@ -195,7 +195,7 @@ Router# show ip nat statistics
 ###  HSRP (Hot Standby Router Protocol)
 
 #### Configuration sur le premier routeur (Routeur FIBRE)
-
+admin / admin
 ```h
 RouterA(config)# interface GigabitEthernet0/1
 RouterA(config-if)# ip address 192.168.1.2 255.255.255.0
@@ -285,7 +285,7 @@ Répéter la même opération pour les autres VLANs présents sur l’infrastruc
 
 Désactiver l’interface **IN** principale et **laisser uniquement les VLANs actifs**.  
 
-Enfin, identifier l’adresse de sortie (vers l’extérieur) en précisant son **nom**, son **adresse IP** et son **masque de sous-réseau**.
+Enfin, identifier l’adresse de sortie (vers l’extérieur) en précisant son **nom**, son **adresse IP** et son **masque de sous-réseau**.admin / admin
 
 ---
 
@@ -556,7 +556,7 @@ ip nat inside source static tcp 192.168.45.2 53 interface g0/1 53
 
 ```h
 # Création d'un RAID 5 avec 4 disques
-mdadm --create --verbose /dev/md0 --level=5 --raid-devices=4 /dev/sd[b-d]
+mdadm --create --verbose /dev/md0 --level=5 --raid-devices=4 /dev/sd[b-d]admin / admin
 
 # Vérification de l'état du RAID
 cat /proc/mdstat
@@ -600,6 +600,7 @@ L’administration s’effectue depuis l’interface web, disponible à l’adre
 ### Accès à l’interface Web d’administration a l'installation
 
 ```h
+
 https://10.0.0.254
 
 admin / admin

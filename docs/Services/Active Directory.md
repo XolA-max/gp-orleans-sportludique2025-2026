@@ -328,3 +328,86 @@ Write-Host "Import terminé" -ForegroundColor Cyan
 Write-Host "============================================" -ForegroundColor Cyan
 ```
 
+# Active Directory Secondaire
+
+## Étape 1 : Installation du Rôle AD DS
+
+1. Ouvrez le **Gestionnaire de serveur**
+2. Cliquez sur **Gérer** → **Ajouter des rôles et fonctionnalités**
+3. Assistant d'ajout de rôles :
+   - Page **Avant de commencer** : Cliquez sur **Suivant**
+   - **Type d'installation** : Sélectionnez **Installation basée sur un rôle ou une fonctionnalité** → **Suivant**
+   - **Sélection du serveur** : Choisissez votre serveur → **Suivant**
+   - **Rôles de serveurs** : Cochez **Services AD DS (Active Directory Domain Services)**
+   - Une fenêtre popup apparaît, cliquez sur **Ajouter des fonctionnalités** → **Suivant**
+   - **Fonctionnalités** : Laissez par défaut → **Suivant**
+   - **AD DS** : Lisez les informations → **Suivant**
+   - **Confirmation** : Cliquez sur **Installer**
+4. Attendez la fin de l'installation (ne fermez pas la fenêtre)
+
+## Étape 2 : Promotion en Contrôleur de Domaine
+
+1. À la fin de l'installation, cliquez sur **Promouvoir ce serveur en contrôleur de domaine** (lien avec drapeau jaune dans le Gestionnaire de serveur)
+
+### Configuration du déploiement
+- Sélectionnez **Ajouter un contrôleur de domaine à un domaine existant**
+- Domaine : Vérifiez que votre domaine est affiché (ex : entreprise.local)
+- Cliquez sur **Modifier** pour fournir les identifiants d'administrateur du domaine si nécessaire
+- Cliquez sur **Suivant**
+
+### Options du contrôleur de domaine
+- Niveau fonctionnel : Laissez la valeur par défaut
+- Cochez **Serveur DNS** (recommandé)
+- Cochez **Catalogue global (GC)** (recommandé pour la redondance)
+- Entrez un **mot de passe DSRM** (mode restauration des services d'annuaire) - À conserver précieusement !
+- Cliquez sur **Suivant**
+
+### Options DNS
+- Ignorez l'avertissement éventuel sur la délégation DNS
+- Cliquez sur **Suivant**
+
+### Options supplémentaires
+- Le système détecte automatiquement le DC source pour la réplication
+- Vérifiez que le bon DC est sélectionné
+- Cliquez sur **Suivant**
+
+### Vérification de la configuration requise
+- L'assistant effectue une vérification complète
+- Lisez les avertissements éventuels (certains sont normaux)
+- Si tout est OK, cliquez sur **Installer**
+
+Le serveur redémarrera automatiquement après l'installation.
+
+## Étape 3 : Vérification Post-Installation
+
+Après le redémarrage, connectez-vous avec un compte administrateur du domaine.
+
+### Vérification dans le Gestionnaire de serveur
+1. Ouvrez le **Gestionnaire de serveur**
+2. Vérifiez que le rôle **AD DS** est affiché
+3. Aucune erreur ne devrait apparaître
+
+### Vérification de la réplication
+1. Ouvrez **Outils** → **Sites et services Active Directory**
+2. Naviguez vers : **Sites** → **Default-First-Site-Name** → **Servers** → Votre nouveau DC
+3. Vérifiez la présence des connexions de réplication
+
+### Test avec PowerShell
+Ouvrez PowerShell en tant qu'administrateur et exécutez :
+
+```powershell
+
+# Vérifier la réplication
+repadmin /replsummary
+
+```
+
+## Configuration DNS Recommandée
+
+1. Sur le DC principal, ouvrez **Gestionnaire DNS**
+2. Ajoutez l'adresse IP du nouveau DC comme serveur DNS secondaire
+3. Sur les clients, configurez le nouveau DC comme DNS secondaire
+
+## Sauvegarde du Mot de Passe DSRM
+
+⚠️ **IMPORTANT** : Conservez le mot de passe DSRM dans un coffre-fort sécurisé. Il est nécessaire pour la restauration en cas de problème grave.
