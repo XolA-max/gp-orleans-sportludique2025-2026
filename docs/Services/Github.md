@@ -3,20 +3,20 @@
 
 ---
 
-### Instalation de Git
+### Installation de Git
 ```
     sudo apt-get install git
 ```
 ---
 
-###  Instalation de Python + pip
+###  Installation de Python + pip
 ```
     sudo apt-get install python3-pip
 ```
 
 ---
 
-###  Instalation de MkDocs
+###  Installation de MkDocs
 ```
     pip install mkdocs
 ```
