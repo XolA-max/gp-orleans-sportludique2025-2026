@@ -335,6 +335,27 @@ Renseigner le **réseau de destination**, **l’interface de sortie** et la **pa
 
 Cela permet de n’avoir aucun problème au niveau des règles de filtrage.
 
+
+## Règles de Pare-feu Stormshield - Configuration Actuelle
+
+| N° | État | Action | Source | Destination | Services | Protocole | Commentaire |
+|----|------|--------|--------|-------------|----------|-----------|-------------|
+| 1 | ON | Passer | Any | DNS-Autorité | dns | udp | Résolution DNS externe |
+| 2 | ON | Passer | Any | DNS-A-P | dns | udp | DNS secondaire |
+| 3 | ON | Passer | Any | Reverse-Proxy | http, https | tcp | Point d'entrée web public |
+| 4 | ON | Passer | Any | Serv-Mail | imap, smtp | tcp | Services de messagerie |
+| 5 | ON | Passer | WordPress | Serv-BDD-Wordpr | mysql | tcp | WordPress vers base de données |
+| 6 | ON | Passer | Reverse-Proxy | Serv-Apache | http, https | tcp | Reverse proxy vers Apache |
+| 7 | ON | Passer | Reverse-Proxy | WordPress | http, https | tcp | Reverse proxy vers WordPress |
+| 8 | ON | Passer | clients, Serveurs, Network_VLAN_245 | Any | Any | - | Accès sortant réseau interne |
+| 9 | ON | Passer | Network_VLAN_140 | Any | Any | - | Accès sortant VLAN 140 |
+| 10 | ON | Bloquer | Any | Any | Any | - | **Règle de blocage par défaut** |
+
+**Architecture :**
+- **Accès publics** : DNS, Reverse-Proxy, Serveur Mail
+- **Services internes** : Apache et WordPress (accessibles uniquement via Reverse-Proxy)
+- **Base de données** : Accessible uniquement depuis WordPress
+- **Sécurité** : Blocage par défaut de tout trafic non autorisé
 ---
 
 ### Desactiver le mode furtif
@@ -388,4 +409,43 @@ Appliquer les règles suivantes sur les interfaces WAN et DMZ :
 
 Cette configuration permet de ne rencontrer aucun blocage au niveau du filtrage, le temps de valider le bon fonctionnement du réseau.
 
+### Ajout d'une DMZ privée
 
+#### Vue d'ensemble
+```
+Internet
+   |
+[Stormshield] ← Pare-feu principal
+   |
+   ├─── DMZ Publique (existante)
+   |    ├─ Reverse-Proxy
+   |    ├─ Serv-Apache
+   |    ├─ WordPress
+   |    └─ Serv-Mail
+   |
+   └─── [OPNsense virtuel] 
+        |
+        └─── DMZ Privée (nouvelle)
+             ├─ Serv-BDD-WordPress
+   |
+   └─── Reseaux interne
+```
+
+#### Segmentation réseau
+| Zone | Réseau | Rôle | Pare-feu |
+|------|--------|------|----------|
+| DMZ Publique | 192.168.45.0/24 | Serveurs web exposés | Stormshield |
+| DMZ Privée | 192.168.55.0/24 | Bases de données et backend | OPNsense |
+
+---
+
+#### Carte réseau
+- **Interface WAN OPNsense** : 192.168.45.254/24 (dans la DMZ publique)
+- **Interface LAN OPNsense** : 192.168.55.254/24 (DMZ privée)
+- **Interface MANA OPNsense** : 192.168.140.75/24 (DMZ privée)
+
+#### Attribuer une nouvelles interface
+
+Attribuer une interface Lan a la nouvelles interface reseaux 
+
+---

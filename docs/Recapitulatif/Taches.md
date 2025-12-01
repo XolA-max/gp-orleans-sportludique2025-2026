@@ -118,4 +118,15 @@
 |--------|--------------|----------------------|
 |Active directory secondaire|resilience du service Active directory|Antoine|
 |Serveur mail|Creation du serveur mail dans la dmz|Louis|
-|Regle Parefeu|Regle de filtrage du stromshield|cyriak|
+|Regle Parefeu|Regle de filtrage du stromshield|Antoine|
+|DNS-autorité-sec|resilience du service dns|cyriak|
+
+---
+
+## 📅 Semaine 12
+
+| Tâches | Descriptions | Personnes concernées |
+|--------|--------------|----------------------|
+|DNS-autorité-sec|resilience du service dns|cyriak|
+|Serveur mail|Creation du serveur mail dans la dmz|Louis|
+|Regle Parefeu|Regle de filtrage du OPNsense|Antoine|

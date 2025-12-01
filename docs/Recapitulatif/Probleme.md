@@ -119,3 +119,16 @@ VLAN actif après configuration.
 
 ### 🟢 Solutions
 - 
+
+---
+
+
+## 🗓️ Semaine 11
+
+### 🔴 Problèmes
+- Serveur mail n'est plus fonctionel
+
+
+
+### 🟢 Solutions
+- 
