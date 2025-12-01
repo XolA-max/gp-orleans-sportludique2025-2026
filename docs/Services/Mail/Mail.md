@@ -74,7 +74,7 @@ Terminez l’installation.
 
 - Accounts --  Add…
 
-Entrez le nom de boîte (ex : contact)
+Entrez le nom de boîte mail (ex : contact)
 
 Cela donne : contact@orleans.sportludique.fr
 
@@ -125,15 +125,15 @@ route add -p [réseau_à_joindre] MASK [masque] [passerelle]
     route print
 ---
 
- ## 4. Configuration DNS
+## 4. Configuration DNS
 
- #### Quel est le processus d'interrogation d'un enregistrement MX ?
+#### Quel est le processus d'interrogation d'un enregistrement MX ?
 
 - Le logiciel *d'agent de transfert de messages (MTA)* est responsable de l'interrogation des enregistrements MX. 
 - Lorsqu'un utilisateur *envoie un e-mail*, le MTA envoie une requête DNS pour identifier les serveurs de messagerie des destinataires de l'e-mail.
 - Le MTA établit une connexion SMTP avec ces serveurs de messagerie, en commençant par les domaines prioritaires 
 
- #### 4.1 configurtion /etc/bind/db.orleans.sp.fr.externe      
+####  4.1 configurtion /etc/bind/db.orleans.sp.fr.externe      
  ```
  ;
  ; BIND data file for local loopback interface
@@ -180,7 +180,7 @@ mail    IN      A       192.168.45.7
         IN      MX      10      smtp.orleans.sportludique.fr    
 smtp    IN      CNAME   mail
 imap    IN      CNAME   mail
-
+orl     IN      A       172.28.120.1  #adresse ip de L'ad
  ```
 - on créer un enregistrement nommé mail qui pointe vers le serveur mail
 - puis deux enregistrement smtp et imap qui pointent vers mail avec le CNAME
@@ -198,8 +198,8 @@ imap    IN      CNAME   mail
 
 # ========== CONFIGURATION ==========
 # Configuration hMailServer
-$hMailAdminPassword = "Admin" #Mot de Passe de l'admin
-$defaultDomain = "orleans.sportludique.fr" 
+$hMailAdminPassword = "P@ssW0rd123456!*" #Mot de Passe de l'admin
+$defaultDomain = "orleans.sportludique.fr"
 $defaultPassword = "etudiant" # Mot de passe par défaut pour nouveaux comptes
 
 # Configuration Active Directory DISTANT
@@ -504,7 +504,7 @@ Write-Host "Synchronisation terminée!" -ForegroundColor Green
 
 ## 6. Créer un compte de messagerie Thunderbird 
 
-    Entrer votre nom complet: Jean
+    Entrer votre nom complet: Jean 
     Adresse e-mail : jean@orleans.sportludique.fr
     Mot de passe : *********
 #### Paramètre du serveur 
@@ -512,7 +512,7 @@ Write-Host "Synchronisation terminée!" -ForegroundColor Green
 Serveur entrant 
 Protocole : IMAP
 Nom d'hôte : imap.orleans.sportludique.fr
-port: non sécurisé 25 ou sécurisé 587
+port: non sécurisé 143 ou sécurisé 993
 Sécurité de la connection : Aucun si port 25 | STARTTLS si port 587
 Méthode d'authentification: 
 ```
@@ -520,7 +520,7 @@ Méthode d'authentification:
 ```
 Serveur sortant
 Nom d'hôte : smtp.orleans.sportludique.fr
-port: 143 ou 993
+port: 25 ou 587
 Sécurité de la connection : Aucun si port 25 | STARTTLS si port 587
 Méthode d'authentification: 
 ```
@@ -534,11 +534,21 @@ Méthode d'authentification:
 
 
 ``` 
-redirection de port 25 587
+redirection de port 25 587 pour SMTP
 ``` 
+---
 
+## 8. Problèmes possible
+
+### 8.1 Erreur après changement de configuration  
 ``` 
+vider le cache de thunderbird 
 
+	- paramètre 
+	- paramètre de compte 
+	- dossier locaux 
+	- tout supprimer 
+	- recréer un compte 
 ``` 
 ---
 
