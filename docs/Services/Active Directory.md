@@ -411,3 +411,287 @@ repadmin /replsummary
 ## Sauvegarde du Mot de Passe DSRM
 
 ⚠️ **IMPORTANT** : Conservez le mot de passe DSRM dans un coffre-fort sécurisé. Il est nécessaire pour la restauration en cas de problème grave.
+
+
+# Documentation - Intégration Active Directory avec Proxmox VE
+
+
+## 1. Vue d'ensemble
+
+### Objectif
+Permettre aux utilisateurs Active Directory de s'authentifier sur Proxmox VE avec leurs identifiants AD et gérer les permissions via des groupes AD.
+
+---
+
+## 2. Prérequis
+
+### 2.1 Informations Active Directory nécessaires
+
+Collectez les informations suivantes avant de commencer :
+```
+Domaine AD         : orl.orleans.sportludique.fr
+Serveur DC         : dc-01.orleans.sportludique.fr
+Adresse IP DC      : 172.28.120.1
+Base DN            : DC=sportludique,DC=fr
+Compte de liaison  : cn=proxmox-bind,cn=Users,dc=orl.orleans.sportludique,dc=fr
+Mot de passe       : *******
+Port LDAP          : 389 
+```
+
+### 2.2 Groupes AD à créer
+
+Créez ces groupes dans AD pour organiser les accès :
+
+| Groupe AD | Rôle Proxmox | Permissions |
+|-----------|--------------|-------------|
+| PVE-Administrators | Administrator | Accès complet |
+
+
+---
+
+## 3. Configuration Active Directory
+
+### 3.1 Créer le compte de service
+
+**Via PowerShell (recommandé) :**
+```powershell
+# Créer le compte de service
+New-ADUser -Name "proxmox-" `
+    -UserPrincipalName "proxmox.l" `
+    -SamAccountName "proxmox-bind" `
+    -Path "CN=Users,DC=exemple,DC=local" `
+    -AccountPassword (ConvertTo-SecureString "Azerty1234!" -AsPlainText -Force) `
+    -Description "Compte de liaison LDAP pour Proxmox VE"
+
+# Vérifier la création
+Get-ADUser -Identity proxmox-bind
+```
+
+**Via Interface graphique :**
+
+1. Ouvrir **Active Directory Users and Computers**
+2. Clic droit sur **Users** → **New** → **User**
+3. Remplir les informations :
+   - First name : `proxmox`
+   - User logon name : `proxmox`
+4. Définir un mot de passe fort
+5. Cocher :
+   - ✅ Password never expires
+   - ✅ User cannot change password
+6. Cliquer **Finish**
+
+### 4.2 Créer les groupes de sécurité
+
+**Via PowerShell :**
+```powershell
+# Créer une OU dédiée (optionnel mais recommandé)
+New-ADOrganizationalUnit -Name "Proxmox" -Path "DC=orl.orleans.sportludique,DC=fr"
+
+# Créer les groupes
+$groups = @(
+    @{Name="PVE-Administrators"; Description="Administrateurs Proxmox - Accès complet"},
+    @{Name="PVE-PowerUsers"; Description="Power Users Proxmox - Gestion VMs"},
+    @{Name="PVE-Users"; Description="Utilisateurs Proxmox - Utilisation VMs"},
+    @{Name="PVE-Auditors"; Description="Auditeurs Proxmox - Lecture seule"}
+)
+
+foreach ($group in $groups) {
+    New-ADGroup -Name $group.Name `
+        -GroupScope Global `
+        -GroupCategory Security `
+        -Path "OU=Proxmox,DC=orl.orleans.sportludique,DC=fr" `
+        -Description $group.Description
+}
+
+# Vérifier la création
+Get-ADGroup -Filter 'Name -like "PVE-*"' | Select-Object Name, DistinguishedName
+```
+
+### 4.3 Ajouter des utilisateurs aux groupes
+
+**Via PowerShell :**
+```powershell
+# Ajouter un utilisateur à un groupe
+Add-ADGroupMember -Identity "PVE-Administrators" -Members "jdupont"
+
+# Ajouter plusieurs utilisateurs
+Add-ADGroupMember -Identity "PVE-Users" -Members "jdupont","mmartin","sdurand"
+
+# Vérifier les membres
+Get-ADGroupMember -Identity "PVE-Administrators" | Select-Object Name
+```
+
+---
+
+## 5. Configuration Proxmox VE
+
+### 5.2 Configuration via interface web
+
+#### Méthode 1 : Interface graphique (recommandé)
+
+1. **Se connecter à Proxmox**
+   - URL : `https://[IP-PROXMOX]:8006`
+   - Login : `root@pam`
+
+2. **Accéder à la configuration**
+   - Datacenter → Permissions → Realms
+   - Cliquer sur **Add**
+
+3. **Choisir le type**
+   - Sélectionner **LDAP** (ou **Active Directory** pour méthode native)
+
+4. **Remplir les paramètres LDAP**
+```
+Realm              : ad
+Type               : LDAP
+Server             : dc01.orl.orleans.sportludique.fr
+Port               : 389 (LDAP) 
+SSL                : (LDAP)
+Base DN            : DC=orl.orleans.sportludique,DC=fr
+User Attribute     : sAMAccountName
+Bind User          : cn=proxmox,cn=Users,dc=orl.orleans.sportludique,dc=fr
+Bind Password      : Azerty1234!
+```
+
+5. **Tester la connexion**
+   - Cliquer sur **Test**
+   - Vérifier que "Connection successful" s'affiche
+
+6. **Enregistrer**
+   - Cliquer sur **Add**
+
+#### Méthode 2 : Ligne de commande
+
+**Configuration LDAP simple :**
+```bash
+# Se connecter en SSH à Proxmox
+ssh root@192.168.45.20
+
+# Ajouter le realm LDAP
+pveum realm add ad --type ldap \
+  --server dc01.orl.orleans.sportludique.fr \
+  --port 389 \
+  --base-dn "DC=orl.orleans.sportludique,DC=fr" \
+  --user-attr sAMAccountName \
+  --bind-dn "cn=proxmox-bind,cn=Users,dc=orl.orleans.sportludique,dc=fr" \
+  --password "Azerty1234!" \
+  --filter "(objectClass=person)"
+
+# Vérifier la configuration
+pveum realm list
+cat /etc/pve/domains.cfg
+```
+
+### 5.3 Synchroniser les groupes AD
+
+**Via interface web :**
+
+1. **Accéder aux groupes**
+   - Datacenter → Permissions → Groups
+   - Cliquer sur **Create**
+
+2. **Créer un groupe Proxmox lié à AD**
+```
+Group ID    : ad-administrators
+Comment     : Administrateurs AD
+```
+
+3. **Répéter pour chaque groupe**
+
+**Via ligne de commande :**
+```bash
+# Créer les groupes Proxmox
+pveum group add ad-administrators -comment "Administrateurs AD"
+pveum group add ad-powerusers -comment "Power Users AD"
+pveum group add ad-users -comment "Utilisateurs AD"
+pveum group add ad-auditors -comment "Auditeurs AD"
+
+# Vérifier
+pveum group list
+```
+
+### 5.4 Configuration avancée
+
+**Activer la synchronisation automatique des groupes :**
+```bash
+# Éditer le fichier de configuration
+nano /etc/pve/domains.cfg
+
+# Ajouter ces paramètres au realm
+ldap: ad
+    base_dn DC=orl.orleans.sportludique,DC=fr
+    bind_dn cn=proxmox-bind,cn=Users,dc=orl.orleans.sportludique,dc=fr
+    port 389
+    server dc01.orl.orleans.sportludique.fr
+    user_attr sAMAccountName
+    sync_attributes memberof
+    sync-defaults-options scope=both,enable-new=1
+    filter (objectClass=person)
+```
+
+**Configurer la synchronisation des groupes AD :**
+```bash
+# Créer un script de synchronisation
+cat > /usr/local/bin/sync-ad-groups.sh << 'EOF'
+#!/bin/bash
+# Script de synchronisation des groupes AD avec Proxmox
+
+REALM="ad"
+AD_GROUPS=("PVE-Administrators" "PVE-PowerUsers" "PVE-Users" "PVE-Auditors")
+
+for group in "${AD_GROUPS[@]}"; do
+    echo "Synchronisation du groupe: $group"
+    pveum sync $REALM --scope both --enable-new 1 --full --purge 0
+done
+
+echo "Synchronisation terminée"
+EOF
+
+# Rendre le script exécutable
+chmod +x /usr/local/bin/sync-ad-groups.sh
+
+# Tester le script
+/usr/local/bin/sync-ad-groups.sh
+
+# Ajouter au cron (toutes les heures)
+crontab -e
+# Ajouter cette ligne :
+0 * * * * /usr/local/bin/sync-ad-groups.sh >> /var/log/ad-sync.log 2>&1
+```
+
+---
+
+## 6. Gestion des permissions
+
+### 6.1 Attribution des rôles
+
+**Rôles Proxmox disponibles :**
+
+| Rôle | Permissions | Utilisation recommandée |
+|------|-------------|-------------------------|
+| **Administrator** | Toutes permissions | Administrateurs système |
+| **PVEAdmin** | Gestion VMs, stockage, réseau | Power users / équipes IT |
+| **PVEVMAdmin** | Gestion VMs complète | Administrateurs VMs |
+| **PVEVMUser** | Démarrer/arrêter VMs | Utilisateurs finaux |
+| **PVEAuditor** | Lecture seule | Auditeurs / monitoring |
+| **PVEDatastoreUser** | Accès stockage | Utilisateurs backup |
+
+---
+
+## 7. Tests et validation
+
+### 7.1 Test d'authentification
+
+**Test 1 : Connexion via interface web**
+
+1. Se déconnecter de Proxmox (logout)
+2. Aller sur `https://[IP-PROXMOX]:8006`
+3. Sélectionner le realm **ad** dans le menu déroulant
+4. Entrer les identifiants AD :
+   - Username : `[identifiant AD]` 
+   - Password : `[mot de passe AD]`
+   - Realm : **ad**
+5. Cliquer sur **Login**
+
+
+---
