@@ -1,0 +1,2828 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../Github/Github/">
+      
+      
+        <link rel="next" href="../../Openssl/OpenSSL/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>HMAIL - Orleans</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#099E37" data-md-color-accent="#099E37">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hmail" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Orleans" class="md-header__button md-logo" aria-label="Orleans" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Orleans
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HMAIL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="#099E37" data-md-color-accent="#099E37"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="#099E37" data-md-color-accent="#099E37"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Orleans" class="md-nav__button md-logo" aria-label="Orleans" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Orleans
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page d'Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appareils
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appareils
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/Equipements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Présentation des équipements réseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/Information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Information
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/reseau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Réseaux présents sur l’infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configurations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firewall
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/LinuxDEB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide linux Debian Prête à l'emplois
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Reinitialisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide : Réinitialisation et ROMMON sur Routeurs Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Routeur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routeur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Switch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide des commandes Switch(cisco)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/WIN10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Windows 10 Prêt à l'emplois ou (PAE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recapitulatif
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Recapitulatif
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Recapitulatif/Probleme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Problèmes rencontrés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Recapitulatif/Taches/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compte rendu des séances
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Services
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activedirectory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Activedirectory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Activedirectory/Active%20Directory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Apache2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Apache2/Apache2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BDD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BDD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BDD/Base%20de%20donne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DNS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DNS/DNS-Sec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide de configuration DNS autoritaire et DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DNS/DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Github
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Github
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Github/Github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Github
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mail
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mail
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HMAIL
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HMAIL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-prerequis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Prérequis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Prérequis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vm-windows-10-ou-11-prete-a-lemplois" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VM Windows 10 ou 11 Prête à l'emplois
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation-de-hmail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation de HMAIL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aller-sur-le-site-officiel-httpswwwhmailservercomdownload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aller sur le site officiel : https://www.hmailserver.com/download
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Aller sur le site officiel : https://www.hmailserver.com/download">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation-de-microsoft-net-framework-20-service-pack-2-x64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation de Microsoft .NET Framework 2.0 Service Pack 2 (x64)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-executez-le-fichier-exe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Exécutez le fichier .exe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-configuration-du-domaine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Configuration du domaine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Configuration du domaine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#puis-mettre-un-domaine-par-defaut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Puis mettre un domaine par défaut :
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-creation-dun-compte-e-mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Création d’un compte e-mail
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-securite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. sécurité
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-creer-les-regles-de-trafic-entrant-inbound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Créer les règles de trafic entrant (inbound)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-creer-les-regles-de-trafic-sortant-outbound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Créer les règles de trafic sortant (Outbound)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-creer-une-route-statique-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Créer une route statique (Windows)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Créer une route statique (Windows)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pour-voir-les-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pour voir les routes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-configuration-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Configuration DNS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Configuration DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quel-est-le-processus-dinterrogation-dun-enregistrement-mx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quel est le processus d'interrogation d'un enregistrement MX ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#41-configurtion-etcbinddborleansspfrexterne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 configurtion /etc/bind/db.orleans.sp.fr.externe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-configurtion-etcbinddborleansspfrinterne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 configurtion /etc/bind/db.orleans.sp.fr.interne
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openssl
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Openssl
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Openssl/OpenSSL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenSSL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReverseProxy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ReverseProxy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ReverseProxy/ReverseProxy-Sec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide de configuration Reverse Proxy secondaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ReverseProxy/ReverseProxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide mise en place d'un Reverse Proxy avec Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualisation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualisation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9_1" id="__nav_4_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Proxmox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Virtualisation/Proxmox/ConfigurationProx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ConfigurationProx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wordpress
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wordpress
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wordpress/Wordpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WordPress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-prerequis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Prérequis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Prérequis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vm-windows-10-ou-11-prete-a-lemplois" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VM Windows 10 ou 11 Prête à l'emplois
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation-de-hmail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation de HMAIL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aller-sur-le-site-officiel-httpswwwhmailservercomdownload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aller sur le site officiel : https://www.hmailserver.com/download
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Aller sur le site officiel : https://www.hmailserver.com/download">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation-de-microsoft-net-framework-20-service-pack-2-x64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation de Microsoft .NET Framework 2.0 Service Pack 2 (x64)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-executez-le-fichier-exe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Exécutez le fichier .exe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-configuration-du-domaine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Configuration du domaine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Configuration du domaine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#puis-mettre-un-domaine-par-defaut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Puis mettre un domaine par défaut :
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-creation-dun-compte-e-mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Création d’un compte e-mail
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-securite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. sécurité
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-creer-les-regles-de-trafic-entrant-inbound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Créer les règles de trafic entrant (inbound)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-creer-les-regles-de-trafic-sortant-outbound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Créer les règles de trafic sortant (Outbound)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-creer-une-route-statique-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Créer une route statique (Windows)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Créer une route statique (Windows)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pour-voir-les-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pour voir les routes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-configuration-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Configuration DNS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Configuration DNS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quel-est-le-processus-dinterrogation-dun-enregistrement-mx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quel est le processus d'interrogation d'un enregistrement MX ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#41-configurtion-etcbinddborleansspfrexterne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 configurtion /etc/bind/db.orleans.sp.fr.externe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-configurtion-etcbinddborleansspfrinterne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 configurtion /etc/bind/db.orleans.sp.fr.interne
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hmail">HMAIL</h1>
+<h2 id="1-prerequis">1. Prérequis</h2>
+<hr />
+<h4 id="vm-windows-10-ou-11-prete-a-lemplois">VM Windows 10 ou 11 Prête à l'emplois</h4>
+<h3 id="installation-de-hmail">Installation de HMAIL</h3>
+<h2 id="aller-sur-le-site-officiel-httpswwwhmailservercomdownload"><div class="highlight"><pre><span></span><code>Aller sur le site officiel :
+https://www.hmailserver.com/download
+</code></pre></div></h2>
+<h3 id="installation-de-microsoft-net-framework-20-service-pack-2-x64">Installation de Microsoft .NET Framework 2.0 Service Pack 2 (x64)</h3>
+<blockquote>
+<p>Car un message d'erreur va arriver nous disant qu'il faut installer ce fichier<br />
+<div class="highlight"><pre><span></span><code>https://www.microsoft.com/en-us/download/details.aspx?id=9834
+</code></pre></div></p>
+</blockquote>
+<hr />
+<hr />
+<h3 id="2-executez-le-fichier-exe">2. Exécutez le fichier .exe</h3>
+<p><div class="highlight"><pre><span></span><code>Acceptez la licence
+Choisissez : Full installation 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Moteur de base de données :
+
+Use built-in database (simple)
+ou External database (si vous utilisez MySQL / MariaDB)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Définissez un mot de passe d’administration pour hMailServer.
+
+Terminez l’installation.
+</code></pre></div></p>
+<blockquote>
+<p>Ouvrez hMailServer Administrator et connecter vous</p>
+</blockquote>
+<hr />
+<h3 id="21-configuration-du-domaine">2.1 Configuration du domaine</h3>
+<ul>
+<li>
+<p>Ajouter un domaine</p>
+</li>
+<li>
+<p>Dans le panneau de gauche, cliquez sur Domains</p>
+</li>
+<li>
+<p>Cliquez sur Add</p>
+</li>
+<li>
+<p>Entrez votre domaine (exemples) :</p>
+</li>
+<li><code>orleans.sportludique.fr</code> ou <code>[mon_domaine_.com]</code></li>
+</ul>
+<h4 id="puis-mettre-un-domaine-par-defaut">Puis mettre un domaine par défaut :</h4>
+<ul>
+<li>
+<p>Settings </p>
+</li>
+<li>
+<p>Advanced -&gt; Default domain : <code>orleans.sportludique.fr</code> ou <code>[mon_domaine_.com]</code></p>
+</li>
+</ul>
+<h3 id="22-creation-dun-compte-e-mail">2.2 Création d’un compte e-mail</h3>
+<hr />
+<ul>
+<li>
+<p>Dans Domains → orleans.sportludique.fr → </p>
+</li>
+<li>
+<p>Accounts --  Add…</p>
+</li>
+</ul>
+<p>Entrez le nom de boîte mail (ex : contact)</p>
+<p>Cela donne : contact@orleans.sportludique.fr</p>
+<p>Définissez un mot de passe</p>
+<hr />
+<h2 id="3-securite">3. sécurité</h2>
+<h2 id="31-creer-les-regles-de-trafic-entrant-inbound">3.1 Créer les règles de trafic entrant (inbound)</h2>
+<blockquote>
+<p>Sur le Pare-feu windows </p>
+</blockquote>
+<div class="codehilite"><pre><span></span><code>pour y acceder dans le cmd:  wf.msc
+</code></pre></div>
+
+<blockquote>
+<p>Ajouter des règles pour autoriser les ports des protocoles IMAP SMTP et leur version sécurisé 
+- Port TCP 143 (Non sécurisé - IMAP) 
+- Port TCP 993 (Sécurisé - IMAPS) 
+- Port TCP 25 (Non sécurisé- SMTP) 
+- Port TCP 587 (STARTTLS) </p>
+</blockquote>
+<p>Dans la colonne de gauche, cliquer sur Inbound Rules</p>
+<div class="codehilite"><pre><span></span><code>- À droite → New Rule…
+- Choisir Port  
+- Choisir TCP
+- Select Specific local ports
+- Entrer les ports voulus : 25,143,587,993
+- Choisir Allow the connection
+- Cocher les trois profils : Domain, Private, Public (ou adapter selon votre réseau)
+- Donner un nom : autoriser écoute sur les port IMAP et SMTP et version secure
+</code></pre></div>
+
+<h2 id="32-creer-les-regles-de-trafic-sortant-outbound">3.2 Créer les règles de trafic sortant (Outbound)</h2>
+<blockquote>
+<p>Faire la même manipulation mais mettre seulement les ports 25 et 587 car seul le protocole SMTP doit sortir </p>
+</blockquote>
+<h2 id="33-creer-une-route-statique-windows">3.3 Créer une route statique (Windows)</h2>
+<blockquote>
+<p>Pour aller dans le réseau LAN et pouvoir communiquer</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>route add -p [réseau_à_joindre] MASK [masque] [passerelle]
+</code></pre></div>
+<blockquote>
+<p>-p pour la rendre permanent</p>
+</blockquote>
+<h4 id="pour-voir-les-routes">pour voir les routes</h4>
+<div class="codehilite"><pre><span></span><code>route print
+</code></pre></div>
+
+<hr />
+<h2 id="4-configuration-dns">4. Configuration DNS</h2>
+<h4 id="quel-est-le-processus-dinterrogation-dun-enregistrement-mx">Quel est le processus d'interrogation d'un enregistrement MX ?</h4>
+<ul>
+<li>Le logiciel <em>d'agent de transfert de messages (MTA)</em> est responsable de l'interrogation des enregistrements MX. </li>
+<li>Lorsqu'un utilisateur <em>envoie un e-mail</em>, le MTA envoie une requête DNS pour identifier les serveurs de messagerie des destinataires de l'e-mail.</li>
+<li>Le MTA établit une connexion SMTP avec ces serveurs de messagerie, en commençant par les domaines prioritaires </li>
+</ul>
+<h4 id="41-configurtion-etcbinddborleansspfrexterne">4.1 configurtion /etc/bind/db.orleans.sp.fr.externe</h4>
+<p>```
+ ;
+ ; BIND data file for local loopback interface
+ ;
+ $TTL    604800
+ @       IN      SOA   ns1.orleans.sportludique.fr. root.orleans.sportludique.fr. (
+                     2025150938         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+ ;
+ @       IN      NS      ns1.orleans.sportludique.fr.
+ @       IN      NS      ns2.orleans.sportludique.fr.</p>
+<p>@       IN      A       183.44.45.1
+ ns1     IN      A       183.44.45.1
+ ns2     IN      A       183.44.45.1
+ www     IN      A       183.44.45.1
+ wp      IN      A       183.44.45.1
+ smtp    IN      A       183.44.45.1
+        IN      MX      10      smtp.orleans.sportludique.fr
+```
+- on créer un enregistrement nommé smtp qui pointe vers le routeur extérieur
+- on créer un enregistrement MX priorité 10 qui pointe </p>
+<h4 id="42-configurtion-etcbinddborleansspfrinterne">4.2 configurtion /etc/bind/db.orleans.sp.fr.interne</h4>
+<div class="highlight"><pre><span></span><code>;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     ns1.orleans.sportludique.fr. root.orleans.sportludique.fr. (
+                         2025111315   ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      ns1.orleans.sportludique.fr.
+ns1     IN      A       192.168.45.2
+www     IN      A       192.168.45.3
+mail    IN      A       192.168.45.7
+@       IN      MX      10      smtp.orleans.sportludique.fr    
+smtp    IN      CNAME   mail
+imap    IN      CNAME   mail
+orl     IN      A       172.28.120.1  #adresse ip de L&#39;ad
+ ```
+- on créer un enregistrement nommé mail qui pointe vers le serveur mail
+- puis deux enregistrement smtp et imap qui pointent vers mail avec le CNAME
+- on créer un enregistrement MX priorité 10 qui pointe vers smtp.orleans.sportludique.fr 
+
+
+---
+
+## 5. Lier les Utilisateurs de L&#39;AD  
+
+&gt;Exemple de script qui peux être utiliser pour ajouter les utilisateurs 
+</code></pre></div>
+<h1 id="script-de-synchronisation-active-directory-vers-hmailserver">Script de synchronisation Active Directory vers hMailServer</h1>
+<h1 id="support-ad-distant-avec-authentification">Support AD distant avec authentification</h1>
+<h1 id="configuration">========== CONFIGURATION ==========</h1>
+<h1 id="configuration-hmailserver">Configuration hMailServer</h1>
+<p>$hMailAdminPassword = "P@ssW0rd123456!*" #Mot de Passe de l'admin
+$defaultDomain = "orleans.sportludique.fr"
+$defaultPassword = "etudiant" # Mot de passe par défaut pour nouveaux comptes</p>
+<h1 id="configuration-active-directory-distant">Configuration Active Directory DISTANT</h1>
+<p>$adServer = "172.28.120.1"  # Nom ou IP du serveur AD
+$adDomain = "orl.orleans.sportludique.fr"# Domaine AD
+$adUsername = "Administrateur@orl.orleans.sportludique.fr"  # Utilisateur avec droits de lecture AD
+$adPassword = "P@ssw0rd123456!"  # Mot de passe pour l'AD</p>
+<h1 id="construction-du-chemin-ldap">Construction du chemin LDAP</h1>
+<p>$ldapPath = "LDAP://$adServer/DC=orl,DC=orleans,DC=sportludique,DC=fr"</p>
+<h1 id="options">Options</h1>
+<p>$createNewAccounts = $true
+$updateExistingAccounts = $true
+$accountMaxSize = 1024  # Taille max en MB
+$enableAccountsByDefault = $true</p>
+<p>Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "Synchronisation AD -&gt; hMailServer" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan</p>
+<h1 id="test-connectivite-ad">========== TEST CONNECTIVITÉ AD ==========</h1>
+<p>Write-Host "`n[Préparation] Test de connectivité AD..." -ForegroundColor Yellow</p>
+<p>try {
+    Write-Host "  → Test ping vers $adServer..." -ForegroundColor Gray
+    $pingResult = Test-Connection -ComputerName $adServer -Count 1 -Quiet -ErrorAction SilentlyContinue</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">$pingResult</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;  ✓ Serveur AD accessible&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Green</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;  ⚠ Serveur AD non pingable (peut être normal si ICMP bloqué)&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Yellow</span>
+<span class="p">}</span>
+
+<span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;  → Test port LDAP 389...&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Gray</span>
+<span class="n">$tcpClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">-</span><span class="n">Object</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">Sockets</span><span class="p">.</span><span class="n">TcpClient</span>
+<span class="n">$asyncResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">$tcpClient</span><span class="p">.</span><span class="n">BeginConnect</span><span class="p">(</span><span class="n">$adServer</span><span class="p">,</span><span class="w"> </span><span class="mh">389</span><span class="p">,</span><span class="w"> </span><span class="n">$null</span><span class="p">,</span><span class="w"> </span><span class="n">$null</span><span class="p">)</span><span class="w"> </span><span class="p">#</span><span class="n">changer</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="n">pour</span><span class="w"> </span><span class="n">mettre</span><span class="w"> </span><span class="nl">LDAPs:</span><span class="mh">636</span><span class="w"> </span>
+<span class="n">$wait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">$asyncResult</span><span class="p">.</span><span class="n">AsyncWaitHandle</span><span class="p">.</span><span class="n">WaitOne</span><span class="p">(</span><span class="mh">3000</span><span class="p">,</span><span class="w"> </span><span class="n">$false</span><span class="p">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">$wait</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">$tcpClient</span><span class="p">.</span><span class="n">EndConnect</span><span class="p">(</span><span class="n">$asyncResult</span><span class="p">)</span>
+<span class="w">    </span><span class="n">$tcpClient</span><span class="p">.</span><span class="n">Close</span><span class="p">()</span>
+<span class="w">    </span><span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;  ✓ Port LDAP 389 accessible&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Green</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;  ✗ Port LDAP 389 non accessible&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Red</span>
+<span class="w">    </span><span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;    Vérifiez le pare-feu et la connectivité réseau&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Yellow</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>}
+catch {
+    Write-Host "  ⚠ Erreur de test réseau: $_" -ForegroundColor Yellow
+}</p>
+<h1 id="connexion-hmailserver">========== CONNEXION HMAILSERVER ==========</h1>
+<p>Write-Host "`n[1/4] Connexion à hMailServer..." -ForegroundColor Yellow</p>
+<p>$hMailApp = $null
+$domain = $null</p>
+<p>try {
+    Write-Host "  → Création de l'objet COM hMailServer.Application..." -ForegroundColor Gray
+    $hMailApp = New-Object -ComObject hMailServer.Application</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">$hMailApp</span><span class="w"> </span><span class="o">-</span><span class="n">eq</span><span class="w"> </span><span class="n">$null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">throw</span><span class="w"> </span><span class="s">&quot;L&#39;objet hMailServer.Application est null&quot;</span>
+<span class="p">}</span>
+
+<span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;  → Authentification...&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Gray</span>
+<span class="n">$authResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">$hMailApp</span><span class="p">.</span><span class="n">Authenticate</span><span class="p">(</span><span class="s">&quot;Administrator&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">$hMailAdminPassword</span><span class="p">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="k">not</span><span class="w"> </span><span class="n">$authResult</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">throw</span><span class="w"> </span><span class="s">&quot;Échec de l&#39;authentification hMailServer. Vérifiez le mot de passe.&quot;</span>
+<span class="p">}</span>
+
+<span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;  → Récupération du domaine $defaultDomain...&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Gray</span>
+<span class="n">$domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">$hMailApp</span><span class="p">.</span><span class="n">Domains</span><span class="p">.</span><span class="n">ItemByName</span><span class="p">(</span><span class="n">$defaultDomain</span><span class="p">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">$domain</span><span class="w"> </span><span class="o">-</span><span class="n">eq</span><span class="w"> </span><span class="n">$null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;`n✗ Domaine &#39;$defaultDomain&#39; non trouvé!&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Red</span>
+<span class="w">    </span><span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;`nDomaines disponibles:&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Yellow</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">$i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w"> </span><span class="n">$i</span><span class="w"> </span><span class="o">-</span><span class="n">lt</span><span class="w"> </span><span class="n">$hMailApp</span><span class="p">.</span><span class="n">Domains</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span><span class="w"> </span><span class="n">$i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">$d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">$hMailApp</span><span class="p">.</span><span class="n">Domains</span><span class="p">.</span><span class="n">Item</span><span class="p">(</span><span class="n">$i</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;  - $($d.Name)&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Cyan</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">exit</span>
+<span class="p">}</span>
+
+<span class="n">Write</span><span class="o">-</span><span class="n">Host</span><span class="w"> </span><span class="s">&quot;✓ Connecté à hMailServer - Domaine: $defaultDomain&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Green</span>
+</code></pre></div>
+
+<p>}
+catch {
+    Write-Host "<code>n✗ ERREUR de connexion hMailServer:" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
+    Write-Host "</code>nVérifications:" -ForegroundColor Yellow
+    Write-Host "1. Service hMailServer démarré ?" -ForegroundColor White
+    Write-Host "2. PowerShell exécuté en Administrateur ?" -ForegroundColor White
+    Write-Host "3. Mot de passe administrateur correct ?" -ForegroundColor White
+    exit
+}</p>
+<h1 id="recuperation-des-comptes-hmailserver">========== RÉCUPÉRATION DES COMPTES HMAILSERVER ==========</h1>
+<p>Write-Host "`n[2/4] Récupération des comptes hMailServer existants..." -ForegroundColor Yellow</p>
+<p>$hmailAccounts = @{}
+try {
+    for ($i = 0; $i -lt $domain.Accounts.Count; $i++) {
+        $account = $domain.Accounts.Item($i)
+        $hmailAccounts[$account.Address.ToLower()] = $account
+    }
+    Write-Host "✓ $($hmailAccounts.Count) comptes trouvés" -ForegroundColor Green
+}
+catch {
+    Write-Host "✗ Erreur: $_" -ForegroundColor Red
+    exit
+}</p>
+<h1 id="connexion-a-lad-distant">========== CONNEXION À L'AD DISTANT ==========</h1>
+<p>Write-Host "`n[3/4] Connexion à l'Active Directory distant..." -ForegroundColor Yellow
+Write-Host "  Serveur: $adServer" -ForegroundColor Gray
+Write-Host "  Chemin LDAP: $ldapPath" -ForegroundColor Gray</p>
+<p>try {
+    # Créer des credentials pour l'AD distant
+    $secPassword = ConvertTo-SecureString $adPassword -AsPlainText -Force
+    $credential = New-Object System.Management.Automation.PSCredential($adUsername, $secPassword)</p>
+<div class="codehilite"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="n">Créer</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">connexion</span><span class="w"> </span><span class="n">LDAP</span><span class="w"> </span><span class="n">avec</span><span class="w"> </span><span class="n">authentification</span>
+<span class="k">Write</span><span class="o">-</span><span class="k">Host</span><span class="w"> </span><span class="ss">&quot;  → Authentification sur l&#39;AD...&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Gray</span>
+
+<span class="err">$</span><span class="n">directoryEntry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">New</span><span class="o">-</span><span class="k">Object</span><span class="w"> </span><span class="k">System</span><span class="p">.</span><span class="n">DirectoryServices</span><span class="p">.</span><span class="n">DirectoryEntry</span><span class="p">(</span>
+<span class="w">    </span><span class="err">$</span><span class="n">ldapPath</span><span class="p">,</span>
+<span class="w">    </span><span class="err">$</span><span class="n">adUsername</span><span class="p">,</span>
+<span class="w">    </span><span class="err">$</span><span class="n">adPassword</span><span class="p">,</span>
+<span class="w">    </span><span class="o">[</span><span class="n">System.DirectoryServices.AuthenticationTypes</span><span class="o">]::</span><span class="n">Secure</span>
+<span class="p">)</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">connexion</span>
+<span class="err">$</span><span class="n">testBind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span><span class="n">directoryEntry</span><span class="p">.</span><span class="n">Name</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">[</span><span class="n">string</span><span class="o">]::</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="err">$</span><span class="n">testBind</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="ow">and</span><span class="w"> </span><span class="err">$</span><span class="n">directoryEntry</span><span class="p">.</span><span class="n">NativeObject</span><span class="w"> </span><span class="o">-</span><span class="n">eq</span><span class="w"> </span><span class="err">$</span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="err">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ss">&quot;Impossible de se connecter à l&#39;AD. Vérifiez les credentials et le chemin LDAP.&quot;</span>
+<span class="err">}</span>
+
+<span class="k">Write</span><span class="o">-</span><span class="k">Host</span><span class="w"> </span><span class="ss">&quot;  ✓ Authentifié sur l&#39;AD&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Green</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">Créer</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">searcher</span>
+<span class="k">Write</span><span class="o">-</span><span class="k">Host</span><span class="w"> </span><span class="ss">&quot;  → Recherche des utilisateurs...&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Gray</span>
+<span class="err">$</span><span class="n">searcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">New</span><span class="o">-</span><span class="k">Object</span><span class="w"> </span><span class="k">System</span><span class="p">.</span><span class="n">DirectoryServices</span><span class="p">.</span><span class="n">DirectorySearcher</span>
+<span class="err">$</span><span class="n">searcher</span><span class="p">.</span><span class="n">SearchRoot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span><span class="n">directoryEntry</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">Filtre</span><span class="w"> </span><span class="n">pour</span><span class="w"> </span><span class="n">les</span><span class="w"> </span><span class="n">utilisateurs</span><span class="w"> </span><span class="n">avec</span><span class="w"> </span><span class="n">email</span>
+<span class="err">$</span><span class="n">searcher</span><span class="p">.</span><span class="k">Filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;(&amp;(objectClass=user)(objectCategory=person)(mail=*))&quot;</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">Propriétés</span><span class="w"> </span><span class="n">à</span><span class="w"> </span><span class="n">récupérer</span>
+<span class="err">$</span><span class="n">searcher</span><span class="p">.</span><span class="n">PropertiesToLoad</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="err">@</span><span class="p">(</span>
+<span class="w">    </span><span class="ss">&quot;sAMAccountName&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;mail&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;givenName&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;sn&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;displayName&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;userAccountControl&quot;</span>
+<span class="p">))</span>
+
+<span class="err">$</span><span class="n">searcher</span><span class="p">.</span><span class="n">PageSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="err">$</span><span class="n">searcher</span><span class="p">.</span><span class="n">SearchScope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">System.DirectoryServices.SearchScope</span><span class="o">]::</span><span class="n">Subtree</span>
+
+<span class="err">$</span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span><span class="n">searcher</span><span class="p">.</span><span class="n">FindAll</span><span class="p">()</span>
+
+<span class="k">Write</span><span class="o">-</span><span class="k">Host</span><span class="w"> </span><span class="ss">&quot;✓ $($results.Count) utilisateurs trouvés dans AD&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Green</span>
+</code></pre></div>
+
+<p>}
+catch {
+    Write-Host "<code>n✗ ERREUR de connexion AD:" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
+    Write-Host "</code>nVérifications:" -ForegroundColor Yellow
+    Write-Host "1. Le serveur AD '$adServer' est-il accessible ?" -ForegroundColor White
+    Write-Host "2. Les credentials AD sont-ils corrects ?" -ForegroundColor White
+    Write-Host "   Username: $adUsername" -ForegroundColor Gray
+    Write-Host "3. Le chemin LDAP est-il correct ?" -ForegroundColor White
+    Write-Host "   $ldapPath" -ForegroundColor Gray
+    Write-Host "4. Le port 389 (LDAP) est-il ouvert ?" -ForegroundColor White
+    Write-Host "5. Essayez avec LDAPS (port 636) si disponible" -ForegroundColor White
+    exit
+}</p>
+<h1 id="synchronisation">========== SYNCHRONISATION ==========</h1>
+<p>Write-Host "`n[4/4] Synchronisation en cours..." -ForegroundColor Yellow
+Write-Host "────────────────────────────────────────" -ForegroundColor Gray</p>
+<p>$stats = @{
+    Created = 0
+    Updated = 0
+    Skipped = 0
+    Errors = 0
+}</p>
+<p>foreach ($result in $results) {
+    $props = $result.Properties</p>
+<div class="codehilite"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="n">Récupérer</span><span class="w"> </span><span class="n">les</span><span class="w"> </span><span class="n">informations</span>
+<span class="err">$</span><span class="n">samAccount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;samaccountname&quot;</span><span class="o">]</span><span class="p">.</span><span class="nf">Count</span><span class="w"> </span><span class="o">-</span><span class="n">gt</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;samaccountname&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="ss">&quot;Inconnu&quot;</span><span class="w"> </span><span class="err">}</span>
+<span class="err">$</span><span class="n">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;mail&quot;</span><span class="o">]</span><span class="p">.</span><span class="nf">Count</span><span class="w"> </span><span class="o">-</span><span class="n">gt</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;mail&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="err">$</span><span class="k">null</span><span class="w"> </span><span class="err">}</span>
+<span class="err">$</span><span class="n">firstName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;givenname&quot;</span><span class="o">]</span><span class="p">.</span><span class="nf">Count</span><span class="w"> </span><span class="o">-</span><span class="n">gt</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;givenname&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"> </span><span class="err">}</span>
+<span class="err">$</span><span class="n">lastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;sn&quot;</span><span class="o">]</span><span class="p">.</span><span class="nf">Count</span><span class="w"> </span><span class="o">-</span><span class="n">gt</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;sn&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"> </span><span class="err">}</span>
+<span class="err">$</span><span class="n">displayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;displayname&quot;</span><span class="o">]</span><span class="p">.</span><span class="nf">Count</span><span class="w"> </span><span class="o">-</span><span class="n">gt</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;displayname&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="err">$</span><span class="n">samAccount</span><span class="w"> </span><span class="err">}</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">Vérifier</span><span class="w"> </span><span class="n">si</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">compte</span><span class="w"> </span><span class="n">est</span><span class="w"> </span><span class="n">actif</span><span class="w"> </span><span class="n">dans</span><span class="w"> </span><span class="n">AD</span>
+<span class="err">$</span><span class="n">userAccountControl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;useraccountcontrol&quot;</span><span class="o">]</span><span class="p">.</span><span class="nf">Count</span><span class="w"> </span><span class="o">-</span><span class="n">gt</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="err">$</span><span class="n">props</span><span class="o">[</span><span class="n">&quot;useraccountcontrol&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="err">}</span>
+<span class="err">$</span><span class="n">isEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="ow">not</span><span class="w"> </span><span class="p">(</span><span class="err">$</span><span class="n">userAccountControl</span><span class="w"> </span><span class="o">-</span><span class="n">band</span><span class="w"> </span><span class="mh">0x2</span><span class="p">)</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="mh">0x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACCOUNTDISABLE</span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">Vérifier</span><span class="w"> </span><span class="n">l</span><span class="s1">&#39;adresse email</span>
+<span class="s1">if ([string]::IsNullOrWhiteSpace($email)) {</span>
+<span class="s1">    Write-Host &quot;⊘ $displayName - Pas d&#39;</span><span class="n">email</span><span class="ss">&quot; -ForegroundColor DarkGray</span>
+<span class="ss">    $stats.Skipped++</span>
+<span class="ss">    continue</span>
+<span class="ss">}</span>
+
+<span class="ss"># Forcer le domaine mail si l&#39;email AD ne correspond pas</span>
+<span class="ss">if (-not $email.EndsWith(&quot;</span><span class="err">@$</span><span class="n">defaultDomain</span><span class="ss">&quot;)) {</span>
+<span class="ss">    $emailParts = $email.Split(&#39;@&#39;)</span>
+<span class="ss">    $email = &quot;</span><span class="err">$</span><span class="p">(</span><span class="err">$</span><span class="n">emailParts</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span><span class="err">@$</span><span class="n">defaultDomain</span><span class="ss">&quot;</span>
+<span class="ss">    Write-Host &quot;</span><span class="n">ℹ</span><span class="w"> </span><span class="err">$</span><span class="n">displayName</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Email</span><span class="w"> </span><span class="nl">modifié</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">email</span><span class="ss">&quot; -ForegroundColor Cyan</span>
+<span class="ss">}</span>
+
+<span class="ss">$emailLower = $email.ToLower()</span>
+
+<span class="ss">try {</span>
+<span class="ss">    # Vérifier si le compte existe dans hMailServer</span>
+<span class="ss">    if ($hmailAccounts.ContainsKey($emailLower)) {</span>
+<span class="ss">        # MISE À JOUR</span>
+<span class="ss">        if ($updateExistingAccounts) {</span>
+<span class="ss">            $account = $hmailAccounts[$emailLower]</span>
+
+<span class="ss">            $account.PersonFirstName = $firstName</span>
+<span class="ss">            $account.PersonLastName = $lastName</span>
+<span class="ss">            $account.Active = $isEnabled</span>
+<span class="ss">            $account.Save()</span>
+
+<span class="ss">            Write-Host &quot;</span><span class="err">↻</span><span class="w"> </span><span class="err">$</span><span class="n">email</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Mis</span><span class="w"> </span><span class="n">à</span><span class="w"> </span><span class="n">jour</span><span class="ss">&quot; -ForegroundColor Cyan</span>
+<span class="ss">            $stats.Updated++</span>
+<span class="ss">        }</span>
+<span class="ss">        else {</span>
+<span class="ss">            Write-Host &quot;</span><span class="err">→</span><span class="w"> </span><span class="err">$</span><span class="n">email</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Existe</span><span class="w"> </span><span class="n">déjà</span><span class="ss">&quot; -ForegroundColor Gray</span>
+<span class="ss">            $stats.Skipped++</span>
+<span class="ss">        }</span>
+<span class="ss">    }</span>
+<span class="ss">    else {</span>
+<span class="ss">        # CRÉATION</span>
+<span class="ss">        if ($createNewAccounts) {</span>
+<span class="ss">            $newAccount = $domain.Accounts.Add()</span>
+<span class="ss">            $newAccount.Address = $email</span>
+<span class="ss">            $newAccount.Password = $defaultPassword</span>
+<span class="ss">            $newAccount.Active = if ($enableAccountsByDefault) { $isEnabled } else { $false }</span>
+<span class="ss">            $newAccount.PersonFirstName = $firstName</span>
+<span class="ss">            $newAccount.PersonLastName = $lastName</span>
+<span class="ss">            $newAccount.MaxSize = $accountMaxSize</span>
+<span class="ss">            $newAccount.Save()</span>
+
+<span class="ss">            Write-Host &quot;</span><span class="err">✓</span><span class="w"> </span><span class="err">$</span><span class="n">email</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Créé</span><span class="ss">&quot; -ForegroundColor Green</span>
+<span class="ss">            $stats.Created++</span>
+<span class="ss">        }</span>
+<span class="ss">        else {</span>
+<span class="ss">            Write-Host &quot;</span><span class="err">⊘</span><span class="w"> </span><span class="err">$</span><span class="n">email</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Nouveau</span><span class="w"> </span><span class="p">(</span><span class="n">création</span><span class="w"> </span><span class="n">désactivée</span><span class="p">)</span><span class="ss">&quot; -ForegroundColor DarkGray</span>
+<span class="ss">            $stats.Skipped++</span>
+<span class="ss">        }</span>
+<span class="ss">    }</span>
+<span class="ss">}</span>
+<span class="ss">catch {</span>
+<span class="ss">    Write-Host &quot;</span><span class="err">✗</span><span class="w"> </span><span class="err">$</span><span class="n">email</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nl">ERREUR</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">_</span><span class="err">&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ForegroundColor</span><span class="w"> </span><span class="n">Red</span>
+<span class="w">    </span><span class="err">$</span><span class="n">stats</span><span class="p">.</span><span class="n">Errors</span><span class="o">++</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<p>}</p>
+<h1 id="resultats">========== RÉSULTATS ==========</h1>
+<p>Write-Host "<code>n========================================" -ForegroundColor Cyan
+Write-Host "RÉSUMÉ DE LA SYNCHRONISATION" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "Comptes créés    : $($stats.Created)" -ForegroundColor Green
+Write-Host "Comptes mis à jour: $($stats.Updated)" -ForegroundColor Cyan
+Write-Host "Comptes ignorés  : $($stats.Skipped)" -ForegroundColor Gray
+Write-Host "Erreurs          : $($stats.Errors)" -ForegroundColor Red
+Write-Host "────────────────────────────────────────" -ForegroundColor Gray
+Write-Host "Total hMailServer: $($domain.Accounts.Count) comptes" -ForegroundColor White
+Write-Host "========================================</code>n" -ForegroundColor Cyan</p>
+<h1 id="nettoyage">========== NETTOYAGE ==========</h1>
+<p>if ($results) { $results.Dispose() }
+if ($searcher) { $searcher.Dispose() }
+if ($directoryEntry) { $directoryEntry.Dispose() }
+if ($domain -ne $null) {
+    [System.Runtime.Interopservices.Marshal]::ReleaseComObject($domain) | Out-Null
+}
+if ($hMailApp -ne $null) {
+    [System.Runtime.Interopservices.Marshal]::ReleaseComObject($hMailApp) | Out-Null
+}</p>
+<p>Write-Host "Synchronisation terminée!" -ForegroundColor Green
+<div class="highlight"><pre><span></span><code>---
+
+---
+
+## 6. Créer un compte de messagerie Thunderbird 
+
+    Entrer votre nom complet: Jean 
+    Adresse e-mail : jean@orleans.sportludique.fr
+    Mot de passe : *********
+#### Paramètre du serveur 
+</code></pre></div>
+Serveur entrant 
+Protocole : IMAP
+Nom d'hôte : imap.orleans.sportludique.fr
+port: non sécurisé 143 ou sécurisé 993
+Sécurité de la connection : Aucun si port 25 | STARTTLS si port 587
+Méthode d'authentification: 
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+Serveur sortant
+Nom d'hôte : smtp.orleans.sportludique.fr
+port: 25 ou 587
+Sécurité de la connection : Aucun si port 25 | STARTTLS si port 587
+Méthode d'authentification: 
+<div class="highlight"><pre><span></span><code>---
+
+---
+
+ ## 7. routeur
+</code></pre></div>
+redirection de port 25 587 pour SMTP
+<div class="highlight"><pre><span></span><code>---
+
+## 8. Problèmes possible
+
+### 8.1 Erreur après changement de configuration  
+</code></pre></div>
+vider le cache de thunderbird </p>
+<div class="codehilite"><pre><span></span><code>- paramètre 
+- paramètre de compte 
+- dossier locaux 
+- tout supprimer 
+- recréer un compte
+</code></pre></div>
+
+<h2 id="_1">```</h2>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
