@@ -39,7 +39,7 @@ sousdomaine.exemple.com.  IN  NS  ns.serveurdns.externe.com.
 
 ### Exemple de configuration
 
-## Resolveur DNS
+## Resolveur DNS (VM-1)
 
 ### Fichier /etc/bind/named.conf.options
 
@@ -90,7 +90,7 @@ Cela permet d'éviter une potentielle censure en utilisant le serveur DNS d'un O
 
 
 
-## DNS-Autorité
+## DNS-Autorité (VM-2)
 
 > 
 > 
@@ -135,7 +135,7 @@ Cela permet d'éviter une potentielle censure en utilisant le serveur DNS d'un O
 
 ```
 
-### Fichier /etc/bind/named.conf.local
+### Fichier /etc/bind/named.conf.local autorité
 
 ```
     //zone externe
@@ -252,17 +252,22 @@ up ip route add 172.28.96.0/24 via 192.168.45.1 dev ens5
 ### Fichier /etc/bind/named.conf.options 
 
 ```markdown
-loggin {
-		channel queries_log {
-					file "/var/log/named/queries.log" version 3 size 10m;
-					severity info;
-					print-time yes;
-			 };
-			 category queries { queries_log; };
-	};
-```
 
-Pour lire les log
+logging {
+        channel queries_log {
+                    file "/var/log/named/queries.log" versions 3 size 10m;
+                    severity info;
+                    print-time yes;
+             };
+             category queries { queries_log; };
+             category query-errors {queries_log; };
+
+    };
+
+```
+> on peux ajouter des catégories en fonction de ce que l'on recherche 
+
+### Pour lire les log
 
 ```markdown
 sudo tail /var/log/named/queries.log
@@ -272,7 +277,7 @@ sudo tail /var/log/named/queries.log
 
 ```markdown
 sudo named-checkconf
-nslookup dns.orleans.sportludique.fr  
+nslookup ns1.orleans.sportludique.fr  
 dig dns.orleans.sportludique.fr
 ```
 ## DNS-Autorité-Secondaire

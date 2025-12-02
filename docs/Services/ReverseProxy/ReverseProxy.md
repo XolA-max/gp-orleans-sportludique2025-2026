@@ -1,4 +1,4 @@
-# Documentation : Mise en place d'un Reverse Proxy avec Nginx
+# Guide mise en place d'un Reverse Proxy avec Nginx
 
 ## Introduction
 
