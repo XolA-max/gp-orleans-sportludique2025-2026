@@ -92,6 +92,64 @@ Cela permet de n’avoir aucun problème au niveau des règles de filtrage.
 Aller dans :  
 `Protection de sécurité → Protocoles → Protocoles IP → IP → Mode furtif`
 
+---
+
+## Configuration des Règles SSL
+
+### Politique de sécurité : SSL Antoine
+
+| N° | État | Action | URL - CN | Commentaire |
+|----|------|--------|----------|-------------|
+| 1 | ON | Bloquer sans déchiffrer | pornography | Blocage sites pornographiques |
+| 2 | ON | Bloquer sans déchiffrer | online | Blocage sites en ligne |
+| 3 | ON | Bloquer sans déchiffrer | illegal | Blocage sites illégaux |
+| 4 | ON | Bloquer sans déchiffrer | warez | Blocage sites de téléchargement illégal |
+| 5 | ON | **Bloquer sans déchiffrer** | **ads** | **Blocage publicités** |
+| 6 | ON | Bloquer sans déchiffrer | bank | Blocage sites bancaires |
+| 7 | ON | Bloquer sans déchiffrer | entertainment | Blocage sites de divertissement |
+| 8 | OFF | Bloquer sans déchiffrer | shopping | Blocage sites d'achat (désactivé) |
+| 9 | ON | Déchiffrer | Any | Règle par défaut - Déchiffrer tout |
+| 10 | ON | **Passer sans déchiffrer** | **proxyssl_by...** | **Exceptions SSL - Ne pas déchiffrer certains serveurs** |
+
+---
+
+## Description des Actions
+
+### Types d'actions disponibles
+
+| Action | Icône | Description | Utilisation |
+|--------|-------|-------------|-------------|
+| **Bloquer sans déchiffrer** | 🚫 | Bloque l'accès au site sans inspecter le contenu | Catégories interdites (porn, warez, illegal) |
+| **Déchiffrer** | 🔓 | Déchiffre le trafic SSL pour inspection | Inspection du trafic HTTPS autorisé |
+| **Passer sans déchiffrer** | ✅ | Autorise le trafic sans déchiffrement | Sites sensibles (banques, santé, exceptions) |
+
+---
+
+## Catégories de Filtrage
+
+### Catégories bloquées (actives)
+
+| Catégorie | Description | Justification | État |
+|-----------|-------------|---------------|------|
+| **pornography** | Sites à contenu pornographique | Politique d'usage acceptable | ✅ Actif |
+| **online** | Sites en ligne (générique) | Contrôle d'accès | ✅ Actif |
+| **illegal** | Sites au contenu illégal | Conformité légale | ✅ Actif |
+| **warez** | Téléchargement illégal de logiciels | Protection propriété intellectuelle | ✅ Actif |
+| **ads** | Publicités et trackers | Protection et performance | ✅ Actif |
+| **bank** | Sites bancaires | Sécurité (éviter MITM) | ✅ Actif |
+| **entertainment** | Sites de divertissement | Productivité | ✅ Actif |
+
+### Catégories désactivées
+
+| Catégorie | Description | État |
+|-----------|-------------|------|
+| **shopping** | Sites de commerce en ligne | ❌ Désactivé |
+
+---
+
+## Règles Spéciales
+
+### Règle 9 : Déchiffrement par défaut
 
 ---
 
