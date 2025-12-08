@@ -130,6 +130,7 @@ Sur les interfaces DMZ et WAN, il est nécessaire de renseigner les passerelles 
 
 ### Règles de filtrage
 
+#### Regle Pass All
 Appliquer les règles suivantes sur les interfaces WAN et DMZ :
 
 | Protocole | Source | Port source | Destination | Port destination | Passerelle |
@@ -138,9 +139,55 @@ Appliquer les règles suivantes sur les interfaces WAN et DMZ :
 
 Cette configuration permet de ne rencontrer aucun blocage au niveau du filtrage, le temps de valider le bon fonctionnement du réseau.
 
-### Ajout d'une DMZ privée
 
-#### Vue d'ensemble
+#### Interface WAN
+
+| N° | Protocol | Source | Port Source | Destination | Port Destination | Gateway | Schedule | Description |
+|----|----------|--------|-------------|-------------|------------------|---------|----------|-------------|
+| 1 | IPv4 UDP | 172.28.96.0/24 | * | * | 53 (DNS) | * | * | Vlan 240 -> DNS |
+| 2 | IPv4 TCP | 172.28.96.0/24 | * | * | 80 (HTTP) | * | * | Vlan 240 -> HTTP |
+| 3 | IPv4 TCP | 172.28.96.0/24 | * | * | 443 (HTTPS) | * | * | Vlan 240 -> HTTPS |
+| 4 | IPv4 TCP | 172.28.96.0/24 | * | * | 25 (SMTP) | * | * | Vlan 240 -> SMTP |
+| 5 | IPv4 TCP | 172.28.96.0/24 | * | * | 143 (IMAP) | * | * | Vlan 240 -> IMAP |
+| 6 | IPv4 UDP | 172.28.120.0/24 | * | * | 53 (DNS) | * | * | Vlan 241 -> DNS |
+| 7 | IPv4 TCP | 172.28.120.0/24 | * | * | 80 (HTTP) | * | * | Vlan 241 -> HTTP |
+| 8 | IPv4 TCP | 172.28.120.0/24 | * | * | 443 (HTTPS) | * | * | Vlan 241 -> HTTPS |
+| 9 | IPv4 TCP | 172.28.120.8 | * | 192.168.55.1 | 3306 | * | * | Serveur 120.8 -> BDD |
+| 10 | IPv4 * | * | * | * | * | * | * | **Deny All (par défaut)** |
+
+#### Interface DMZPRV
+
+| N° | Protocol | Source | Port Source | Destination | Port Destination | Gateway | Schedule | Description |
+|----|----------|--------|-------------|-------------|------------------|---------|----------|-------------|
+| 1 | IPv4 * | * | * | * | * | * | * | **Deny All (par défaut)** |
+
+#### Interface DMZ
+
+| N° | Protocol | Source | Port Source | Destination | Port Destination | Gateway | Schedule | Description |
+|----|----------|--------|-------------|-------------|------------------|---------|----------|-------------|
+| 1 | IPv4 TCP | 192.168.45.6 | * | 192.168.55.1 | 3306 | * | * | DMZ -> BDD MySQL |
+| 2 | IPv4 UDP | 192.168.45.0/24 | * | 172.28.120.3 | 53 (DNS) | * | * | DMZ -> DNS |
+| 3 | IPv4 * | * | * | * | * | * | * | **Deny All (par défaut)** |
+
+---
+
+### Résumé des flux autorisés
+
+#### Depuis WAN (réseaux internes)
+- **172.28.96.0/24** : Accès DNS, HTTP, HTTPS, SMTP, IMAP vers Internet
+- **172.28.120.0/24** : Accès DNS, HTTP, HTTPS vers Internet
+- **172.28.120.8** : Accès MySQL vers 192.168.55.1 (serveur BDD)
+
+#### Depuis DMZ (192.168.45.0/24)
+- **192.168.45.6** : Accès MySQL vers 192.168.55.1 (serveur BDD)
+- **192.168.45.0/24** : Résolution DNS vers 172.28.120.3
+
+#### Depuis DMZPRV
+- **Aucun flux autorisé** (tout bloqué par défaut)
+
+#### Ajout d'une DMZ privée
+
+### Vue d'ensemble
 ```
 Internet
    |
@@ -168,13 +215,3 @@ Internet
 
 ---
 
-#### Carte réseau
-- **Interface WAN OPNsense** : 192.168.45.254/24 (dans la DMZ publique)
-- **Interface LAN OPNsense** : 192.168.55.254/24 (DMZ privée)
-- **Interface MANA OPNsense** : 192.168.140.75/24 (DMZ privée)
-
-#### Attribuer une nouvelles interface
-
-Attribuer une interface Lan a la nouvelles interface reseaux 
-
----
