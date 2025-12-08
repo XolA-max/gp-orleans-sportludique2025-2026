@@ -1,4 +1,4 @@
-# WordPress
+# Guide d'installation et de configuration de WordPress
 
 ## Installation de MariaDB et des extensions PHP
 
@@ -10,7 +10,7 @@ sudo apt install mariadb-server -y
 sudo apt install php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip -y
 ```
 
-## Instalation de Wordpress:
+## Installation de Wordpress:
 
 ```bash
 cd /tmp

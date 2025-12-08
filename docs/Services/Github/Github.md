@@ -1,4 +1,4 @@
-# Github
+# Guide utilisation Github
 ## 1. Prérequis
 
 ---

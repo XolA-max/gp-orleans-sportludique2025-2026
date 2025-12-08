@@ -1,3 +1,4 @@
+# Guide installation DNS
 DNS:
 > Linux → bind9
 > 
