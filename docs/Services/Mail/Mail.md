@@ -2,6 +2,7 @@
 ## 1. Prérequis
 
 ---
+
 #### VM Windows 10 ou 11 Prête à l'emplois
 ### Installation de HMAIL
 ```
@@ -161,7 +162,7 @@ route add -p [réseau_à_joindre] MASK [masque] [passerelle]
 - on créer un enregistrement MX priorité 10 qui pointe 
 
 #### 4.2 configurtion /etc/bind/db.orleans.sp.fr.interne
- ```
+```
 ;
 ; BIND data file for local loopback interface
 ;
@@ -177,7 +178,7 @@ $TTL    604800
 ns1     IN      A       192.168.45.2
 www     IN      A       192.168.45.3
 mail    IN      A       192.168.45.7
-        IN      MX      10      smtp.orleans.sportludique.fr    
+@       IN      MX      10      smtp.orleans.sportludique.fr    
 smtp    IN      CNAME   mail
 imap    IN      CNAME   mail
 orl     IN      A       172.28.120.1  #adresse ip de L'ad
