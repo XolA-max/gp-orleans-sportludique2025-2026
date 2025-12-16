@@ -65,40 +65,40 @@ MongoDB sert de base de données de métadonnées pour Graylog. Vous devez l'ins
 
 ### 1.1 Sur le premier nœud MongoDB
 
-#### A. Installer les dépendances
+### A. Installer les dépendances
 
 ```bash
 sudo apt-get install gnupg curl
 ```
 
-#### B. Importer la clé GPG MongoDB
+### B. Importer la clé GPG MongoDB
 
 ```bash
 curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
   sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
 ```
 
-#### C. Ajouter le dépôt MongoDB
+### C. Ajouter le dépôt MongoDB
 
 ```bash
 echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/8.0 main" | \
   sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
 ```
 
-#### D. Mettre à jour et installer MongoDB
+### D. Mettre à jour et installer MongoDB
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 ```
 
-#### E. Bloquer les mises à jour automatiques
+### E. Bloquer les mises à jour automatiques
 
 ```bash
 sudo apt-mark hold mongodb-org
 ```
 
-#### F. Configurer MongoDB
+### F. Configurer MongoDB
 
 Ouvrir le fichier de configuration :
 
@@ -129,7 +129,7 @@ net:
   bindIp: graylog01
 ```
 
-#### G. Démarrer MongoDB
+### G. Démarrer MongoDB
 
 ```bash
 sudo systemctl daemon-reload
@@ -151,7 +151,7 @@ Data Node gère l'ingestion, le traitement et l'indexation des logs. Il doit êt
 
 ### 2.1 Sur le premier nœud Data Node
 
-#### A. Installer le paquet Data Node
+### A. Installer le paquet Data Node
 
 ```bash
 wget https://packages.graylog2.org/repo/packages/graylog-7.0-repository_latest.deb
@@ -160,7 +160,7 @@ sudo apt-get update
 sudo apt-get install graylog-datanode
 ```
 
-#### B. Configurer vm.max_map_count
+### B. Configurer vm.max_map_count
 
 OpenSearch nécessite d'augmenter cette limite.
 
@@ -182,7 +182,7 @@ cat /proc/sys/vm/max_map_count
 
 Devrait afficher : `262144`
 
-#### C. Générer le password_secret
+### C. Générer le password_secret
 
 ```bash
 openssl rand -hex 32
@@ -195,7 +195,7 @@ c0b10ff32ccd565dd76a6331aeba6ff9bce2e6f1c8ca3504092e5856b6c76622
 
 *** CRITIQUE : Sauvegardez ce secret !** Vous devrez l'utiliser dans la configuration Graylog également.
 
-#### D. Configurer Data Node
+### D. Configurer Data Node
 
 Ouvrir le fichier de configuration :
 
@@ -226,7 +226,7 @@ sudo nano /etc/graylog/datanode/datanode.conf
    mongodb_uri = mongodb://graylog01:27017/graylog?replicaSet=rs0
    ```
 
-#### E. Démarrer Data Node
+### E. Démarrer Data Node
 
 ```bash
 sudo systemctl daemon-reload
@@ -253,7 +253,7 @@ Graylog est installé sur les **mêmes nœuds que MongoDB** selon l'architecture
 
 ### 3.1 Sur le premier nœud Graylog
 
-#### A. Installer le paquet Graylog
+### A. Installer le paquet Graylog
 
 **Pour Graylog Open (gratuit) :**
 ```bash
@@ -265,7 +265,7 @@ sudo apt-get install graylog-server
 sudo apt-get install graylog-enterprise
 ```
 
-#### B. Générer le mot de passe root (administrateur)
+### B. Générer le mot de passe root (administrateur)
 
 ```bash
 echo -n "MotDePasseAdmin" | sha256sum | cut -d' ' -f1
@@ -280,7 +280,7 @@ Tapez votre mot de passe (exemple : `Azerty1234!`) et appuyez sur Entrée.
 
 **IMPORTANT :** Sauvegardez le mot de passe en clair, vous en aurez besoin après la configuration preflight.
 
-#### C. Configurer Graylog
+### C. Configurer Graylog
 
 Ouvrir le fichier de configuration :
 
@@ -290,19 +290,19 @@ sudo nano /etc/graylog/server/server.conf
 
 **Modifier les paramètres suivants :**
 
-##### 1. Ajouter le hash du mot de passe root
+### 1. Ajouter le hash du mot de passe root
 
 ```properties
 root_password_sha2 = 86dac5b7dc404d676e3696eb2933734540218c2ea1ed19a4ba9ccb6cd4cad08b
 ```
 
-##### 2. Ajouter le password_secret (le même que Data Node !)
+### 2. Ajouter le password_secret (le même que Data Node !)
 
 ```properties
 password_secret = c0b10ff32ccd565dd76a6331aeba6ff9bce2e6f1c8ca3504092e5856b6c76622
 ```
 
-##### 3. Configurer l'adresse d'écoute HTTP
+### 3. Configurer l'adresse d'écoute HTTP
 
 Chercher la section `# HTTP settings` et décommenter/modifier :
 
@@ -310,14 +310,14 @@ Chercher la section `# HTTP settings` et décommenter/modifier :
 http_bind_address = 0.0.0.0:9000
 ```
 
-##### 4. Configurer la connexion MongoDB
+### 4. Configurer la connexion MongoDB
 
 Remplacer `graylog01` par vos hostname/IPs:
 
 ```
 mongodb_uri = mongodb://192.168.140.235:27017/graylog
 ```
-##### 5. Configurer le journal (message journal)
+### 5. Configurer le journal (message journal)
 
 Recommandation: 72heure et taille diviser part deux le stockage 
 
@@ -328,7 +328,7 @@ message_journal_max_age = 72h
 message_journal_max_size = 4gb
 ```
 
-###### D. Configurer la mémoire heap de Graylog
+### D. Configurer la mémoire heap de Graylog
 
 Ouvrir le fichier de service:
 ```
@@ -343,7 +343,7 @@ GRAYLOG_SERVER_JAVA_OPTS="-Xms2g -Xmx2g -server -XX:+UseG1GC -XX:-OmitStackTrace
 ```
 Toujours mettre la même valeur pour -Xms et -Xmx !
 
-###### E. Démarrer Graylog
+### E. Démarrer Graylog
 
 ```
 sudo systemctl daemon-reload
@@ -362,11 +362,11 @@ sudo journalctl -u graylog-server -f
 ```
 Attendez le message : Graylog server up and running.
 
-###### Étape 4 : Connexion Preflight
+### Étape 4 : Connexion Preflight
 
 Après l'installation, vous devez effectuer la connexion preflight pour accéder à l'interface Graylog.
 
-###### 4.1 Trouver les identifiants temporaires
+### 4.1 Trouver les identifiants temporaires
 
 Les identifiants de première connexion sont générés automatiquement et affichés dans les logs :
 
@@ -379,21 +379,21 @@ Cherchez une ligne comme :
 Initial configuration is accessible at 0.0.0.0:9000, with username 'admin' and password 'RdOIRGVrWM'.
 ```
 
-##### 4.2 Accéder à l'interface
+### 4.2 Accéder à l'interface
 
 Ouvrez votre navigateur et accédez à votre load balancer ou à l'IP d'un nœud Graylog :
 
 ```
 http://192.168.140.235:9000
 ```
-##### 4.3 Connexion initiale (preflight)
+### 4.3 Connexion initiale (preflight)
 
 Première connexion :
 
 Utilisateur : admin
 Mot de passe : Le mot de passe temporaire trouvé dans les logs (exemple : RdOIRGVrWM)
 
-##### 4.4 Première interface web 
+### 4.4 Première interface web 
 
 Création d'un certificat Graylog depuis l'interface web
 
