@@ -55,7 +55,7 @@ timedatectl
 
 ---
 
-## 🗄️ Étape 1 : Installation de MongoDB
+## Étape 1 : Installation de MongoDB
 
 MongoDB sert de base de données de métadonnées pour Graylog. Vous devez l'installer sur **tous les nœuds Graylog/MongoDB**.
 
