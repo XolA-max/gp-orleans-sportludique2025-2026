@@ -1,4 +1,4 @@
-OpenSSL
+# Guide OpenSSL pour avoir HTTPS 
 
 # HTTPS
 
@@ -88,15 +88,17 @@ VM Serveur Apache :
 
 ### Génération de la clé privée du serveur web
 
-<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
-  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
-    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">RSA</button>
-    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Courbe eliptique</button>
-  </div>
+#### RSA
 
-  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl genrsa 2048 > siteweb/keys/privatekey.key</code></pre>
+```markdown
+openssl genrsa 2048 > siteweb/keys/privatekey.key
+```
 
-  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl ecparam -genkey -name prime256v1 -out privatekey.key</code></pre>
+#### Courbe Eliptique
+
+```markdown
+openssl ecparam -genkey -name prime256v1 -out privatekey.key
+```
 </div>
 
 
@@ -107,7 +109,7 @@ openssl ec -in privatekey.key -text -noout
 
 ```
 
-Génération d'une demande de certificat pour le serveur web.
+#### Génération d'une demande de certificat pour le serveur web.
 
 La demande de certificat est généré avec openssl via la commande
 suivante :
@@ -118,18 +120,14 @@ Normallement les modifications dans le fichier de conf d'open SSL sont prise en 
 
 <aside>
 
-<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
-  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
-    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique</button>
-    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Forcer l’usage du fichier de conf</button>
-  </div>
+Classique :
 
-  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl req -new -key siteweb/keys/privatekey.key > siteweb/requests_certificats/demande.csr</code></pre>
+```markdown
+cnf
+openssl req -new -key siteweb/keys/privatekey-orleans.key > siteweb/requests_certificats/demande-orleans.csr
+```
 
-  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl req -new -key siteweb/keys/privatekey.key > siteweb/requests_certificats/demande.csr -config /etc/ssl/openssl.cnf</code></pre>
-</div>
-
-
+Forcer l’usage :
 
 </aside>
 
@@ -169,17 +167,6 @@ AN optional company name [] :
 dans le format PEM encodé en base64, PEM (*Privacy Enhanced Mail*) étant
 le format par défaut pour OpenSSL (il s'agit d'un fichier DER encodé en
 ASCII et entouré de balises de marquage).
-> 
-
-<script>
-function showTab(tab) {
-  document.getElementById('tab1').style.display = tab === 'tab1' ? 'block' : 'none';
-  document.getElementById('tab2').style.display = tab === 'tab2' ? 'block' : 'none';
-  document.getElementById('btn1').style.background = tab === 'tab1' ? '#444' : '#222';
-  document.getElementById('btn2').style.background = tab === 'tab2' ? '#444' : '#222';
-}
-</script>
-
 
 ---
 
@@ -256,62 +243,44 @@ openssl req -new -x509 -days 365 -key /autorite/keys/private_ca.key > autorite/c
 
 1. La commande qui signe la demande de certificat est la suivante :
 
-<aside>
+classique 
 
-<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
-  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
-    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique </button>
-    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Dans notre cas</button>
-  </div>
+```markdown
+openssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certificat autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl
+```
 
-  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certificat autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl</code></pre>
+Dans notre cas :
 
-  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt -CA [ca].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl</code></pre>
-</div>
+```markdown
+openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt -CA [ca].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl
+```
 
-
-</aside>
-
-<aside>
+---
 
 ###  Forcer l'usage des champs Subject Alternatives Names (SAN)
 
-<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
-  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
-    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique </button>
-    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Dans notre cas</button>
-  </div>
+Forcer l'usage des champs Subject Alternatives Names (SAN)
 
-  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>oopenssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certif_autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req</code></pre>
+```
+openssl x509 -req -in [demande].csr -out [certificat_signe].crt -CA [certif_autorite].crt -CAkey [privatekey_ca].key -CAcreateserial -CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req
+```
 
-  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt 
+Dans notre cas :
+
+```markdown
+openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt 
 -CA [ca].crt -CAkey [privatekey_ca].key -CAcreateserial 
--CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req</code></pre>
-</div>
-
-</aside>
-
+-CAserial ca.srl -extfile /etc/ssl/openssl.cnf -extensions v3_req
+```
 ---
 
 ---
 
 ## Envois de Fichier d’un post à un autre
 
-<aside>
-
-<div style="border:1px solid #444; border-radius:6px; padding:1em; background:#1e1e1e; color:#eee;">
-  <div style="display:flex; gap:1em; border-bottom:1px solid #444; margin-bottom:1em;">
-    <button onclick="showTab('tab1')" id="btn1" style="background:#444; color:#fff; border:none; padding:0.5em 1em; border-radius:4px;">classique </button>
-    <button onclick="showTab('tab2')" id="btn2" style="background:#222; color:#aaa; border:none; padding:0.5em 1em; border-radius:4px;">Dans notre cas</button>
-  </div>
-
-  <pre id="tab1" style="display:block; background:#2d2d2d; padding:1em; border-radius:6px;"><code>scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/du/fichier/destination</code></pre>
-
-  <pre id="tab2" style="display:none; background:#2d2d2d; padding:1em; border-radius:6px;"><code>	scp orlssl/autorite/certs/ca-orleans.sp.crt etudiant@192.168.140.105:/etc/ssl/cert</code></pre>
-</div>
-
-
-</aside>
+```markdown
+scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/du/fichier/destination
+```
 
 ---
 
@@ -327,8 +296,8 @@ sudo nano /etc/apache2/sites-available/www.orleans.sportludique.fr-secure.conf
 
 ```markdown
 <VirtualHost *:80>
-ServerName [www.orleans.sportludique.fr](http://www.orleans.sportludique.fr/)
-ServerAlias [orleans.sportludique.fr](http://orleans.sportludique.fr/)
+ServerName www.orleans.sportludique.fr # (http://www.orleans.sportludique.fr/)
+ServerAlias orleans.sportludique.fr # (http://orleans.sportludique.fr/)
 # Redirection permanente vers HTTPS
 Redirect permanent / <https://www.orleans.sportludique.fr>
 </VirtualHost>
@@ -393,15 +362,6 @@ sudo systemctl restart apache2
 
 ---
 
-<aside>
-
-```markdown
-sudo cp /etc/ssl/certs/ca.crt /var/www/siteorl
-```
-
-</aside>
-
-  
 
 > /!\ Sur les routeurs penser à rediriger le port 443 sur le serveur web comme fait precedement avec le port 80
 > 

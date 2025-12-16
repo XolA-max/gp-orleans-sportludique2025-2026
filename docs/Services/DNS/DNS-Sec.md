@@ -1,6 +1,6 @@
-# Guide de configuration DNS autoritaire et DNS
-## DNS-Autorité-Secondaire
- 
+
+# DNS Secondaire
+## Guide de configuration DNS autoritaire secondaire et DNS redirecteur secondaire
 >
 >
  
@@ -94,6 +94,13 @@ Le DNS Autorité secondaire n'a pas besoin d'avoir de configuration dans les fic
     nameserver 172.28.120.3
  
 ```
+## Fichier /etc/bind/db.local
+ 
+> /!\ ne pas oublier de le remplir afin que le serveur apache retourne des servfail
+ 
+
+
+-------------------------------------------------
 
 ## DNS Résolveur Secondaire
  
