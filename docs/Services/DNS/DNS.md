@@ -281,3 +281,98 @@ sudo named-checkconf
 nslookup ns1.orleans.sportludique.fr  
 dig dns.orleans.sportludique.fr
 ```
+## DNS-Autorité-Secondaire
+
+>
+>
+
+## DNS étant esclaves du DNS Autorite 
+## Fichier /etc/bind/named.conf.default-zones
+```markdown
+// prime the server with knowledge of the root servers
+//zone "." {
+//      type hint;
+//      file "/usr/share/dns/root.hints";
+//};
+
+// be authoritative for the localhost forward and reverse zones, and for
+// broadcast zones as per RFC 1912
+
+//zone "localhost" {
+//      type slaves;
+//      file "/etc/bind/db.local";
+//};
+
+//zone "127.in-addr.arpa" {
+//      type slaves;
+//      file "/etc/bind/db.127";
+//};
+
+//zone "0.in-addr.arpa" {
+//      type slaves;
+//      file "/etc/bind/db.0";
+//};
+
+//zone "255.in-addr.arpa" {
+//      type slaves;
+//      file "/etc/bind/db.255";
+//};
+
+```
+
+## Fichier /etc/bind/named.conf.local
+
+```markdown
+    //zone externe
+    view "outside" {
+        match-clients {
+            !172.x.x.0/24;    //requète de provenant pas du LAN
+            !192.168.x.0/24;    //requète de provenant pas de la DMZ
+            127.0.0.1;
+            any;                //Toutes les autres adresses
+        };
+        zone "orleans.sportludique.fr." {
+            type slave;
+            file "/etc/cache/bind/db.orleans.sp.fr.externe";
+            masters { 192.168.45.2; };
+        };
+    };
+    view "inside" {
+        match-clients {
+            172.x.0.0/24;    //requète provenant du LAN
+            192.168.x.0/24;    //requète provenant de la DMZ
+            127.0.0.1;
+        };
+        zone "orleans.sportludique.fr." {
+            type slave;
+            file "/etc/cache/bind/db.orleans.sp.fr.interne";
+            masters { 192.168.45.2; };
+        };
+    };
+
+```
+
+## Fichier /etc/bind/db.orleans.sp.fr.interne et /etc/bind/db.orleans.sp.fr.externe
+<aside>
+
+Le DNS Autorité secondaire n'a pas besoin d'avoir de configuration dans les fichiers (/etc/bind/db.orleans.sp.fr.interne et /etc/bind/db.orleans.sp.fr.externe) l'autorité principale va répondre au secondaire et ainsi il remplira les fichiers automitequement, ils seront illisible.
+
+<aside>
+
+
+## Fichier /etc/bind/named.conf.options
+
+```markdown
+    options {
+            directory "/var/cache/bind";
+    }
+
+```
+
+## Fichier /etc/resolv.conf
+
+```markdown
+    search orleans.sportludique.fr
+    nameserver 172.28.120.3
+
+```
