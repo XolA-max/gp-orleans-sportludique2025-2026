@@ -1,6 +1,6 @@
 # Principe et utilisation de LDAP
 
-## Windows Serveur 2025
+## Erreur lié à Windows Serveur 2025 pour LDAP
 
 Depuis Windows Server 2019 (patch 2020) et renforcé dans Windows Server 2022 / 2025, les connexions LDAP simples non chiffrées (port 389) sont désormais bloquées ou limitées.
 >Raison : Les identifiants sont envoyés en clair sur le réseau. Pas de Confidentialité

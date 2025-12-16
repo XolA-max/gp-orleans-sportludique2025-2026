@@ -28,20 +28,27 @@
 ## 2. Phase de Test LDAP
 Après avoir remplis le LDAP Directory on test pour voir si il fonctionne correctement 
 
-géneralement les 3 premières phases TCP stream (flux tcp) 
-base DN et LDAP URI vont fonctionner correctement 
-#### 
-- Pour la phase Bind connection si vous avez l'erreur :
-Bind connection
-Authentication failed: Invalid credentials(49)
+géneralement les 3 premières phases vont fonctionner correctement :
+- TCP stream (flux tcp) 
+- base DN 
+- LDAP URI 
+### Pour la phase Bind connection si vous avez l'erreur :
+
+- #### Bind connection Authentication failed: Invalid credentials(49)
 c'est que vous avez surement une erreur dans le champ root DN 
+![alt text](NewLDAPErreurRootDN.png)
 
-![alt text](ErreurRootDN.png)
 
-- Pour l'erreur Strong(er) authentication required (8)
+- #### Pour l'erreur Strong(er) authentication required (8)
 
 GLPI veux utiliser LDAPS (version sécurisé de LDAP)
-mais le DC ne l'autorise pas il faut alors le forcer à l'utiliser et [fixer l'erreur de LDAP](gp-orleans-sportludique2025-2026/docs/Services/Activedirectory/LDAP.md)
-> /!\ utiliser LDAP est dangereux en effect il n'y à pas de chiffrement sur les données  /!\ et ne dois pas être mit en production comme ça ! 
+mais le DC ne l'autorise pas il faut alors le forcer à l'utiliser cliquer ici : [pour fixer l'erreur de LDAP](gp-orleans-sportludique2025-2026/docs/Services/Activedirectory/LDAP.md)
+> /!\ utiliser LDAP est dangereux en effect il n'y a pas de chiffrement sur les données  /!\ et ne dois pas être mit en production comme ça ! 
 
->
+#### Test réussi ! 
+
+![alt text](NewLDAPtestok.png)
+
+
+## 3.
+
