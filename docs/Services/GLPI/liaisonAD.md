@@ -42,7 +42,7 @@ c'est que vous avez surement une erreur dans le champ root DN
 - #### Pour l'erreur Strong(er) authentication required (8)
 
 GLPI veux utiliser LDAPS (version sécurisé de LDAP)
-mais le DC ne l'autorise pas il faut alors le forcer à l'utiliser cliquer ici : [pour fixer l'erreur de LDAP](gp-orleans-sportludique2025-2026/docs/Services/Activedirectory/LDAP.md)
+mais le DC ne l'autorise pas il faut alors le forcer à l'utiliser cliquer ici : [pour fixer l'erreur de LDAP](../Activedirectory/LDAP.md)
 > /!\ utiliser LDAP est dangereux en effect il n'y a pas de chiffrement sur les données  /!\ et ne dois pas être mit en production comme ça ! 
 
 #### Test réussi ! 
