@@ -1,4 +1,4 @@
-# Installation Graylog Multi-Node sur Debian 12
+# Installation Graylog sur Debian 12
 
 
 ##  Prérequis
@@ -147,7 +147,7 @@ sudo systemctl status mongod.service
 
 Data Node gère l'ingestion, le traitement et l'indexation des logs. Il doit être installé sur un **cluster séparé** des nœuds Graylog/MongoDB.
 
-⚠️ **N'INSTALLEZ PAS OpenSearch directement !** Data Node inclut déjà OpenSearch.
+**N'INSTALLEZ PAS OpenSearch directement !** Data Node inclut déjà OpenSearch.
 
 ### 2.1 Sur le premier nœud Data Node
 
@@ -193,7 +193,7 @@ openssl rand -hex 32
 c0b10ff32ccd565dd76a6331aeba6ff9bce2e6f1c8ca3504092e5856b6c76622
 ```
 
-**⚠️ CRITIQUE : Sauvegardez ce secret !** Vous devrez l'utiliser dans la configuration Graylog également.
+*** CRITIQUE : Sauvegardez ce secret !** Vous devrez l'utiliser dans la configuration Graylog également.
 
 #### D. Configurer Data Node
 
@@ -210,7 +210,7 @@ sudo nano /etc/graylog/datanode/datanode.conf
    password_secret = c0b10ff32ccd565dd76a6331aeba6ff9bce2e6f1c8ca3504092e5856b6c76622
    ```
 
-2. **Configurer la mémoire heap (⚠️ non présent par défaut, à ajouter) :**
+2. **Configurer la mémoire heap ( non présent par défaut, à ajouter) :**
    
    Règle : 50% de la RAM système, maximum 31 GB.
    
@@ -241,13 +241,13 @@ sudo systemctl status graylog-datanode
 
 ### 2.2 Répéter sur les autres nœuds Data Node
 
-**⚠️ IMPORTANT :** Répétez les étapes A, B, D et E sur les autres Data Nodes.
+** IMPORTANT :** Répétez les étapes A, B, D et E sur les autres Data Nodes.
 
 **NE PAS générer un nouveau password_secret (étape C) !** Utilisez le **même secret** sur tous les nœuds.
 
 ---
 
-## 🎯 Étape 3 : Installation de Graylog Server
+##  Étape 3 : Installation de Graylog Server
 
 Graylog est installé sur les **mêmes nœuds que MongoDB** selon l'architecture Conventionnelle.
 
@@ -278,7 +278,7 @@ Tapez votre mot de passe (exemple : `Azerty1234!`) et appuyez sur Entrée.
 86dac5b7dc404d676e3696eb2933734540218c2ea1ed19a4ba9ccb6cd4cad08b
 ```
 
-**⚠️ IMPORTANT :** Sauvegardez le mot de passe en clair, vous en aurez besoin après la configuration preflight.
+**IMPORTANT :** Sauvegardez le mot de passe en clair, vous en aurez besoin après la configuration preflight.
 
 #### C. Configurer Graylog
 
