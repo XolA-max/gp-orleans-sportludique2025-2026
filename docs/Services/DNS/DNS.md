@@ -1,378 +1,261 @@
-# Guide installation DNS
-DNS:
+# Guide Installation DNS
+
 > Linux → bind9
-> 
 
-### Installation
+## Installation
 
-```markdown
-sudo apt install -y bind9 bind9utils bind9-dnsutils
-```
+!!! info
+    Installation des paquets :
+    ```bash
+    sudo apt install -y bind9 bind9utils bind9-dnsutils
+    ```
 
-### Redirecteur
+---
 
-### **Configuration BIND (zone principale pour exemple.com) :**
+---
 
-1. Dans le fichier de zone pour `orleans.sportludique.fr` ou `exemple.com`, ajoutez les enregistrements NS pour le sous-domaine délégué comme ceci :
+## Configuration BIND (Zone Principale)
 
-Informations lié à notre cas
-Informations à changer en fonction de la situation
+### Exemple pour `orleans.sportludique.fr`
 
-```markdown
-; Fichier de zone pour exemple.com (zone publique)
-$TTL 3600
-@      IN      SOA    dns.orleans.sportludique.fr. ns1.exemple.com. admin.exemple.com. (
-                  2023091301 ; Numéro de série
-                  3600       ; Intervalle de rafraîchissement
-                  1800       ; Intervalle de réessai
-                  604800     ; Intervalle d'expiration
-                  86400 )    ; Durée minimale de cache
-@      IN      NS     dns.orleans.sportludique.fr. ou ns1.exemple.com.
-@      IN      NS     ns2.exemple.com.
-; Enregistrements IPv4
-@      IN      A      [Adresse ip d'un serveur]
-www    IN      A      [Adresse ip du serv web]
-mail   IN      A      [Adresse ip du serv mail]
-dns    IN      A      192.168.45.2
-; Délégation du sous-domaine à un autre serveur DNS
-sousdomaine.exemple.com.  IN  NS  ns.serveurdns.externe.com.
-```
+Dans le fichier de zone, ajoutez les enregistrements NS et A nécessaires.
 
-### Exemple de configuration
+!!! info
+    Fichier de zone (exemple) :
+    
+    ```bind
+    ; Fichier de zone pour exemple.com (zone publique)
+    $TTL 3600
+    @      IN      SOA    dns.orleans.sportludique.fr. ns1.exemple.com. admin.exemple.com. (
+                      2023091301 ; Numéro de série
+                      3600       ; Intervalle de rafraîchissement
+                      1800       ; Intervalle de réessai
+                      604800     ; Intervalle d'expiration
+                      86400 )    ; Durée minimale de cache
+    @      IN      NS     dns.orleans.sportludique.fr. 
+    @      IN      NS     ns2.exemple.com.
+    
+    ; Enregistrements IPv4
+    @      IN      A      [Adresse ip d'un serveur]
+    www    IN      A      [Adresse ip du serv web]
+    mail   IN      A      [Adresse ip du serv mail]
+    dns    IN      A      192.168.45.2
+    
+    ; Délégation du sous-domaine
+    sousdomaine.exemple.com.  IN  NS  ns.serveurdns.externe.com.
+    ```
 
-## Resolveur DNS (VM-1)
+---
 
-### Fichier /etc/bind/named.conf.options
+---
 
-```markdown
+## Résolveur DNS (VM-1)
+
+### Configuration des Options
+
+!!! info
+    `sudo nano /etc/bind/named.conf.options`
+
+    ```bind
     options {
             directory "/var/cache/bind";
-            //Autorise les requetes recursives
+            
+            // Autorise les requetes recursives
             recursion yes;  
-            //Liste des réseaux autorisés à interoger le resolver
-            //Par defaut seul les équipements du meme réseau IP que le serveur peuvent l\'interroger.
+            
+            // Liste des réseaux autorisés à interoger le resolver
             allow-query { 
-                172.16.x.0/24;       //LAN
-                127.0.0.1;          //LOCALHOST
-                192.168.x.0/24;    //DMZ
+                172.16.x.0/24;      // LAN
+                127.0.0.1;          // LOCALHOST
+                192.168.x.0/24;     // DMZ
             };
-            //Desactivation de DNSSec
+            
+            // Desactivation de DNSSec
             dnssec-validation no;
-            //Ecoute sur l\'ensemble des interfaces IPv4
+            
+            // Ecoute sur l'ensemble des interfaces IPv4
             listen-on { any; };
     };
-```
+    ```
 
-### Fichier /etc/bind/named.conf.local (du resolver)
+### Configuration Locale (Zones Forward)
 
-Les requetes à destination de la zone locale doivent être redirigées 
-vers le serveur DNS de la DMZ en interogeant la vue interne.
+Les requêtes à destination de la zone locale doivent être redirigées vers le serveur DNS de la DMZ (vue interne).
 
-```markdown
-zone "orleans.sportludique.fr" {
-    type forward;
-    forwarders { 192.168.x.y };  // Remplace par l'IP du serveur DNS ayant autorité sur la zone (dans la DMZ par exemple)
-};
-```
+!!! info
+    `sudo nano /etc/bind/named.conf.local`
 
-Les requetes à destination de la zone de l'entreprise 
-(sportludique.fr) doivent partir vers le serveur resolver de 
-l'enseignant gérant cette zone.
+    ```bind
+    zone "orleans.sportludique.fr" {
+        type forward;
+        forwarders { 192.168.x.y };  // IP du serveur DNS autorité DMZ
+    };
+    ```
 
-```markdown
-zone "sportludique.fr" {
-    type forward;
-    forwarders { 121.183.90.205; };  // IP du serveur de l'enseignant ayant autorité sur la zone sportludique.fr
-};
-```
+Les requêtes vers `sportludique.fr` (entreprise) sont redirigées vers le serveur de l'enseignant.
 
-Toutes les autres requetes sont recursives et interrogent donc les serveurs racines (connu de Bind).
-Cela permet d'éviter une potentielle censure en utilisant le serveur DNS d'un Opérateur (celui du prof :-) )
+!!! info
+    ```bind
+    zone "sportludique.fr" {
+        type forward;
+        forwarders { 121.183.90.205; };  // IP du serveur de l'enseignant
+    };
+    ```
 
+---
 
+---
 
-## DNS-Autorité (VM-2)
+## DNS Autorité (VM-2)
 
-> 
-> 
+### Fichier `/etc/bind/named.conf.default-zones`
 
-### serveur DNS ayant autorité sur la zone orleans.sportludique.fr
+!!! warning
+    Toutes les lignes du fichier `named.conf.default-zones` doivent être commentées car elles ne sont associées à aucune vue spécifique ici.
 
-### Fichier /etc/bind/named.conf.default-zones
+    ```bind
+    // zone "." { ... };
+    // zone "localhost" { ... };
+    // ...
+    ```
 
-> Toutes les lignes du fichier `named.conf.default-zones` doivent être mises `en commentaire` car ne elles ne sont associées à aucune vue.
-> 
+### Configuration des Vues (Views)
 
-```markdown
-                                                                                                   
-// prime the server with knowledge of the root servers
-//zone "." {
-//      type hint;
-//      file "/usr/share/dns/root.hints";
-//};
+!!! info "Définition : Vue (View)"
+    Une vue permet à un même serveur DNS de répondre différemment selon l’origine de la requête (LAN, DMZ, Externe).
 
-// be authoritative for the localhost forward and reverse zones, and for
-// broadcast zones as per RFC 1912
+!!! info
+    `sudo nano /etc/bind/named.conf.local`
 
-//zone "localhost" {
-//      type master;
-//      file "/etc/bind/db.local";
-//};
-
-//zone "127.in-addr.arpa" {
-//      type master;
-//      file "/etc/bind/db.127";
-//};
-
-//zone "0.in-addr.arpa" {
-//      type master;
-//      file "/etc/bind/db.0";
-//};
-
-//zone "255.in-addr.arpa" {
-//      type master;
-//      file "/etc/bind/db.255";
-//};
-
-```
-
-### Fichier /etc/bind/named.conf.local autorité
-
-```
-    //zone externe
+    ```bind
+    // Zone externe
     view "outside" {
         match-clients {
-            !172.x.x.0/24;    //requète de provenant pas du LAN
-            !192.168.x.0/24;    //requète de provenant pas de la DMZ
-            any;                //Toutes les autres adresses
+            !172.x.x.0/24;      // Pas du LAN
+            !192.168.x.0/24;    // Pas de la DMZ
+            any;                // Tout le reste
         };
         zone "orleans.sportludique.fr." {
             type master;
             file "/etc/bind/db.orleans.sp.fr.externe";
         };
     };
+
+    // Zone interne
     view "inside" {
         match-clients {
-            172.x.0.0/24;    //requète provenant du LAN
-            192.168.x.0/24;    //requète provenant de la DMZ
+            172.x.0.0/24;       // LAN
+            192.168.x.0/24;     // DMZ
         };
         zone "orleans.sportludique.fr." {
             type master;
             file "/etc/bind/db.orleans.sp.fr.interne";
         };
     };
+    ```
 
-```
+### Fichiers de Zone
 
-<aside>
+#### Vue Interne
 
+!!! info
+    `sudo nano /etc/bind/db.orleans.sp.fr.interne`
 
-Une vue (ou view en anglais) 
-Dans Bind9 est une vue un mécanisme de filtrage et de séparation logique du service DNS. Elle permet à un même serveur DNS de répondre différemment selon l’origine de la requête.
+    ```bind
+    ; BIND data file for internal view
+    $TTL    604800
+    @       IN      SOA     ns1.orleans.sportludique.fr. root.orleans.sportludique.fr. (
+                             2025101301   ; Serial
+                             604800       ; Refresh
+                              86400       ; Retry
+                            2419200       ; Expire
+                             604800 )     ; Negative Cache TTL
+    ;
+    @       IN      NS      ns1.orleans.sportludique.fr.
+    ns1     IN      A       192.168.45.2
+    www     IN      A       192.168.45.3
+    ```
 
-</aside>
+#### Vue Externe
 
-### Fichier /etc/bind/db.orleans.sp.fr.interne
+!!! info
+    `sudo nano /etc/bind/db.orleans.sp.fr.externe`
 
-```markdown                                     
-;
-; BIND data file for local loopback interface
-;
-$TTL    604800
-@       IN      SOA     ns1.orleans.sportludique.fr. root.orleans.sportludique.fr. (
-                         2025101301   ; Serial
+    ```bind
+    ; BIND data file for external view
+    $TTL    604800
+    @       IN      SOA   ns1.orleans.sportludique.fr. root.orleans.sportludique.fr. (
+                         2025150938     ; Serial
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
-;
-@       IN      NS      ns1.orleans.sportludique.fr.
-ns1     IN      A       192.168.45.2
-www     IN      A       192.168.45.3
+    ;
+    @       IN      NS      ns1.orleans.sportludique.fr.
 
+    @       IN      A       183.44.45.1
+    ns1     IN      A       183.44.45.1
+    www     IN      A       183.44.45.1
+    ```
 
+### Explications des enregistrements
 
+!!! info
+    * **SOA (Start Of Authority)** : Définit le serveur DNS maître et les paramètres de la zone.
+    * **NS (Name Server)** : Désigne les serveurs DNS autoritaires.
+    * **A (Address)** : Associe un nom d’hôte à une IPv4.
+    * **CNAME** : Crée un alias vers un autre nom canonique.
 
-```
+---
 
-> @       IN      SOA     [ns1.orleans.sportludique.fr](http://dns.orleans.sportludique.fr/).
-> 
-> - **OA (Start Of Authority)** définit **le serveur DNS maître (primaire)** et **les paramètres d’autorité** de la zone.
-> - Il est **obligatoirement unique** dans chaque fichier de zone.
-> - En plus du DNS primaire, il indique aussi **l’adresse e-mail de l’administrateur** et les **valeurs de synchronisation** (Serial, Refresh, etc.).
+---
 
-> @       IN      NS      [ns1.orleans.sportludique.fr](http://www.orleans.sportludique.fr/).
-> 
-> - Les enregistrements **NS (Name Server)** désignent les **serveurs DNS autoritaires** pour cette zone.
-> - Il peut y en avoir **plusieurs** (un primaire, un ou plusieurs secondaires).
+## Route Interne
 
-> dns     IN      A       192.168.45.2
-> 
-> - ’enregistrement **A (Address)** associe un **nom d’hôte** (ex. `ns1`) à une **adresse IPv4**.
-> - C’est le lien entre **nom → IP**.
+Configuration pour le routage interne.
 
-> monsite IN      CNAME   www
-> 
-> - Le **CNAME (Canonical Name)** crée un **alias** : il fait pointer un nom vers **un autre nom DNS**, **pas directement vers une IP**.
-> - Le résolveur suit ensuite ce second nom pour trouver son enregistrement A.
+!!! info
+    `sudo nano /etc/network/interfaces`
 
-### Fichier /etc/bind/db.orleans.sp.fr.externe
+    ```bash
+    up ip route add 172.28.96.0/24 via 192.168.45.1 dev ens5
+    ```
 
-> 
-> 
+---
 
-```markdown
+## Logs
 
-;
-; BIND data file for local loopback interface
-;
-$TTL    604800
-@       IN      SOA   ns1.orleans.sportludique.fr. root.orleans.sportludique.fr>
-                     2025150938         ; Serial
-                         604800         ; Refresh
-                          86400         ; Retry
-                        2419200         ; Expire
-                         604800 )       ; Negative Cache TTL
-;
-@       IN      NS      ns1.orleans.sportludique.fr.
+Ajouter des logs personnalisés pour le DNS.
 
-@       IN      A       183.44.45.1
-ns1     IN      A       183.44.45.1
-www     IN      A       183.44.45.1
+!!! info
+    `sudo nano /etc/bind/named.conf.options`
 
-
-```
-## Route interne
-
-```
-sudo nano /etc/network/interfaces
-up ip route add 172.28.96.0/24 via 192.168.45.1 dev ens5
-```
-
-## Pour ajouter des LOG
-### Fichier /etc/bind/named.conf.options 
-
-```markdown
-
-logging {
+    ```bind
+    logging {
         channel queries_log {
                     file "/var/log/named/queries.log" versions 3 size 10m;
                     severity info;
                     print-time yes;
              };
              category queries { queries_log; };
-             category query-errors {queries_log; };
-
+             category query-errors { queries_log; };
     };
+    ```
 
-```
-> on peux ajouter des catégories en fonction de ce que l'on recherche 
+    Pour lire les logs :
+    ```bash
+    sudo tail -f /var/log/named/queries.log
+    ```
 
-### Pour lire les log
+---
 
-```markdown
-sudo tail /var/log/named/queries.log
-```
+## Vérification
 
-## Commandes de verification
+Commandes utiles pour vérifier la configuration.
 
-```markdown
-sudo named-checkconf
-nslookup ns1.orleans.sportludique.fr  
-dig dns.orleans.sportludique.fr
-```
-## DNS-Autorité-Secondaire
-
->
->
-
-## DNS étant esclaves du DNS Autorite 
-## Fichier /etc/bind/named.conf.default-zones
-```markdown
-// prime the server with knowledge of the root servers
-//zone "." {
-//      type hint;
-//      file "/usr/share/dns/root.hints";
-//};
-
-// be authoritative for the localhost forward and reverse zones, and for
-// broadcast zones as per RFC 1912
-
-//zone "localhost" {
-//      type slaves;
-//      file "/etc/bind/db.local";
-//};
-
-//zone "127.in-addr.arpa" {
-//      type slaves;
-//      file "/etc/bind/db.127";
-//};
-
-//zone "0.in-addr.arpa" {
-//      type slaves;
-//      file "/etc/bind/db.0";
-//};
-
-//zone "255.in-addr.arpa" {
-//      type slaves;
-//      file "/etc/bind/db.255";
-//};
-
-```
-
-## Fichier /etc/bind/named.conf.local
-
-```markdown
-    //zone externe
-    view "outside" {
-        match-clients {
-            !172.x.x.0/24;    //requète de provenant pas du LAN
-            !192.168.x.0/24;    //requète de provenant pas de la DMZ
-            127.0.0.1;
-            any;                //Toutes les autres adresses
-        };
-        zone "orleans.sportludique.fr." {
-            type slave;
-            file "/etc/cache/bind/db.orleans.sp.fr.externe";
-            masters { 192.168.45.2; };
-        };
-    };
-    view "inside" {
-        match-clients {
-            172.x.0.0/24;    //requète provenant du LAN
-            192.168.x.0/24;    //requète provenant de la DMZ
-            127.0.0.1;
-        };
-        zone "orleans.sportludique.fr." {
-            type slave;
-            file "/etc/cache/bind/db.orleans.sp.fr.interne";
-            masters { 192.168.45.2; };
-        };
-    };
-
-```
-
-## Fichier /etc/bind/db.orleans.sp.fr.interne et /etc/bind/db.orleans.sp.fr.externe
-<aside>
-
-Le DNS Autorité secondaire n'a pas besoin d'avoir de configuration dans les fichiers (/etc/bind/db.orleans.sp.fr.interne et /etc/bind/db.orleans.sp.fr.externe) l'autorité principale va répondre au secondaire et ainsi il remplira les fichiers automitequement, ils seront illisible.
-
-<aside>
-
-
-## Fichier /etc/bind/named.conf.options
-
-```markdown
-    options {
-            directory "/var/cache/bind";
-    }
-
-```
-
-## Fichier /etc/resolv.conf
-
-```markdown
-    search orleans.sportludique.fr
-    nameserver 172.28.120.3
-
-```
+!!! info
+    ```bash
+    sudo named-checkconf
+    nslookup ns1.orleans.sportludique.fr  
+    dig dns.orleans.sportludique.fr
+    ```

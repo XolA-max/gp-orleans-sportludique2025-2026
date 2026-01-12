@@ -1,39 +1,61 @@
-#  Base de Données
+# Base de Données
 
-##  Installation de MariaDB
+---
 
-```bash
-sudo apt update && sudo apt upgrade -y
+## Installation de MariaDB
 
-sudo apt install mariadb-server -y
+!!! info "Installation"
+    ```bash
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install mariadb-server -y
+    ```
+    
+    Vérification su statut :
+    ```bash
+    sudo systemctl status mariadb
+    ```
 
-sudo systemctl status mariadb
-```
+---
 
-## Création de la base de données et de l’utilisateur
+---
 
-```bash
-sudo mysql -u root -p
+## Configuration
 
-CREATE DATABASE Wordpress;
+### Création de la base de données et de l’utilisateur
 
-CREATE USER 'Nom-utilisateur'@'Adresse_IP_du_serveur_web' IDENTIFIED BY 'Mots_de_passe';
+!!! info "SQL"
+    Connexion en root :
+    ```bash
+    sudo mysql -u root -p
+    ```
+    
+    Commandes SQL :
+    ```sql
+    CREATE DATABASE Wordpress;
+    
+    CREATE USER 'Nom-utilisateur'@'Adresse_IP_du_serveur_web' IDENTIFIED BY 'Mots_de_passe';
+    
+    GRANT ALL PRIVILEGES ON Wordpress.* TO 'Nom-utilisateur'@'Adresse_IP_du_serveur_web';
+    
+    FLUSH PRIVILEGES;
+    ```
 
-GRANT ALL PRIVILEGES ON *Wordpress.* TO 'Nom-utilisateur'@'Adresse_IP_du_serveur_web';
+### Modification de la bind-address
 
-FLUSH PRIVILEGES;
-```
+Pour autoriser les connexions distantes.
 
-## Modification de la bind-address
+!!! info
+    `sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf`
 
-```bash
-sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
-```
+    Modifier :
+    ```ini
+    bind-address = 0.0.0.0
+    ```
+    (Au lieu de `127.0.0.1`)
 
-Modifier bind-address = 127.0.0.1 par bind-address = 0.0.0.0
+### Redémarrage du service
 
-## Redémarrer le service MariaDB
-
-```bash
-sudo systemctl restart mariadb
-```
+!!! info
+    ```bash
+    sudo systemctl restart mariadb
+    ```

@@ -1,5 +1,18 @@
-## Script pour installer un agent et le forcer dans GLPI 
-```
+# Inventaire GLPI - Windows
+
+Script PowerShell pour installer un agent et forcer l'inventaire dans GLPI.
+
+---
+
+## Script Auto-Install
+
+Ce script télécharge, installe et configure l'agent GLPI sur Windows Serveur.
+
+!!! info "Prérequis"
+    *   Exécuter en tant qu'Administrateur
+    *   Serveur GLPI accessible : `http://192.168.140.225/front/inventory.php`
+
+```powershell
 #Requires -RunAsAdministrator
 
 <#

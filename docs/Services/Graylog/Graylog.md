@@ -1,17 +1,17 @@
 # Installation Graylog sur Debian 12
 
+---
 
-##  Prérequis
+## Prérequis
 
 Avant de commencer, assurez-vous que :
 
-- Tous les **ports requis sont ouverts** entre les nœuds
-- Les **pare-feu sont désactivés** ou configurés pour autoriser le trafic
--  Un **load balancer** avec DNS est configuré pour Graylog (recommandé)
--  Le système de fichiers **XFS** est utilisé pour le stockage (fortement recommandé)
--  Vous avez vérifié les **ressources recommandées** selon l'architecture Conventionnelle
+*   Tous les **ports requis sont ouverts** entre les nœuds.
+*   Les **pare-feu sont désactivés** ou configurés pour autoriser le trafic.
+*   Un **load balancer** avec DNS est configuré pour Graylog (recommandé).
+*   Le système de fichiers **XFS** est utilisé pour le stockage (recommandé).
 
-### Ports par défaut requis
+### Ports requis
 
 | Service | Port | Description |
 |---------|------|-------------|
@@ -19,425 +19,240 @@ Avant de commencer, assurez-vous que :
 | MongoDB | 27017 | Base de données |
 | Data Node | 9200 | OpenSearch API |
 | Data Node | 9300 | Communication inter-nœuds |
-| Graylog Inputs | 1514, 5044, etc. | Réception des logs |
+| Graylog Inputs | 1514, 514 | Réception des logs |
 
 ---
 
-## Configuration du fuseau horaire
-
-Définir le fuseau horaire sur tous les serveurs :
-
-```bash
-sudo timedatectl set-timezone UTC
-```
-
-Ou pour l'Europe :
-
-```bash
-sudo timedatectl set-timezone Europe/Paris
-```
-
-**Vérification :**
-```bash
-timedatectl
-```
-
 ---
 
-##  Fichiers de configuration importants
+## Configuration Système
 
-| Service | Fichier de configuration | Description |
-|---------|-------------------------|-------------|
-| **MongoDB** | `/etc/mongod.conf` | Configuration MongoDB |
-| **Data Node** | `/etc/graylog/datanode/datanode.conf` | Configuration Data Node |
-| **Graylog** | `/etc/graylog/server/server.conf` | Configuration Graylog |
-| **Graylog JVM** | `/etc/default/graylog-server` | Paramètres heap Java |
+### Configuration du fuseau horaire
+
+!!! info "Timezone"
+    Définir le fuseau horaire sur tous les serveurs :
+    ```bash
+    sudo timedatectl set-timezone Europe/Paris
+    ```
+    
+    Vérification :
+    ```bash
+    timedatectl
+    ```
+
+---
 
 ---
 
 ## Étape 1 : Installation de MongoDB
 
-MongoDB sert de base de données de métadonnées pour Graylog. Vous devez l'installer sur **tous les nœuds Graylog/MongoDB**.
+MongoDB sert de base de données de métadonnées. À installer sur tous les nœuds Graylog/MongoDB.
 
-> **Ressources :**
-> - [Documentation MongoDB officielle](https://www.mongodb.com/docs/v8.0/tutorial/install-mongodb-on-debian/)
-> - [Configuration d'un cluster MongoDB](https://www.mongodb.com/resources/products/fundamentals/mongodb-cluster-setup)
+### 1.1 Installation
 
-### 1.1 Sur le premier nœud MongoDB
+!!! info "Commandes d'installation"
+    Importer la clé GPG :
+    ```bash
+    curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+      sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
+    ```
 
-### A. Installer les dépendances
+    Ajouter le dépôt :
+    ```bash
+    echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/8.0 main" | \
+      sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+    ```
 
-```bash
-sudo apt-get install gnupg curl
-```
+    Installer :
+    ```bash
+    sudo apt-get update
+    sudo apt-get install -y mongodb-org
+    sudo apt-mark hold mongodb-org
+    ```
 
-### B. Importer la clé GPG MongoDB
+### 1.2 Configuration
 
-```bash
-curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
-  sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
-```
+!!! info
+    `sudo nano /etc/mongod.conf`
 
-### C. Ajouter le dépôt MongoDB
+    Modifier la section `net:` :
+    ```yaml
+    net:
+      port: 27017
+      bindIp: 0.0.0.0  # Ou IP spécifique
+    ```
 
-```bash
-echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/8.0 main" | \
-  sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
-```
+### 1.3 Démarrage
 
-### D. Mettre à jour et installer MongoDB
-
-```bash
-sudo apt-get update
-sudo apt-get install -y mongodb-org
-```
-
-### E. Bloquer les mises à jour automatiques
-
-```bash
-sudo apt-mark hold mongodb-org
-```
-
-### F. Configurer MongoDB
-
-Ouvrir le fichier de configuration :
-
-```bash
-sudo nano /etc/mongod.conf
-```
-
-**Modifier la section `net:` pour écouter sur le réseau :**
-
-Option 1 - Écouter sur toutes les interfaces :
-```yaml
-net:
-  port: 27017
-  bindIpAll: true
-```
-
-Option 2 - Écouter sur une IP spécifique (exemple : `192.168.140.235`) :
-```yaml
-net:
-  port: 27017
-  bindIp: 192.168.140.235
-```
-
-Option 3 - Écouter sur un hostname (exemple : `graylog01`) :
-```yaml
-net:
-  port: 27017
-  bindIp: graylog01
-```
-
-### G. Démarrer MongoDB
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable mongod.service
-sudo systemctl start mongod.service
-```
-
-**Vérification :**
-```bash
-sudo systemctl status mongod.service
-```
----
-
-##  Étape 2 : Installation de Data Node
-
-Data Node gère l'ingestion, le traitement et l'indexation des logs. Il doit être installé sur un **cluster séparé** des nœuds Graylog/MongoDB.
-
-**N'INSTALLEZ PAS OpenSearch directement !** Data Node inclut déjà OpenSearch.
-
-### 2.1 Sur le premier nœud Data Node
-
-### A. Installer le paquet Data Node
-
-```bash
-wget https://packages.graylog2.org/repo/packages/graylog-7.0-repository_latest.deb
-sudo dpkg -i graylog-7.0-repository_latest.deb
-sudo apt-get update
-sudo apt-get install graylog-datanode
-```
-
-### B. Configurer vm.max_map_count
-
-OpenSearch nécessite d'augmenter cette limite.
-
-**Vérifier la valeur actuelle :**
-```bash
-cat /proc/sys/vm/max_map_count
-```
-
-**Si inférieur à 262144, augmenter la valeur :**
-```bash
-echo 'vm.max_map_count=262144' | sudo tee -a /etc/sysctl.d/99-graylog-datanode.conf
-sudo sysctl --system
-```
-
-**Vérifier que c'est appliqué :**
-```bash
-cat /proc/sys/vm/max_map_count
-```
-
-Devrait afficher : `262144`
-
-### C. Générer le password_secret
-
-```bash
-openssl rand -hex 32
-```
-
-**Exemple de sortie :**
-```
-c0b10ff32ccd565dd76a6331aeba6ff9bce2e6f1c8ca3504092e5856b6c76622
-```
-
-*** CRITIQUE : Sauvegardez ce secret !** Vous devrez l'utiliser dans la configuration Graylog également.
-
-### D. Configurer Data Node
-
-Ouvrir le fichier de configuration :
-
-```bash
-sudo nano /etc/graylog/datanode/datanode.conf
-```
-
-**Ajouter/modifier les paramètres suivants :**
-
-1. **Ajouter le password_secret :**
-   ```properties
-   password_secret = c0b10ff32ccd565dd76a6331aeba6ff9bce2e6f1c8ca3504092e5856b6c76622
-   ```
-
-2. **Configurer la mémoire heap ( non présent par défaut, à ajouter) :**
-   
-   Règle : 50% de la RAM système, maximum 31 GB.
-   
-   Exemple pour 8 GB de RAM :
-   ```properties
-   opensearch_heap = 4g
-   ```
-
-3. **Configurer la connexion MongoDB :**
-   
-   Remplacer `graylog01` par vos hostnames/IPs :
-   ```properties
-   mongodb_uri = mongodb://graylog01:27017/graylog?replicaSet=rs0
-   ```
-
-### E. Démarrer Data Node
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable graylog-datanode.service
-sudo systemctl start graylog-datanode
-```
-
-**Vérification :**
-```bash
-sudo systemctl status graylog-datanode
-```
-
-### 2.2 Répéter sur les autres nœuds Data Node
-
-** IMPORTANT :** Répétez les étapes A, B, D et E sur les autres Data Nodes.
-
-**NE PAS générer un nouveau password_secret (étape C) !** Utilisez le **même secret** sur tous les nœuds.
+!!! info
+    ```bash
+    sudo systemctl daemon-reload
+    sudo systemctl enable mongod.service
+    sudo systemctl start mongod.service
+    ```
 
 ---
 
-##  Étape 3 : Installation de Graylog Server
+---
 
-Graylog est installé sur les **mêmes nœuds que MongoDB** selon l'architecture Conventionnelle.
+## Étape 2 : Installation de Data Node (OpenSearch)
 
-### 3.1 Sur le premier nœud Graylog
+Data Node gère l'ingestion et l'indexation.
 
-### A. Installer le paquet Graylog
+### 2.1 Installation
 
-**Pour Graylog Open (gratuit) :**
-```bash
-sudo apt-get install graylog-server
-```
+!!! info
+    ```bash
+    wget https://packages.graylog2.org/repo/packages/graylog-7.0-repository_latest.deb
+    sudo dpkg -i graylog-7.0-repository_latest.deb
+    sudo apt-get update
+    sudo apt-get install graylog-datanode
+    ```
 
-**Pour Graylog Enterprise/Security :**
-```bash
-sudo apt-get install graylog-enterprise
-```
+### 2.2 Configuration Système (vm.max_map_count)
 
-### B. Générer le mot de passe root (administrateur)
+!!! info
+    Augmenter la limite mémoire :
+    ```bash
+    echo 'vm.max_map_count=262144' | sudo tee -a /etc/sysctl.d/99-graylog-datanode.conf
+    sudo sysctl --system
+    ```
 
-```bash
-echo -n "MotDePasseAdmin" | sha256sum | cut -d' ' -f1
-```
+### 2.3 Configuration Data Node
 
-Tapez votre mot de passe (exemple : `Azerty1234!`) et appuyez sur Entrée.
+Générer le `password_secret` (à conserver !) :
 
-**Exemple de sortie :**
-```
-86dac5b7dc404d676e3696eb2933734540218c2ea1ed19a4ba9ccb6cd4cad08b
-```
+!!! info "Génération Secret"
+    ```bash
+    openssl rand -hex 32
+    ```
 
-**IMPORTANT :** Sauvegardez le mot de passe en clair, vous en aurez besoin après la configuration preflight.
+Éditer la configuration :
 
-### C. Configurer Graylog
+!!! info
+    `sudo nano /etc/graylog/datanode/datanode.conf`
 
-Ouvrir le fichier de configuration :
+    Paramètres clés :
+    ```properties
+    # Secret généré (MEME secret sur TOUS les noeuds)
+    password_secret = c0b10ff32ccd565dd76a6331aeba6ff9bce2e6f1c8ca...
+    
+    # Heap Size (50% RAM, max 31g)
+    opensearch_heap = 4g
+    
+    # Connexion MongoDB
+    mongodb_uri = mongodb://192.168.140.235:27017/graylog?replicaSet=rs0
+    ```
 
-```bash
-sudo nano /etc/graylog/server/server.conf
-```
+### 2.4 Démarrage
 
-**Modifier les paramètres suivants :**
+!!! info
+    ```bash
+    sudo systemctl daemon-reload
+    sudo systemctl enable graylog-datanode
+    sudo systemctl start graylog-datanode
+    ```
 
-### 1. Ajouter le hash du mot de passe root
+---
 
-```properties
-root_password_sha2 = 86dac5b7dc404d676e3696eb2933734540218c2ea1ed19a4ba9ccb6cd4cad08b
-```
+---
 
-### 2. Ajouter le password_secret (le même que Data Node !)
+## Étape 3 : Installation de Graylog Server
 
-```properties
-password_secret = c0b10ff32ccd565dd76a6331aeba6ff9bce2e6f1c8ca3504092e5856b6c76622
-```
+### 3.1 Installation
 
-### 3. Configurer l'adresse d'écoute HTTP
+!!! info
+    ```bash
+    sudo apt-get install graylog-server
+    ```
 
-Chercher la section `# HTTP settings` et décommenter/modifier :
+### 3.2 Configuration
 
-```properties
-http_bind_address = 0.0.0.0:9000
-```
+Générer le mot de passe root (SHA256) :
 
-### 4. Configurer la connexion MongoDB
+!!! info
+    ```bash
+    echo -n "VotreMotDePasse" | sha256sum | cut -d' ' -f1
+    ```
 
-Remplacer `graylog01` par vos hostname/IPs:
+Éditer le configuration :
 
-```
-mongodb_uri = mongodb://192.168.140.235:27017/graylog
-```
-### 5. Configurer le journal (message journal)
+!!! info
+    `sudo nano /etc/graylog/server/server.conf`
 
-Recommandation: 72heure et taille diviser part deux le stockage 
+    Paramètres clés :
+    ```properties
+    # Hash du mot de passe admin
+    root_password_sha2 = 86dac5b7dc404d676e3696eb29337345...
+    
+    # MEME secret que Data Node
+    password_secret = c0b10ff32ccd565dd76a6331aeba6ff9bce2e6f1c8ca...
+    
+    # Ecoute Web
+    http_bind_address = 0.0.0.0:9000
+    
+    # Connexion MongoDB
+    mongodb_uri = mongodb://192.168.140.235:27017/graylog
+    
+    # Rétention journal
+    message_journal_max_age = 72h
+    message_journal_max_size = 4gb
+    ```
 
-Exemple pour 8gb mettre 4gb
+### 3.3 Configuration Java Heap
 
-```
-message_journal_max_age = 72h
-message_journal_max_size = 4gb
-```
+!!! info
+    `sudo nano /etc/default/graylog-server`
 
-### D. Configurer la mémoire heap de Graylog
+    Ajuster la mémoire (50% RAM, max 16GB) :
+    ```bash
+    GRAYLOG_SERVER_JAVA_OPTS="-Xms2g -Xmx2g -server -XX:+UseG1GC ..."
+    ```
 
-Ouvrir le fichier de service:
-```
-sudo nano /etc/default/graylog-server
-```
-Modifier la ligne GRAYLOG_SERVER_JAVA_OPTS :
+### 3.4 Démarrage
 
-Règle : 50% de la RAM système, maximum 16 GB.
-Exemple pour 4 GB de RAM (2 GB heap) :
-```
-GRAYLOG_SERVER_JAVA_OPTS="-Xms2g -Xmx2g -server -XX:+UseG1GC -XX:-OmitStackTraceInFastThrow"
-```
-Toujours mettre la même valeur pour -Xms et -Xmx !
+!!! info
+    ```bash
+    sudo systemctl daemon-reload
+    sudo systemctl enable graylog-server
+    sudo systemctl start graylog-server
+    ```
 
-### E. Démarrer Graylog
+---
 
-```
-sudo systemctl daemon-reload
-sudo systemctl enable graylog-server.service
-sudo systemctl start graylog-server.service
-```
-Vérification :
+---
 
-```
-sudo systemctl status graylog-server.service
-```
-Suivre les logs de démarrage :
+## Étape 4 : Premier Démarrage (Preflight)
 
-```
-sudo journalctl -u graylog-server -f
-```
-Attendez le message : Graylog server up and running.
+### 4.1 Identifiants temporaires
 
-### Étape 4 : Connexion Preflight
+Si le serveur démarre en mode "Preflight" (première install), trouver les identifiants dans les logs :
 
-Après l'installation, vous devez effectuer la connexion preflight pour accéder à l'interface Graylog.
+!!! info
+    ```bash
+    sudo journalctl -u graylog-server -n 100
+    ```
+    
+    Chercher : `Initial configuration is accessible at...`
 
-### 4.1 Trouver les identifiants temporaires
+### 4.2 Accès Web
 
-Les identifiants de première connexion sont générés automatiquement et affichés dans les logs :
+Accédez à `http://IP_GRAYLOG:9000`.
 
-```
-sudo nano /var/log/graylog-server/server.log
-```
-Cherchez une ligne comme :
+*   Utilisez `admin` et le mot de passe temporaire ou celui défini si l'installation est complète.
 
-```
-Initial configuration is accessible at 0.0.0.0:9000, with username 'admin' and password 'RdOIRGVrWM'.
-```
+### 4.3 Configuration Hosts
 
-### 4.2 Accéder à l'interface
+Pour que Graylog et DataNode communiquent correctement, assurez-vous que les `hostname` sont résolus dans `/etc/hosts`.
 
-Ouvrez votre navigateur et accédez à votre load balancer ou à l'IP d'un nœud Graylog :
+!!! info
+    `sudo nano /etc/hosts`
 
-```
-http://192.168.140.235:9000
-```
-### 4.3 Connexion initiale (preflight)
+    ```text
+    127.0.0.1       localhost
+    192.168.140.235 ORL-SRV-Graylog
+    192.168.140.10  Datanode
+    ```
 
-Première connexion :
-
-Utilisateur : admin
-Mot de passe : Le mot de passe temporaire trouvé dans les logs (exemple : RdOIRGVrWM)
-
-### 4.4 Première interface web 
-
-Création d'un certificat Graylog depuis l'interface web
-
-```
-Cliquer sur "Create CA" 
-```
-
-Activation et réinitialisation du CA 
-
-```
-Laisser les paramètres part défault : Validité de 30jours, renouvelable
-```
-Importer ensuite le CA pour le Datanode
-
-Configuration importante (à vérifier)
-
-Sur le serveur Graylog, modifier le fichier de configuration suivant :
-
-```
-sudo nano /etc/hosts
-```
-
-Ajouter l’adresse IP du DataNode et du serveur Graylog, ainsi que leurs noms de machine. 
-
-Exemple
-```
-127.0.0.1       localhost
-192.168.140.235 ORL-SRV-Graylog
-192.168.140.10  Datanode
-```
-Faire la même chose pour le Datatanode, en ajoutant uniquement :
-
-```
-127.0.0.1       localhost
-192.168.140.10  Datanode
-```
-
-Cette configuration est nécessaire afin que le Graylog puisse correctement identifier et communiquer avec le DataNode.
-
-L’interface web de Graylog est accessible via l’URL suivante :
-
-```
-http://192.168.140.235:9000
-```
-
-Pour en savoir plus sur l'interface web, consulter la documentation suivante : [Graylog-web](./Graylog-web.md) :
-
+---
+Pour la configuration de l'interface web, voir : [Guide Web Graylog](Graylog-web.md).

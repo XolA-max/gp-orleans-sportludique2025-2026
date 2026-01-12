@@ -1,54 +1,66 @@
 # Liaison GLPI à L'AD (LDAP)
 
-## 1. Création d'une liaison 
+---
 
-- #### Configuration -> Authentification -> LDAP Directory -> nouveau
+## 1. Création d'une liaison
 
-![Info-Vide](NewLDAP.png)
--
-- Nom : Active Directory - it-connect.local
-- Serveur par défaut : Oui
-- Actif : Oui
-- Serveur : 10.10.100.11
-- Port : 389
-- Filtre de connexion : (&(objectClass=user)(objectCategory=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))
-- BaseDN : DC=orl,DC=orleans,DC=sportludique,DC=fr
-- Utiliser bind : Oui
-- DN du compte : syncglpi@orl.orleans.sportludique.fr #nom utilisateur@nomdedomaine 
-- Mot de passe du compte : Mot de passe du compte "Sync_GLPI"
-- Champ de l'identifiant : userprincipalname #pas obligatoire
-- Champ de synchronisation : objectguid #pas obligatoire
- 
+Dans **Configuration** → **Authentification** → **LDAP Directory** → **Nouveau**
 
+![Interface Nouvelle Liaison LDAP](NewLDAP.png)
 
+### Paramètres de Configuration
 
-![Infos-Orleans](NewLDAPRempli.png)
+*   **Nom** : Active Directory - it-connect.local
+*   **Serveur par défaut** : Oui
+*   **Actif** : Oui
+*   **Serveur** : `10.10.100.11` (ou `172.28.120.1` selon infra)
+*   **Port** : `389`
+*   **Filtre de connexion** :
+    ```ldap
+    (&(objectClass=user)(objectCategory=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))
+    ```
+*   **BaseDN** : `DC=orl,DC=orleans,DC=sportludique,DC=fr`
+*   **Utiliser bind** : Oui
+*   **DN du compte** : `syncglpi@orl.orleans.sportludique.fr` (Compte de service AD)
+*   **Mot de passe du compte** : *[Mot de passe du compte "Sync_GLPI"]*
+*   **Champ de l'identifiant** : `userprincipalname` (optionnel)
+*   **Champ de synchronisation** : `objectguid` (optionnel)
 
+![Exemple de configuration remplie](NewLDAPRempli.png)
+
+---
+
+---
 
 ## 2. Phase de Test LDAP
-Après avoir remplis le LDAP Directory on test pour voir si il fonctionne correctement 
 
-géneralement les 3 premières phases vont fonctionner correctement :
-- TCP stream (flux tcp) 
-- base DN 
-- LDAP URI 
-### Pour la phase Bind connection si vous avez l'erreur :
+Après avoir rempli le formulaire, effectuez un test pour vérifier la connexion.
 
-- #### Bind connection Authentication failed: Invalid credentials(49)
-c'est que vous avez surement une erreur dans le champ root DN 
-![alt text](NewLDAPErreurRootDN.png)
+Les 3 premières phases fonctionnent généralement correctement :
+*   TCP stream (flux TCP)
+*   Base DN
+*   LDAP URI
 
+### Gestion des Erreurs
 
-- #### Pour l'erreur Strong(er) authentication required (8)
+#### Erreur : "Bind connection Authentication failed: Invalid credentials (49)"
 
-GLPI veux utiliser LDAPS (version sécurisé de LDAP)
-mais le DC ne l'autorise pas il faut alors le forcer à l'utiliser cliquer ici : [pour fixer l'erreur de LDAP](../Activedirectory/LDAP.md)
-> /!\ utiliser LDAP est dangereux en effect il n'y a pas de chiffrement sur les données  /!\ et ne dois pas être mit en production comme ça ! 
+C'est probablement une erreur dans le champ **Root DN** ou le mot de passe.
 
-#### Test réussi ! 
+![Erreur Root DN](NewLDAPErreurRootDN.png)
 
-![alt text](NewLDAPtestok.png)
+#### Erreur : "Strong(er) authentication required (8)"
 
+GLPI veut utiliser LDAPS (LDAP sécurisé), mais le Contrôleur de Domaine ne l'autorise pas ou force une signature que GLPI ne fournit pas.
 
-## 3.
+!!! warning "Solution"
+    Il faut configurer le DC ou passer en LDAPS. Voir le guide : [Fixer l'erreur de LDAP](../Activedirectory/LDAP.md)
 
+!!! danger "Sécurité"
+    Utiliser LDAP simple (port 389) signifie que les identifiants transitent en **clair** sur le réseau. Ceci ne doit pas être utilisé en production définitive.
+
+### Test Réussi
+
+Si tout est correct, vous obtiendrez un résultat similaire :
+
+![Test LDAP Réussi](NewLDAPtestok.png)

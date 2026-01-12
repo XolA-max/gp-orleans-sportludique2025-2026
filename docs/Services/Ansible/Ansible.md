@@ -1,31 +1,54 @@
 # Guide d'installation Ansible
 
-1. Installation
+---
+
+## Installation
 
 Depuis une machine Linux / Debian, mettre à jour le système :
 
-sudo apt update
-sudo apt upgrade -y
+!!! info "Mise à jour"
+    ```bash
+    sudo apt update
+    sudo apt upgrade -y
+    ```
 
-Installer Ansible.
+Installer Ansible :
 
+!!! info "Installation"
+    ```bash
     sudo apt install ansible -y
+    ```
 
-2. Configuration de base pour test
+---
 
-Créer le fichier d’inventaire :
+---
 
-    sudo mkdir -p /etc/ansible
+## Configuration de Base (Test)
+
+### Création du fichier d’inventaire
+
+!!! info
+    Création du répertoire et du fichier hosts :
     
+    ```bash
+    sudo mkdir -p /etc/ansible
     sudo nano /etc/ansible/hosts
+    ```
 
-Exemple simple de contenu pour tester sur la machine locale :
-
+    Contenu d'exemple pour tester sur la machine locale :
+    
+    ```ini
     [local]
     127.0.0.1 ansible_connection=local
+    ```
 
-Tester la connexion :
+### Test de connexion
 
+!!! info
+    Lancer un ping Ansible :
+    
+    ```bash
     ansible all -m ping
-
-Si tout est OK, tu verras pong.
+    ```
+    
+    Si tout est OK, le retour sera `pong`.

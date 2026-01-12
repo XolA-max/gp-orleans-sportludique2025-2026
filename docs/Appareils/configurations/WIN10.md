@@ -61,4 +61,3 @@ Si la jonction échoue, vérifier :
 - La résolution DNS (test ping vers le nom de domaine)
 - Les droits du compte utilisateur utilisé
 - Les paramètres du pare-feu
-

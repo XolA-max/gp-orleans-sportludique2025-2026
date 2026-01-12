@@ -1,220 +1,169 @@
-# HMAILSERVER – Documentation d’installation et de configuration
+# HMAILSERVER – Installation et Configuration
 
 ---
 
 ## 1. Prérequis
 
-### 1.1 Environnement requis
-- Machine virtuelle ou physique sous **Windows 10 ou Windows 11**
-- Accès administrateur à la machine
-- Connexion réseau fonctionnelle (LAN / Internet selon le contexte)
+### Environnement requis
+*   Machine virtuelle ou physique sous **Windows 10 ou Windows 11**
+*   Accès administrateur à la machine
+*   Connexion réseau fonctionnelle
 
-### 1.2 Téléchargement de hMailServer
-Téléchargez la dernière version stable depuis le site officiel :  
-👉 https://www.hmailserver.com/download
+### Téléchargement
+Téléchargez hMailServer et .NET Framework 2.0 SP2 (requis).
 
-### 1.3 Installation de Microsoft .NET Framework 2.0 SP2 (x64)
-> hMailServer nécessite ce composant. Sans lui, un message d’erreur apparaîtra lors de l’installation.
+!!! info "Téléchargements"
+    *   [hMailServer](https://www.hmailserver.com/download)
+    *   [.NET Framework 2.0 SP2 (x64)](https://www.microsoft.com/en-us/download/details.aspx?id=9834)
 
-Lien de téléchargement :  
-👉 https://www.microsoft.com/en-us/download/details.aspx?id=9834
+---
 
 ---
 
 ## 2. Installation de hMailServer
 
-### 2.1 Exécution de l’installateur
-Lancez le fichier **.exe** téléchargé.
+### 2.1 Exécution se l'installateur
 
-1. Acceptez la licence
-2. Sélectionnez **Full installation**
-3. Choisissez le moteur de base de données :
-   - **Use built-in database (simple)** → recommandé pour les tests et petits environnements
-   - **External database** → MySQL / MariaDB (environnements de production)
-4. Définissez un **mot de passe administrateur hMailServer**
-5. Terminez l’installation
+1.  Lancez le fichier `.exe`.
+2.  Selectionnez **Full installation**.
+3.  Choisissez le moteur de base de données :
+    *   **Use built-in database (simple)** (recommandé pour test).
+    *   **External database** (pour production).
+4.  Définissez le **mot de passe administrateur hMailServer**.
 
-### 2.2 Accès à l’interface d’administration
-- Ouvrez **hMailServer Administrator**
-- Connectez-vous avec le mot de passe défini précédemment
+### 2.2 Accès à l'interface
+
+*   Ouvrez **hMailServer Administrator**.
+*   Connectez-vous avec le mot de passe défini.
 
 ---
 
-## 3. Configuration des domaines
+---
+
+## 3. Configuration des Domaines
 
 ### 3.1 Ajouter un domaine
-1. Dans le panneau de gauche, cliquez sur **Domains**
-2. Cliquez sur **Add**
-3. Entrez votre nom de domaine, par exemple :
-   - `orleans.sportludique.fr`
-   - `mon_domaine.com`
+
+1.  **Domains** → **Add**.
+2.  Entrez le nom de domaine (ex: `orleans.sportludique.fr`).
 
 ### 3.2 Définir le domaine par défaut
-1. Allez dans **Settings**
-2. **Advanced → Default domain**
-3. Sélectionnez votre domaine (ex. `orleans.sportludique.fr`)
+
+1.  **Settings** → **Advanced** → **Default domain**.
+2.  Sélectionnez votre domaine.
 
 ---
 
-## 4. Création des comptes e-mail
+---
 
-1. Accédez à :  
-   **Domains → orleans.sportludique.fr → Accounts**
-2. Cliquez sur **Add…**
-3. Renseignez :
-   - Nom du compte : `contact`
-   - Mot de passe
+## 4. Création des Comptes E-mail
 
-📧 Adresse créée : `contact@orleans.sportludique.fr`
+1.  **Domains** → *votre_domaine* → **Accounts**.
+2.  Cliquez sur **Add**.
+3.  Remplir :
+    *   **Address** : `contact` (pour `contact@orleans.sportludique.fr`)
+    *   **Password** : Définir un mot de passe.
 
 ---
 
-## 5. Sécurité et pare-feu Windows
+---
 
-### 5.1 Règles de trafic entrant (Inbound Rules)
-Accéder au pare-feu Windows :
-```cmd
-wf.msc
-```
+## 5. Sécurité et Pare-feu Windows
 
-Ports à autoriser (TCP) :
-- **143** → IMAP (non sécurisé)
-- **993** → IMAPS (sécurisé)
-- **25** → SMTP (non sécurisé)
-- **587** → SMTP avec STARTTLS
+### 5.1 Règles de Trafic Entrant (Inbound)
 
-Procédure :
-1. Inbound Rules → New Rule…
-2. Type : **Port**
-3. Protocole : **TCP**
-4. Ports spécifiques : `25,143,587,993`
-5. Action : **Allow the connection**
-6. Profils : Domain / Private / Public (selon le contexte)
-7. Nom : *Autoriser IMAP / SMTP (secure & non-secure)*
+!!! info "Ouvrir le Pare-feu"
+    Exécuter `wf.msc`
 
-### 5.2 Règles de trafic sortant (Outbound Rules)
-Même procédure que pour l’entrant, mais uniquement pour :
-- **25**
-- **587**
+Créez une nouvelle règle pour les ports TCP suivants :
 
-> Seul le protocole SMTP doit sortir du serveur
+| Port | Service | Description |
+| ---- | ------- | ----------- |
+| 25 | SMTP | Envoi de mail (Non sécurisé) |
+| 587 | SMTP | Envoi de mail (STARTTLS) |
+| 143 | IMAP | Réception (Non sécurisé) |
+| 993 | IMAPS | Réception (Sécurisé) |
+
+### 5.2 Règles de Trafic Sortant (Outbound)
+
+Autorisez uniquement la sortie pour **SMTP (25, 587)**.
 
 ---
 
-## 6. Configuration réseau – Route statique
+---
 
-Permet la communication avec le réseau LAN.
+## 6. Configuration Réseau
 
-Commande :
-```cmd
-route add -p [reseau] MASK [masque] [passerelle]
-```
+### Route Statique
 
-Afficher les routes existantes :
-```cmd
-route print
-```
+Pour permettre la communication avec le réseau LAN si nécessaire.
+
+!!! info
+    ```cmd
+    route add -p [reseau] MASK [masque] [passerelle]
+    ```
+
+    Vérification :
+    ```cmd
+    route print
+    ```
 
 ---
 
-## 7. Configuration DNS
-
-### 7.1 Fonctionnement des enregistrements MX
-- Le **MTA (Mail Transfer Agent)** interroge les enregistrements MX
-- Le DNS retourne les serveurs de messagerie avec leur priorité
-- Le MTA tente la livraison SMTP du plus prioritaire au moins prioritaire
-
 ---
 
-### 7.2 Zone DNS externe (BIND)
-**Fichier :** `/etc/bind/db.orleans.sp.fr.externe`
+## 7. Configuration DNS (Bind9)
+
+### 7.1 Zone Externe
+
+Fichier : `/etc/bind/db.orleans.sp.fr.externe`
+
 ```dns
-$TTL    604800
-@   IN  SOA ns1.orleans.sportludique.fr. root.orleans.sportludique.fr. (
-        2025150938 604800 86400 2419200 604800 )
-@   IN  NS  ns1.orleans.sportludique.fr.
-@   IN  NS  ns2.orleans.sportludique.fr.
-@   IN  A   183.44.45.1
-ns1 IN  A   183.44.45.1
-ns2 IN  A   183.44.45.1
-www IN  A   183.44.45.1
-smtp IN A   183.44.45.1
 @   IN  MX  10 smtp.orleans.sportludique.fr.
+smtp IN A   183.44.45.1  ; IP Publique du routeur
 ```
 
-✔ `smtp` pointe vers l’IP publique du routeur
-✔ MX priorité 10 vers `smtp`
+### 7.2 Zone Interne
 
----
+Fichier : `/etc/bind/db.orleans.sp.fr.interne`
 
-### 7.3 Zone DNS interne (BIND)
-**Fichier :** `/etc/bind/db.orleans.sp.fr.interne`
 ```dns
-$TTL    604800
-@   IN  SOA ns1.orleans.sportludique.fr. root.orleans.sportludique.fr. (
-        2025111315 604800 86400 2419200 604800 )
-@   IN  NS  ns1.orleans.sportludique.fr.
-ns1 IN  A   192.168.45.2
-www IN  A   192.168.45.3
-mail IN A   192.168.45.7
+@   IN  MX  10 smtp.orleans.sportludique.fr.
+mail IN A   192.168.45.7 ; IP du serveur hMail
 smtp IN CNAME mail
 imap IN CNAME mail
-@   IN  MX  10 smtp.orleans.sportludique.fr.
 ```
 
-✔ `mail` pointe vers le serveur hMailServer
-✔ `smtp` et `imap` sont des alias
+---
 
 ---
 
 ## 8. Liaison avec Active Directory
 
-Un script peut être utilisé pour importer automatiquement les utilisateurs AD.
+Un script PowerShell permet de synchroniser les utilisateurs AD vers hMailServer.
 
-📎 cliquer ici : [accedder à la page de script](scriptHmail.md)
+[Voir le script de synchronisation](scriptHmail.md)
 
 ---
 
-## 9. Configuration d’un client Thunderbird
+---
 
-### 9.1 Informations utilisateur
-- Nom : Jean
-- Adresse : jean@orleans.sportludique.fr
-- Mot de passe : ********
+## 9. Configuration Client (Thunderbird)
 
-### 9.2 Serveur entrant (IMAP)
-- Hôte : `imap.orleans.sportludique.fr`
-- Port : 143 (non sécurisé) ou 993 (sécurisé)
-- Sécurité : STARTTLS (si 993)
-- Authentification : Mot de passe normal
+### Paramètres
 
-### 9.3 Serveur sortant (SMTP)
-- Hôte : `smtp.orleans.sportludique.fr`
-- Port : 25 ou 587
-- Sécurité : STARTTLS (recommandé)
-- Authentification : Mot de passe normal
+| Type | Hôte | Port | Sécurité |
+| ---- | ---- | ---- | -------- |
+| **IMAP** | `imap.orleans.sportludique.fr` | 143 (ou 993) | STARTTLS (si 993) |
+| **SMTP** | `smtp.orleans.sportludique.fr` | 587 (ou 25) | STARTTLS |
+
+---
 
 ---
 
 ## 10. Routeur / NAT
 
-Redirections nécessaires :
-- **25 → SMTP**
-- **587 → SMTP sécurisé (STARTTLS)**
+N'oubliez pas les règles de redirection de port (PAT) sur le routeur :
 
----
-
-## 11. Problèmes courants
-
-### 11.1 Erreurs après changement de configuration
-
-Solution (Thunderbird) :
-1. Paramètres
-2. Paramètres de compte
-3. Dossiers locaux
-4. Supprimer les données locales
-5. Recréer le compte
-
----
-
-📘 *Documentation améliorée et prête à être utilisée comme fichier Markdown (.md)*
+*   Port 25 (WAN) → Port 25 (LAN Serveur Mail)
+*   Port 587 (WAN) → Port 587 (LAN Serveur Mail)

@@ -86,6 +86,3 @@ Les adresses IP sont configurées en **statique** afin d’assurer une communica
 |LANtoDMZ|10.0.0.128|/25|10.0.0.129-10.0.0.253|10.0.0.254|10.0.0.255|
 
 ---
-
-
-

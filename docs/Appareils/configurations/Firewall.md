@@ -2,12 +2,13 @@
 
 ### Accès à l’interface Web d’administration a l'installation
 
-```h
+!!! info
+    ```text
+    https://10.0.0.254
+    
+    admin / admin
+    ```
 
-https://10.0.0.254
-
-admin / admin
-```
 ---
 
 ### Définir les interfaces réseau
@@ -85,6 +86,7 @@ Cela permet de n’avoir aucun problème au niveau des règles de filtrage.
 - **Services internes** : Apache et WordPress (accessibles uniquement via Reverse-Proxy)
 - **Base de données** : Accessible uniquement depuis WordPress
 - **Sécurité** : Blocage par défaut de tout trafic non autorisé
+
 ---
 
 ### Desactiver le mode furtif
@@ -246,30 +248,28 @@ Cette configuration permet de ne rencontrer aucun blocage au niveau du filtrage,
 #### Ajout d'une DMZ privée
 
 ### Vue d'ensemble
-```
-Internet
-   |
-[Stormshield] ← Pare-feu principal
-   |
-   ├─── DMZ Publique (existante)
-   |    ├─ Reverse-Proxy
-   |    ├─ Serv-Apache
-   |    ├─ WordPress
-   |    └─ Serv-Mail
-   |
-   └─── [OPNsense virtuel] 
-        |
-        └─── DMZ Privée (nouvelle)
-             ├─ Serv-BDD-WordPress
-   |
-   └─── Reseaux interne
-```
+!!! info
+    ```text
+    Internet
+       |
+    [Stormshield] ← Pare-feu principal
+       |
+       ├─── DMZ Publique (existante)
+       |    ├─ Reverse-Proxy
+       |    ├─ Serv-Apache
+       |    ├─ WordPress
+       |    └─ Serv-Mail
+       |
+       └─── [OPNsense virtuel] 
+            |
+            └─── DMZ Privée (nouvelle)
+                 ├─ Serv-BDD-WordPress
+       |
+       └─── Reseaux interne
+    ```
 
 #### Segmentation réseau
 | Zone | Réseau | Rôle | Pare-feu |
 |------|--------|------|----------|
 | DMZ Publique | 192.168.45.0/24 | Serveurs web exposés | Stormshield |
 | DMZ Privée | 192.168.55.0/24 | Bases de données et backend | OPNsense |
-
----
-

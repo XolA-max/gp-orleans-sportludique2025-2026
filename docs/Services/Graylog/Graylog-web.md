@@ -1,114 +1,136 @@
-### 1. Interface Web
+# Interface Web Graylog
 
-Se connecter a l'interface via :
+---
 
-```
-Admin 
-```
+## 1. Connexion
 
-Mot de passe noter dans cette commande :
+### Accès à l'interface
 
-```
-echo -n "MotDePasseAdmin" | sha256sum | cut -d' ' -f1
-```
+Se connecter à l'interface Web (port 9000).
 
-Le mot de passe sera donc MotDePasseAdmin dans cette situation :
+*   **Utilisateur** : `admin`
+*   **Mot de passe** : Le hash SHA256 du mot de passe défini lors de l'installation.
 
-### 1.1 Création d'un Input pour Syslog
+!!! info "Retrouver le mot de passe manuellement"
+    Si vous avez oublié le mot de passe mais avez accès au serveur, vous pouvez générer le hash d'un nouveau mot de passe :
+    ```bash
+    echo -n "NouveauMotDePasse" | sha256sum | cut -d' ' -f1
+    ```
+    *(Ceci ne change pas le mot de passe, c'est juste pour vérifier la valeur à mettre dans server.conf)*
 
-Connectez-vous à l'interface de Graylog, cliquez sur "System" dans le menu puis sur "Inputs". Dans la liste déroulante, sélectionnez "Syslog UDP" puis cliquez sur le bouton intitulé "Launch new input". Il est également possible de créer un Input Syslog en TCP, mais cela implique d'utiliser un certificat TLS : c'est un plus pour la sécurité, mais ce point ne sera pas abordé dans cet article.
+---
 
-```
-Un assistant va s'afficher à l'écran. Commencez par donner un nom à cet Input, par exemple "Graylog_UDP_Rsyslog_Linux" et choisissez un port. Par défaut, le port est "514" mais vous pouvez le personnaliser.
-```
+---
 
-```
-Le port 514 et déja actif sur le Graylog donc il est recommander de l'utiliser.
-```
+## 2. Configuration des Inputs
 
-Vous pouvez aussi cocher l'option "Store full message" pour que le message de log complet soit stocké dans Graylog. Cliquez sur "Launch Input".
+### 2.1 Création d'un Input pour Syslog (Linux)
 
-Le nouvel Input a été créé et il est désormais actif. Désormais, Graylog peut recevoir les logs Syslog sur le port 514/UDP. 
+1.  Aller dans **System** → **Inputs**.
+2.  Sélectionner **Syslog UDP** dans la liste dropdown.
+3.  Cliquer sur **Launch new input**.
 
-Pour cela voir si des logs apparaissent en temps réel sur le graphe du nouvel Input.
+#### Configuration de l'Input
 
-#### A. Créer un nouvel Index Linux
+*   **Title** : `Graylog_UDP_Rsyslog_Linux` (exemple)
+*   **Port** : `514` (Recommandé car standard)
+*   **Bind address** : `0.0.0.0`
+*   **Store full message** : Coché (Recommandé)
 
-La création d'un Index dans Graylog permet de stocker les jouraux des machines. C'est une structure de stockage qui contient les logs reçus, Graylog utilise OpenSearch comme moteur de stockage et les messagessont indexes pour permettre une meileur fluidité, rapidités et efficacités.
+!!! info "Note"
+    Le port 514 est standard pour Syslog. Assurez-vous qu'aucun autre service (comme rsyslog local) n'utilise déjà ce port sur le serveur Graylog, ou utilisez un port différent (ex: 1514).
 
-À partir de Graylog, cliquez sur "System" dans le menu puis sur "Indices". Au sein de la nouvelle page qui s'affiche, cliquez sur "Create index set".
+Cliquer sur **Launch Input**.
 
-Nommez cet index, ajoutez une description et un préfixe, avant de valider. Ici nous allons stocker tous les journaux dans cet index. Il est également possibe de créer des index spécifiques afin de stocker uniquement certains logs comme (SSH).
+### 2.2 Création des Index
 
-#### B. Créer un Stream
+L'index est la structure de stockage dans OpenSearch.
 
-Pour créer un nouveau Stream, cliquez sur "Streams" dans le menu principal de Graylog. Ensuite, cliquez sur le bouton "Create stream" situé sur la droite. Dans la fenêtre qui apparaît, nommez le stream et choisissez l'index que vous venez de nommez pour le champ nommé "Index Set". Validez.
+1.  Aller dans **System** → **Indices**.
+2.  Cliquer sur **Create index set**.
+3.  Remplir les champs (Nom, Description, Préfixe).
+    *   *Exemple : Index pour Logs Linux.*
+4.  Valider.
 
-Dans les paramètres du stream, cliquez sur le bouton "Add stream rule" pour ajouter une nouvelle règle de routage des messages. Si vous ne trouvez pas cette fenêtre, cliquez sur "Streams" dans le menu, puis sur la ligne correspondante à votre stream, cliquez sur "More" puis "Manage Rules".
+---
 
-Ensuite choissisez le type "match input" et selectionnez l'input Rsyslog en UDP crée précédemment. Validez avec le bouton "Create Rule".Ainsi tout les messages à destination de notre nouvel Input seront envoyés dans l'index.
+---
 
-Le nouveau stream doit s'afficher dans la liste et doit être en état "running". Si la bande passante indique "0msg/s" c'est normal aucun journal vers l'input Rsyslog UDP n'est envoyer. Pour voir les journaux d'un stream il suffit de cliquez simplement sur son nom.
+## 3. Configuration des Streams
 
-##### Tout est prêt coté de Graylog. 
+Les Streams permettent de router les logs vers des index spécifiques.
 
-### 1.2 Installation et configuration de Rsyslog sur Graylog
+1.  Aller dans **Streams**.
+2.  Cliquer sur **Create stream**.
+3.  **Nom** : `Linux Stream` (exemple).
+4.  **Index Set** : Sélectionner l'index créé précédemment.
+5.  Valider.
 
-#### A. Installer le paquet Rsyslog
+### Configurer les règles de routage
 
-Commencez par mettre à jour le cache des paquets et installer le paquet nommé "rsyslog".
+1.  Cliquer sur **Manage Rules** (ou "More" → "Manage Rules") sur la ligne du Stream.
+2.  Cliquer sur **Add stream rule**.
+3.  **Field** : `gl2_source_input` (ou autre critère).
+4.  **Type** : `match input`.
+5.  **Value** : Sélectionner l'Input UDP créé à l'étape 2.1.
+6.  Valider.
 
-```
-sudo apt-get update
-sudo apt-get install rsyslog
-```
-Puis, vérifiez le statut du service. En principal, il est déjà en cours d'exécution.
+!!! success "Terminé"
+    Start the stream ! N'oubliez pas de cliquer sur **Start Stream** si ce n'est pas automatique.
 
-```
-sudo systemctl status rsyslog
-```
+---
 
-#### B. Configurer Rsyslog
+---
 
-Rsyslog dispose d'un fichier de configuration principal situé à cet emplacement :
+## 4. Configuration des Clients Linux (Rsyslog)
 
-```
-/etc/rsyslog.conf
-```
+Sur la machine cliente (celle qui envoie les logs) :
 
-Le répertoire "/etc/rsyslog.d/" est utiliser pour stocker des fichiers de configuration supplémentaires pour Rsyslog. Dans le fichier de configuration principal, il y a une directive Include permettant d'importer tous les fichiers ".conf" situé ce répertoire. Ceci permet d'avoir des fichiers complémentaires pour configurer Rsyslog sans modifier le fichier principal.
+### A. Installer Rsyslog
 
-Dans ce répertoire, nous allons créer le fichier intitulé "10-graylog.conf" :
+!!! info
+    ```bash
+    sudo apt-get update
+    sudo apt-get install rsyslog
+    ```
 
-```
-sudo nano /etc/rsyslog.d/10-graylog.conf
-```
-Dans ce fichier, insérez cette ligne :
+### B. Configurer l'envoi vers Graylog
 
-```
-*.* @192.168.10.220:12514;RSYSLOG_SyslogProtocol23Format
-```
+Créer un fichier de configuration dédié :
 
-Quand c'est fait, enregistrez le fichier et redémarrez Rsyslog.
+!!! info
+    `sudo nano /etc/rsyslog.d/10-graylog.conf`
 
-```
-sudo systemctl restart rsyslog.service
-```
+    Ajouter la ligne suivante :
+    ```bash
+    *.* @192.168.10.220:514;RSYSLOG_SyslogProtocol23Format
+    ```
+    *(Remplacer 192.168.10.220 par l'IP de votre serveur Graylog)*
 
-Suite à cette action, les premiers messages devraient arriver sur votre serveur Graylog !
+### C. Redémarrer Rsyslog
 
-### 1.3 Afficher les journaux Linux dans Graylog
+!!! info
+    ```bash
+    sudo systemctl restart rsyslog
+    ```
 
-À partir de Graylog, vous pouvez cliquer sur "Streams" et sélectionner votre nouveau stream pour afficher les messages associés. Sinon, cliquez sur "Search" et effectuez la sélection de votre Steam et lancez une recherche.
+---
 
-1 - Sélectionnez la période pour laquelle afficher les messages. Par défaut, ce sont les messages des 5 dernières minutes qui s'affichent.
+---
 
-2 - Sélectionnez le(s) stream(s) à afficher.
+## 5. Visualisation des Logs
 
-3 - Activer le refresh automatique de la liste des messages (toutes les 5 secondes, par exemple). Sinon, c'est statique et c'est à vous de faire un refresh manuel.
+1.  Aller dans **Streams**.
+2.  Cliquer sur le titre de votre Stream (ex: `Linux Stream`).
+3.  L'interface de recherche s'ouvre.
 
-4 - Cliquez sur la loupe pour lancer la recherche après avoir modifié la période, le stream, ou le filtre.
+### Utilisation de la recherche
 
-5 - Barre de saisie pour indiquer vos filtres de recherche. Ici, je précise "source:srv\-docker" pour afficher uniquement les journaux de la nouvelle machine sur laquelle je viens de configurer Rsyslog.
+*   **Période** : "Last 5 minutes" (par défaut).
+*   **Auto-refresh** : Configurable (ex: 5s).
+*   **Barre de recherche** :
+    *   `source:srv-docker` : Affiche les logs de la machine "srv-docker".
+    *   `level:3` : Affiche les erreurs.
 
-Des journaux sont bien envoyés :
+!!! tip "Astuce"
+    Cliquez sur le bouton "Play" (ou la loupe) pour lancer la recherche après modification des filtres.
