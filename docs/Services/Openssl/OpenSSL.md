@@ -4,13 +4,10 @@
 
 ## Obtenir Openssl
 
-<aside>
-
-```markdown
-apt-get install openssl
-```
-
-</aside>
+!!! info
+    ```markdown
+    apt-get install openssl
+    ```
 
 ---
 
@@ -19,27 +16,24 @@ apt-get install openssl
 Ce fichier décrit le comportemant que gère openSSL. C'est dans ce fichier que nous 
 imposerons les champs SAN (Subject Alternative Names).
 
-<aside>
+!!! info
+    sudo nano /etc/ssl/openssl.cnf 
 
- sudo nano /etc/ssl/openssl.cnf 
-
-```markdown
-  [ req ]
-distinguished_name = req_distinguished_name
-req_extensions = v3_req    #Decommenter cette ligne et trouver la section
-...
-[ v3_req ]
-# Extensions to add to a certificate request
-basicConstraints = CA:FALSE
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment
-#########    Ajouter la ligne suivante:
-subjectAltName = @alt_names    # le @alt_names est un pointeur vers la section ci dessous
-[ alt_names ]
-DNS.1 = example.com             #Saisir le nom du domaine concerné (vous remarquez qu'il n'y a pas l'hôte associé)
-DNS.2 = www.example.com         #saisir le nom FQDN de votre site
-```
-
-</aside>
+    ```markdown
+      [ req ]
+    distinguished_name = req_distinguished_name
+    req_extensions = v3_req    #Decommenter cette ligne et trouver la section
+    ...
+    [ v3_req ]
+    # Extensions to add to a certificate request
+    basicConstraints = CA:FALSE
+    keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+    #########    Ajouter la ligne suivante:
+    subjectAltName = @alt_names    # le @alt_names est un pointeur vers la section ci dessous
+    [ alt_names ]
+    DNS.1 = example.com             #Saisir le nom du domaine concerné (vous remarquez qu'il n'y a pas l'hôte associé)
+    DNS.2 = www.example.com         #saisir le nom FQDN de votre site
+    ```
 
 Malheuresement, ces champs ne peuvent être renseignées par l'utilisateur de manière interactive.
 Il faudra donc penser à faire cette manipulation pour chaque site que pour lesquel vous souhaitez générer un certificat.
@@ -57,30 +51,24 @@ Il faut donc une deuxième VM nous pouvons aussi le faire sur la meme VM mais po
 
 1. Créer un dossier de travail (orlssl) dans les VM avec l'arborescence suivante afin de s'organiser un minimum. Vérifiez avec la commande tree à installer si vous ne l'avez pas déjà fait :
 
-<aside>
+!!! info
+    VM Certificats d’autorité :
 
-VM Certificats d’autorité :
+    ```
+    ├── autorite
+        ├── certificats
+        └── keys
+    ```
 
-```
-├── autorite
-    ├── certificats
-    └── keys
-```
+!!! info
+    VM Serveur Apache :
 
-</aside>
-
-<aside>
-
-VM Serveur Apache :
-
-```markdown
- ├─ siteweb
-       ├── certificats
-       ├── keys
-       └── requests_certificats
-```
-
-</aside>
+    ```markdown
+     ├─ siteweb
+           ├── certificats
+           ├── keys
+           └── requests_certificats
+    ```
 
 ---
 
@@ -99,7 +87,6 @@ openssl genrsa 2048 > siteweb/keys/privatekey.key
 ```markdown
 openssl ecparam -genkey -name prime256v1 -out privatekey.key
 ```
-</div>
 
 
 1. Vérifier le contenu du fichier généré avec la commande `cat` pour les clés RSA ou pour les **courbes eliptique**
@@ -118,50 +105,41 @@ Information très importante
 
 Normallement les modifications dans le fichier de conf d'open SSL sont prise en compte mais on peut forcer leur utilisation
 
-<aside>
+!!! info
+    Classique :
 
-Classique :
+    ```markdown
+    cnf
+    openssl req -new -key siteweb/keys/privatekey-orleans.key > siteweb/requests_certificats/demande-orleans.csr
+    ```
 
-```markdown
-cnf
-openssl req -new -key siteweb/keys/privatekey-orleans.key > siteweb/requests_certificats/demande-orleans.csr
-```
-
-Forcer l’usage :
-
-</aside>
+    Forcer l’usage :
 
 Le système va vous demander de saisir des champs remplissez-les en adaptant sauf le champ 
 
-<aside>
+!!! info
+    **Common Name** qui doit correspondre
+    exactement au nom de domaine utilisé correspondant à la directive
+    **Server Name** défini dans le VHost d'apache. (ex :
+    www.orleans.sportludique.fr )
 
-**Common Name** qui doit correspondre
-exactement au nom de domaine utilisé correspondant à la directive
-**Server Name** défini dans le VHost d'apache. (ex :
-www.orleans.sportludique.fr )
+    ```markdown
+    Country Name (2 letter code) [AU]:FR
+    State or Province Name (full name) [Some-State]:Centre-Val-De-Loire
+    Locality Name (eg, city) []:Orleans
+    Organization Name (eg, company) [Internet Widgits Pty Ltd]:orleans-sportludique                                                    
+    Organizational Unit Name (eg, section) []:orleans-sportludique
+    Common Name (e.g. server FQDN or YOUR name) []:www.orleans.sportludique.fr
+    Email Address []:
+    ```
 
-```markdown
-Country Name (2 letter code) [AU]:FR
-State or Province Name (full name) [Some-State]:Centre-Val-De-Loire
-Locality Name (eg, city) []:Orleans
-Organization Name (eg, company) [Internet Widgits Pty Ltd]:orleans-sportludique                                                    
-Organizational Unit Name (eg, section) []:orleans-sportludique
-Common Name (e.g. server FQDN or YOUR name) []:www.orleans.sportludique.fr
-Email Address []:
-```
+!!! info
+    Ce n'est pas la peine de saisir d'autres "extra attributes"...
 
-</aside>
-
-<aside>
-
-Ce n'est pas la peine de saisir d'autres "extra attributes"...
-
-```markdown
-A challenge password [] :
-AN optional company name [] :
-```
-
-</aside>
+    ```markdown
+    A challenge password [] :
+    AN optional company name [] :
+    ```
 
 > Ce qui permet de générer votre **CSR certificat**. Celle-ci est créée
 dans le format PEM encodé en base64, PEM (*Privacy Enhanced Mail*) étant
@@ -174,19 +152,16 @@ ASCII et entouré de balises de marquage).
 
 ## Format PEM
 
-<aside>
+!!! info
+    ```markdown
+    cat file1.crt file2.key > file3.pem
+    ```
 
-```markdown
-cat file1.crt file2.key > file3.pem
-```
+    par exemple :
 
-par exemple :
-
-```markdown
-cat ca-orleans.sp.crt > ca-orleans.sp.pem
-```
-
-</aside>
+    ```markdown
+    cat ca-orleans.sp.crt > ca-orleans.sp.pem
+    ```
 
 ---
 
@@ -220,13 +195,10 @@ certificat auto-signé.
 1. La création de la clé privée de l\'autorité de certification se fait
 comme précédemment :
     
-    <aside>
-    
+!!! info
     ```markdown
     openssl genrsa -des3 2048 > autorite/keys/private_ca.key
     ```
-    
-    </aside>
     
 
 Attention ne pas mélanger le fichier correspondant à notre serveur et
@@ -290,75 +262,63 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
 
 ## Fichier de conf
 
-<aside>
+!!! info
+    sudo nano /etc/apache2/sites-available/www.orleans.sportludique.fr-secure.conf
 
-sudo nano /etc/apache2/sites-available/www.orleans.sportludique.fr-secure.conf
+    ```markdown
+    <VirtualHost *:80>
+    ServerName www.orleans.sportludique.fr # (http://www.orleans.sportludique.fr/)
+    ServerAlias orleans.sportludique.fr # (http://orleans.sportludique.fr/)
+    # Redirection permanente vers HTTPS
+    Redirect permanent / <https://www.orleans.sportludique.fr>
+    </VirtualHost>
 
-```markdown
-<VirtualHost *:80>
-ServerName www.orleans.sportludique.fr # (http://www.orleans.sportludique.fr/)
-ServerAlias orleans.sportludique.fr # (http://orleans.sportludique.fr/)
-# Redirection permanente vers HTTPS
-Redirect permanent / <https://www.orleans.sportludique.fr>
-</VirtualHost>
+    <VirtualHost *:443>
+        ServerName www.orleans.sportludique.fr
+        ServerAlias www.orleans.sportludique.fr
+        DocumentRoot /var/www/siteorl
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-<VirtualHost *:443>
-	ServerName www.orleans.sportludique.fr
-	ServerAlias www.orleans.sportludique.fr
-	DocumentRoot /var/www/siteorl
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
+        SSLEngine on
 
-    SSLEngine on
+          #  SSLCertificateFile directive is needed.
+            SSLCertificateFile      /etc/ssl/certs/ca-orleans.sp.crt
+            SSLCertificateKeyFile   /etc/ssl/private/privatekey-orleans.key
+            SSLCACertificateFile /etc/ssl/certs/ca.crt
 
-      #  SSLCertificateFile directive is needed.
-        SSLCertificateFile      /etc/ssl/certs/ca-orleans.sp.crt
-        SSLCertificateKeyFile   /etc/ssl/private/privatekey-orleans.key
-        SSLCACertificateFile /etc/ssl/certs/ca.crt
+            <Directory /var/www/siteorl>
+                 Options -Indexes +FollowSymLinks
+                 AllowOverride All  
+            </Directory>
 
-        <Directory /var/www/siteorl>
-             Options -Indexes +FollowSymLinks
-             AllowOverride All  
-        </Directory>
+    </VirtualHost>
+    ```
 
-</VirtualHost>
-```
-
-</aside>
 ---
 
 ## Activer le site web
 
-<aside>
-
-```markdown
-sudo a2ensite www.orleans.sportludique.fr-secure.conf
-```
-
-</aside>
-
+!!! info
+    ```markdown
+    sudo a2ensite www.orleans.sportludique.fr-secure.conf
+    ```
 
 
 ## Activer SSL
 
-<aside>
-
-```markdown
-sudo a2enmod ssl
-```
-
-</aside>
+!!! info
+    ```markdown
+    sudo a2enmod ssl
+    ```
 
 
 ## Restart apache2
 
-<aside>
-
-```markdown
-sudo systemctl restart apache2
-```
-
-</aside>
+!!! info
+    ```markdown
+    sudo systemctl restart apache2
+    ```
 
 ---
 
@@ -370,12 +330,10 @@ sudo systemctl restart apache2
 
 ## Navigateur
 
-<aside>
+!!! info
+    ```markdown
+    on importe le fichier ca.crt 
 
-```markdown
-on importe le fichier ca.crt 
-
-l’importer dans le navigateur 
-Exemple sur firefox "Paramètre" → rechercher "certificats" afficher les certificats "importer" "ca.crt"
-```
-</aside>
+    l’importer dans le navigateur 
+    Exemple sur firefox "Paramètre" → rechercher "certificats" afficher les certificats "importer" "ca.crt"
+    ```
