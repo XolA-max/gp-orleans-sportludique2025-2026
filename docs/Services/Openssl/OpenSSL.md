@@ -1,3 +1,9 @@
+<style>
+.md-typeset code {
+  font-size: 0.7em !important;
+}
+</style>
+
 **Guide OpenSSL pour avoir HTTPS** 
 
 **HTTPS**
