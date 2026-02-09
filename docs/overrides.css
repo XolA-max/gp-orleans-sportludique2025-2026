@@ -57,30 +57,3 @@ pre {
     background: #1e1e1e20;
     /* transparent pour les 2 modes */
 }
-
-/* Specific targeting for OpenSSL page via Material Page ID */
-/* This normalizes font sizes to 1em only for the OpenSSL page */
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h1,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h2,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h3,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h4,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h5,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h6,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset p,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset li,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset code,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset pre {
-    font-size: 1rem !important;
-}
-
-/* Maintain bold weight and spacing for headers */
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h1,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h2,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h3,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h4,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h5,
-[data-md-id="Services/Openssl/OpenSSL"] .md-typeset h6 {
-    font-weight: bold !important;
-    margin-top: 1.5em !important;
-    margin-bottom: 0.5em !important;
-}

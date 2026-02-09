@@ -1,8 +1,8 @@
 # Guide OpenSSL pour avoir HTTPS 
 
-# HTTPS
+## HTTPS
 
-## Obtenir Openssl
+### Obtenir Openssl
 
 !!! info
     ```markdown
@@ -49,6 +49,7 @@ Pour notre certificat nous allons creer une autorité de certification qui va si
 Il faut donc une deuxième VM nous pouvons aussi le faire sur la meme VM mais pour dissocier les deux nous avons le serveur apache et une autre VM Autorité de certification 
 
 
+#### Étape 1 : Dossiers de travail
 1. Créer un dossier de travail (orlssl) dans les VM avec l'arborescence suivante afin de s'organiser un minimum. Vérifiez avec la commande tree à installer si vous ne l'avez pas déjà fait :
 
 !!! info
@@ -72,7 +73,7 @@ Il faut donc une deuxième VM nous pouvons aussi le faire sur la meme VM mais po
 
 ---
 
-# ServeurWeb
+## ServeurWeb
 
 ### Génération de la clé privée du serveur web
 
@@ -172,6 +173,7 @@ Deux choix s'offrent désormais à nous :
 
 Ici nous allons utiliser notre deuxième VM comme autorité de certification
 
+#### Étape 2 : Vérification SAN
 1. Verifier la présence des champs Subject Alternatives Names
 
 ```markdown
@@ -186,7 +188,7 @@ openssl req -in siteweb/requests_certificats/demande.csr -noout -text
 
 ## VM Autorité de certification
 
-## Création du certificat de l'autorité de certification
+### Création du certificat de l'autorité de certification
 
 Pour signer un certificat, vous devez devenir votre propre autorité de
 certification, cela implique donc de posséder une clé privée et un
@@ -211,7 +213,7 @@ durée de validité d'un an auto-signé :
 openssl req -new -x509 -days 365 -key /autorite/keys/private_ca.key > autorite/certificats/ca.crt
 ```
 
-## Traitement de la demande de certificat de notre serveur par l'autorité de certification fictive
+### Traitement de la demande de certificat
 
 1. La commande qui signe la demande de certificat est la suivante :
 
@@ -258,9 +260,9 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
 
 ---
 
-### Serveur Apache2 :
+## Serveur Apache2
 
-## Fichier de conf
+### Fichier de conf
 
 !!! info
     sudo nano /etc/apache2/sites-available/www.orleans.sportludique.fr-secure.conf
@@ -297,7 +299,9 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
 
 ---
 
-## Activer le site web
+### Activation
+
+#### Activer le site web
 
 !!! info
     ```markdown
@@ -305,7 +309,7 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
     ```
 
 
-## Activer SSL
+#### Activer SSL
 
 !!! info
     ```markdown
@@ -313,7 +317,7 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
     ```
 
 
-## Restart apache2
+#### Restart apache2
 
 !!! info
     ```markdown
