@@ -35,7 +35,8 @@
 
 /* Liens dans le contenu (mode sombre) */
 [data-md-color-scheme="slate"] .md-content a {
-    color: #4DD688 !important; /* vert plus clair pour contraste */
+    color: #4DD688 !important;
+    /* vert plus clair pour contraste */
 }
 
 
@@ -51,11 +52,15 @@
 }
 
 /* Code */
-code, pre {
-    background: #1e1e1e20; /* transparent pour les 2 modes */
+code,
+pre {
+    background: #1e1e1e20;
+    /* transparent pour les 2 modes */
 }
 
 /* Reduce code block font size */
-code, pre, .md-typeset code {
-    font-size: 0.85em !important;
+code,
+pre,
+.md-typeset code {
+    font-size: 0.7em !important;
 }
