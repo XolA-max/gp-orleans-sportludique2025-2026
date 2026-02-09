@@ -57,9 +57,9 @@ code {
     /* transparent pour les 2 modes */
 }
 
-/* Reduce code block font size */
-code,
-pre,
-.md-typeset code {
-    font-size: 0.7em !important;
+/* Scoped reduce code block font size for OpenSSL page */
+.openssl-content code,
+.openssl-content pre,
+.openssl-content .md-typeset code {
+    font-size: 0.6em !important;
 }

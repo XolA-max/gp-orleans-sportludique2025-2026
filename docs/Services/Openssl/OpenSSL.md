@@ -1,8 +1,4 @@
-<style>
-.md-typeset code {
-  font-size: 0.7em !important;
-}
-</style>
+<div class="openssl-content">
 
 **Guide OpenSSL pour avoir HTTPS** 
 
@@ -343,3 +339,4 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
     l’importer dans le navigateur 
     Exemple sur firefox "Paramètre" → rechercher "certificats" afficher les certificats "importer" "ca.crt"
     ```
+</div>
