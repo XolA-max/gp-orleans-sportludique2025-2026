@@ -1,0 +1,3563 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../GLPI/">
+      
+      
+        <link rel="next" href="../InventaireGLPIWin/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Inventaire GLPI - Linux - Orleans</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#099E37" data-md-color-accent="#099E37">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#inventaire-glpi-linux" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Orleans" class="md-header__button md-logo" aria-label="Orleans" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Orleans
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Inventaire GLPI - Linux
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="#099E37" data-md-color-accent="#099E37"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="#099E37" data-md-color-accent="#099E37"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Orleans" class="md-nav__button md-logo" aria-label="Orleans" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Orleans
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page d'Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appareils
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appareils
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/Equipements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Présentation des équipements réseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/Information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Information
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/reseau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Réseaux présents sur l’infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configurations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firewall
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/LinuxDEB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide linux Debian Prête à l'emplois
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Reinitialisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide : Réinitialisation et ROMMON sur Routeurs Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Routeur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routeur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Switch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide des commandes Switch(cisco)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/WIN10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Windows 10 Prêt à l'emplois ou (PAE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recapitulatif
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Recapitulatif
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Recapitulatif/Probleme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Problèmes rencontrés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Recapitulatif/Taches/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compte rendu des séances
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Services
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activedirectory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Activedirectory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Activedirectory/Active%20Directory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Activedirectory/LDAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principe et utilisation de LDAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ansible
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Ansible/Ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Apache2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Apache2/Apache2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Apache2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BDD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BDD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BDD/Base%20de%20donne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DNS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DNS/DNS-Sec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS Secondaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DNS/DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Installation DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Docker/Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation de Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GLPI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GLPI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GLPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation de GLPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventaire GLPI - Linux
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventaire GLPI - Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-prerequis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Prérequis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-activer-linventaire-dans-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Activer l'inventaire dans GLPI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-creation-du-playbook-dinstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Création du playbook d'installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-configuration-du-fichier-dinventaire-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Configuration du fichier d'inventaire Ansible
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-creation-dune-cle-dauthentification-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Création d'une clé d'authentification SSH
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Création d&#39;une clé d&#39;authentification SSH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pourquoi-une-cle-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pourquoi une clé SSH ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generer-la-paire-de-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Générer la paire de clés
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-copie-de-la-cle-publique-sur-les-serveurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Copie de la clé publique sur les serveurs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Copie de la clé publique sur les serveurs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-copie-manuelle-methode-longue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Copie manuelle (méthode longue)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-script-de-copie-automatisee-methode-rapide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Script de copie automatisée (méthode rapide)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-verification-de-la-connexion-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Vérification de la connexion SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-lancer-le-playbook-dinstallation-des-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Lancer le playbook d'installation des agents
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Lancer le playbook d&#39;installation des agents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#execution-du-playbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exécution du playbook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deroulement-de-linstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Déroulement de l'installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-verification-dans-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Vérification dans GLPI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Vérification dans GLPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acceder-a-linterface-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accéder à l'interface GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verifier-les-ordinateurs-inventories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vérifier les ordinateurs inventoriés
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-forcer-linventaire-manuellement-optionnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Forcer l'inventaire manuellement (optionnel)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Forcer l&#39;inventaire manuellement (optionnel)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sur-une-machine-specifique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sur une machine spécifique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sur-toutes-les-machines-via-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sur toutes les machines via Ansible
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-depannage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Dépannage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Dépannage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#probleme-lagent-ne-se-connecte-pas-a-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problème : L'agent ne se connecte pas à GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probleme-les-machines-napparaissent-pas-dans-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problème : Les machines n'apparaissent pas dans GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probleme-permission-denied-lors-de-lexecution-du-playbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problème : Permission denied lors de l'exécution du playbook
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-maintenance-et-mise-a-jour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Maintenance et mise à jour
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Maintenance et mise à jour">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mettre-a-jour-lagent-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mettre à jour l'agent GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desinstaller-lagent-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Désinstaller l'agent GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-bonnes-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Bonnes pratiques
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Bonnes pratiques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#securite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sécurité
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ressources-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ressources utiles
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../InventaireGLPIWin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventaire GLPI - Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../liaisonAD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Liaison GLPI à L'AD (LDAP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Github
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Github
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Github/Github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide utilisation Github
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graylog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graylog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graylog/Graylog-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface Web Graylog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graylog/Graylog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation Graylog sur Debian 12
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graylog/nxlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoyer les logs Windows vers Graylog avec NXLog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mail
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mail
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mail/Mail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HMAILSERVER – Installation et Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mail/scriptHmail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script de Synchronisation AD vers hMailServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openssl
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Openssl
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Openssl/OpenSSL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide OpenSSL pour avoir HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_12" id="__nav_4_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReverseProxy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ReverseProxy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ReverseProxy/ReverseProxy-Sec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reverse Proxy Secondaire &amp; Synchronisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ReverseProxy/ReverseProxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Reverse Proxy Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_13" id="__nav_4_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualisation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualisation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_13_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_13_1" id="__nav_4_13_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_13_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_13_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Proxmox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Virtualisation/Proxmox/ConfigurationProx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_14" id="__nav_4_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wordpress
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wordpress
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wordpress/Wordpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation WordPress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-prerequis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Prérequis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-activer-linventaire-dans-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Activer l'inventaire dans GLPI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-creation-du-playbook-dinstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Création du playbook d'installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-configuration-du-fichier-dinventaire-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Configuration du fichier d'inventaire Ansible
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-creation-dune-cle-dauthentification-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Création d'une clé d'authentification SSH
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Création d&#39;une clé d&#39;authentification SSH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pourquoi-une-cle-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pourquoi une clé SSH ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generer-la-paire-de-cles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Générer la paire de clés
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-copie-de-la-cle-publique-sur-les-serveurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Copie de la clé publique sur les serveurs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Copie de la clé publique sur les serveurs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-copie-manuelle-methode-longue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Copie manuelle (méthode longue)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-script-de-copie-automatisee-methode-rapide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Script de copie automatisée (méthode rapide)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-verification-de-la-connexion-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Vérification de la connexion SSH
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-lancer-le-playbook-dinstallation-des-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Lancer le playbook d'installation des agents
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Lancer le playbook d&#39;installation des agents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#execution-du-playbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exécution du playbook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deroulement-de-linstallation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Déroulement de l'installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-verification-dans-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Vérification dans GLPI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Vérification dans GLPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acceder-a-linterface-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accéder à l'interface GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verifier-les-ordinateurs-inventories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vérifier les ordinateurs inventoriés
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-forcer-linventaire-manuellement-optionnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Forcer l'inventaire manuellement (optionnel)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Forcer l&#39;inventaire manuellement (optionnel)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sur-une-machine-specifique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sur une machine spécifique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sur-toutes-les-machines-via-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sur toutes les machines via Ansible
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-depannage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Dépannage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Dépannage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#probleme-lagent-ne-se-connecte-pas-a-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problème : L'agent ne se connecte pas à GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probleme-les-machines-napparaissent-pas-dans-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problème : Les machines n'apparaissent pas dans GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probleme-permission-denied-lors-de-lexecution-du-playbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problème : Permission denied lors de l'exécution du playbook
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-maintenance-et-mise-a-jour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Maintenance et mise à jour
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Maintenance et mise à jour">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mettre-a-jour-lagent-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mettre à jour l'agent GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desinstaller-lagent-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Désinstaller l'agent GLPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-bonnes-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Bonnes pratiques
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Bonnes pratiques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#securite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sécurité
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organisation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ressources-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ressources utiles
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="inventaire-glpi-linux">Inventaire GLPI - Linux</h1>
+<p>Inventorier les appareils Linux sur GLPI.</p>
+<hr />
+<h2 id="1-prerequis">1. Prérequis</h2>
+<p>Avant de commencer, assurez-vous d'avoir :</p>
+<ul>
+<li>✅ GLPI installé - <a href="../GLPI/">Guide d'installation de GLPI</a></li>
+<li>✅ Ansible installé - <a href="../../Ansible/Ansible/">Guide d'installation d'Ansible</a></li>
+<li>✅ Accès SSH aux différents services (authentification + mot de passe)</li>
+</ul>
+<hr />
+<hr />
+<h2 id="2-activer-linventaire-dans-glpi">2. Activer l'inventaire dans GLPI</h2>
+<p>Dans <strong>l'interface web</strong> de GLPI :</p>
+<blockquote>
+<p><strong>Configuration</strong> → <strong>Inventory</strong> → <strong>Enable inventory</strong></p>
+</blockquote>
+<div class="admonition info">
+<p class="admonition-title">Important</p>
+<p>Cette étape est cruciale pour permettre à GLPI de recevoir les inventaires des agents.</p>
+</div>
+<hr />
+<hr />
+<h2 id="3-creation-du-playbook-dinstallation">3. Création du playbook d'installation</h2>
+<p>Sur le serveur Ansible, créer le fichier :</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><code>sudo nano /etc/ansible/playbooks/install_glpi_agent.yml</code></p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Installer et configurer l&#39;agent GLPI sur toutes les VM Linux</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all_linux</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+
+<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">glpi_release_folder</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.7&quot;</span>
+<span class="w">    </span><span class="nt">glpi_agent_filename</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;glpi-agent_1.7-1_all.deb&quot;</span>
+<span class="w">    </span><span class="nt">glpi_agent_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/glpi-project/glpi-agent/releases/download/{{</span><span class="nv"> </span><span class="s">glpi_release_folder</span><span class="nv"> </span><span class="s">}}/{{</span><span class="nv"> </span><span class="s">glpi_agent_filename}}&quot;</span>
+<span class="w">    </span><span class="nt">glpi_server_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://172.28.120.8:80/front/inventory.php&quot;</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1. Mettre à jour le cache APT</span>
+<span class="w">      </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">update_cache</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">      </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">update</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2. Télécharger le package GLPI Agent (DEB)</span>
+<span class="w">      </span><span class="nt">ansible.builtin.get_url</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">glpi_agent_url</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/tmp/glpi-agent.deb&quot;</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0644&#39;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3. Installer le package GLPI Agent</span>
+<span class="w">      </span><span class="nt">ansible.builtin.apt</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">deb</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/tmp/glpi-agent.deb&quot;</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">        </span><span class="nt">update_cache</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Démarrer et Activer GLPI Agent</span>
+
+<span class="w">    </span><span class="c1"># --- TÂCHES DE NETTOYAGE ET DE CONFIGURATION (NO AUTH) ---</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4a. Configurer l&#39;URL du serveur GLPI dans agent.cfg</span>
+<span class="w">      </span><span class="nt">ansible.builtin.lineinfile</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/glpi-agent/agent.cfg</span>
+<span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^server</span><span class="nv"> </span><span class="s">=&#39;</span>
+<span class="w">        </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;server</span><span class="nv"> </span><span class="s">=</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">glpi_server_url</span><span class="nv"> </span><span class="s">}}&#39;</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Redémarrer GLPI Agent pour appliquer la config</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4b. Supprimer l&#39;ancienne configuration de login (pour Aucune Authentification)</span>
+<span class="w">      </span><span class="nt">ansible.builtin.lineinfile</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/glpi-agent/agent.cfg</span>
+<span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^user</span><span class="nv"> </span><span class="s">=&#39;</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Redémarrer GLPI Agent pour appliquer la config</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4c. Supprimer l&#39;ancienne configuration de mot de passe</span>
+<span class="w">      </span><span class="nt">ansible.builtin.lineinfile</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/glpi-agent/agent.cfg</span>
+<span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^password</span><span class="nv"> </span><span class="s">=&#39;</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">absent</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Redémarrer GLPI Agent pour appliquer la config</span>
+
+<span class="w">  </span><span class="nt">handlers</span><span class="p">:</span>
+
+<span class="w">    </span><span class="c1"># 1. Handler pour démarrer l&#39;agent après l&#39;installation</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Démarrer et Activer GLPI Agent</span>
+<span class="w">      </span><span class="nt">ansible.builtin.systemd</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glpi-agent</span>
+<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">started</span>
+
+<span class="w">    </span><span class="c1"># 2. Handler pour redémarrer l&#39;agent après une modification de config</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Redémarrer GLPI Agent pour appliquer la config</span>
+<span class="w">      </span><span class="nt">ansible.builtin.systemd</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glpi-agent</span>
+<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span>
+
+<span class="c1"># --- Forcer l&#39;ajout dans GLPI ---</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Forcer et vérifier l&#39;inventaire GLPI</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all_linux</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Lancer l&#39;inventaire GLPI</span>
+<span class="w">      </span><span class="nt">ansible.builtin.command</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">cmd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glpi-agent --server http://192.168.140.225/ --force</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glpi_inventory</span>
+<span class="w">      </span><span class="nt">changed_when</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&#39;sending</span><span class="nv"> </span><span class="s">prolog</span><span class="nv"> </span><span class="s">request&#39;</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">glpi_inventory.stdout&quot;</span>
+<span class="w">      </span><span class="nt">failed_when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glpi_inventory.rc != 0</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inventaire GLPI effectué</span>
+<span class="w">      </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;✅</span><span class="nv"> </span><span class="s">Inventaire</span><span class="nv"> </span><span class="s">GLPI</span><span class="nv"> </span><span class="s">envoyé</span><span class="nv"> </span><span class="s">avec</span><span class="nv"> </span><span class="s">succès</span><span class="nv"> </span><span class="s">sur</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glpi_inventory.changed</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Inventaire GLPI déjà existant</span>
+<span class="w">      </span><span class="nt">ansible.builtin.debug</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ℹ️</span><span class="nv"> </span><span class="s">Inventaire</span><span class="nv"> </span><span class="s">GLPI</span><span class="nv"> </span><span class="s">déjà</span><span class="nv"> </span><span class="s">présent</span><span class="nv"> </span><span class="s">pour</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not glpi_inventory.changed</span>
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+<p>Ce playbook installe l'agent GLPI, le configure et force l'envoi de l'inventaire automatiquement.</p>
+</div>
+<hr />
+<hr />
+<h2 id="4-configuration-du-fichier-dinventaire-ansible">4. Configuration du fichier d'inventaire Ansible</h2>
+<p>Éditer le fichier d'inventaire :</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><code>sudo nano /etc/ansible/hosts</code></p>
+<p>Ajouter tous les hôtes à inventorier (le groupe <code>[all_linux]</code> permet de cibler toutes ces machines simultanément) :</p>
+<div class="highlight"><pre><span></span><code><span class="k">[all_linux]</span>
+<span class="c1"># DNS</span>
+<span class="na">ORL-DNS-REDIRECTEUR ansible_host</span><span class="o">=</span><span class="s">192.168.140.85 ansible_user=etudiant</span>
+<span class="na">ORL-DNS-AUTORITE ansible_host</span><span class="o">=</span><span class="s">192.168.140.95 ansible_user=etudiant</span>
+<span class="na">ORL-DNS-AUTORITE-SECOND ansible_host</span><span class="o">=</span><span class="s">192.168.140.125 ansible_user=etudiant</span>
+<span class="na">ORL-DNS-REDIRECTEUR-SECOND ansible_host</span><span class="o">=</span><span class="s">192.168.140.135 ansible_user=etudiant</span>
+
+<span class="c1"># WEB</span>
+<span class="na">ORL-SRV-WEB ansible_host</span><span class="o">=</span><span class="s">192.168.140.105 ansible_user=etudiant</span>
+<span class="na">ORL-AUTORITE-CERT ansible_host</span><span class="o">=</span><span class="s">192.168.140.115 ansible_user=etudiant</span>
+<span class="na">ORL-SRV-WORDPRESS ansible_host</span><span class="o">=</span><span class="s">192.168.140.145 ansible_user=etudiant</span>
+<span class="na">ORL-REVERSE_PROXY ansible_host</span><span class="o">=</span><span class="s">192.168.140.155 ansible_user=etudiant</span>
+<span class="na">ORL-REVERSE_PROXY-SECOND ansible_host</span><span class="o">=</span><span class="s">192.168.140.215 ansible_user=etudiant</span>
+
+<span class="c1"># SERVEUR</span>
+<span class="na">ORL-SRV-BDD ansible_host</span><span class="o">=</span><span class="s">192.168.140.165 ansible_user=etudiant</span>
+<span class="na">ORL-SRV-DOCKER ansible_host</span><span class="o">=</span><span class="s">192.168.140.225 ansible_user=etudiant</span>
+<span class="na">ORL-SRV-GRAYLOG ansible_host</span><span class="o">=</span><span class="s">192.168.140.235 ansible_user=etudiant</span>
+<span class="na">ORL-SRV-ANSIBLE ansible_host</span><span class="o">=</span><span class="s">192.168.140.240 ansible_user=etudiant</span>
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+<p>Adaptez les adresses IP et les noms d'utilisateur selon votre infrastructure.</p>
+</div>
+<hr />
+<hr />
+<h2 id="5-creation-dune-cle-dauthentification-ssh">5. Création d'une clé d'authentification SSH</h2>
+<h3 id="pourquoi-une-cle-ssh">Pourquoi une clé SSH ?</h3>
+<p>Il n'est pas possible d'utiliser une authentification SSH par mot de passe, car le serveur Ansible ne connaît pas les mots de passe des machines distantes. Il est donc nécessaire de mettre en place une <strong>authentification par clé publique</strong>.</p>
+<h3 id="generer-la-paire-de-cles">Générer la paire de clés</h3>
+<p>Sur le serveur Ansible :</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519
+</code></pre></div>
+<ul>
+<li>Appuyez sur <strong>Entrée</strong> pour accepter l'emplacement par défaut.</li>
+<li><strong>Ne définissez PAS de passphrase</strong> (appuyez sur Entrée).</li>
+</ul>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+<p>Aucune passphrase n'est définie car le serveur Ansible ne pourrait pas la saisir automatiquement. Cela permet des connexions SSH non interactives, indispensables au bon fonctionnement d'Ansible.</p>
+</div>
+<hr />
+<hr />
+<h2 id="6-copie-de-la-cle-publique-sur-les-serveurs">6. Copie de la clé publique sur les serveurs</h2>
+<p>La clé publique générée doit être <strong>copiée</strong> sur l'ensemble des <strong>machines virtuelles</strong> à administrer et à inventorier.</p>
+<h3 id="61-copie-manuelle-methode-longue">6.1 Copie manuelle (méthode longue)</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<div class="highlight"><pre><span></span><code>ssh-copy-id<span class="w"> </span>utilisateur@192.168.X.X
+</code></pre></div>
+</div>
+<h3 id="62-script-de-copie-automatisee-methode-rapide">6.2 Script de copie automatisée (méthode rapide)</h3>
+<p>Créer un script pour copier automatiquement la clé sur toutes les machines :</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><code>nano copy-ssh-keys.sh</code></p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="nv">INVENTORY</span><span class="o">=</span><span class="s2">&quot;/etc/ansible/hosts&quot;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="nv">ip</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oP<span class="w"> </span><span class="s1">&#39;ansible_host=\K[0-9.]+&#39;</span><span class="k">)</span>
+<span class="w">  </span><span class="nv">user</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oP<span class="w"> </span><span class="s1">&#39;ansible_user=\K\S+&#39;</span><span class="k">)</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ip</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$user</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Copie de la clé vers </span><span class="nv">$user</span><span class="s2">@</span><span class="nv">$ip</span><span class="s2">&quot;</span>
+<span class="w">    </span>ssh-copy-id<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$user</span><span class="s2">@</span><span class="nv">$ip</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$INVENTORY</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>Exécuter le script :
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>copy-ssh-keys.sh
+./copy-ssh-keys.sh
+</code></pre></div></p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+<p>Le script va demander le mot de passe SSH pour chaque machine. Entrez le mot de passe lorsque demandé.
+Une fois cette étape réalisée, le serveur Ansible pourra se connecter automatiquement aux VM sans demander de mot de passe.</p>
+</div>
+<h3 id="63-verification-de-la-connexion-ssh">6.3 Vérification de la connexion SSH</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Tester la connexion sans mot de passe :
+<div class="highlight"><pre><span></span><code>ansible<span class="w"> </span>all_linux<span class="w"> </span>-m<span class="w"> </span>ping
+</code></pre></div></p>
+</div>
+<hr />
+<hr />
+<h2 id="7-lancer-le-playbook-dinstallation-des-agents">7. Lancer le playbook d'installation des agents</h2>
+<h3 id="execution-du-playbook">Exécution du playbook</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>/etc/ansible/playbooks/install_glpi_agent.yml<span class="w"> </span>--ask-become-pass
+</code></pre></div>
+<ul>
+<li><strong>ansible-playbook</strong> : Lance l'exécution du playbook.</li>
+<li><strong>--ask-become-pass</strong> : Demande le mot de passe <strong>sudo</strong> de l'utilisateur distant.</li>
+</ul>
+</div>
+<h3 id="deroulement-de-linstallation">Déroulement de l'installation</h3>
+<p>Le playbook va automatiquement :
+1. ✅ Mettre à jour le cache APT
+2. ✅ Télécharger l'agent GLPI
+3. ✅ Installer l'agent GLPI
+4. ✅ Configurer l'URL du serveur GLPI
+5. ✅ Démarrer et activer le service
+6. ✅ Forcer l'envoi de l'inventaire à GLPI</p>
+<hr />
+<hr />
+<h2 id="8-verification-dans-glpi">8. Vérification dans GLPI</h2>
+<h3 id="acceder-a-linterface-glpi">Accéder à l'interface GLPI</h3>
+<ul>
+<li>URL : <code>http://IP_SERVEUR_GLPI</code></li>
+</ul>
+<h3 id="verifier-les-ordinateurs-inventories">Vérifier les ordinateurs inventoriés</h3>
+<ul>
+<li>Aller dans : <strong>Parc</strong> → <strong>Ordinateurs</strong></li>
+</ul>
+<p>Vous devriez voir apparaître tous vos serveurs Linux avec leurs informations détaillées (Nom d'hôte, Adresse IP, OS, Hardware, etc.).</p>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+<p>L'inventaire se met à jour automatiquement selon la configuration de l'agent (par défaut toutes les 24 heures).</p>
+</div>
+<hr />
+<hr />
+<h2 id="9-forcer-linventaire-manuellement-optionnel">9. Forcer l'inventaire manuellement (optionnel)</h2>
+<h3 id="sur-une-machine-specifique">Sur une machine spécifique</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>glpi-agent<span class="w"> </span>--server<span class="w"> </span>http://192.168.140.225/<span class="w"> </span>--force
+</code></pre></div>
+</div>
+<h3 id="sur-toutes-les-machines-via-ansible">Sur toutes les machines via Ansible</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<div class="highlight"><pre><span></span><code>ansible<span class="w"> </span>all_linux<span class="w"> </span>-m<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;glpi-agent --server http://192.168.140.225/ --force&quot;</span><span class="w"> </span>--become<span class="w"> </span>--ask-become-pass
+</code></pre></div>
+</div>
+<hr />
+<hr />
+<h2 id="10-depannage">10. Dépannage</h2>
+<h3 id="probleme-lagent-ne-se-connecte-pas-a-glpi">Problème : L'agent ne se connecte pas à GLPI</h3>
+<div class="admonition warning">
+<p class="admonition-title">Diagnostic</p>
+<p>Vérifier le statut de l'agent :
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>glpi-agent
+</code></pre></div></p>
+<p>Vérifier les logs :
+<div class="highlight"><pre><span></span><code>journalctl<span class="w"> </span>-u<span class="w"> </span>glpi-agent<span class="w"> </span>-f
+</code></pre></div></p>
+<p>Vérifier la configuration :
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/glpi-agent/agent.cfg
+</code></pre></div></p>
+</div>
+<h3 id="probleme-les-machines-napparaissent-pas-dans-glpi">Problème : Les machines n'apparaissent pas dans GLPI</h3>
+<div class="admonition warning">
+<p class="admonition-title">Diagnostic</p>
+<ol>
+<li>Vérifier que l'inventaire est activé dans GLPI (<code>Configuration</code> → <code>Inventory</code> → <code>Enable inventory</code>).</li>
+<li>Forcer l'inventaire manuellement.</li>
+<li>Vérifier que le serveur GLPI est accessible :
+    <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://IP_GLPI/front/inventory.php
+</code></pre></div></li>
+</ol>
+</div>
+<h3 id="probleme-permission-denied-lors-de-lexecution-du-playbook">Problème : Permission denied lors de l'exécution du playbook</h3>
+<div class="admonition warning">
+<p class="admonition-title">Diagnostic</p>
+<ol>
+<li>S'assurer que la clé SSH a bien été copiée :
+    <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>etudiant@192.168.140.85
+</code></pre></div></li>
+<li>Vérifier que l'utilisateur a les droits sudo :
+    <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>etudiant@192.168.140.85<span class="w"> </span><span class="s2">&quot;sudo whoami&quot;</span>
+</code></pre></div></li>
+</ol>
+</div>
+<hr />
+<hr />
+<h2 id="11-maintenance-et-mise-a-jour">11. Maintenance et mise à jour</h2>
+<h3 id="mettre-a-jour-lagent-glpi">Mettre à jour l'agent GLPI</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Modifier la version dans le playbook :
+<div class="highlight"><pre><span></span><code><span class="nt">vars</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">glpi_release_folder</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.8&quot;</span>
+<span class="w">  </span><span class="nt">glpi_agent_filename</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;glpi-agent_1.8-1_all.deb&quot;</span>
+</code></pre></div></p>
+<p>Relancer le playbook :
+<div class="highlight"><pre><span></span><code>ansible-playbook<span class="w"> </span>/etc/ansible/playbooks/install_glpi_agent.yml<span class="w"> </span>--ask-become-pass
+</code></pre></div></p>
+</div>
+<h3 id="desinstaller-lagent-glpi">Désinstaller l'agent GLPI</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<div class="highlight"><pre><span></span><code>ansible<span class="w"> </span>all_linux<span class="w"> </span>-m<span class="w"> </span>apt<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;name=glpi-agent state=absent&quot;</span><span class="w"> </span>--become<span class="w"> </span>--ask-become-pass
+</code></pre></div>
+</div>
+<hr />
+<hr />
+<h2 id="12-bonnes-pratiques">12. Bonnes pratiques</h2>
+<h3 id="securite">Sécurité</h3>
+<ul>
+<li>✅ Restreindre l'accès SSH au serveur Ansible uniquement.</li>
+<li>✅ Utiliser des clés SSH avec passphrase en production.</li>
+<li>✅ Limiter les droits sudo de l'utilisateur Ansible.</li>
+<li>✅ Activer l'authentification dans GLPI pour l'inventaire.</li>
+</ul>
+<h3 id="organisation">Organisation</h3>
+<ul>
+<li>✅ Documenter les modifications dans le playbook.</li>
+<li>✅ Tester sur un environnement de test avant la production.</li>
+<li>✅ Sauvegarder régulièrement la configuration GLPI.</li>
+<li>✅ Maintenir l'inventaire Ansible à jour.</li>
+</ul>
+<h3 id="monitoring">Monitoring</h3>
+<ul>
+<li>✅ Surveiller les logs de l'agent GLPI.</li>
+<li>✅ Vérifier régulièrement que tous les agents envoient leur inventaire.</li>
+<li>✅ Mettre en place des alertes en cas d'échec d'inventaire.</li>
+</ul>
+<hr />
+<hr />
+<h2 id="ressources-utiles">Ressources utiles</h2>
+<ul>
+<li><a href="https://glpi-agent.readthedocs.io">Documentation GLPI Agent</a></li>
+<li><a href="https://github.com/glpi-project/glpi-agent">GitHub GLPI Agent</a></li>
+<li><a href="https://docs.ansible.com">Documentation Ansible</a></li>
+<li><a href="https://forum.glpi-project.org">Forum GLPI</a></li>
+</ul>
+<hr />
+<p><em>Dernière mise à jour : Décembre 2024</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
