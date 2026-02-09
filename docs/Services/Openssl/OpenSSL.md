@@ -1,8 +1,8 @@
-# Guide OpenSSL pour avoir HTTPS 
+**Guide OpenSSL pour avoir HTTPS** 
 
-# HTTPS
+**HTTPS**
 
-## Obtenir Openssl
+**Obtenir Openssl**
 
 !!! info
     ```markdown
@@ -11,7 +11,7 @@
 
 ---
 
-### Configuration openSSL (gestion RFC 2818)
+**Configuration openSSL (gestion RFC 2818)**
 
 Ce fichier décrit le comportemant que gère openSSL. C'est dans ce fichier que nous 
 imposerons les champs SAN (Subject Alternative Names).
@@ -72,17 +72,17 @@ Il faut donc une deuxième VM nous pouvons aussi le faire sur la meme VM mais po
 
 ---
 
-# ServeurWeb
+**ServeurWeb**
 
-### Génération de la clé privée du serveur web
+**Génération de la clé privée du serveur web**
 
-#### RSA
+**RSA**
 
 ```markdown
 openssl genrsa 2048 > siteweb/keys/privatekey.key
 ```
 
-#### Courbe Eliptique
+**Courbe Eliptique**
 
 ```markdown
 openssl ecparam -genkey -name prime256v1 -out privatekey.key
@@ -96,7 +96,7 @@ openssl ec -in privatekey.key -text -noout
 
 ```
 
-#### Génération d'une demande de certificat pour le serveur web.
+**Génération d'une demande de certificat pour le serveur web.**
 
 La demande de certificat est généré avec openssl via la commande
 suivante :
@@ -150,7 +150,7 @@ ASCII et entouré de balises de marquage).
 
 ---
 
-## Format PEM
+**Format PEM**
 
 !!! info
     ```markdown
@@ -184,9 +184,9 @@ openssl req -in siteweb/requests_certificats/demande.csr -noout -text
 
 ---
 
-## VM Autorité de certification
+**VM Autorité de certification**
 
-## Création du certificat de l'autorité de certification
+**Création du certificat de l'autorité de certification**
 
 Pour signer un certificat, vous devez devenir votre propre autorité de
 certification, cela implique donc de posséder une clé privée et un
@@ -211,7 +211,7 @@ durée de validité d'un an auto-signé :
 openssl req -new -x509 -days 365 -key /autorite/keys/private_ca.key > autorite/certificats/ca.crt
 ```
 
-## Traitement de la demande de certificat de notre serveur par l'autorité de certification fictive
+**Traitement de la demande de certificat de notre serveur par l'autorité de certification fictive**
 
 1. La commande qui signe la demande de certificat est la suivante :
 
@@ -229,7 +229,7 @@ openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt -CA [ca].cr
 
 ---
 
-###  Forcer l'usage des champs Subject Alternatives Names (SAN)
+**Forcer l'usage des champs Subject Alternatives Names (SAN)**
 
 Forcer l'usage des champs Subject Alternatives Names (SAN)
 
@@ -248,7 +248,7 @@ openssl x509 -req -in [demande-orleans].csr -out [ca-orleans.sp].crt
 
 ---
 
-## Envois de Fichier d’un post à un autre
+**Envois de Fichier d’un post à un autre**
 
 ```markdown
 scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/du/fichier/destination
@@ -258,9 +258,9 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
 
 ---
 
-### Serveur Apache2 :
+**Serveur Apache2 :**
 
-## Fichier de conf
+**Fichier de conf**
 
 !!! info
     sudo nano /etc/apache2/sites-available/www.orleans.sportludique.fr-secure.conf
@@ -297,7 +297,7 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
 
 ---
 
-## Activer le site web
+**Activer le site web**
 
 !!! info
     ```markdown
@@ -305,7 +305,7 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
     ```
 
 
-## Activer SSL
+**Activer SSL**
 
 !!! info
     ```markdown
@@ -313,7 +313,7 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
     ```
 
 
-## Restart apache2
+**Restart apache2**
 
 !!! info
     ```markdown
@@ -328,7 +328,7 @@ scp /chemin/du/fichier/correspondant Utilisateur@adresse_ip_destinataire:chemin/
 
 ---
 
-## Navigateur
+**Navigateur**
 
 !!! info
     ```markdown
