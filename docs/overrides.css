@@ -52,7 +52,8 @@
 }
 
 /* Code */
-code {
+code,
+pre {
     background: #1e1e1e20;
     /* transparent pour les 2 modes */
 }
