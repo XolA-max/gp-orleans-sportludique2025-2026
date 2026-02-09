@@ -54,3 +54,8 @@
 code, pre {
     background: #1e1e1e20; /* transparent pour les 2 modes */
 }
+
+/* Reduce code block font size */
+code, pre, .md-typeset code {
+    font-size: 0.85em !important;
+}
