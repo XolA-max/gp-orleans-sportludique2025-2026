@@ -62,3 +62,59 @@ Il sert uniquement à associer des noms d’hôtes à des adresses IP sans passe
     sudo nano /etc/hostname
     
     ```
+
+## 2. Sécurisation de l'accès SSH
+
+Afin de sécuriser les accès aux machines, l'authentification par mot de passe est désactivée au profit d'une authentification par clé publique (protocole SSH).
+
+### 2.1 Générer une paire de clés (sur votre PC)
+Si vous ne possédez pas encore de clé SSH, ouvrez un terminal (PowerShell sous Windows ou terminal Linux/macOS) et tapez :
+!!! info
+    ```bash
+    ssh-keygen -t ed25519 -C "votre_email@exemple.com"
+    ```
+Laissez l'emplacement par défaut et définissez une *passphrase* si vous le souhaitez.
+
+### 2.2 Copier la clé publique sur la VM
+Pour autoriser votre PC à se connecter à la VM, vous devez copier votre clé **publique** (`.pub`) sur celle-ci.
+
+**Sous Linux/macOS :**
+!!! info
+    ```bash
+    ssh-copy-id utilisateur@ip_de_la_vm
+    ```
+
+**Sous Windows (PowerShell) :**
+!!! info
+    ```powershell
+    type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh utilisateur@ip_de_la_vm "cat >> .ssh/authorized_keys"
+    ```
+*(Note : il peut être nécessaire de créer le dossier `.ssh` sur la VM au préalable avec `mkdir -p ~/.ssh`)*
+
+### 2.3 Désactiver l'authentification par mot de passe
+Sur la VM Debian, modifiez la configuration du service SSH :
+!!! info
+    ```bash
+    sudo nano /etc/ssh/sshd_config
+    ```
+
+Repérez et modifiez les lignes suivantes (décommentez-les si nécessaire) :
+!!! info
+    ```ini
+    # Désactiver l'authentification par mot de passe
+    PasswordAuthentication no
+    
+    # S'assurer que l'authentification par clé est activée
+    PubkeyAuthentication yes
+    
+    # (Optionnel) Bloquer l'accès direct en root
+    PermitRootLogin prohibit-password
+    ```
+
+### 2.4 Appliquer les changements
+Redémarrez le service SSH pour prendre en compte la nouvelle configuration :
+!!! info
+    ```bash
+    sudo systemctl restart ssh
+    ```
+> **⚠️ Attention :** Avant de fermer votre session actuelle, ouvrez un second terminal et vérifiez que vous parvenez bien à vous connecter via votre clé SSH. Si ce n'est pas le cas, vous risquez de perdre l'accès en modifiant la configuration !
