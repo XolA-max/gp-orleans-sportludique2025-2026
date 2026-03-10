@@ -1,20 +1,30 @@
 site_name: Orleans
 theme:
   name: material
+  language: fr
   features:
     - navigation.tabs
     - navigation.sections
     - navigation.instant
-  palette:
-    - scheme: slate
-      primary: indigo   # placeholder (sera écrasé par CSS)
-      accent: teal
-      toggle:
-        icon: material/lightbulb-outline
-        name: "Basculer le thème"
   font:
     text: Roboto
     code: Roboto Mono
+  palette:
+    # --- MODE CLAIR ---
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Passer au mode sombre
+
+    # --- MODE SOMBRE ---
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Passer au mode clair
 
 markdown_extensions:
   - admonition
@@ -23,31 +33,12 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight
   - pymdownx.emoji
+
 extra_css:
   - overrides.css
+
 plugins: 
-  - drawio 
-
-theme:
-  name: material
-  language: fr
-  palette:
-
-    # --- MODE CLAIR ---
-    - scheme: default
-      primary: "#099E37"
-      accent: "#099E37"
-      toggle:
-        icon: material/weather-night
-        name: Passer au mode sombre
-
-    # --- MODE SOMBRE ---
-    - scheme: slate
-      primary: "#099E37"
-      accent: "#099E37"
-      toggle:
-        icon: material/weather-sunny
-        name: Passer au mode clair
+  # - drawio # Commenté temporairement car non installé
 
 extra:
   css:
