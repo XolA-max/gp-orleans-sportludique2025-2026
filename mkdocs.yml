@@ -38,7 +38,7 @@ extra_css:
   - overrides.css
 
 plugins: 
-  # - drawio # Commenté temporairement car non installé
+  - drawio
 
 extra:
   css:
