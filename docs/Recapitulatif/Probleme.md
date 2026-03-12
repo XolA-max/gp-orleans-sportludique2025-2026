@@ -137,3 +137,17 @@ VLAN actif après configuration.
 
 ### 🟢 Solutions
 - N/A
+
+---
+
+## 🗓️ Semaine 14 (09 au 12 Mars 2026)
+
+### 🔴 Problèmes
+- 1️⃣ **DNS REFUSED** : Les requêtes DNS depuis le réseau Wi-Fi étaient rejetées par le serveur Bind9.
+- 2️⃣ **Proxy Cache DNS** : L'interface DMZ n'était pas autorisée à interroger le service de relais sur le Stormshield.
+- 3️⃣ **Redirection HTTPS** : Le portail captif ne s'affichait pas automatiquement sur les sites sécurisés.
+
+### 🟢 Solutions
+- 1️⃣ Modification du fichier `/etc/bind/named.conf.options` pour inclure `192.168.65.0/24;` dans la section `allow-query`.
+- 2️⃣ Ajout de l'interface DMZ dans `Réseau > Proxy Cache DNS > Interfaces autorisées`.
+- 3️⃣ Utilisation du site `http://neverssl.com` pour forcer l'interception en HTTP simple et déclencher le portail.

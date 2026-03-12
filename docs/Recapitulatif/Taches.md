@@ -142,3 +142,15 @@
 | Règles firewall OPNsense| Règles firewall                               | Antoine              |
 | Users GLPI              | Ajout des utilisateurs de l'AD sur GLPI       | Antoine              |
 | Win clients             | Win clients sur le domaine                    | Antoine              |
+
+---
+
+## 📅 Semaine 14 (09 au 12 Mars 2026)
+
+| Tâches                       | Descriptions                            | Personnes concernées |
+|------------------------------|-----------------------------------------|----------------------|
+| Isolation réseau Wi-Fi       | Mise en place d'une DMZ pour la borne Wi-Fi | Cyriak           |
+| Configuration DNS Bind9      | Autorisation des requêtes DNS Wi-Fi     | Cyriak               |
+| Proxy Cache DNS Stormshield  | Activation du relais DNS sur le firewall | Cyriak               |
+| Portail Captif Stormshield   | Mise en place de l'authentification Guest (Nom/Prénom) | Cyriak               |
+| Stratégie de filtrage ASQ    | Configuration des règles d'interception et redirection | Cyriak               |

@@ -89,6 +89,36 @@ Cela permet de n’avoir aucun problème au niveau des règles de filtrage.
 
 ---
 
+## Configuration du Portail Captif (Méthode Guest)
+
+L'objectif est d'isoler le réseau Wi-Fi (DMZ) et de forcer une authentification simple pour les invités.
+
+### 1. Politique d'Authentification
+Configurer une règle pour intercepter le trafic du réseau Wi-Fi :
+- **Chemin** : `Utilisateurs > Authentification > Politique d'authentification`
+- **Source** : `Network_DMZ`
+- **Méthode** : `Invités`
+
+### 2. Personnalisation du Profil
+Utiliser le profil interne pour demander les informations nécessaires :
+- **Profil** : `Internal`
+- **Configuration** : Demander uniquement `Nom` et `Prénom`.
+- **Liaison Interface** : Dans l'onglet `Portail Captif`, lier l'interface `DMZ` au profil `Guest`.
+
+### 3. Stratégie de Filtrage (ASQ)
+L'ordre des règles est crucial pour permettre l'affichage du portail :
+
+| N° | Action | Source | Destination | Services | Commentaire |
+|----|--------|--------|-------------|----------|-------------|
+| 1 | Passer | Network_DMZ | DNS-Resolver | dns | Autoriser les requêtes DNS |
+| 2 | Passer | Network_DMZ | Firewall_DMZ | http, https | Autoriser l'accès à la mire de login |
+| 3 | Redirection | Network_DMZ (unknown) | Any | http, https | Rediriger vers le portail d'authentification |
+
+> [!TIP]
+> **Problème de redirection HTTPS** : Si le portail ne s'affiche pas automatiquement (blocage HSTS/SSL), utilisez le site **[http://neverssl.com](http://neverssl.com)** pour forcer une interception en HTTP simple.
+
+---
+
 ### Desactiver le mode furtif
 
 Aller dans :  

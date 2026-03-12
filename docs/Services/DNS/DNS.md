@@ -68,6 +68,7 @@ Dans le fichier de zone, ajoutez les enregistrements NS et A nécessaires.
                 172.16.x.0/24;      // LAN
                 127.0.0.1;          // LOCALHOST
                 192.168.x.0/24;     // DMZ
+                192.168.65.0/24;    // Wi-Fi (Borne)
             };
             
             // Desactivation de DNSSec
