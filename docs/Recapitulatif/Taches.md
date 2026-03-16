@@ -149,8 +149,8 @@
 
 | Tâches                       | Descriptions                            | Personnes concernées |
 |------------------------------|-----------------------------------------|----------------------|
-| Isolation réseau Wi-Fi       | Mise en place d'une DMZ pour la borne Wi-Fi | Cyriak           |
+| Isolation réseau Wi-Fi       | Mise en place d'une DMZ pour la borne Wi-Fi | Cyriak, Louis           |
 | Configuration DNS Bind9      | Autorisation des requêtes DNS Wi-Fi     | Cyriak               |
 | Proxy Cache DNS Stormshield  | Activation du relais DNS sur le firewall | Cyriak               |
 | Portail Captif Stormshield   | Mise en place de l'authentification Guest (Nom/Prénom) | Cyriak               |
-| Stratégie de filtrage ASQ    | Configuration des règles d'interception et redirection | Cyriak               |
+| Stratégie de filtrage ASQ    | Configuration des règles d'interception et redirection | Cyriak, Antoine               |

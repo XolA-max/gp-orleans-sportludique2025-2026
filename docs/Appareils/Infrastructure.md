@@ -1,11 +1,11 @@
 # Infrastructure
 
-## Plan du reseau
+## Plan du réseau
 
-![](Plan.drawio)
+![Plan du réseau](Plan.drawio)
 
 ---
 
-## Details
+## Détails
 
-![](equip.drawio)
+![Détails des équipements](equip.drawio)

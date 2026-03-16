@@ -178,7 +178,7 @@ Les requêtes vers `sportludique.fr` (entreprise) sont redirigées vers le serve
     ```
 
 #### Vue Externe
-
+i
 !!! info
     `sudo nano /etc/bind/db.orleans.sp.fr.externe`
 
@@ -186,7 +186,7 @@ Les requêtes vers `sportludique.fr` (entreprise) sont redirigées vers le serve
     ; BIND data file for external view
     $TTL    604800
     @       IN      SOA   ns1.orleans.sportludique.fr. root.orleans.sportludique.fr. (
-                         2025150938     ; Serial
+                         2025150938     ; Seriali
                          604800         ; Refresh
                           86400         ; Retry
                         2419200         ; Expire
