@@ -65,8 +65,8 @@ Ce playbook crée l'utilisateur `ansible`, génère la configuration sudo et dé
 
 Et si le script précédent ne fonctionne pas, il faudra donc créer l'utilisateur `ansible` à la main :
 
-> [!NOTE]
-> La méthode manuelle est principalement destinée au premier serveur (hôte maître) ou en cas de problème ponctuel. Privilégiez l'automatisation.
+!!! info "Note"
+    La méthode manuelle est principalement destinée au premier serveur (hôte maître) ou en cas de problème ponctuel. Privilégiez l'automatisation.
 
 #### Création de l'utilisateur
 
@@ -118,15 +118,15 @@ Afin de permettre la connexion, la clé publique du serveur maître Ansible doit
    chmod 600 /home/etudiant/.ssh/authorized_keys
    ```
 
-> [!CAUTION]
-> Les permissions `chmod 700` sur le dossier `.ssh` et `chmod 600` sur `authorized_keys` sont **cruciales**. Si elles sont trop permissives (ex: 777), le service SSH refusera par défaut la connexion par mesure de sécurité.
+!!! danger "Crucial"
+    Les permissions `chmod 700` sur le dossier `.ssh` et `chmod 600` sur `authorized_keys` sont **cruciales**. Si elles sont trop permissives (ex: 777), le service SSH refusera par défaut la connexion par mesure de sécurité.
 
 ## 2. Sécurisation SSH (Le fichier `sshd_config`)
 
 Il est recommandé de durcir la configuration SSH dans le fichier `/etc/ssh/sshd_config`.
 
-> [!WARNING]
-> Avant de désactiver `PasswordAuthentication`, assurez-vous impérativement que l'authentification par clé fonctionne correctement sur chaque machine, pour éviter d'être bloqué hors du système.
+!!! warning "Attention"
+    Avant de désactiver `PasswordAuthentication`, assurez-vous impérativement que l'authentification par clé fonctionne correctement sur chaque machine, pour éviter d'être bloqué hors du système.
 
 | Paramètre | Valeur Sécurisée | Usage de Secours |
 | --- | --- | --- |
@@ -147,8 +147,8 @@ Une fois l'accès initial garanti, un script permet de configurer le service SSH
 
 Avant d'exécuter l'automatisation de la sécurisation, il est nécessaire de créer un répertoire contenant les clés publiques de chaque administrateur. 
 
-> [!IMPORTANT]
-> Les noms des fichiers `.pub` doivent correspondre exactement aux pseudonymes définis dans le `loop` du playbook. L'extension `.pub` est indispensable.
+!!! warning "Important"
+    Les noms des fichiers `.pub` doivent correspondre exactement aux pseudonymes définis dans le `loop` du playbook. L'extension `.pub` est indispensable.
 
 1. Créez un répertoire `keys` dans le dossier des playbooks Ansible :
    ```bash
