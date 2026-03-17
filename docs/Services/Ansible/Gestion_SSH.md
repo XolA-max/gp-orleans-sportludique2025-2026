@@ -65,6 +65,9 @@ Ce playbook crée l'utilisateur `ansible`, génère la configuration sudo et dé
 
 Et si le script précédent ne fonctionne pas, il faudra donc créer l'utilisateur `ansible` à la main :
 
+> [!NOTE]
+> La méthode manuelle est principalement destinée au premier serveur (hôte maître) ou en cas de problème ponctuel. Privilégiez l'automatisation.
+
 #### Création de l'utilisateur
 
 On crée l'utilisateur `ansible`. Le mot de passe peut être laissé vide ou verrouillé, car l'authentification se fera exclusivement par clé SSH.
@@ -122,6 +125,9 @@ Afin de permettre la connexion, la clé publique du serveur maître Ansible doit
 
 Il est recommandé de durcir la configuration SSH dans le fichier `/etc/ssh/sshd_config`.
 
+> [!WARNING]
+> Avant de désactiver `PasswordAuthentication`, assurez-vous impérativement que l'authentification par clé fonctionne correctement sur chaque machine, pour éviter d'être bloqué hors du système.
+
 | Paramètre | Valeur Sécurisée | Usage de Secours |
 | --- | --- | --- |
 | `PasswordAuthentication` | `no` | `yes` (pour dépanner) |
@@ -140,6 +146,9 @@ Une fois l'accès initial garanti, un script permet de configurer le service SSH
 ### Préparation : Le dossier `keys/`
 
 Avant d'exécuter l'automatisation de la sécurisation, il est nécessaire de créer un répertoire contenant les clés publiques de chaque administrateur. 
+
+> [!IMPORTANT]
+> Les noms des fichiers `.pub` doivent correspondre exactement aux pseudonymes définis dans le `loop` du playbook. L'extension `.pub` est indispensable.
 
 1. Créez un répertoire `keys` dans le dossier des playbooks Ansible :
    ```bash
@@ -184,27 +193,4 @@ Ce playbook utilise une boucle (`loop`) pour lire les clés SSH précédemment c
       service:
         name: ssh
         state: restarted
-```
-
-## 4. Procédure de secours (Le mode Debug)
-
-Si vous vous retrouvez bloqué (par exemple, un problème de clé empêchant la connexion lorsque `PasswordAuthentication` est à `no`), vous pouvez utiliser le mode Sauvetage.
-
-### Lancer le serveur sur un port alternatif
-
-Depuis une console physique ou une autre session parallèle active de la machine, lancez un démon SSH en mode debug sur un port alternatif (ex: 2222) :
-
-```bash
-sudo /usr/sbin/sshd -d -p 2222
-```
-
-### Pourquoi l'utiliser ?
-
-Le mode debug permet de :
-1. Contourner les blocages du port par défaut (22).
-2. Voir les erreurs d'authentification en temps réel pour identifier la raison du rejet (problèmes de permissions, format de clé invalide, etc.).
-
-Pour reprendre la main et vous reconnecter avec un mot de passe classique, réactivez temporairement `PasswordAuthentication yes` et `KbdInteractiveAuthentication yes` dans `/etc/ssh/sshd_config`, puis redémarrez le service :
-```bash
-sudo systemctl restart ssh
 ```
