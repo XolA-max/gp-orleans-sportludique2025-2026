@@ -76,6 +76,9 @@ On crée l'utilisateur `ansible`. Le mot de passe peut être laissé vide ou ver
 sudo adduser ansible
 ```
 
+!!! info "💡 Note sur l'utilisateur pivot"
+    Si la machine cible utilise l'utilisateur `admin` au lieu de `etudiant`, il faut modifier la variable `ansible_user` dans l'inventaire avant de lancer le playbook de secours.
+
 #### Attribution des privilèges sudo
 
 Pour permettre à Ansible d'exécuter des commandes en tant qu'administrateur sans demande de mot de passe, il faut créer un fichier de configuration dans `/etc/sudoers.d/`.
@@ -135,6 +138,10 @@ Il est recommandé de durcir la configuration SSH dans le fichier `/etc/ssh/sshd
 | `KbdInteractiveAuthentication` | `no` | `yes` (si le mot de passe ne passe pas) |
 
 Après modification, n'oubliez pas de redémarrer le service SSH :
+
+!!! danger "Attention"
+    Toujours tester la connexion dans un nouvel onglet avant de redémarrer le service SSH, pour éviter de perdre définitivement l'accès à la VM.
+
 ```bash
 sudo systemctl restart ssh
 ```
@@ -193,4 +200,65 @@ Ce playbook utilise une boucle (`loop`) pour lire les clés SSH précédemment c
       service:
         name: ssh
         state: restarted
+
+## 4. Dépannage et Remise en état
+
+### Dépannage : Erreurs Communes
+
+Voici les erreurs les plus fréquemment rencontrées et comment les résoudre :
+
+- **L'erreur Permission denied** : Même si l'utilisateur existe, si le dossier `~/.ssh` n'a pas les droits `700` et si le fichier `authorized_keys` n'a pas les droits `600`, SSH rejettera systématiquement la connexion par mesure de sécurité.
+- **Le piège du propriétaire** : Si le dossier `.ssh` appartient à `root` au lieu de l'utilisateur concerné (par exemple `ansible`), l'authentification par clé SSH ne fonctionnera jamais.
+- **L'erreur de désérialisation JSON** : Si Ansible a besoin d'un mot de passe pour `sudo` mais qu'il est lancé sans l'option `--ask-become-pass` (ou `-K`), il plantera en affichant une erreur confuse de désérialisation JSON.
+
+### Le Mode Debug (Port 2222)
+
+La commande magique pour voir ce qui se passe "sous le capot" :
+
+```bash
+sudo /usr/sbin/sshd -d -p 2222
 ```
+C'est grâce à ça qu'on a compris que le problème venait de la configuration et non du mot de passe lui-même.
+
+### Procédure de remise en état des accès
+
+Le playbook de secours `fix_ansible_access.yml` qu'on a fait ensemble est crucial. C'est lui qui permet de réparer 15 machines d'un coup quand elles passent en `UNREACHABLE`.
+
+*(Exemple de structure type)*
+```yaml
+---
+- name: "Dépannage : Remise en état des accès Ansible"
+  hosts: all
+  become: yes
+  
+  tasks:
+    - name: "S'assurer que le dossier .ssh appartient à ansible avec les bons droits"
+      ansible.builtin.file:
+        path: /home/ansible/.ssh
+        state: directory
+        owner: ansible
+        group: ansible
+        mode: '0700'
+
+    - name: "Déployer la clé publique et corriger les droits (600)"
+      ansible.posix.authorized_key:
+        user: ansible
+        path: /home/ansible/.ssh/authorized_keys
+        key: "{{ lookup('file', 'keys/ansible.pub') }}"
+        state: present
+
+    - name: "Rétablir les droits SUDO sans mot de passe"
+      ansible.builtin.copy:
+        content: "ansible ALL=(ALL) NOPASSWD: ALL"
+        dest: /etc/sudoers.d/ansible
+        mode: '0440'
+```
+
+Pour exécuter ce playbook sur les machines inaccessibles, il est crucial d'utiliser l'utilisateur pivot pour lequel on a encore un accès par mot de passe :
+
+```bash
+# Lancement du secours en utilisant l'utilisateur pivot (ex: etudiant)
+ansible-playbook fix_ansible_access.yml -u etudiant -k -K
+```
+
+*Rappel : `-k` pour le mot de passe SSH, `-K` pour le mot de passe sudo.*
