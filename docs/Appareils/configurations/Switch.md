@@ -134,5 +134,5 @@
     Switch(config)#ip arp inspection vlan 240
     Switch(config)#interface fa1/0/12
     Switch(config-if)#ip arp inspection trust
-
+    ```
 ---
