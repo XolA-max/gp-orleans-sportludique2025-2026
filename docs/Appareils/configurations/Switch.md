@@ -122,7 +122,18 @@
     Switch(config)# ip dhcp snooping
     Switch(config)# ip dhcp snooping vlan 240
     Switch(config)# interface fa1/0/12
-    Switch(config-if)# ip dhcp snooping trust
+    Switch(config-if)# ip dhcp snooping trustinterface fa1/0/12
+ip arp inspection trust
     ```
+
+
+####  DCHP Snooping
+
+
+!!! info
+    ```bash
+    Switch(config)#ip arp inspection vlan 240
+    Switch(config)#interface fa1/0/12
+    Switch(config-if)#ip arp inspection trust
 
 ---
