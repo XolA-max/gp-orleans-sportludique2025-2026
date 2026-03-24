@@ -111,7 +111,7 @@
     (config-if)# switchport port-security
     (config-if)# switchport port-security maximum 1
     (config-if)# switchport port-security mac-address sticky
-    (config-if)# switchport port-security violation shutdown
+    (config-if)# switchport port-security violation protect
     ```
 
 ####  DCHP Snooping
