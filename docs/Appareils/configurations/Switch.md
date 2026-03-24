@@ -122,12 +122,11 @@
     Switch(config)# ip dhcp snooping
     Switch(config)# ip dhcp snooping vlan 240
     Switch(config)# interface fa1/0/12
-    Switch(config-if)# ip dhcp snooping trustinterface fa1/0/12
-ip arp inspection trust
+    Switch(config-if)# ip dhcp snooping trust
     ```
 
 
-####  DCHP Snooping
+####  DAI
 
 
 !!! info
