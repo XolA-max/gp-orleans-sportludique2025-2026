@@ -140,7 +140,7 @@ VLAN actif après configuration.
 
 ---
 
-## 🗓️ Semaine 14 (09 au 12 Mars 2026)
+## 🗓️ Semaine 14 
 
 ### 🔴 Problèmes
 - 1️⃣ **DNS REFUSED** : Les requêtes DNS depuis le réseau Wi-Fi étaient rejetées par le serveur Bind9.
@@ -151,3 +151,15 @@ VLAN actif après configuration.
 - 1️⃣ Modification du fichier `/etc/bind/named.conf.options` pour inclure `192.168.65.0/24;` dans la section `allow-query`.
 - 2️⃣ Ajout de l'interface DMZ dans `Réseau > Proxy Cache DNS > Interfaces autorisées`.
 - 3️⃣ Utilisation du site `http://neverssl.com` pour forcer l'interception en HTTP simple et déclencher le portail.
+
+---
+
+## 🗓️ Semaine 17
+
+### 🔴 Problèmes
+- 1️⃣ **Borne Wi-Fi plantée** : Plus du tout d'Internet ! Aucune redirection après la connexion au réseau et le portail captif qui refuse de s'afficher.
+- 2️⃣ **Perte de l'interface web Graylog** : Juste après un redémarrage du service `graylog-server.service`, impossible d'accéder à l'interface web.
+
+### 🟢 Solutions
+- 1️⃣ On a d'abord analysé les règles du pare-feu au cas où, mais il n'y avait rien de suspect. Au final, un simple redémarrage de la borne Wi-Fi a suffi à régler le problème.
+- 2️⃣ On est allés fouiller dans les journaux en écoutant le trafic sur le port 514 (`sudo tcpdump -i any port 514`). De nombreux logs passaient! En creusant, on s'est rendu compte que le datanode était passé inactif. On l'a redémarré, tout est revenu à la normale.
