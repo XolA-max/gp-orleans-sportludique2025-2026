@@ -98,5 +98,41 @@
     Switch# show interfaces status                
     Switch# show etherchannel detail              
     ```
+    
 
+### Securisation
+
+
+####  Securisation des ports
+
+
+!!! info
+    ```bash
+    (config-if)# switchport port-security
+    (config-if)# switchport port-security maximum 1
+    (config-if)# switchport port-security mac-address sticky
+    (config-if)# switchport port-security violation protect
+    ```
+
+####  DCHP Snooping
+
+
+!!! info
+    ```bash
+    Switch(config)# ip dhcp snooping
+    Switch(config)# ip dhcp snooping vlan 240
+    Switch(config)# interface fa1/0/12
+    Switch(config-if)# ip dhcp snooping trust
+    ```
+
+
+####  DAI
+
+
+!!! info
+    ```bash
+    Switch(config)#ip arp inspection vlan 240
+    Switch(config)#interface fa1/0/12
+    Switch(config-if)#ip arp inspection trust
+    ```
 ---
