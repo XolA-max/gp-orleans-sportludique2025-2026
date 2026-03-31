@@ -63,12 +63,14 @@ Ce playbook crée l'utilisateur `ansible`, génère la configuration sudo et dé
 
 ### Méthode Manuelle (Secours)
 
-Et si le script précédent ne fonctionne pas, il faudra donc créer l'utilisateur `ansible` à la main :
+Et si le script précédent ne fonctionne pas, il faudra donc créer l'utilisateur `ansible` à la main sur chaque VM cible.
 
 !!! info "Note"
-    La méthode manuelle est principalement destinée au premier serveur (hôte maître) ou en cas de problème ponctuel. Privilégiez l'automatisation.
+    La méthode manuelle est principalement destinée au premier serveur (hôte maître) ou en cas de problème ponctuel. Privilégiez toujours l'automatisation.
 
-#### Création de l'utilisateur
+---
+
+#### Étape 1 — Création de l'utilisateur `ansible`
 
 On crée l'utilisateur `ansible`. Le mot de passe peut être laissé vide ou verrouillé, car l'authentification se fera exclusivement par clé SSH.
 
@@ -77,52 +79,96 @@ sudo adduser ansible
 ```
 
 !!! info "💡 Note sur l'utilisateur pivot"
-    Si la machine cible utilise l'utilisateur `admin` au lieu de `etudiant`, il faut modifier la variable `ansible_user` dans l'inventaire avant de lancer le playbook de secours.
+    Si la machine cible utilise l'utilisateur `admin` au lieu de `etudiant`, il faut adapter les chemins dans les commandes suivantes.
 
-#### Attribution des privilèges sudo
+---
 
-Pour permettre à Ansible d'exécuter des commandes en tant qu'administrateur sans demande de mot de passe, il faut créer un fichier de configuration dans `/etc/sudoers.d/`.
+#### Étape 2 — Attribution des privilèges sudo (NOPASSWD)
+
+Ansible a besoin d'exécuter des commandes root (`become: yes` dans les playbooks). Pour éviter qu'il soit bloqué par un prompt de mot de passe, on ajoute une règle **NOPASSWD** dans `/etc/sudoers.d/` :
 
 ```bash
 echo "ansible ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
-sudo chmod 440 /etc/sudoers.d/ansible
+sudo chmod 0440 /etc/sudoers.d/ansible
 ```
 
-#### Configuration de l'identité SSH
+> **Pourquoi `chmod 0440` ?** Le service `sudo` vérifie que les fichiers inclus dans `/etc/sudoers.d/` ne sont pas modifiables par n'importe qui. Si les permissions sont trop ouvertes, `sudo` ignorera le fichier silencieusement. Le mode `0440` (lecture seule pour root et le groupe root) est le minimum requis.
 
-Afin de permettre la connexion, la clé publique du serveur maître Ansible doit être copiée sur les hôtes cibles.
+---
 
-1. **Création de la clé SSH (sur le serveur maître)** :
-   Si vous ne l'avez pas encore créée, générez une clé SSH :
-   ```bash
-   ssh-keygen -t ed25519 -C "nom_de_la_machine"
-   ```
-   Dès qu'elle est créée, utilisez la commande `cat` pour afficher son contenu, puis copiez tout le texte affiché :
-   ```bash
-   cat ~/.ssh/id_ed25519.pub
-   ```
+#### Étape 3 — Préparation du répertoire SSH (utilisateur courant)
 
-2. **Création du répertoire `.ssh` (sur l'hôte cible)** :
-   Préparez le répertoire sur le serveur de destination :
-   ```bash
-   mkdir -p /home/etudiant/.ssh
-   chmod 700 /home/etudiant/.ssh
-   ```
+On prépare d'abord le dossier `.ssh` et le fichier `authorized_keys` sur l'utilisateur courant (par ex. `etudiant`) :
 
-3. **Ajout de la clé publique dans le fichier `authorized_keys`** :
-   Ouvrez le fichier des clés autorisées avec l'éditeur `nano` :
-   ```bash
-   nano /home/etudiant/.ssh/authorized_keys
-   ```
-   *Collez-y le contenu copié précédemment.* Enregistrez (`Ctrl+O`, `Entrée`) et quittez (`Ctrl+X`).
+```bash
+mkdir -p ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+```
 
-   N'oubliez pas d'appliquer les permissions strictes sur le fichier :
-   ```bash
-   chmod 600 /home/etudiant/.ssh/authorized_keys
-   ```
+> **Pourquoi ces commandes ?**
+>
+> - `mkdir -p ~/.ssh` : crée le dossier `.ssh` s'il n'existe pas encore (l'option `-p` empêche une erreur s'il existe déjà).
+> - `touch ~/.ssh/authorized_keys` : crée le fichier `authorized_keys` vide s'il n'existe pas.
+> - `chmod 700 ~/.ssh` : seul le propriétaire peut lire, écrire et traverser ce dossier. SSH exige cette restriction stricte, sinon il refusera l'authentification par clé.
+> - `chmod 600 ~/.ssh/authorized_keys` : seul le propriétaire peut lire et écrire ce fichier. Même logique de sécurité que pour le dossier.
+
+---
+
+#### Étape 4 — Ajout des clés publiques autorisées
+
+Ouvrez le fichier `authorized_keys` avec `nano` et collez-y les clés publiques de chaque administrateur et du serveur Ansible :
+
+```bash
+nano ~/.ssh/authorized_keys
+```
+
+Contenu à ajouter (une clé par ligne) :
+
+```text
+ssh-ed25519 AAAAC3...jkcsm etudiant@ORL-SRV-ANSIBLE
+ssh-ed25519 AAAAC3...NhGC  admin-cyriak
+ssh-ed25519 AAAAC3...JhPC  Admin-Louis
+ssh-ed25519 AAAAC3...r6oG  antoine.mesange@gmail.fr
+```
+
+!!! warning "Clés masquées"
+    Les clés ci-dessus sont volontairement tronquées pour cette documentation publique. Les clés complètes sont disponibles sur le serveur Ansible (`/etc/ansible/playbooks/keys/`) ou auprès de chaque administrateur.
+
+Enregistrez (`Ctrl+O`, `Entrée`) et quittez (`Ctrl+X`).
+
+---
+
+#### Étape 5 — Copie et sécurisation du `.ssh` vers l'utilisateur `ansible`
+
+Maintenant que les clés sont en place sur l'utilisateur courant, on copie tout le dossier `.ssh` vers le home de l'utilisateur `ansible` et on corrige les propriétaires et permissions :
+
+```bash
+# Créer le dossier .ssh pour ansible (au cas où il n'existerait pas)
+sudo mkdir -p /home/ansible/.ssh
+
+# Copier les clés autorisées de l'utilisateur courant vers ansible
+sudo cp /home/etudiant/.ssh/authorized_keys /home/ansible/.ssh/authorized_keys
+
+# Attribuer la propriété du dossier .ssh à l'utilisateur ansible
+sudo chown -R ansible:ansible /home/ansible/.ssh
+
+# Appliquer les permissions strictes exigées par SSH
+sudo chmod 700 /home/ansible/.ssh
+sudo chmod 600 /home/ansible/.ssh/authorized_keys
+```
+
+> **Pourquoi chacune de ces commandes est nécessaire ?**
+>
+> - `sudo mkdir -p /home/ansible/.ssh` : l'utilisateur `ansible` vient d'être créé, il n'a pas encore de dossier `.ssh`. On le crée manuellement.
+> - `sudo cp ... authorized_keys` : on réutilise les clés déjà configurées pour l'utilisateur courant. Cela évite de devoir les recopier une par une.
+> - `sudo chown -R ansible:ansible /home/ansible/.ssh` : **étape critique** — si le dossier `.ssh` ou `authorized_keys` appartient à `root` ou à un autre utilisateur, SSH refusera systématiquement la connexion par clé. Le propriétaire **doit** être `ansible`.
+> - `sudo chmod 700 /home/ansible/.ssh` : le dossier `.ssh` ne doit être accessible qu'à son propriétaire. C'est une vérification de sécurité du daemon SSH (mode `StrictModes` activé par défaut).
+> - `sudo chmod 600 /home/ansible/.ssh/authorized_keys` : même logique — le fichier des clés ne doit être lisible et modifiable que par l'utilisateur `ansible`.
 
 !!! danger "Crucial"
-    Les permissions `chmod 700` sur le dossier `.ssh` et `chmod 600` sur `authorized_keys` sont **cruciales**. Si elles sont trop permissives (ex: 777), le service SSH refusera par défaut la connexion par mesure de sécurité.
+    Les permissions `chmod 700` sur le dossier `.ssh` et `chmod 600` sur `authorized_keys` sont **cruciales**. De plus, le **propriétaire** doit impérativement être l'utilisateur `ansible` (et non `root`). Si l'une de ces conditions n'est pas remplie, SSH refusera la connexion par clé sans message d'erreur explicite.
 
 ## 2. Sécurisation SSH (Le fichier `sshd_config`)
 
