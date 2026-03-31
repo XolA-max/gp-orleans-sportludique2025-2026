@@ -1,6 +1,6 @@
 # Compte rendu des séances
 
-## 📅 Semaine 1
+## Semaine 1
 
 | Tâches                                  | Descriptions                                                                 | Personnes concernées       |
 |-----------------------------------------|----------------------------------------------------------------------------|----------------------------|
@@ -11,7 +11,7 @@
 
 ---
 
-## 📅 Semaine 2
+## Semaine 2
 
 | Tâches                       | Descriptions                                                                 | Personnes concernées       |
 |------------------------------|----------------------------------------------------------------------------|----------------------------|
@@ -22,7 +22,7 @@
 
 ---
 
-## 📅 Semaine 3
+## Semaine 3
 
 | Tâches                | Descriptions                                                                                                                                                  | Personnes concernées  |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
@@ -33,7 +33,7 @@
 
 ---
 
-## 📅 Semaine 4
+## Semaine 4
 
 | Tâches        | Descriptions                                            | Personnes concernées  |
 |---------------|--------------------------------------------------------|-----------------------|
@@ -44,7 +44,7 @@
 
 ---
 
-## 📅 Semaine 5
+## Semaine 5
 
 | Tâches             | Descriptions                                                           | Personnes concernées  |
 |--------------------|-----------------------------------------------------------------------|-----------------------|
@@ -55,7 +55,7 @@
 
 ---
 
-## 📅 Semaine 6
+## Semaine 6
 
 | Tâches         | Descriptions                                                                  | Personnes concernées |
 |----------------|------------------------------------------------------------------------------|----------------------|
@@ -66,7 +66,7 @@
 
 ---
 
-## 📅 Semaine 7
+## Semaine 7
 
 | Tâches   | Descriptions                                         | Personnes concernées |
 |----------|-----------------------------------------------------|----------------------|
@@ -78,7 +78,7 @@
 
 ---
 
-## 📅 Semaine 8
+## Semaine 8
 
 | Tâches          | Descriptions                                                                   | Personnes concernées  |
 |-----------------|-------------------------------------------------------------------------------|-----------------------|
@@ -90,7 +90,7 @@
 
 ---
 
-## 📅 Semaine 9
+## Semaine 9
 
 | Tâches                  | Descriptions                                   | Personnes concernées  |
 |-------------------------|-----------------------------------------------|-----------------------|
@@ -100,7 +100,7 @@
 
 ---
 
-## 📅 Semaine 10
+## Semaine 10
 
 | Tâches                       | Descriptions                            | Personnes concernées |
 |------------------------------|-----------------------------------------|----------------------|
@@ -112,7 +112,7 @@
 
 ---
 
-## 📅 Semaine 11
+## Semaine 11
 
 | Tâches                       | Descriptions                            | Personnes concernées |
 |------------------------------|-----------------------------------------|----------------------|
@@ -123,7 +123,7 @@
 
 ---
 
-## 📅 Semaine 12
+## Semaine 12
 
 | Tâches           | Descriptions                            | Personnes concernées |
 |------------------|-----------------------------------------|----------------------|
@@ -133,7 +133,7 @@
 
 ---
 
-## 📅 Semaine 13
+## Semaine 13
 
 | Tâches                  | Descriptions                                  | Personnes concernées |
 |-------------------------|----------------------------------------------|----------------------|
@@ -145,7 +145,7 @@
 
 ---
 
-## 📅 Semaine 14 
+## Semaine 14 
 
 | Tâches                       | Descriptions                            | Personnes concernées |
 |------------------------------|-----------------------------------------|----------------------|
@@ -157,11 +157,11 @@
 
 ---
 
-## 📅 Semaine 17
+## Semaine 17
 
 | Tâches                       | Descriptions                            | Personnes concernées |
 |------------------------------|-----------------------------------------|----------------------|
-| Dépannage borne Wi-Fi        | Diagnostic et redémarrage de la borne Wi-Fi suite à une perte d'accès Internet et portail captif | Cyriak, Louis |
-| Dépannage Graylog            | Diagnostic du datanode inactif et remise en service de l'interface web Graylog | Cyriak |
-| Documentation SSH Ansible    | Mise à jour de la procédure manuelle de connexion sécurisée SSH pour Ansible (commandes détaillées, clés masquées, explications des permissions) | Louis |
-| Restriction SSH management   | Mise à jour du playbook `setup_ssh.yml` : SSH n'écoute plus que sur le réseau de management (`192.168.140.0/24`) via `ListenAddress` | Louis |
+| Dépannage borne Wi-Fi        | Diagnostic et redémarrage de la borne Wi-Fi suite à une perte d'accès Internet et portail captif | Cyriak, Louis, Antoine |
+| Dépannage Graylog            | Diagnostic du datanode inactif et remise en service de l'interface web Graylog | Cyriak, Antoine |
+| Documentation SSH Ansible    | Mise à jour de la procédure manuelle de connexion sécurisée SSH pour Ansible (commandes détaillées, clés masquées, explications des permissions) | Cyriak, Antoine |
+| Restriction SSH management   | Mise à jour du playbook `setup_ssh.yml` : SSH n'écoute plus que sur le réseau de management (`192.168.140.0/24`) via `ListenAddress` | Cyriak, Antoine |
