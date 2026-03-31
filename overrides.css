@@ -1,0 +1,97 @@
+/* ======================================================
+   COULEURS GLOBALES US ORLÉANS (Rouge et Jaune)
+   ====================================================== */
+:root {
+    /* Écrasement global des variables de couleur Markdown/Material */
+    --md-primary-fg-color: #E30613;
+    /* Rouge principal */
+    --md-primary-fg-color--light: #f73645;
+    --md-primary-fg-color--dark: #b3040f;
+    --md-accent-fg-color: #FFED00;
+    /* Jaune accentué */
+
+    /* Forcer la couleur des liens standards partout (remplace le bleu par défaut) */
+    --md-typeset-a-color: #E30613;
+}
+
+/* ======================================================
+   HEADER (En-tête) ET ONGLETS
+   ====================================================== */
+/* Header en rouge avec une ligne jaune en dessous (Rappel du Logo) */
+.md-header,
+.md-tabs {
+    background-color: #E30613 !important;
+}
+
+.md-header {
+    border-bottom: 4px solid #FFED00 !important;
+}
+
+/* Rendre le texte du header blanc pour contraster sur le rouge */
+.md-header__title,
+.md-header__button,
+.md-tabs__link {
+    color: #ffffff !important;
+}
+
+/* ======================================================
+   MODE CLAIR (scheme: default)
+   ====================================================== */
+[data-md-color-scheme="default"] {
+    --md-default-bg-color: #ffffff !important;
+    --md-default-fg-color: #000000 !important;
+    --md-typeset-a-color: #E30613 !important;
+    /* Liens en rouge */
+}
+
+/* Titres (rouge en mode clair) */
+[data-md-color-scheme="default"] .md-typeset h1,
+[data-md-color-scheme="default"] .md-typeset h2 {
+    color: #E30613;
+}
+
+/* ======================================================
+   MODE SOMBRE (scheme: slate)
+   ====================================================== */
+[data-md-color-scheme="slate"] {
+    --md-default-bg-color: #1a1a1a !important;
+    --md-default-fg-color: #ffffff !important;
+
+    /* En mode sombre, le texte de base et les liens passent en Jaune */
+    --md-primary-fg-color: #FFED00 !important;
+    --md-typeset-a-color: #FFED00 !important;
+}
+
+/* Titres (jaune en mode sombre) */
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2 {
+    color: #FFED00;
+}
+
+/* Pied de page et pagination (Page précédente / suivante) */
+[data-md-color-scheme="slate"] .md-footer-nav__link .md-footer-nav__title {
+    color: #FFED00 !important;
+    /* Force le jaune sur les gros liens du bas (ex: Page d'Accueil) */
+}
+
+[data-md-color-scheme="default"] .md-footer-nav__link .md-footer-nav__title,
+.md-footer-item {
+    color: #E30613 !important;
+    /* Force le rouge en mode clair */
+}
+
+/* ======================================================
+   STYLE COMMUN
+   ====================================================== */
+/* Boutons primaires */
+.md-button.md-button--primary {
+    background-color: var(--md-primary-fg-color) !important;
+    color: #000000 !important;
+    /* Texte noir sur boutons pour contraste (Rouge/Jaune) */
+}
+
+/* Code */
+code,
+pre {
+    background: #1e1e1e20 !important;
+}

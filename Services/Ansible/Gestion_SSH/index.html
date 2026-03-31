@@ -1,0 +1,3281 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Ansible/">
+      
+      
+        <link rel="next" href="../../Apache2/Apache2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Gestion des accès SSH et Automatisation avec Ansible - Orleans</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../overrides.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gestion-des-acces-ssh-et-automatisation-avec-ansible" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="Orleans" class="md-header__button md-logo" aria-label="Orleans" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Orleans
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Gestion des accès SSH et Automatisation avec Ansible
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Passer au mode sombre"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Passer au mode sombre" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Passer au mode clair"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Passer au mode clair" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Page d'Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Appareils/Equipements/" class="md-tabs__link">
+          
+  
+  
+  Appareils
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Recapitulatif/Probleme/" class="md-tabs__link">
+          
+  
+  
+  Recapitulatif
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Activedirectory/Active%20Directory/" class="md-tabs__link">
+          
+  
+  
+  Services
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Orleans" class="md-nav__button md-logo" aria-label="Orleans" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Orleans
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Page d'Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appareils
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appareils
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/Equipements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Présentation des équipements réseau
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/Information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Information
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/Infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/reseau/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Réseaux présents sur l’infrastructure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Configurations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Firewall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firewall
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/LinuxDEB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide linux Debian Prête à l'emplois
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Reinitialisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide : Réinitialisation et ROMMON sur Routeurs Cisco
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Routeur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routeur
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/Switch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide des commandes Switch(cisco)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Appareils/configurations/WIN10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Windows 10 Prêt à l'emplois ou (PAE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recapitulatif
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Recapitulatif
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Recapitulatif/Probleme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Problèmes rencontrés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Recapitulatif/Taches/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compte rendu des séances
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Services
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Activedirectory
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Activedirectory
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Activedirectory/Active%20Directory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Active Directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Activedirectory/LDAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Principe et utilisation de LDAP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ansible
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestion des accès SSH et Automatisation avec Ansible
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestion des accès SSH et Automatisation avec Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-creation-de-lutilisateur-de-gestion-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Création de l'utilisateur de gestion (ansible)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Création de l&#39;utilisateur de gestion (ansible)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methode-automatisee-recommandee-etcansibleplaybooksadd_ansible_useryml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthode Automatisée (Recommandée) : /etc/ansible/playbooks/add_ansible_user.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methode-manuelle-secours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthode Manuelle (Secours)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Méthode Manuelle (Secours)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-creation-de-lutilisateur-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 — Création de l'utilisateur ansible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-attribution-des-privileges-sudo-nopasswd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 — Attribution des privilèges sudo (NOPASSWD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-preparation-du-repertoire-ssh-utilisateur-courant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 — Préparation du répertoire SSH (utilisateur courant)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-ajout-des-cles-publiques-autorisees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 — Ajout des clés publiques autorisées
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-5-copie-et-securisation-du-ssh-vers-lutilisateur-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 5 — Copie et sécurisation du .ssh vers l'utilisateur ansible
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-securisation-ssh-le-fichier-sshd_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Sécurisation SSH (Le fichier sshd_config)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-automatisation-de-la-securisation-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Automatisation de la Sécurisation SSH
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Automatisation de la Sécurisation SSH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation-le-dossier-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Préparation : Le dossier keys/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-playbook-etcansibleplaybookssetup_sshyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le Playbook (/etc/ansible/playbooks/setup_ssh.yml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procedure-de-remise-en-etat-des-acces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procédure de remise en état des accès
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Apache2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Apache2/Apache2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Apache2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BDD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    BDD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BDD/Base%20de%20donne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base de Données
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DNS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DNS/DNS-Sec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS Secondaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DNS/DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Installation DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Docker/Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation de Docker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GLPI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GLPI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GLPI/GLPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation de GLPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GLPI/InventaireGLPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventaire GLPI - Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GLPI/InventaireGLPIWin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventaire GLPI - Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GLPI/liaisonAD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Liaison GLPI à L'AD (LDAP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Github
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Github
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Github/Github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide utilisation Github
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_9" id="__nav_4_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Graylog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Graylog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graylog/Graylog-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interface Web Graylog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graylog/Graylog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation Graylog sur Debian 12
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Graylog/nxlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Envoyer les logs Windows vers Graylog avec NXLog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_10" id="__nav_4_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mail
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mail
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mail/Mail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HMAILSERVER – Installation et Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mail/scriptHmail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Script de Synchronisation AD vers hMailServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_11" id="__nav_4_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openssl
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Openssl
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Openssl/OpenSSL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide OpenSSL pour avoir HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_12" id="__nav_4_12_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ReverseProxy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ReverseProxy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ReverseProxy/ReverseProxy-Sec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reverse Proxy Secondaire &amp; Synchronisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ReverseProxy/ReverseProxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide Reverse Proxy Nginx
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_13" id="__nav_4_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Virtualisation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Virtualisation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_13_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_13_1" id="__nav_4_13_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxmox
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_13_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_13_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Proxmox
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Virtualisation/Proxmox/ConfigurationProx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration Proxmox
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_14" id="__nav_4_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wordpress
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Wordpress
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Wordpress/Wordpress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide d'installation WordPress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-creation-de-lutilisateur-de-gestion-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Création de l'utilisateur de gestion (ansible)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Création de l&#39;utilisateur de gestion (ansible)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methode-automatisee-recommandee-etcansibleplaybooksadd_ansible_useryml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthode Automatisée (Recommandée) : /etc/ansible/playbooks/add_ansible_user.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methode-manuelle-secours" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Méthode Manuelle (Secours)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Méthode Manuelle (Secours)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-creation-de-lutilisateur-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 — Création de l'utilisateur ansible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-attribution-des-privileges-sudo-nopasswd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 — Attribution des privilèges sudo (NOPASSWD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-preparation-du-repertoire-ssh-utilisateur-courant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 — Préparation du répertoire SSH (utilisateur courant)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-4-ajout-des-cles-publiques-autorisees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 4 — Ajout des clés publiques autorisées
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-5-copie-et-securisation-du-ssh-vers-lutilisateur-ansible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 5 — Copie et sécurisation du .ssh vers l'utilisateur ansible
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-securisation-ssh-le-fichier-sshd_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Sécurisation SSH (Le fichier sshd_config)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-automatisation-de-la-securisation-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Automatisation de la Sécurisation SSH
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Automatisation de la Sécurisation SSH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparation-le-dossier-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Préparation : Le dossier keys/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-playbook-etcansibleplaybookssetup_sshyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le Playbook (/etc/ansible/playbooks/setup_ssh.yml)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procedure-de-remise-en-etat-des-acces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procédure de remise en état des accès
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="gestion-des-acces-ssh-et-automatisation-avec-ansible">Gestion des accès SSH et Automatisation avec Ansible</h1>
+<p>Cette documentation détaille la mise en place d'un accès sécurisé pour l'utilisateur de gestion Ansible, la configuration du service SSH, ainsi que les procédures d'automatisation et de dépannage.</p>
+<h2 id="1-creation-de-lutilisateur-de-gestion-ansible">1. Création de l'utilisateur de gestion (ansible)</h2>
+<p>Pour administrer les serveurs avec Ansible, il est nécessaire de créer un utilisateur dédié possèdant les droits d'administration sans interruption. L'approche recommandée est d'utiliser un playbook pour automatiser ce déploiement sur les machines.</p>
+<h3 id="methode-automatisee-recommandee-etcansibleplaybooksadd_ansible_useryml">Méthode Automatisée (Recommandée) : <code>/etc/ansible/playbooks/add_ansible_user.yml</code></h3>
+<p>Ce playbook crée l'utilisateur <code>ansible</code>, génère la configuration sudo et déploie la clé SSH pour permettre la gestion à distance. Créez-le dans le gestionnaire Ansible :</p>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Création</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">l&#39;utilisateur</span><span class="nv"> </span><span class="s">ansible&quot;</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">  </span><span class="nt">vars</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">admin_user_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">    </span><span class="nt">admin_user_ssh_public_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cle.pub</span><span class="nv"> </span><span class="s">ansible&quot;</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Déterminer</span><span class="nv"> </span><span class="s">le</span><span class="nv"> </span><span class="s">groupe</span><span class="nv"> </span><span class="s">sudo&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.set_fact</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">_sudo_group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sudo&quot;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Créer</span><span class="nv"> </span><span class="s">l&#39;utilisateur&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.user</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">admin_user_name</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/bin/bash</span>
+<span class="w">        </span><span class="nt">groups</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">_sudo_group</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">append</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;!&quot;</span>
+<span class="w">        </span><span class="nt">password_lock</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">create_home</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Créer</span><span class="nv"> </span><span class="s">le</span><span class="nv"> </span><span class="s">dossier</span><span class="nv"> </span><span class="s">.ssh&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.file</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/home/{{</span><span class="nv"> </span><span class="s">admin_user_name</span><span class="nv"> </span><span class="s">}}/.ssh&quot;</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">directory</span>
+<span class="w">        </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">admin_user_name</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">admin_user_name</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0700&quot;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Déployer</span><span class="nv"> </span><span class="s">la</span><span class="nv"> </span><span class="s">clé</span><span class="nv"> </span><span class="s">publique&quot;</span>
+<span class="w">      </span><span class="nt">ansible.posix.authorized_key</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">admin_user_name</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/home/{{</span><span class="nv"> </span><span class="s">admin_user_name</span><span class="nv"> </span><span class="s">}}/.ssh/authorized_keys&quot;</span>
+<span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">admin_user_ssh_public_key</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Configurer</span><span class="nv"> </span><span class="s">sudoers&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">admin_user_name</span><span class="nv"> </span><span class="s">}}</span><span class="nv"> </span><span class="s">ALL=(ALL:ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:</span><span class="nv"> </span><span class="s">ALL\n&quot;</span>
+<span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/sudoers.d/{{</span><span class="nv"> </span><span class="s">admin_user_name</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root</span>
+<span class="w">        </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;0440&quot;</span>
+<span class="w">        </span><span class="nt">validate</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/sbin/visudo</span><span class="nv"> </span><span class="s">-cf</span><span class="nv"> </span><span class="s">%s&quot;</span>
+</code></pre></div>
+<h3 id="methode-manuelle-secours">Méthode Manuelle (Secours)</h3>
+<p>Et si le script précédent ne fonctionne pas, il faudra donc créer l'utilisateur <code>ansible</code> à la main sur chaque VM cible.</p>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+<p>La méthode manuelle est principalement destinée au premier serveur (hôte maître) ou en cas de problème ponctuel. Privilégiez toujours l'automatisation.</p>
+</div>
+<hr />
+<h4 id="etape-1-creation-de-lutilisateur-ansible">Étape 1 — Création de l'utilisateur <code>ansible</code></h4>
+<p>On crée l'utilisateur <code>ansible</code>. Le mot de passe peut être laissé vide ou verrouillé, car l'authentification se fera exclusivement par clé SSH.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>adduser<span class="w"> </span>ansible
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">💡 Note sur l'utilisateur pivot</p>
+<p>Si la machine cible utilise l'utilisateur <code>admin</code> au lieu de <code>etudiant</code>, il faut adapter les chemins dans les commandes suivantes.</p>
+</div>
+<hr />
+<h4 id="etape-2-attribution-des-privileges-sudo-nopasswd">Étape 2 — Attribution des privilèges sudo (NOPASSWD)</h4>
+<p>Ansible a besoin d'exécuter des commandes root (<code>become: yes</code> dans les playbooks). Pour éviter qu'il soit bloqué par un prompt de mot de passe, on ajoute une règle <strong>NOPASSWD</strong> dans <code>/etc/sudoers.d/</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ansible ALL=(ALL) NOPASSWD:ALL&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/sudoers.d/ansible
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">0440</span><span class="w"> </span>/etc/sudoers.d/ansible
+</code></pre></div>
+<blockquote>
+<p><strong>Pourquoi <code>chmod 0440</code> ?</strong> Le service <code>sudo</code> vérifie que les fichiers inclus dans <code>/etc/sudoers.d/</code> ne sont pas modifiables par n'importe qui. Si les permissions sont trop ouvertes, <code>sudo</code> ignorera le fichier silencieusement. Le mode <code>0440</code> (lecture seule pour root et le groupe root) est le minimum requis.</p>
+</blockquote>
+<hr />
+<h4 id="etape-3-preparation-du-repertoire-ssh-utilisateur-courant">Étape 3 — Préparation du répertoire SSH (utilisateur courant)</h4>
+<p>On prépare d'abord le dossier <code>.ssh</code> et le fichier <code>authorized_keys</code> sur l'utilisateur courant (par ex. <code>etudiant</code>) :</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.ssh
+touch<span class="w"> </span>~/.ssh/authorized_keys
+chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>~/.ssh
+chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/authorized_keys
+</code></pre></div>
+<blockquote>
+<p><strong>Pourquoi ces commandes ?</strong></p>
+<ul>
+<li><code>mkdir -p ~/.ssh</code> : crée le dossier <code>.ssh</code> s'il n'existe pas encore (l'option <code>-p</code> empêche une erreur s'il existe déjà).</li>
+<li><code>touch ~/.ssh/authorized_keys</code> : crée le fichier <code>authorized_keys</code> vide s'il n'existe pas.</li>
+<li><code>chmod 700 ~/.ssh</code> : seul le propriétaire peut lire, écrire et traverser ce dossier. SSH exige cette restriction stricte, sinon il refusera l'authentification par clé.</li>
+<li><code>chmod 600 ~/.ssh/authorized_keys</code> : seul le propriétaire peut lire et écrire ce fichier. Même logique de sécurité que pour le dossier.</li>
+</ul>
+</blockquote>
+<hr />
+<h4 id="etape-4-ajout-des-cles-publiques-autorisees">Étape 4 — Ajout des clés publiques autorisées</h4>
+<p>Ouvrez le fichier <code>authorized_keys</code> avec <code>nano</code> et collez-y les clés publiques de chaque administrateur et du serveur Ansible :</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>~/.ssh/authorized_keys
+</code></pre></div>
+<p>Contenu à ajouter (une clé par ligne) :</p>
+<div class="highlight"><pre><span></span><code>ssh-ed25519 AAAAC3...jkcsm etudiant@ORL-SRV-ANSIBLE
+ssh-ed25519 AAAAC3...NhGC  admin-cyriak
+ssh-ed25519 AAAAC3...JhPC  Admin-Louis
+ssh-ed25519 AAAAC3...r6oG  antoine.mesange@gmail.fr
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Clés masquées</p>
+<p>Les clés ci-dessus sont volontairement tronquées pour cette documentation publique. Les clés complètes sont disponibles sur le serveur Ansible (<code>/etc/ansible/playbooks/keys/</code>) ou auprès de chaque administrateur.</p>
+</div>
+<p>Enregistrez (<code>Ctrl+O</code>, <code>Entrée</code>) et quittez (<code>Ctrl+X</code>).</p>
+<hr />
+<h4 id="etape-5-copie-et-securisation-du-ssh-vers-lutilisateur-ansible">Étape 5 — Copie et sécurisation du <code>.ssh</code> vers l'utilisateur <code>ansible</code></h4>
+<p>Maintenant que les clés sont en place sur l'utilisateur courant, on copie tout le dossier <code>.ssh</code> vers le home de l'utilisateur <code>ansible</code> et on corrige les propriétaires et permissions :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Créer le dossier .ssh pour ansible (au cas où il n&#39;existerait pas)</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/home/ansible/.ssh
+
+<span class="c1"># Copier les clés autorisées de l&#39;utilisateur courant vers ansible</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>/home/etudiant/.ssh/authorized_keys<span class="w"> </span>/home/ansible/.ssh/authorized_keys
+
+<span class="c1"># Attribuer la propriété du dossier .ssh à l&#39;utilisateur ansible</span>
+sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>ansible:ansible<span class="w"> </span>/home/ansible/.ssh
+
+<span class="c1"># Appliquer les permissions strictes exigées par SSH</span>
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>/home/ansible/.ssh
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/home/ansible/.ssh/authorized_keys
+</code></pre></div>
+<blockquote>
+<p><strong>Pourquoi chacune de ces commandes est nécessaire ?</strong></p>
+<ul>
+<li><code>sudo mkdir -p /home/ansible/.ssh</code> : l'utilisateur <code>ansible</code> vient d'être créé, il n'a pas encore de dossier <code>.ssh</code>. On le crée manuellement.</li>
+<li><code>sudo cp ... authorized_keys</code> : on réutilise les clés déjà configurées pour l'utilisateur courant. Cela évite de devoir les recopier une par une.</li>
+<li><code>sudo chown -R ansible:ansible /home/ansible/.ssh</code> : <strong>étape critique</strong> — si le dossier <code>.ssh</code> ou <code>authorized_keys</code> appartient à <code>root</code> ou à un autre utilisateur, SSH refusera systématiquement la connexion par clé. Le propriétaire <strong>doit</strong> être <code>ansible</code>.</li>
+<li><code>sudo chmod 700 /home/ansible/.ssh</code> : le dossier <code>.ssh</code> ne doit être accessible qu'à son propriétaire. C'est une vérification de sécurité du daemon SSH (mode <code>StrictModes</code> activé par défaut).</li>
+<li><code>sudo chmod 600 /home/ansible/.ssh/authorized_keys</code> : même logique — le fichier des clés ne doit être lisible et modifiable que par l'utilisateur <code>ansible</code>.</li>
+</ul>
+</blockquote>
+<div class="admonition danger">
+<p class="admonition-title">Crucial</p>
+<p>Les permissions <code>chmod 700</code> sur le dossier <code>.ssh</code> et <code>chmod 600</code> sur <code>authorized_keys</code> sont <strong>cruciales</strong>. De plus, le <strong>propriétaire</strong> doit impérativement être l'utilisateur <code>ansible</code> (et non <code>root</code>). Si l'une de ces conditions n'est pas remplie, SSH refusera la connexion par clé sans message d'erreur explicite.</p>
+</div>
+<h2 id="2-securisation-ssh-le-fichier-sshd_config">2. Sécurisation SSH (Le fichier <code>sshd_config</code>)</h2>
+<p>Il est recommandé de durcir la configuration SSH dans le fichier <code>/etc/ssh/sshd_config</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Attention</p>
+<p>Avant de désactiver <code>PasswordAuthentication</code>, assurez-vous impérativement que l'authentification par clé fonctionne correctement sur chaque machine, pour éviter d'être bloqué hors du système.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Paramètre</th>
+<th>Valeur Sécurisée</th>
+<th>Usage de Secours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PasswordAuthentication</code></td>
+<td><code>no</code></td>
+<td><code>yes</code> (pour dépanner)</td>
+</tr>
+<tr>
+<td><code>PubkeyAuthentication</code></td>
+<td><code>yes</code></td>
+<td><code>yes</code></td>
+</tr>
+<tr>
+<td><code>KbdInteractiveAuthentication</code></td>
+<td><code>no</code></td>
+<td><code>yes</code> (si le mot de passe ne passe pas)</td>
+</tr>
+<tr>
+<td><code>ListenAddress</code></td>
+<td><code>192.168.140.x</code> (IP management)</td>
+<td><code>0.0.0.0</code> (écoute sur toutes les interfaces)</td>
+</tr>
+</tbody>
+</table>
+<p>Après modification, n'oubliez pas de redémarrer le service SSH :</p>
+<div class="admonition danger">
+<p class="admonition-title">Attention</p>
+<p>Toujours tester la connexion dans un nouvel onglet avant de redémarrer le service SSH, pour éviter de perdre définitivement l'accès à la VM.</p>
+</div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>ssh
+</code></pre></div>
+<h2 id="3-automatisation-de-la-securisation-ssh">3. Automatisation de la Sécurisation SSH</h2>
+<p>Une fois l'accès initial garanti, un script permet de configurer le service SSH sur l'ensemble du parc informatique. Ce playbook applique les durcissements recommandés en désactivant la connexion par mot de passe et en déployant les clés publiques nécessaires.</p>
+<h3 id="preparation-le-dossier-keys">Préparation : Le dossier <code>keys/</code></h3>
+<p>Avant d'exécuter l'automatisation de la sécurisation, il est nécessaire de créer un répertoire contenant les clés publiques de chaque administrateur. </p>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>Les noms des fichiers <code>.pub</code> doivent correspondre exactement aux pseudonymes définis dans le <code>loop</code> du playbook. L'extension <code>.pub</code> est indispensable.</p>
+</div>
+<ol>
+<li>Créez un répertoire <code>keys</code> dans le dossier des playbooks Ansible :
+   <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/ansible/playbooks/keys
+</code></pre></div></li>
+<li>Ajoutez un fichier par utilisateur contenant sa clé publique (<code>.pub</code>). Les noms de fichiers doivent correspondre aux pseudonymes utilisés dans le playbook :</li>
+<li><code>/etc/ansible/playbooks/keys/cyriak.pub</code></li>
+<li><code>/etc/ansible/playbooks/keys/louis.pub</code></li>
+<li><code>/etc/ansible/playbooks/keys/antoine.pub</code></li>
+<li><code>/etc/ansible/playbooks/keys/ansible.pub</code></li>
+</ol>
+<h3 id="le-playbook-etcansibleplaybookssetup_sshyml">Le Playbook (<code>/etc/ansible/playbooks/setup_ssh.yml</code>)</h3>
+<p>Ce playbook effectue trois actions de sécurisation sur l'ensemble du parc :</p>
+<ol>
+<li><strong>Déploiement des clés SSH</strong> : il lit les clés publiques du dossier <code>keys/</code> et les ajoute dans le fichier <code>authorized_keys</code> de l'utilisateur <code>ansible</code>.</li>
+<li><strong>Désactivation de l'authentification par mot de passe</strong> : il force <code>PasswordAuthentication no</code> dans <code>sshd_config</code>.</li>
+<li><strong>Restriction réseau</strong> : il configure <code>ListenAddress</code> pour que SSH n'écoute que sur l'interface du réseau de management (<code>192.168.140.0/24</code>), rendant les VM inaccessibles par SSH depuis les autres réseaux (clients, DMZ, etc.).</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Securisation SSH de toute l&#39;infrastructure</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Ajout</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">cles</span><span class="nv"> </span><span class="s">publiques</span><span class="nv"> </span><span class="s">dans</span><span class="nv"> </span><span class="s">authorized_keys&quot;</span>
+<span class="w">      </span><span class="nt">ansible.posix.authorized_key</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">lookup(&#39;file&#39;,</span><span class="nv"> </span><span class="s">&#39;keys/&#39;</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">&#39;.pub&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">loop</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cyriak</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">louis</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">antoine</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Verrouillage</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">Desactivation</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">mots</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">passe&quot;</span>
+<span class="w">      </span><span class="nt">lineinfile</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/ssh/sshd_config</span>
+<span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^#?PasswordAuthentication&#39;</span>
+<span class="w">        </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;PasswordAuthentication</span><span class="nv"> </span><span class="s">no&#39;</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart SSH</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Restriction</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">SSH</span><span class="nv"> </span><span class="s">ecoute</span><span class="nv"> </span><span class="s">uniquement</span><span class="nv"> </span><span class="s">sur</span><span class="nv"> </span><span class="s">l&#39;interface</span><span class="nv"> </span><span class="s">192.168.140.0/24&quot;</span>
+<span class="w">      </span><span class="nt">lineinfile</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/ssh/sshd_config</span>
+<span class="w">        </span><span class="nt">regexp</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;^#?ListenAddress&#39;</span>
+<span class="w">        </span><span class="nt">line</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ListenAddress</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s">ansible_all_ipv4_addresses</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">select(&#39;match&#39;,</span><span class="nv"> </span><span class="s">&#39;^192\\.168\\.140\\.&#39;)</span><span class="nv"> </span><span class="s">|</span><span class="nv"> </span><span class="s">first</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">      </span><span class="nt">notify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart SSH</span>
+
+<span class="w">  </span><span class="nt">handlers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Restart SSH</span>
+<span class="w">      </span><span class="nt">service</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ssh</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">restarted</span>
+
+<span class="c1">## 4. Dépannage et Remise en état</span>
+
+<span class="c1">### Dépannage : Erreurs Communes</span>
+
+<span class="nt">Voici les erreurs les plus fréquemment rencontrées et comment les résoudre </span><span class="p">:</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="err">*</span><span class="nv">*L</span><span class="s">&#39;erreur</span><span class="nv"> </span><span class="s">Permission</span><span class="nv"> </span><span class="s">denied**</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">Même</span><span class="nv"> </span><span class="s">si</span><span class="nv"> </span><span class="s">l&#39;</span><span class="l l-Scalar l-Scalar-Plain">utilisateur existe, si le dossier `~/.ssh` n&#39;a pas les droits `700` et si le fichier `authorized_keys` n&#39;a pas les droits `600`, SSH rejettera systématiquement la connexion par mesure de sécurité.</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">**Le piège du propriétaire** </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Si le dossier `.ssh` appartient à `root` au lieu de l&#39;utilisateur concerné (par exemple `ansible`), l&#39;authentification par clé SSH ne fonctionnera jamais.</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="err">*</span><span class="nv">*L</span><span class="s">&#39;erreur</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">désérialisation</span><span class="nv"> </span><span class="s">JSON**</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">Si</span><span class="nv"> </span><span class="s">Ansible</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">besoin</span><span class="nv"> </span><span class="s">d&#39;</span><span class="l l-Scalar l-Scalar-Plain">un mot de passe pour `sudo` mais qu&#39;il est lancé sans l&#39;option `--ask-become-pass` (ou `-K`), il plantera en affichant une erreur confuse de désérialisation JSON.</span>
+
+<span class="c1">### Le Mode Debug (Port 2222)</span>
+
+<span class="l l-Scalar l-Scalar-Plain">La commande magique pour voir ce qui se passe &quot;sous le capot&quot;</span><span class="w"> </span><span class="p p-Indicator">:</span>
+
+<span class="err">```</span><span class="l l-Scalar l-Scalar-Plain">bash</span>
+<span class="l l-Scalar l-Scalar-Plain">sudo /usr/sbin/sshd -d -p 2222</span>
+</code></pre></div>
+C'est grâce à ça qu'on a compris que le problème venait de la configuration et non du mot de passe lui-même.</p>
+<h3 id="procedure-de-remise-en-etat-des-acces">Procédure de remise en état des accès</h3>
+<p>Le playbook de secours <code>fix_ansible_access.yml</code> qu'on a fait ensemble est crucial. C'est lui qui permet de réparer 15 machines d'un coup quand elles passent en <code>UNREACHABLE</code>.</p>
+<p><em>(Exemple de structure type)</em>
+<div class="highlight"><pre><span></span><code><span class="nn">---</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Dépannage</span><span class="nv"> </span><span class="s">:</span><span class="nv"> </span><span class="s">Remise</span><span class="nv"> </span><span class="s">en</span><span class="nv"> </span><span class="s">état</span><span class="nv"> </span><span class="s">des</span><span class="nv"> </span><span class="s">accès</span><span class="nv"> </span><span class="s">Ansible&quot;</span>
+<span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all</span>
+<span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+
+<span class="w">  </span><span class="nt">tasks</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;S&#39;assurer</span><span class="nv"> </span><span class="s">que</span><span class="nv"> </span><span class="s">le</span><span class="nv"> </span><span class="s">dossier</span><span class="nv"> </span><span class="s">.ssh</span><span class="nv"> </span><span class="s">appartient</span><span class="nv"> </span><span class="s">à</span><span class="nv"> </span><span class="s">ansible</span><span class="nv"> </span><span class="s">avec</span><span class="nv"> </span><span class="s">les</span><span class="nv"> </span><span class="s">bons</span><span class="nv"> </span><span class="s">droits&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.file</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/ansible/.ssh</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">directory</span>
+<span class="w">        </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">        </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0700&#39;</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Déployer</span><span class="nv"> </span><span class="s">la</span><span class="nv"> </span><span class="s">clé</span><span class="nv"> </span><span class="s">publique</span><span class="nv"> </span><span class="s">et</span><span class="nv"> </span><span class="s">corriger</span><span class="nv"> </span><span class="s">les</span><span class="nv"> </span><span class="s">droits</span><span class="nv"> </span><span class="s">(600)&quot;</span>
+<span class="w">      </span><span class="nt">ansible.posix.authorized_key</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ansible</span>
+<span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/ansible/.ssh/authorized_keys</span>
+<span class="w">        </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">lookup(&#39;file&#39;,</span><span class="nv"> </span><span class="s">&#39;keys/ansible.pub&#39;)</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Rétablir</span><span class="nv"> </span><span class="s">les</span><span class="nv"> </span><span class="s">droits</span><span class="nv"> </span><span class="s">SUDO</span><span class="nv"> </span><span class="s">sans</span><span class="nv"> </span><span class="s">mot</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">passe&quot;</span>
+<span class="w">      </span><span class="nt">ansible.builtin.copy</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ansible</span><span class="nv"> </span><span class="s">ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:</span><span class="nv"> </span><span class="s">ALL&quot;</span>
+<span class="w">        </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/sudoers.d/ansible</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0440&#39;</span>
+</code></pre></div></p>
+<p>Pour exécuter ce playbook sur les machines inaccessibles, il est crucial d'utiliser l'utilisateur pivot pour lequel on a encore un accès par mot de passe :</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Lancement du secours en utilisant l&#39;utilisateur pivot (ex: etudiant)</span>
+ansible-playbook<span class="w"> </span>fix_ansible_access.yml<span class="w"> </span>-u<span class="w"> </span>etudiant<span class="w"> </span>-k<span class="w"> </span>-K
+</code></pre></div>
+<p><em>Rappel : <code>-k</code> pour le mot de passe SSH, <code>-K</code> pour le mot de passe sudo.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
