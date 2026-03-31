@@ -154,3 +154,14 @@
 | Proxy Cache DNS Stormshield  | Activation du relais DNS sur le firewall | Cyriak               |
 | Portail Captif Stormshield   | Mise en place de l'authentification Guest (Nom/Prénom) | Cyriak               |
 | Stratégie de filtrage ASQ    | Configuration des règles d'interception et redirection | Cyriak, Antoine               |
+
+---
+
+## 📅 Semaine 17
+
+| Tâches                       | Descriptions                            | Personnes concernées |
+|------------------------------|-----------------------------------------|----------------------|
+| Dépannage borne Wi-Fi        | Diagnostic et redémarrage de la borne Wi-Fi suite à une perte d'accès Internet et portail captif | Cyriak, Louis |
+| Dépannage Graylog            | Diagnostic du datanode inactif et remise en service de l'interface web Graylog | Cyriak |
+| Documentation SSH Ansible    | Mise à jour de la procédure manuelle de connexion sécurisée SSH pour Ansible (commandes détaillées, clés masquées, explications des permissions) | Louis |
+| Restriction SSH management   | Mise à jour du playbook `setup_ssh.yml` : SSH n'écoute plus que sur le réseau de management (`192.168.140.0/24`) via `ListenAddress` | Louis |

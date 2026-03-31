@@ -182,6 +182,7 @@ Il est recommandé de durcir la configuration SSH dans le fichier `/etc/ssh/sshd
 | `PasswordAuthentication` | `no` | `yes` (pour dépanner) |
 | `PubkeyAuthentication` | `yes` | `yes` |
 | `KbdInteractiveAuthentication` | `no` | `yes` (si le mot de passe ne passe pas) |
+| `ListenAddress` | `192.168.140.x` (IP management) | `0.0.0.0` (écoute sur toutes les interfaces) |
 
 Après modification, n'oubliez pas de redémarrer le service SSH :
 
@@ -215,7 +216,11 @@ Avant d'exécuter l'automatisation de la sécurisation, il est nécessaire de cr
 
 ### Le Playbook (`/etc/ansible/playbooks/setup_ssh.yml`)
 
-Ce playbook utilise une boucle (`loop`) pour lire les clés SSH précédemment créées dans le dossier `keys/` et les transférer sur l'ensemble des machines gérées. Ensuite, il modifie le fichier de configuration SSH `sshd_config`.
+Ce playbook effectue trois actions de sécurisation sur l'ensemble du parc :
+
+1. **Déploiement des clés SSH** : il lit les clés publiques du dossier `keys/` et les ajoute dans le fichier `authorized_keys` de l'utilisateur `ansible`.
+2. **Désactivation de l'authentification par mot de passe** : il force `PasswordAuthentication no` dans `sshd_config`.
+3. **Restriction réseau** : il configure `ListenAddress` pour que SSH n'écoute que sur l'interface du réseau de management (`192.168.140.0/24`), rendant les VM inaccessibles par SSH depuis les autres réseaux (clients, DMZ, etc.).
 
 ```yaml
 ---
@@ -225,7 +230,7 @@ Ce playbook utilise une boucle (`loop`) pour lire les clés SSH précédemment c
   tasks:
     - name: "Ajout des cles publiques dans authorized_keys"
       ansible.posix.authorized_key:
-        user: etudiant
+        user: ansible
         state: present
         key: "{{ lookup('file', 'keys/' + item + '.pub') }}"
       loop:
@@ -233,12 +238,19 @@ Ce playbook utilise une boucle (`loop`) pour lire les clés SSH précédemment c
         - louis
         - antoine
         - ansible
-        
+
     - name: "Verrouillage : Desactivation des mots de passe"
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^#?PasswordAuthentication'
         line: 'PasswordAuthentication no'
+      notify: Restart SSH
+
+    - name: "Restriction : SSH ecoute uniquement sur l'interface 192.168.140.0/24"
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?ListenAddress'
+        line: "ListenAddress {{ ansible_all_ipv4_addresses | select('match', '^192\\.168\\.140\\.') | first }}"
       notify: Restart SSH
 
   handlers:

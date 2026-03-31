@@ -159,7 +159,11 @@ VLAN actif après configuration.
 ### 🔴 Problèmes
 - 1️⃣ **Borne Wi-Fi plantée** : Plus du tout d'Internet ! Aucune redirection après la connexion au réseau et le portail captif qui refuse de s'afficher.
 - 2️⃣ **Perte de l'interface web Graylog** : Juste après un redémarrage du service `graylog-server.service`, impossible d'accéder à l'interface web.
+- 3️⃣ **Documentation SSH Ansible incomplète** : Il manquait les commandes manuelles détaillées pour préparer une VM pour Ansible (création utilisateur, droits sudo, transfert des clés SSH, permissions).
+- 4️⃣ **Sécurisation SSH insuffisante** : Le service SSH des VM était accessible depuis tous les réseaux (clients, DMZ, etc.) au lieu d'être restreint au réseau de management.
 
 ### 🟢 Solutions
 - 1️⃣ On a d'abord analysé les règles du pare-feu au cas où, mais il n'y avait rien de suspect. Au final, un simple redémarrage de la borne Wi-Fi a suffi à régler le problème.
 - 2️⃣ On est allés fouiller dans les journaux en écoutant le trafic sur le port 514 (`sudo tcpdump -i any port 514`). De nombreux logs passaient! En creusant, on s'est rendu compte que le datanode était passé inactif. On l'a redémarré, tout est revenu à la normale.
+- 3️⃣ Mise à jour complète de la documentation `Gestion_SSH.md` avec la procédure manuelle en 5 étapes : création de l'utilisateur `ansible`, droits sudo NOPASSWD, préparation du dossier `.ssh`, ajout des clés autorisées (masquées pour la doc publique), et copie sécurisée vers l'utilisateur `ansible` avec explications détaillées des permissions.
+- 4️⃣ Mise à jour du playbook `setup_ssh.yml` : ajout d'une tâche `ListenAddress` qui force SSH à n'écouter que sur l'interface du réseau de management (`192.168.140.0/24`), bloquant tout accès SSH depuis les autres réseaux.
